@@ -15,20 +15,20 @@ This implementation plan follows the TDD-first approach with executable specific
   - Add basic Cargo.toml with clap, ar, tar, flate2, thiserror dependencies
   - _Requirements: 1.1, 1.2_
 
-- [ ] 2. Implement path validation with security contracts
-  - [ ] 2.1 Write path validation test contracts (RED phase)
+- [x] 2. Implement path validation with security contracts
+  - [x] 2.1 Write path validation test contracts (RED phase)
     - Test safe relative paths return correct joined path
     - Test "../" paths return PathError::Traversal
     - Test absolute paths return PathError::Absolute
     - _Requirements: 2.1, 2.2_
   
-  - [ ] 2.2 Implement validate_path function (GREEN phase)
+  - [x] 2.2 Implement validate_path function (GREEN phase)
     - Write minimal implementation to pass all path validation tests
     - Handle edge cases: empty paths, multiple "..", Windows vs Unix paths
     - _Requirements: 2.1, 2.2_
 
-- [ ] 3. Create basic .deb extraction functionality
-  - [ ] 3.1 Write extraction test contracts (RED phase)
+- [-] 3. Create basic .deb extraction functionality
+  - [-] 3.1 Write extraction test contracts (RED phase)
     - Test extract_deb with valid .deb file creates expected output files
     - Test extraction rejects files with path traversal attempts
     - Create test .deb file with known structure for testing

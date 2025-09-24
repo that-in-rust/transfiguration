@@ -1,4 +1,4 @@
-use rust_file_unpacker::Result;
+use rust_file_unpacker::{Result, validate_path};
 use std::path::Path;
 
 /// Test file location for development and testing
@@ -12,6 +12,13 @@ fn main() -> Result<()> {
         println!("Test file found: {}", TEST_DEB_FILE);
     } else {
         eprintln!("Warning: Test file not found at {}", TEST_DEB_FILE);
+    }
+    
+    // Test the path validation function
+    let base_dir = Path::new("/tmp/safe");
+    match validate_path("test/file.txt", base_dir) {
+        Ok(validated_path) => println!("Path validation working: {:?}", validated_path),
+        Err(e) => eprintln!("Path validation error: {}", e),
     }
     
     println!("Project structure initialized successfully!");
