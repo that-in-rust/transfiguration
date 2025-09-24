@@ -67,21 +67,21 @@ This implementation plan follows the TDD-first approach with executable specific
     - Gracefully handle unsupported formats with warnings
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [ ] 6. Enhance error handling and user feedback
-  - [ ] 6.1 Write error handling test contracts (RED phase)
+- [x] 6. Enhance error handling and user feedback
+  - [x] 6.1 Write error handling test contracts (RED phase)
     - Test graceful handling of corrupted .deb files
     - Test informative error messages for common failure cases
     - Test verbose output shows detailed extraction progress
     - _Requirements: 2.3, 2.4, 4.2, 4.3, 4.4_
   
-  - [ ] 6.2 Implement comprehensive error handling (GREEN phase)
+  - [x] 6.2 Implement comprehensive error handling (GREEN phase)
     - Add context to errors using error chains
     - Implement verbose logging with println! for progress updates
     - Ensure extraction continues after individual file failures
     - _Requirements: 2.3, 2.4, 4.2, 4.3, 4.4_
 
-- [ ] 7. Create integration tests with real .deb file
-  - [ ] 7.1 Write end-to-end test contracts (RED phase)
+- [-] 7. Create integration tests with real .deb file
+  - [-] 7.1 Write end-to-end test contracts (RED phase)
     - Test complete extraction of Kiro .deb file
     - Verify all expected files are extracted to correct locations
     - Test tool handles the specific structure of Kiro package
