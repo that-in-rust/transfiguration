@@ -27,41 +27,41 @@ This implementation plan follows the TDD-first approach with executable specific
     - Handle edge cases: empty paths, multiple "..", Windows vs Unix paths
     - _Requirements: 2.1, 2.2_
 
-- [-] 3. Create basic .deb extraction functionality
-  - [-] 3.1 Write extraction test contracts (RED phase)
+- [x] 3. Create basic .deb extraction functionality
+  - [x] 3.1 Write extraction test contracts (RED phase)
     - Test extract_deb with valid .deb file creates expected output files
     - Test extraction rejects files with path traversal attempts
     - Create test .deb file with known structure for testing
     - _Requirements: 1.1, 1.3, 2.1_
   
-  - [ ] 3.2 Implement extract_deb function (GREEN phase)
+  - [x] 3.2 Implement extract_deb function (GREEN phase)
     - Use ar crate to parse .deb outer archive
     - Extract debian-binary, control.tar.*, data.tar.* members
     - Use tar crate to extract inner tar archives
     - Apply path validation to all extracted file paths
     - _Requirements: 1.1, 1.3, 3.1, 3.2, 3.3_
 
-- [ ] 4. Add CLI interface with clap
-  - [ ] 4.1 Write CLI test contracts (RED phase)
+- [x] 4. Add CLI interface with clap
+  - [x] 4.1 Write CLI test contracts (RED phase)
     - Test argument parsing for input file, output directory, verbose flag
     - Test default values are applied correctly
     - Test error handling for missing required arguments
     - _Requirements: 4.1, 4.2_
   
-  - [ ] 4.2 Implement CLI argument parsing (GREEN phase)
+  - [x] 4.2 Implement CLI argument parsing (GREEN phase)
     - Create Args struct with clap derive macros
     - Implement main function that calls extract_deb with parsed arguments
     - Add basic error handling and user-friendly error messages
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 5. Add compression support for tar archives
-  - [ ] 5.1 Write compression test contracts (RED phase)
+- [x] 5. Add compression support for tar archives
+  - [x] 5.1 Write compression test contracts (RED phase)
     - Test extraction of .tar.gz files using flate2
     - Test extraction of uncompressed .tar files
     - Test handling of unsupported compression formats
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
   
-  - [ ] 5.2 Implement compression detection and handling (GREEN phase)
+  - [x] 5.2 Implement compression detection and handling (GREEN phase)
     - Detect compression by file extension (.tar.gz, .tar.xz, .tar)
     - Use flate2 for gzip decompression
     - Gracefully handle unsupported formats with warnings
