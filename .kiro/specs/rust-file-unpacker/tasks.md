@@ -80,14 +80,14 @@ This implementation plan follows the TDD-first approach with executable specific
     - Ensure extraction continues after individual file failures
     - _Requirements: 2.3, 2.4, 4.2, 4.3, 4.4_
 
-- [-] 7. Create integration tests with real .deb file
-  - [-] 7.1 Write end-to-end test contracts (RED phase)
+- [x] 7. Create integration tests with real .deb file
+  - [x] 7.1 Write end-to-end test contracts (RED phase)
     - Test complete extraction of Kiro .deb file
     - Verify all expected files are extracted to correct locations
     - Test tool handles the specific structure of Kiro package
     - _Requirements: 1.1, 1.3, 1.4_
   
-  - [ ] 7.2 Implement integration test suite (GREEN phase)
+  - [x] 7.2 Implement integration test suite (GREEN phase)
     - Create test that downloads or uses provided Kiro .deb file
     - Verify extraction produces expected directory structure
     - Add performance assertion for reasonable extraction time
