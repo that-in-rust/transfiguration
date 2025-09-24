@@ -2,79 +2,69 @@
 
 ## Introduction
 
-This feature involves creating a security-first Rust command-line tool that can safely and recursively unpack .deb files (specifically Kiro202509172055-distro-linux-x64.deb) to maximum depth for comprehensive analysis. The tool is designed for developers, security researchers, and DevSecOps teams who need complete visibility into package contents without executing code, addressing critical gaps in existing tooling like `dpkg-deb`. This is not merely an unpacker but a zero-trust analysis engine for modern software supply chain validation.
+This feature involves creating a Rust command-line tool to safely unpack and analyze the Kiro202509172055-distro-linux-x64.deb file. The primary user is a **security researcher** who needs to examine package contents without executing code or risking system compromise. The tool addresses the gap left by `dpkg-deb`, which lacks security sandboxing for untrusted archives.
+
+**MVP Goal:** Enable safe, complete extraction of a .deb file with basic security protections, then incrementally add advanced features based on user feedback.
 
 ## Requirements
 
-### Requirement 1
+### Requirement 1 (MVP Core)
 
-**User Story:** As a security researcher, I want to safely unpack the Kiro202509172055-distro-linux-x64.deb file to maximum depth with zero-trust security controls, so that I can analyze all nested package contents without risk of system compromise.
-
-#### Acceptance Criteria
-
-1. WHEN the tool processes a .deb file THEN the system SHALL validate it as a proper ar archive with !<arch> magic string
-2. WHEN the ar archive is parsed THEN the system SHALL enforce the required member order: debian-binary, control.tar.*, data.tar.*
-3. WHEN debian-binary is extracted THEN the system SHALL validate it contains version "2.0" format
-4. WHEN nested archives are discovered THEN the system SHALL recursively unpack them using streaming I/O pipeline
-5. WHEN extraction completes THEN the system SHALL generate a structured JSON manifest with complete file inventory
-
-### Requirement 2
-
-**User Story:** As a DevSecOps engineer, I want the tool to handle comprehensive format support with streaming decompression, so that I can process large .deb packages efficiently in CI/CD pipelines.
+**User Story:** As a security researcher, I want to safely extract the contents of a .deb file to a designated directory, so that I can examine all files without risk of path traversal attacks.
 
 #### Acceptance Criteria
 
-1. WHEN compressed tar archives are encountered THEN the system SHALL support gzip, xz, zstd, bzip2, and lzma formats using streaming decompression
-2. WHEN file types are detected THEN the system SHALL use magic-byte detection rather than file extensions for security
-3. WHEN decompression occurs THEN the system SHALL use streaming readers to maintain memory usage below 150MB peak
-4. WHEN tar archives are processed THEN the system SHALL extract all entries while performing path sanitization
-5. WHEN unsupported formats are found THEN the system SHALL log warnings, record in JSON manifest, and continue processing
-6. WHEN cycle detection is needed THEN the system SHALL use BLAKE3 hashing to prevent infinite loops from self-referential archives
+1. WHEN I provide a .deb file path THEN the system SHALL extract all contents to a safe output directory
+2. WHEN extraction occurs THEN the system SHALL prevent any files from being written outside the target directory
+3. WHEN the .deb structure is parsed THEN the system SHALL extract debian-binary, control.tar.*, and data.tar.* components
+4. WHEN extraction completes THEN the system SHALL show a summary of extracted files and any errors encountered
 
-### Requirement 3
+### Requirement 2 (Essential Security)
 
-**User Story:** As a security analyst, I want robust path traversal protection and secure file extraction, so that I can safely analyze untrusted .deb packages without system compromise.
+**User Story:** As a security researcher, I want protection against malicious archives, so that I can analyze untrusted .deb files without compromising my system.
 
 #### Acceptance Criteria
 
-1. WHEN any file path is processed THEN the system SHALL use openat2(RESOLVE_BENEATH) on Linux to confine extraction to target directory
-2. WHEN path traversal attempts are detected THEN the system SHALL reject paths containing ".." or absolute paths and log security violations
-3. WHEN output directory is specified THEN the system SHALL create it securely and validate all extracted paths remain within it
-4. WHEN filename collisions occur THEN the system SHALL handle them gracefully with numeric suffixes
-5. WHEN symlinks are encountered THEN the system SHALL validate they don't escape the extraction directory
+1. WHEN paths contain ".." or absolute paths THEN the system SHALL reject them and log security warnings
+2. WHEN archives are deeply nested THEN the system SHALL limit recursion to prevent infinite loops
+3. WHEN large files are encountered THEN the system SHALL warn about potential resource exhaustion
+4. WHEN extraction fails for individual files THEN the system SHALL continue processing other files
 
-### Requirement 4
+### Requirement 3 (Format Support)
 
-**User Story:** As a CI/CD engineer, I want structured logging and machine-readable output, so that I can integrate the tool into automated security scanning pipelines.
-
-#### Acceptance Criteria
-
-1. WHEN the tool runs THEN the system SHALL use tracing framework for structured logging with spans and events
-2. WHEN progress reporting is needed THEN the system SHALL integrate indicatif progress bars with tracing for flicker-free output
-3. WHEN analysis completes THEN the system SHALL output a comprehensive JSON manifest with file counts, sizes, errors, and archive lineage
-4. WHEN verbose mode is enabled THEN the system SHALL provide detailed operation-by-operation logging for troubleshooting
-5. WHEN errors occur THEN the system SHALL use thiserror for typed errors and anyhow for contextual error propagation
-
-### Requirement 5
-
-**User Story:** As a security team lead, I want comprehensive resource exhaustion protection and DoS prevention, so that the tool can safely process potentially malicious archives in production environments.
+**User Story:** As a security researcher, I want to unpack common compression formats found in .deb files, so that I can access all nested content.
 
 #### Acceptance Criteria
 
-1. WHEN recursion depth is tracked THEN the system SHALL enforce a default limit of 16 levels (configurable via --depth-limit flag)
-2. WHEN file sizes are processed THEN the system SHALL implement configurable limits and warn users of extremely large files
-3. WHEN memory usage is monitored THEN the system SHALL maintain peak usage below 150MB regardless of archive size
-4. WHEN corrupted archives are encountered THEN the system SHALL handle errors gracefully, skip problematic entries, and continue processing
-5. WHEN resource limits are exceeded THEN the system SHALL log detailed warnings and allow graceful termination
+1. WHEN tar.gz files are encountered THEN the system SHALL decompress and extract them
+2. WHEN tar.xz files are encountered THEN the system SHALL decompress and extract them  
+3. WHEN uncompressed tar files are found THEN the system SHALL extract them
+4. WHEN unsupported formats are found THEN the system SHALL log warnings and skip them
 
-### Requirement 6
+### Requirement 4 (Usability)
 
-**User Story:** As a platform engineer, I want high-performance parallel extraction with a clean modular architecture, so that the tool can process large packages efficiently and be reusable across different applications.
+**User Story:** As a security researcher, I want clear feedback during extraction, so that I can monitor progress and troubleshoot issues.
 
 #### Acceptance Criteria
 
-1. WHEN the tool is architected THEN the system SHALL use a two-crate design with library (my-deb-tool-lib) and CLI (my-deb-tool-cli) separation
-2. WHEN file extraction occurs THEN the system SHALL use parallel I/O workers with bounded channels for backpressure control
-3. WHEN throughput is measured THEN the system SHALL achieve at least 10,000 files per second on modern NVMe storage
-4. WHEN the tool is built THEN the system SHALL target x86_64-unknown-linux-musl for static binary distribution
-5. WHEN CLI arguments are processed THEN the system SHALL support --out-dir, --depth-limit, --jobs, and --verbose flags using clap
+1. WHEN extraction starts THEN the system SHALL show progress information
+2. WHEN errors occur THEN the system SHALL display clear, actionable error messages
+3. WHEN I specify --verbose THEN the system SHALL show detailed operation logs
+4. WHEN extraction completes THEN the system SHALL provide a final summary with file counts
+
+## Future Requirements (Post-MVP)
+
+### Advanced Security (V2)
+- Comprehensive format support (zstd, bzip2, lzma)
+- Content-based cycle detection with hashing
+- Advanced resource limits and monitoring
+
+### Automation Features (V3)  
+- Structured JSON output for CI/CD integration
+- Machine-readable manifests with metadata
+- Integration-friendly error codes and formats
+
+### Performance Optimization (V4)
+- Parallel extraction with worker pools
+- Streaming I/O for memory efficiency
+- High-throughput processing for large archives
