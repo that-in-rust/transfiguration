@@ -1,0 +1,11 @@
+[package]
+name = "rust-file-unpacker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+ar = "0.9"
+tar = "0.4"
+flate2 = "1.0"
+thiserror = "1.0"
