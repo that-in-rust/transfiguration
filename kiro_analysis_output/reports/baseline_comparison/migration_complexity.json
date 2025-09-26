@@ -1,0 +1,42 @@
+{
+  "configuration": {
+    "category": "configuration",
+    "complexity_level": "medium",
+    "migration_effort": "2-4 weeks",
+    "risk_factors": [
+      "Command count significantly different"
+    ]
+  },
+  "api_surface": {
+    "category": "api_surface",
+    "complexity_level": "high",
+    "migration_effort": "6-12 weeks",
+    "risk_factors": [
+      "Low contribution point coverage"
+    ]
+  },
+  "ui_structure": {
+    "category": "ui_structure",
+    "complexity_level": "high",
+    "migration_effort": "8-16 weeks",
+    "risk_factors": [
+      "Low UI component coverage",
+      "UI requires pixel-perfect replication",
+      "Theme system needs careful migration"
+    ]
+  },
+  "overall_complexity": "high",
+  "total_estimated_effort": "6-24 months",
+  "critical_path": [
+    "API surface compatibility",
+    "UI component replication",
+    "Extension ecosystem support",
+    "Performance optimization"
+  ],
+  "success_factors": [
+    "Comprehensive behavioral specification",
+    "Incremental migration approach",
+    "Extensive testing framework",
+    "Performance benchmarking"
+  ]
+}
