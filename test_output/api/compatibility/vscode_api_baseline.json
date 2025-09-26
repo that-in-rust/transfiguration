@@ -1,0 +1,55 @@
+{
+  "version": "1.103.2",
+  "api_surface": {
+    "commands": {
+      "registerCommand": "stable",
+      "executeCommand": "stable",
+      "getCommands": "stable"
+    },
+    "window": {
+      "showInformationMessage": "stable",
+      "showWarningMessage": "stable",
+      "showErrorMessage": "stable",
+      "showInputBox": "stable",
+      "showQuickPick": "stable",
+      "createStatusBarItem": "stable",
+      "createOutputChannel": "stable",
+      "createWebviewPanel": "stable"
+    },
+    "workspace": {
+      "openTextDocument": "stable",
+      "saveAll": "stable",
+      "findFiles": "stable",
+      "createFileSystemWatcher": "stable",
+      "getConfiguration": "stable",
+      "onDidChangeConfiguration": "stable",
+      "workspaceFolders": "stable",
+      "onDidChangeWorkspaceFolders": "stable"
+    },
+    "languages": {
+      "registerCompletionItemProvider": "stable",
+      "registerHoverProvider": "stable",
+      "registerDefinitionProvider": "stable",
+      "registerDocumentFormattingEditProvider": "stable",
+      "registerCodeActionsProvider": "stable"
+    },
+    "debug": {
+      "registerDebugConfigurationProvider": "stable",
+      "registerDebugAdapterDescriptorFactory": "stable",
+      "startDebugging": "stable"
+    }
+  },
+  "contribution_points": {
+    "commands": "stable",
+    "keybindings": "stable",
+    "menus": "stable",
+    "configuration": "stable",
+    "languages": "stable",
+    "grammars": "stable",
+    "themes": "stable",
+    "snippets": "stable",
+    "debuggers": "stable",
+    "views": "stable",
+    "viewsContainers": "stable"
+  }
+}

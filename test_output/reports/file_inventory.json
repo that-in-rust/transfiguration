@@ -1,0 +1,45 @@
+[
+  {
+  "path": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/resources/icons/kiro-icon.png",
+  "filename": "kiro-icon.png",
+  "dirname": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/resources/icons",
+  "extension": "png",
+  "category": "images",
+  "size_bytes": 0,
+  "modified_timestamp": 1758891416,
+  "size_human": "0B"
+}
+,
+  {
+  "path": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/resources/icons/file-icon.svg",
+  "filename": "file-icon.svg",
+  "dirname": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/resources/icons",
+  "extension": "svg",
+  "category": "images",
+  "size_bytes": 0,
+  "modified_timestamp": 1758891416,
+  "size_human": "0B"
+}
+,
+  {
+  "path": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/package.json",
+  "filename": "package.json",
+  "dirname": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app",
+  "extension": "json",
+  "category": "json",
+  "size_bytes": 756,
+  "modified_timestamp": 1758891416,
+  "size_human": "756B"
+}
+,
+  {
+  "path": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/product.json",
+  "filename": "product.json",
+  "dirname": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app",
+  "extension": "json",
+  "category": "json",
+  "size_bytes": 356,
+  "modified_timestamp": 1758891416,
+  "size_human": "356B"
+}
+]

@@ -1,0 +1,10 @@
+{
+  "title": "Kiro",
+  "properties": {
+    "kiro.ai.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable AI assistance"
+    }
+  }
+}

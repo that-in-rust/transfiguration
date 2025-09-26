@@ -551,8 +551,15 @@ run_api_surface_analysis() {
     fi
     
     # Task 3: TypeScript definition parsing and API extraction
-    if ! parse_typescript_definitions "$extracted_path" "$api_output"; then
-        api_log_error "Task 3 main failed: TypeScript definition parsing"
+    # Source the TypeScript parser module
+    if [[ -f "$(dirname "${BASH_SOURCE[0]}")/typescript_parser.sh" ]]; then
+        source "$(dirname "${BASH_SOURCE[0]}")/typescript_parser.sh"
+        if ! parse_typescript_definitions "$extracted_path" "$api_output"; then
+            api_log_error "Task 3 main failed: TypeScript definition parsing"
+            success=false
+        fi
+    else
+        api_log_error "TypeScript parser module not found"
         success=false
     fi
     
@@ -593,23 +600,27 @@ analyze_builtin_extensions() {
     local total_builtin=0
     local kiro_specific=0
     
-    # Process each extensions directory
-    for ext_dir in "${builtin_dirs[@]}"; do
-        api_log_debug "Processing extensions directory: $ext_dir"
-        
-        # Find individual extension directories
-        while IFS= read -r -d '' extension_dir; do
-            if [[ -f "$extension_dir/package.json" ]]; then
-                analyze_individual_extension "$extension_dir" "$builtin_output" "$extracted_path"
-                total_builtin=$((total_builtin + 1))
-                
-                # Check if this is Kiro-specific
-                if is_kiro_specific_extension "$extension_dir"; then
-                    kiro_specific=$((kiro_specific + 1))
+    # Process each extensions directory (handle empty array case)
+    if [[ ${#builtin_dirs[@]} -gt 0 ]]; then
+        for ext_dir in "${builtin_dirs[@]}"; do
+            api_log_debug "Processing extensions directory: $ext_dir"
+            
+            # Find individual extension directories
+            while IFS= read -r -d '' extension_dir; do
+                if [[ -f "$extension_dir/package.json" ]]; then
+                    analyze_individual_extension "$extension_dir" "$builtin_output" "$extracted_path"
+                    total_builtin=$((total_builtin + 1))
+                    
+                    # Check if this is Kiro-specific
+                    if is_kiro_specific_extension "$extension_dir"; then
+                        kiro_specific=$((kiro_specific + 1))
+                    fi
                 fi
-            fi
-        done < <(find "$ext_dir" -maxdepth 1 -type d -print0 2>/dev/null || true)
-    done
+            done < <(find "$ext_dir" -maxdepth 1 -type d -print0 2>/dev/null || true)
+        done
+    else
+        api_log_warn "No built-in extension directories found"
+    fi
     
     # Analyze AWS integration patterns
     analyze_aws_integrations "$extracted_path" "$builtin_output"

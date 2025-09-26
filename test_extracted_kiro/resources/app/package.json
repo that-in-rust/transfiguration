@@ -1,0 +1,37 @@
+{
+  "name": "kiro",
+  "version": "1.103.2",
+  "description": "Kiro - AI-powered development environment",
+  "main": "./out/main.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kiro.openFile",
+        "title": "Open File",
+        "category": "File"
+      },
+      {
+        "command": "kiro.ai.askQuestion",
+        "title": "Ask AI",
+        "category": "AI"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "kiro.openFile",
+        "key": "ctrl+o",
+        "mac": "cmd+o"
+      }
+    ],
+    "configuration": {
+      "title": "Kiro",
+      "properties": {
+        "kiro.ai.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI assistance"
+        }
+      }
+    }
+  }
+}
