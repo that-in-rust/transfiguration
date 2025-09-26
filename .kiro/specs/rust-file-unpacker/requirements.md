@@ -8,7 +8,7 @@ This feature involves creating a Rust command-line tool to safely unpack and ana
 
 ## Requirements
 
-### Requirement 1 (MVP Core)
+### Requirement 1
 
 **User Story:** As a security researcher, I want to safely extract the contents of a .deb file to a designated directory, so that I can examine all files without risk of path traversal attacks.
 
@@ -19,7 +19,7 @@ This feature involves creating a Rust command-line tool to safely unpack and ana
 3. WHEN the .deb structure is parsed THEN the system SHALL extract debian-binary, control.tar.*, and data.tar.* components
 4. WHEN extraction completes THEN the system SHALL show a summary of extracted files and any errors encountered
 
-### Requirement 2 (Essential Security)
+### Requirement 2
 
 **User Story:** As a security researcher, I want protection against malicious archives, so that I can analyze untrusted .deb files without compromising my system.
 
@@ -30,7 +30,7 @@ This feature involves creating a Rust command-line tool to safely unpack and ana
 3. WHEN large files are encountered THEN the system SHALL warn about potential resource exhaustion
 4. WHEN extraction fails for individual files THEN the system SHALL continue processing other files
 
-### Requirement 3 (Format Support)
+### Requirement 3
 
 **User Story:** As a security researcher, I want to unpack common compression formats found in .deb files, so that I can access all nested content.
 
@@ -41,7 +41,7 @@ This feature involves creating a Rust command-line tool to safely unpack and ana
 3. WHEN uncompressed tar files are found THEN the system SHALL extract them
 4. WHEN unsupported formats are found THEN the system SHALL log warnings and skip them
 
-### Requirement 4 (Usability)
+### Requirement 4
 
 **User Story:** As a security researcher, I want clear feedback during extraction, so that I can monitor progress and troubleshoot issues.
 
