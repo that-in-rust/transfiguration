@@ -113,13 +113,13 @@ parse_typescript_definitions() {
         total_classes=$((total_classes + class_count))
         
         # Parse enums
-        local enum_count
-        enum_count=$(extract_typescript_enums "$ts_file" "$rel_path" "$TS_OUTPUT_DIR")
+        extract_typescript_enums "$ts_file" "$rel_path" "$TS_OUTPUT_DIR"
+        local enum_count=$?
         total_enums=$((total_enums + enum_count))
         
         # Parse type aliases
-        local type_count
-        type_count=$(extract_typescript_types "$ts_file" "$rel_path" "$TS_OUTPUT_DIR")
+        extract_typescript_types "$ts_file" "$rel_path" "$TS_OUTPUT_DIR"
+        local type_count=$?
         total_types=$((total_types + type_count))
         
         # Parse modules and namespaces
@@ -158,9 +158,11 @@ extract_typescript_interfaces() {
     # Extract interface definitions using grep and sed (handle indented interfaces)
     while IFS= read -r line; do
         if [[ -n "$line" ]]; then
+            ts_log_debug "Processing line: $line"
             # Extract interface name (handle both export and non-export interfaces)
             local interface_name
-            interface_name=$(echo "$line" | sed -n 's/.*interface[[:space:]]\+\([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            interface_name=$(echo "$line" | sed -n 's/.*interface \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            ts_log_debug "Extracted interface name: '$interface_name'"
             
             if [[ -n "$interface_name" ]]; then
                 # Create interface entry
@@ -185,7 +187,7 @@ extract_typescript_interfaces() {
                 ts_log_debug "  Found interface: $interface_name"
             fi
         fi
-    done < <(grep -n "interface[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
+    done < <(grep "interface[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
     
     return $interface_count
 }
@@ -203,7 +205,7 @@ extract_typescript_classes() {
         if [[ -n "$line" ]]; then
             # Extract class name
             local class_name
-            class_name=$(echo "$line" | sed -n 's/.*class[[:space:]]\+\([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            class_name=$(echo "$line" | sed -n 's/.*class \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
             
             if [[ -n "$class_name" ]]; then
                 # Create class entry
@@ -228,7 +230,7 @@ extract_typescript_classes() {
                 ts_log_debug "  Found class: $class_name"
             fi
         fi
-    done < <(grep -n "class[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
+    done < <(grep "class[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
     
     return $class_count
 }
@@ -246,7 +248,7 @@ extract_typescript_enums() {
         if [[ -n "$line" ]]; then
             # Extract enum name
             local enum_name
-            enum_name=$(echo "$line" | sed -n 's/.*enum[[:space:]]\+\([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            enum_name=$(echo "$line" | sed -n 's/.*enum \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
             
             if [[ -n "$enum_name" ]]; then
                 # Create enum entry
@@ -271,7 +273,7 @@ extract_typescript_enums() {
                 ts_log_debug "  Found enum: $enum_name"
             fi
         fi
-    done < <(grep -n "^[[:space:]]*export[[:space:]]\+enum\|^[[:space:]]*enum" "$ts_file" 2>/dev/null || true)
+    done < <(grep "enum[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
     
     return $enum_count
 }
@@ -289,7 +291,7 @@ extract_typescript_types() {
         if [[ -n "$line" ]]; then
             # Extract type name
             local type_name
-            type_name=$(echo "$line" | sed -n 's/.*type[[:space:]]\+\([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            type_name=$(echo "$line" | sed -n 's/.*type \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
             
             if [[ -n "$type_name" ]]; then
                 # Create type entry
@@ -314,7 +316,7 @@ extract_typescript_types() {
                 ts_log_debug "  Found type: $type_name"
             fi
         fi
-    done < <(grep -n "^[[:space:]]*export[[:space:]]\+type\|^[[:space:]]*type" "$ts_file" 2>/dev/null || true)
+    done < <(grep "type[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
     
     return $type_count
 }
@@ -330,7 +332,7 @@ extract_typescript_functions() {
         if [[ -n "$line" ]]; then
             # Extract function name
             local function_name
-            function_name=$(echo "$line" | sed -n 's/.*function[[:space:]]\+\([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
+            function_name=$(echo "$line" | sed -n 's/.*function \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
             
             if [[ -n "$function_name" ]]; then
                 # Create function entry (add to types for now)
@@ -354,7 +356,7 @@ extract_typescript_functions() {
                 ts_log_debug "  Found function: $function_name"
             fi
         fi
-    done < <(grep -n "function[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
+    done < <(grep "function[[:space:]]\+[A-Za-z_][A-Za-z0-9_]*" "$ts_file" 2>/dev/null || true)
 }
 
 # Extract TypeScript modules and namespaces
@@ -368,10 +370,10 @@ extract_typescript_modules() {
         if [[ -n "$line" ]]; then
             # Extract module/namespace name (handle declare module 'name' and namespace name)
             local module_name
-            if echo "$line" | grep -q "declare[[:space:]]\+module"; then
-                module_name=$(echo "$line" | sed -n "s/.*declare[[:space:]]\+module[[:space:]]\+['\"]\\([^'\"]*\\)['\"].*/\\1/p")
+            if echo "$line" | grep -q "declare module"; then
+                module_name=$(echo "$line" | sed -n "s/.*declare module ['\"]\\([^'\"]*\\)['\"].*/\\1/p")
             else
-                module_name=$(echo "$line" | sed -n 's/.*\(module\|namespace\)[[:space:]]\+\([A-Za-z_][A-Za-z0-9_.]*\).*/\2/p')
+                module_name=$(echo "$line" | sed -n 's/.*\(module\|namespace\) \([A-Za-z_][A-Za-z0-9_.]*\).*/\2/p')
             fi
             
             if [[ -n "$module_name" ]]; then
@@ -396,7 +398,7 @@ extract_typescript_modules() {
                 ts_log_debug "  Found module/namespace: $module_name"
             fi
         fi
-    done < <(grep -n "\(module\|namespace\)[[:space:]]\+\|declare[[:space:]]\+module" "$ts_file" 2>/dev/null || true)
+    done < <(grep "\(module\|namespace\)[[:space:]]\+\|declare[[:space:]]\+module" "$ts_file" 2>/dev/null || true)
 }
 
 # Generate API surface documentation
