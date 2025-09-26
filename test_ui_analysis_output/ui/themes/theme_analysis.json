@@ -1,0 +1,274 @@
+{
+  "theme_files": [
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-seti/icons/vs-seti-icon-theme.json",
+      "filename": "vs-seti-icon-theme.json",
+      "size_bytes": 44089,
+      "theme_type": "icon-theme",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-monokai/themes/monokai-color-theme.json",
+      "filename": "monokai-color-theme.json",
+      "size_bytes": 8872,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-red/themes/Red-color-theme.json",
+      "filename": "Red-color-theme.json",
+      "size_bytes": 6986,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Red",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-abyss/themes/abyss-color-theme.json",
+      "filename": "abyss-color-theme.json",
+      "size_bytes": 6953,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Abyss",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-quietlight/themes/quietlight-color-theme.json",
+      "filename": "quietlight-color-theme.json",
+      "size_bytes": 8541,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Quiet Light",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-solarized-dark/themes/solarized-dark-color-theme.json",
+      "filename": "solarized-dark-color-theme.json",
+      "size_bytes": 7619,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Solarized (dark)",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-tomorrow-night-blue/themes/tomorrow-night-blue-color-theme.json",
+      "filename": "tomorrow-night-blue-color-theme.json",
+      "size_bytes": 6001,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-solarized-light/themes/solarized-light-color-theme.json",
+      "filename": "solarized-light-color-theme.json",
+      "size_bytes": 7251,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Solarized (light)",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/fileicons/vs_minimal-icon-theme.json",
+      "filename": "vs_minimal-icon-theme.json",
+      "size_bytes": 1094,
+      "theme_type": "icon-theme",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/dark_modern.json",
+      "filename": "dark_modern.json",
+      "size_bytes": 4590,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Default Dark Modern",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/dark_vs.json",
+      "filename": "dark_vs.json",
+      "size_bytes": 6142,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Dark (Visual Studio)",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/dark_default.json",
+      "filename": "dark_default.json",
+      "size_bytes": 12548,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Kiro Dark",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:55Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/light_vs.json",
+      "filename": "light_vs.json",
+      "size_bytes": 7014,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Light (Visual Studio)",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/hc_black.json",
+      "filename": "hc_black.json",
+      "size_bytes": 7081,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Dark High Contrast",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/light_default.json",
+      "filename": "light_default.json",
+      "size_bytes": 12208,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Kiro Light",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/dark_plus.json",
+      "filename": "dark_plus.json",
+      "size_bytes": 3684,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Dark+",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/light_modern.json",
+      "filename": "light_modern.json",
+      "size_bytes": 5434,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Default Light Modern",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/light_plus.json",
+      "filename": "light_plus.json",
+      "size_bytes": 3725,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Light+",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-defaults/themes/hc_light.json",
+      "filename": "hc_light.json",
+      "size_bytes": 8753,
+      "theme_type": "general-theme",
+      "theme_content": {
+        "name": "Light High Contrast",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-monokai-dimmed/themes/dimmed-monokai-color-theme.json",
+      "filename": "dimmed-monokai-color-theme.json",
+      "size_bytes": 10991,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/theme-kimbie-dark/themes/kimbie-dark-color-theme.json",
+      "filename": "kimbie-dark-color-theme.json",
+      "size_bytes": 6327,
+      "theme_type": "color-theme",
+      "theme_content": {
+        "name": "Kimbie Dark",
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/product.json",
+      "filename": "product.json",
+      "size_bytes": 8117,
+      "theme_type": "product-config",
+      "theme_content": {
+        "name": null,
+        "id": null,
+        "description": null
+      },
+      "analyzed_at": "2025-09-26T13:56:56Z"
+    }
+  ],
+  "summary": {
+    "total_files": 22,
+    "color_themes": 17,
+    "icon_themes": 2,
+    "analysis_date": "2025-09-26T13:56:56Z"
+  }
+}
