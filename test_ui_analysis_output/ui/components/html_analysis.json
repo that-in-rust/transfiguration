@@ -1,0 +1,152 @@
+{
+  "html_files": [
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/code/electron-browser/workbench/workbench.html",
+      "filename": "workbench.html",
+      "size_bytes": 1428,
+      "elements_count": 10,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"utf-8\" />"
+      ],
+      "scripts": [
+        "<script src=\"./workbench.js\" type=\"module\">"
+      ],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" href=\"../../../workbench/workbench.desktop.main.css\">"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/contrib/webview/browser/pre/index.html",
+      "filename": "index.html",
+      "size_bytes": 40648,
+      "elements_count": 13,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"UTF-8\">"
+      ],
+      "scripts": [],
+      "stylesheets": [],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/contrib/webview/browser/pre/fake.html",
+      "filename": "fake.html",
+      "size_bytes": 188,
+      "elements_count": 7,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"UTF-8\">",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+      ],
+      "scripts": [],
+      "stylesheets": [],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html",
+      "filename": "webWorkerExtensionHostIframe.html",
+      "size_bytes": 5287,
+      "elements_count": 5,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [],
+      "scripts": [],
+      "stylesheets": [],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/index.html",
+      "filename": "index.html",
+      "size_bytes": 433,
+      "elements_count": 11,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"UTF-8\" />",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
+      ],
+      "scripts": [
+        "<script type=\"module\" crossorigin src=\"/assets/index.js\">"
+      ],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" href=\"/assets/index.css\">"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.html",
+      "filename": "index.html",
+      "size_bytes": 439,
+      "elements_count": 11,
+      "doctype": "<!doctype html>",
+      "meta_tags": [
+        "<meta charset=\"utf-8\" />",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
+      ],
+      "scripts": [
+        "<script type=\"module\" crossorigin src=\"/index.js\">"
+      ],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" crossorigin href=\"/index.css\">"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/microsoft-authentication/media/index.html",
+      "filename": "index.html",
+      "size_bytes": 953,
+      "elements_count": 15,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"utf-8\" />",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+      ],
+      "scripts": [],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"auth.css\" />"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/github-authentication/media/index.html",
+      "filename": "index.html",
+      "size_bytes": 2471,
+      "elements_count": 24,
+      "doctype": "<!DOCTYPE html>",
+      "meta_tags": [
+        "<meta charset=\"utf-8\" />",
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+      ],
+      "scripts": [],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"auth.css\" />"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    },
+    {
+      "path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/LICENSES.chromium.html",
+      "filename": "LICENSES.chromium.html",
+      "size_bytes": 15271935,
+      "elements_count": 4411,
+      "doctype": "<!-- Generated by licenses.py; do not edit. --><!doctype html>",
+      "meta_tags": [
+        "<meta charset=\"utf-8\">",
+        "<meta name=\"viewport\" content=\"width=device-width\">",
+        "<meta name=\"color-scheme\" content=\"light dark\">"
+      ],
+      "scripts": [],
+      "stylesheets": [
+        "<link rel=\"stylesheet\" href=\"chrome://resources/css/text_defaults.css\">",
+        "<link rel=\"stylesheet\" href=\"chrome://credits/credits.css\">"
+      ],
+      "analyzed_at": "2025-09-26T13:56:54Z"
+    }
+  ],
+  "summary": {
+    "total_files": 9,
+    "total_elements": 4507,
+    "total_components": 0,
+    "analysis_date": "2025-09-26T13:56:55Z"
+  }
+}
