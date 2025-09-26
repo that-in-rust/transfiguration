@@ -1,4 +1,4 @@
-use rust_file_unpacker::{Result, extract_deb, cli::Args};
+use rust_file_unpacker::{Result, extract_deb_with_depth, cli::Args};
 use clap::Parser;
 
 fn main() -> Result<()> {
@@ -27,6 +27,7 @@ fn main() -> Result<()> {
         println!("Rust File Unpacker - .deb extraction tool");
         println!("Input file: {:?}", args.input);
         println!("Output directory: {:?}", args.output);
+        println!("Max recursion depth: {}", args.max_depth);
     }
     
     // Verify input file exists
@@ -38,15 +39,12 @@ fn main() -> Result<()> {
     
     // Verify input file has .deb extension (basic validation)
     if let Some(extension) = args.input.extension() {
-        if extension != "deb" {
-            if args.verbose {
+        if extension != "deb"
+            && args.verbose {
                 println!("Warning: Input file does not have .deb extension, proceeding anyway...");
             }
-        }
-    } else {
-        if args.verbose {
-            println!("Warning: Input file has no extension, proceeding anyway...");
-        }
+    } else if args.verbose {
+        println!("Warning: Input file has no extension, proceeding anyway...");
     }
     
     if args.verbose {
@@ -54,7 +52,7 @@ fn main() -> Result<()> {
     }
     
     // Extract the .deb file
-    match extract_deb(&args.input, &args.output) {
+    match extract_deb_with_depth(&args.input, &args.output, args.max_depth) {
         Ok(()) => {
             if args.verbose {
                 println!("Extraction completed successfully!");
@@ -91,6 +89,10 @@ fn main() -> Result<()> {
                 }
                 rust_file_unpacker::ExtractionError::Path(path_err) => {
                     eprintln!("Path validation error: {}", path_err);
+                }
+                rust_file_unpacker::ExtractionError::RecursionLimitExceeded { depth, limit } => {
+                    eprintln!("Recursion limit exceeded: reached depth {} (limit: {})", depth, limit);
+                    eprintln!("Hint: Use --max-depth to increase the limit if needed.");
                 }
             }
             

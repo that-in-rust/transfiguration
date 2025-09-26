@@ -93,14 +93,14 @@ This implementation plan follows the TDD-first approach with executable specific
     - Add performance assertion for reasonable extraction time
     - _Requirements: 1.1, 1.3, 1.4_
 
-- [ ] 8. Add basic recursion depth limiting
-  - [ ] 8.1 Write recursion limit test contracts (RED phase)
+- [x] 8. Add basic recursion depth limiting
+  - [x] 8.1 Write recursion limit test contracts (RED phase)
     - Test extraction stops at configured depth limit
     - Test default depth limit prevents excessive nesting
     - Test depth limit can be overridden via CLI flag
     - _Requirements: 2.2, 2.3_
   
-  - [ ] 8.2 Implement recursion depth tracking (GREEN phase)
+  - [x] 8.2 Implement recursion depth tracking (GREEN phase)
     - Add depth parameter to extraction functions
     - Track current depth during recursive extraction
     - Stop extraction and log warning when limit reached

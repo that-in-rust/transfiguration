@@ -11,6 +11,8 @@ pub enum ExtractionError {
     Format(String),
     #[error("Path validation error: {0}")]
     Path(#[from] PathError),
+    #[error("Recursion depth limit exceeded: {depth} (max: {limit})")]
+    RecursionLimitExceeded { depth: usize, limit: usize },
 }
 
 #[derive(Error, Debug)]
@@ -25,8 +27,20 @@ pub type Result<T> = std::result::Result<T, ExtractionError>;
 pub type PathResult<T> = std::result::Result<T, PathError>;
 
 pub fn extract_deb(input_path: &Path, output_dir: &Path) -> Result<()> {
+    extract_deb_with_depth(input_path, output_dir, 10) // Default depth limit of 10
+}
+
+pub fn extract_deb_with_depth(input_path: &Path, output_dir: &Path, max_depth: usize) -> Result<()> {
     use std::fs::{self, File};
     use std::io::{BufReader, Read};
+    
+    // Check depth limit at the start
+    if max_depth == 0 {
+        return Err(ExtractionError::RecursionLimitExceeded { 
+            depth: 0, 
+            limit: max_depth 
+        });
+    }
     
     fs::create_dir_all(output_dir)?;
     let file = File::open(input_path)?;
@@ -57,11 +71,11 @@ pub fn extract_deb(input_path: &Path, output_dir: &Path) -> Result<()> {
             }
             name if name.starts_with("control.tar") => {
                 println!("DEBUG: About to extract control archive: {}", name);
-                extract_tar_archive_with_name(&entry_data, output_dir, "control", &name)?;
+                extract_tar_archive_with_name_and_depth(&entry_data, output_dir, "control", name, max_depth, 0)?;
                 println!("Extracted control archive: {}", name);
             }
             name if name.starts_with("data.tar") => {
-                extract_tar_archive_with_name(&entry_data, output_dir, "data", &name)?;
+                extract_tar_archive_with_name_and_depth(&entry_data, output_dir, "data", name, max_depth, 0)?;
                 println!("Extracted data archive: {}", name);
             }
             _ => {
@@ -71,45 +85,28 @@ pub fn extract_deb(input_path: &Path, output_dir: &Path) -> Result<()> {
         }
     }
     Ok(())
-}f
-n extract_tar_archive(data: &[u8], base_output_dir: &Path, subdir: &str) -> Result<()> {
-    let output_dir = base_output_dir.join(subdir);
-    std::fs::create_dir_all(&output_dir)?;
-    
-    let extraction_result = try_extract_gzipped_tar(data, &output_dir)
-        .map_err(|e| { println!("Gzip extraction failed: {}", e); e })
-        .or_else(|_| try_extract_xz_tar(data, &output_dir)
-            .map_err(|e| { println!("XZ extraction failed: {}", e); e }))
-        .or_else(|_| try_extract_raw_tar(data, &output_dir)
-            .map_err(|e| { println!("Raw TAR extraction failed: {}", e); e }));
-    
-    match extraction_result {
-        Ok(()) => {
-            println!("Successfully extracted {} archive", subdir);
-            Ok(())
-        }
-        Err(e) => {
-            println!("Warning: Failed to extract {} archive: {}", subdir, e);
-            // Still create the directory even if extraction fails
-            std::fs::create_dir_all(&output_dir)?;
-            Ok(())
-        }
-    }
 }
 
-fn extract_tar_archive_with_name(data: &[u8], base_output_dir: &Path, subdir: &str, filename: &str) -> Result<()> {
+fn extract_tar_archive_with_name_and_depth(data: &[u8], base_output_dir: &Path, subdir: &str, filename: &str, max_depth: usize, current_depth: usize) -> Result<()> {
+    if current_depth >= max_depth {
+        return Err(ExtractionError::RecursionLimitExceeded { 
+            depth: current_depth, 
+            limit: max_depth 
+        });
+    }
+    
     let output_dir = base_output_dir.join(subdir);
     std::fs::create_dir_all(&output_dir)?;
     
     let extraction_result = if filename.ends_with(".xz") {
         println!("Detected XZ compression for {}", filename);
-        try_extract_xz_tar(data, &output_dir)
+        try_extract_xz_tar_with_depth(data, &output_dir, max_depth, current_depth + 1)
     } else if filename.ends_with(".gz") {
         println!("Detected Gzip compression for {}", filename);
-        try_extract_gzipped_tar(data, &output_dir)
+        try_extract_gzipped_tar_with_depth(data, &output_dir, max_depth, current_depth + 1)
     } else {
         println!("No compression detected for {}, trying raw TAR", filename);
-        try_extract_raw_tar(data, &output_dir)
+        try_extract_raw_tar_with_depth(data, &output_dir, max_depth, current_depth + 1)
     };
     
     match extraction_result {
@@ -126,36 +123,7 @@ fn extract_tar_archive_with_name(data: &[u8], base_output_dir: &Path, subdir: &s
     }
 }
 
-fn extract_tar_archive_with_name(data: &[u8], base_output_dir: &Path, subdir: &str, filename: &str) -> Result<()> {
-    let output_dir = base_output_dir.join(subdir);
-    std::fs::create_dir_all(&output_dir)?;
-    
-    let extraction_result = if filename.ends_with(".xz") {
-        println!("Detected XZ compression for {}", filename);
-        try_extract_xz_tar(data, &output_dir)
-    } else if filename.ends_with(".gz") {
-        println!("Detected Gzip compression for {}", filename);
-        try_extract_gzipped_tar(data, &output_dir)
-    } else {
-        println!("No compression detected for {}, trying raw TAR", filename);
-        try_extract_raw_tar(data, &output_dir)
-    };
-    
-    match extraction_result {
-        Ok(()) => {
-            println!("Successfully extracted {} archive", subdir);
-            Ok(())
-        }
-        Err(e) => {
-            println!("Warning: Failed to extract {} archive: {}", subdir, e);
-            // Still create the directory even if extraction fails
-            std::fs::create_dir_all(&output_dir)?;
-            Ok(())
-        }
-    }
-}
-
-fn try_extract_gzipped_tar(data: &[u8], output_dir: &Path) -> Result<()> {
+fn try_extract_gzipped_tar_with_depth(data: &[u8], output_dir: &Path, max_depth: usize, current_depth: usize) -> Result<()> {
     use std::io::Cursor;
     use flate2::read::GzDecoder;
     
@@ -168,19 +136,19 @@ fn try_extract_gzipped_tar(data: &[u8], output_dir: &Path) -> Result<()> {
         println!("Gzip TAR entries error: {}", e);
         ExtractionError::Format(format!("Gzipped TAR parse error: {}", e))
     })?;
-    extract_tar_entries(entries, output_dir)
+    extract_tar_entries_with_depth(entries, output_dir, max_depth, current_depth)
 }
 
-fn try_extract_raw_tar(data: &[u8], output_dir: &Path) -> Result<()> {
+fn try_extract_raw_tar_with_depth(data: &[u8], output_dir: &Path, max_depth: usize, current_depth: usize) -> Result<()> {
     use std::io::Cursor;
     
     let cursor = Cursor::new(data);
     let mut archive = tar::Archive::new(cursor);
     let entries = archive.entries().map_err(|e| ExtractionError::Format(format!("Raw TAR parse error: {}", e)))?;
-    extract_tar_entries(entries, output_dir)
+    extract_tar_entries_with_depth(entries, output_dir, max_depth, current_depth)
 }
 
-fn try_extract_xz_tar(data: &[u8], output_dir: &Path) -> Result<()> {
+fn try_extract_xz_tar_with_depth(data: &[u8], output_dir: &Path, max_depth: usize, current_depth: usize) -> Result<()> {
     use std::io::Cursor;
     use xz2::read::XzDecoder;
     
@@ -193,55 +161,15 @@ fn try_extract_xz_tar(data: &[u8], output_dir: &Path) -> Result<()> {
         println!("XZ TAR entries error: {}", e);
         ExtractionError::Format(format!("XZ TAR parse error: {}", e))
     })?;
-    extract_tar_entries(entries, output_dir)
+    extract_tar_entries_with_depth(entries, output_dir, max_depth, current_depth)
 }
 
-fn extract_tar_archive_with_name(data: &[u8], base_output_dir: &Path, subdir: &str, filename: &str) -> Result<()> {
-    let output_dir = base_output_dir.join(subdir);
-    std::fs::create_dir_all(&output_dir)?;
-    
-    let extraction_result = if filename.ends_with(".xz") {
-        println!("Detected XZ compression for {}", filename);
-        try_extract_xz_tar(data, &output_dir)
-    } else if filename.ends_with(".gz") {
-        println!("Detected Gzip compression for {}", filename);
-        try_extract_gzipped_tar(data, &output_dir)
-    } else {
-        println!("No compression detected for {}, trying raw TAR", filename);
-        try_extract_raw_tar(data, &output_dir)
-    };
-    
-    match extraction_result {
-        Ok(()) => {
-            println!("Successfully extracted {} archive", subdir);
-            Ok(())
-        }
-        Err(e) => {
-            println!("Warning: Failed to extract {} archive: {}", subdir, e);
-            // Still create the directory even if extraction fails
-            std::fs::create_dir_all(&output_dir)?;
-            Ok(())
-        }
+fn extract_tar_entries_with_depth<R: std::io::Read>(entries: tar::Entries<R>, output_dir: &Path, max_depth: usize, current_depth: usize) -> Result<()> {
+    if current_depth >= max_depth {
+        println!("Warning: Recursion depth limit reached at depth {}, skipping further extraction", current_depth);
+        return Ok(());
     }
-}
-
-fn try_extract_xz_tar(data: &[u8], output_dir: &Path) -> Result<()> {
-    use std::io::Cursor;
-    use xz2::read::XzDecoder;
     
-    println!("Attempting XZ extraction, data size: {} bytes", data.len());
-    
-    let cursor = Cursor::new(data);
-    let xz_decoder = XzDecoder::new(cursor);
-    let mut archive = tar::Archive::new(xz_decoder);
-    let entries = archive.entries().map_err(|e| {
-        println!("XZ TAR entries error: {}", e);
-        ExtractionError::Format(format!("XZ TAR parse error: {}", e))
-    })?;
-    extract_tar_entries(entries, output_dir)
-}
-
-fn extract_tar_entries<R: std::io::Read>(entries: tar::Entries<R>, output_dir: &Path) -> Result<()> {
     for entry_result in entries {
         let mut entry = entry_result.map_err(|e| ExtractionError::Format(format!("TAR entry error: {}", e)))?;
         
@@ -265,7 +193,9 @@ fn extract_tar_entries<R: std::io::Read>(entries: tar::Entries<R>, output_dir: &
         }
     }
     Ok(())
-}pub
+}
+
+pub
  fn validate_path(path: &str, base_dir: &Path) -> PathResult<PathBuf> {
     if path.is_empty() {
         return Ok(base_dir.to_path_buf());
@@ -275,11 +205,10 @@ fn extract_tar_entries<R: std::io::Read>(entries: tar::Entries<R>, output_dir: &
         return Err(PathError::Absolute);
     }
     
-    if path.len() >= 2 {
-        if path.chars().nth(1) == Some(':') && path.chars().next().map_or(false, |c| c.is_ascii_alphabetic()) {
+    if path.len() >= 2
+        && path.chars().nth(1) == Some(':') && path.chars().next().is_some_and(|c| c.is_ascii_alphabetic()) {
             return Err(PathError::Absolute);
         }
-    }
     
     if path.starts_with("\\\\") {
         return Err(PathError::Absolute);
@@ -316,6 +245,9 @@ fn extract_tar_entries<R: std::io::Read>(entries: tar::Entries<R>, output_dir: &
     Ok(result)
 }
 
+#[cfg(test)]
+mod recursion_tests;
+
 pub mod cli {
     use clap::Parser;
     use std::path::PathBuf;
@@ -328,6 +260,8 @@ pub mod cli {
         pub output: PathBuf,
         #[arg(short, long)]
         pub verbose: bool,
+        #[arg(long, default_value = "10")]
+        pub max_depth: usize,
     }
 
     impl Args {
