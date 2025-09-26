@@ -103,13 +103,13 @@ parse_typescript_definitions() {
         local rel_path="${ts_file#$extracted_path/}"
         
         # Parse interfaces
-        local interface_count
-        interface_count=$(extract_typescript_interfaces "$ts_file" "$rel_path" "$TS_OUTPUT_DIR")
+        extract_typescript_interfaces "$ts_file" "$rel_path" "$TS_OUTPUT_DIR"
+        local interface_count=$?
         total_interfaces=$((total_interfaces + interface_count))
         
         # Parse classes
-        local class_count
-        class_count=$(extract_typescript_classes "$ts_file" "$rel_path" "$TS_OUTPUT_DIR")
+        extract_typescript_classes "$ts_file" "$rel_path" "$TS_OUTPUT_DIR"
+        local class_count=$?
         total_classes=$((total_classes + class_count))
         
         # Parse enums
