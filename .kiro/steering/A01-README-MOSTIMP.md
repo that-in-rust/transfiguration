@@ -50,4 +50,4 @@ These principles are derived from the Parseltongue AIM Daemon design process and
 
 ## IMPORTANT FOR VISUALS AND DIAGRAMS
 
-ALL DIAGRAMS WILL BE IN MERMAID ONLY TO ENSURE EASE WITH GITHUB - DO NOT SKIP THAT 
+ALL DIAGRAMS WILL BE IN MERMAID ONLY TO ENSURE EASE WITH GITHUB - DO NOT SKIP THAT - use MermaidSteering.md file for that - it must be somewhere - use it
