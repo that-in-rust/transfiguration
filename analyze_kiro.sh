@@ -382,7 +382,9 @@ main() {
     log_debug "Log file: $log_file"
     
     # Simple logging approach - we'll manually log to file in functions if needed
-    echo "Analysis started at $(date -Iseconds)" > "$log_file"
+    if [[ "$DRY_RUN" != "true" ]]; then
+        echo "Analysis started at $(date -Iseconds)" > "$log_file"
+    fi
     
     log_success "Analysis pipeline initialization completed"
     log_info "Ready to begin file discovery and analysis phases"
@@ -403,6 +405,8 @@ main() {
     log_debug "Loaded output_management.sh"
     source "$SCRIPT_DIR/lib/configuration_analyzer.sh"
     log_debug "Loaded configuration_analyzer.sh"
+    source "$SCRIPT_DIR/lib/api_surface_analyzer.sh"
+    log_debug "Loaded api_surface_analyzer.sh"
     
     # Initialize subsystems
     log_debug "Initializing error handling..."
@@ -445,16 +449,36 @@ main() {
         exit 1
     fi
     
+    # Run API surface mapping analysis
+    log_info "Starting Phase 3: API Surface Mapping"
+    update_progress "api_surface_mapping" "started" "Analyzing TypeScript definitions and extension APIs"
+    
+    # Initialize API analysis module
+    if declare -f init_api_analysis >/dev/null; then
+        init_api_analysis "$OUTPUT_DIR" "$CONFIG_FILE"
+    else
+        log_warn "API analysis initialization function not available"
+    fi
+    
+    if run_api_surface_analysis "$EXTRACTED_KIRO_PATH" "$OUTPUT_DIR" "$CONFIG_FILE"; then
+        update_progress "api_surface_mapping" "completed" "API surface mapping completed successfully"
+        log_success "Phase 3 completed: API Surface Mapping"
+    else
+        update_progress "api_surface_mapping" "failed" "API surface mapping failed"
+        log_error "Phase 3 failed: API Surface Mapping"
+        exit 1
+    fi
+    
     # Generate initial reports
     generate_cross_references "$OUTPUT_DIR"
     generate_summary_report "$OUTPUT_DIR"
     collect_analysis_statistics "$OUTPUT_DIR"
     
     # Update final status
-    update_analysis_status "phase2_completed" "File discovery and configuration analysis completed"
+    update_analysis_status "phase3_completed" "File discovery, configuration analysis, and API surface mapping completed"
     
-    log_success "Analysis pipeline Phases 1-2 completed successfully"
-    log_info "Ready for Phase 3: API Surface Mapping (to be implemented in next task)"
+    log_success "Analysis pipeline Phases 1-3 completed successfully"
+    log_info "Ready for Phase 4: UI Structure Analysis (to be implemented in next task)"
 }
 
 # Execute main function with all arguments
