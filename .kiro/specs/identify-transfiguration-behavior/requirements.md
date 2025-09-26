@@ -50,49 +50,53 @@ This feature involves **Phase 1: Discovery & Documentation** of Kiro.dev behavio
 4. WHEN I analyze extension loading THEN the system SHALL document the extension lifecycle and dependency patterns
 5. WHEN I examine Open VSX integration THEN the system SHALL document marketplace interaction patterns
 
-### Requirement 3
+### Requirement 3: UI Structure and Styling Analysis
 
-**User Story:** As a developer, I want AI-powered multi-file editing capabilities, so that I can make coordinated changes across my entire codebase.
-
-#### Acceptance Criteria
-
-1. WHEN I describe a change request THEN the system SHALL analyze multiple files for necessary modifications
-2. WHEN multi-file changes are proposed THEN the system SHALL show a clear diff preview
-3. WHEN I approve changes THEN the system SHALL apply modifications across all affected files
-4. WHEN changes conflict THEN the system SHALL provide conflict resolution assistance
-
-### Requirement 4
-
-**User Story:** As a developer, I want conversational AI assistance for debugging and problem-solving, so that I can get help with complex coding challenges.
+**User Story:** As a developer analyzing Kiro, I want to document the complete UI structure and styling system, so that I can replicate the exact visual appearance and layout behaviors.
 
 #### Acceptance Criteria
 
-1. WHEN I encounter errors THEN the system SHALL offer AI-powered debugging assistance
-2. WHEN I ask questions about code THEN the system SHALL provide contextual explanations
-3. WHEN I request refactoring suggestions THEN the system SHALL analyze code and propose improvements
-4. WHEN I need documentation THEN the system SHALL generate appropriate comments and docs
+1. WHEN I analyze HTML templates THEN the system SHALL document all UI component structures and hierarchies
+2. WHEN I examine CSS files THEN the system SHALL document all styling rules, animations, and responsive behaviors
+3. WHEN I review theme definitions THEN the system SHALL document color schemes, typography, and customization options
+4. WHEN I analyze layout systems THEN the system SHALL document panel arrangements, resizing behaviors, and docking mechanisms
+5. WHEN I examine media assets THEN the system SHALL catalog all icons, images, and visual resources
 
-### Requirement 5
+### Requirement 4: AI Integration Pattern Analysis
 
-**User Story:** As a developer, I want secure and configurable AI integration, so that I can control how my code and data are shared with AI services.
-
-#### Acceptance Criteria
-
-1. WHEN I configure AI settings THEN the system SHALL provide granular privacy controls
-2. WHEN sending code to AI THEN the system SHALL respect configured privacy boundaries
-3. WHEN API keys are stored THEN the system SHALL use secure encryption
-4. WHEN offline mode is enabled THEN the system SHALL function without AI features
-
-### Requirement 6
-
-**User Story:** As a developer, I want extensible AI capabilities, so that I can customize and extend the AI integration for my specific needs.
+**User Story:** As a developer analyzing Kiro, I want to document AI integration patterns and workflows, so that I can understand how Kiro implements AI-powered development assistance.
 
 #### Acceptance Criteria
 
-1. WHEN I install AI extensions THEN the system SHALL support custom AI providers through a Rust-based plugin system
-2. WHEN I configure custom prompts THEN the system SHALL use them for AI interactions with validation through Rust code
-3. WHEN I create AI workflows THEN the system SHALL allow automation of common tasks using Rust/WASM performance
-4. WHEN I share configurations THEN the system SHALL support team-wide AI settings with secure serialization
+1. WHEN I analyze Kiro Agent extension THEN the system SHALL document AI service integration points and API patterns
+2. WHEN I examine AI workflow code THEN the system SHALL document context collection, request formatting, and response processing
+3. WHEN I review network patterns THEN the system SHALL document API endpoints, authentication flows, and data transmission formats
+4. WHEN I analyze UI integration THEN the system SHALL document how AI responses are displayed and integrated into the editor
+5. WHEN I examine error handling THEN the system SHALL document AI service failure modes and fallback behaviors
+
+### Requirement 5: Behavioral Inference from Code Patterns
+
+**User Story:** As a developer analyzing Kiro, I want to infer runtime behaviors from static code patterns, so that I can understand dynamic behaviors without running the application.
+
+#### Acceptance Criteria
+
+1. WHEN I analyze event handlers THEN the system SHALL document user interaction patterns and their expected responses
+2. WHEN I examine state management THEN the system SHALL document application state transitions and data flow patterns
+3. WHEN I review animation code THEN the system SHALL document timing, easing functions, and visual transition behaviors
+4. WHEN I analyze performance patterns THEN the system SHALL document optimization techniques and resource management approaches
+5. WHEN I examine error handling THEN the system SHALL document exception patterns and recovery mechanisms
+
+### Requirement 6: Static Analysis Methodology Implementation
+
+**User Story:** As a developer analyzing Kiro, I want systematic static analysis tools and processes, so that I can extract behavioral information comprehensively and consistently.
+
+#### Acceptance Criteria
+
+1. WHEN I execute configuration analysis THEN the system SHALL extract all JSON schemas, command definitions, and setting structures
+2. WHEN I run API surface mapping THEN the system SHALL document all extension contribution points and TypeScript interfaces
+3. WHEN I perform code pattern analysis THEN the system SHALL identify event handlers, state management, and interaction patterns
+4. WHEN I execute dependency analysis THEN the system SHALL map all internal and external dependencies and their relationships
+5. WHEN I generate documentation THEN the system SHALL produce structured behavioral specifications for future implementation phases
 
 ### Requirement 7
 
@@ -186,7 +190,66 @@ This feature involves **Phase 1: Discovery & Documentation** of Kiro.dev behavio
 - Custom AI model fine-tuning
 - Enterprise-grade audit and monitoring
 
-## Behavioral Replication Methodology
+## Static Analysis Discovery Methodology
+
+### Extracted Kiro Files as Source of Truth
+The extracted Kiro application at `/Users/neetipatni/Desktop/extracted_kiro` serves as the primary source for behavioral discovery. All analysis must be performed on these static files without runtime execution.
+
+### Phase 1 Analysis Techniques
+
+#### Configuration Structure Analysis
+```bash
+# Extract all configuration schemas
+find /Users/neetipatni/Desktop/extracted_kiro -name "*.json" -exec jq '.' {} \;
+# Map command definitions  
+grep -r "registerCommand\|contributes.*commands" --include="*.js" --include="*.json"
+# Extract keybinding definitions
+find . -name "*keybinding*" -o -name "*shortcut*"
+```
+
+#### Extension API Surface Mapping
+```bash
+# Find all extension contribution points
+grep -r "contributes" --include="package.json"
+# Map activation events
+grep -r "activationEvents" --include="*.json"
+# Document TypeScript API definitions
+find . -name "vscode.d.ts" -o -name "*.d.ts"
+```
+
+#### UI Structure and Styling Documentation
+```bash
+# Extract HTML templates and component structures
+find . -name "*.html" | head -10
+# Document CSS styling and animation patterns
+find . -name "*.css" | xargs grep -l "transition\|animation"
+# Map theme and customization systems
+grep -r "theme\|color-theme" --include="*.json"
+```
+
+#### Behavioral Pattern Inference
+```bash
+# Identify event handling patterns
+grep -r "addEventListener\|onClick\|onKeyDown" --include="*.js"
+# Map state management patterns
+grep -r "setState\|state\." --include="*.js"
+# Document performance optimization patterns
+grep -r "performance\|optimization\|cache" --include="*.js"
+```
+
+### Limitations and Assumptions
+- **No Runtime Observation**: Cannot observe actual user interactions, timing, or dynamic behaviors
+- **VS Code OSS Baseline**: Use VS Code OSS 1.103.2 as behavioral reference for standard IDE patterns
+- **Inference-Based**: Many behaviors must be inferred from code patterns rather than observed
+- **Static-Only**: All analysis limited to file contents, configurations, and code structure
+
+### Deliverables for Next Phase
+- **Behavioral Specification Document**: Complete documentation of all discoverable Kiro behaviors
+- **API Compatibility Matrix**: Full mapping of extension APIs and integration points
+- **UI/UX Pattern Library**: Documentation of visual components, layouts, and styling systems
+- **Configuration Schema**: Complete mapping of all settings, preferences, and customization options
+
+## Technical Constraints
 
 ### Kiro as Living Specification
 The extracted Kiro application at `/Users/neetipatni/Desktop/extracted_kiro` serves as the authoritative specification for all behaviors. Every user-facing interaction, configuration option, and extension API must be replicated exactly.
