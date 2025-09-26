@@ -8,14 +8,14 @@ This implementation plan converts the behavioral discovery design into a series 
 
 ### Phase 1.1: Core Analysis Infrastructure
 
-- [ ] 1. Set up analysis pipeline architecture
+- [-] 1. Set up analysis pipeline architecture
   - Create main analysis script with proper argument parsing and help documentation
   - Implement directory structure creation for organized output
   - Set up logging system with different verbosity levels (debug, info, warn, error)
   - Create configuration file for analysis parameters and paths
   - _Requirements: 6.1, 6.2, 6.5_
 
-- [ ] 1.1 Implement file discovery and validation system
+- [-] 1.1 Implement file discovery and validation system
   - Write function to recursively find all relevant files in extracted Kiro directory
   - Implement file type detection and categorization (JSON, JS, TS, HTML, CSS, etc.)
   - Create file validation to ensure files are readable and not corrupted
