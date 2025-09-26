@@ -52,6 +52,17 @@ This feature involves creating a Rust command-line tool to safely unpack and ana
 3. WHEN I specify --verbose THEN the system SHALL show detailed operation logs
 4. WHEN extraction completes THEN the system SHALL provide a final summary with file counts
 
+### Requirement 5
+
+**User Story:** As a security researcher, I want protection against deeply nested archives, so that I can prevent resource exhaustion and infinite recursion attacks.
+
+#### Acceptance Criteria
+
+1. WHEN extraction depth exceeds the default limit THEN the system SHALL stop extraction and log a warning
+2. WHEN I specify --max-depth flag THEN the system SHALL use the provided depth limit instead of default
+3. WHEN recursion limit is reached THEN the system SHALL continue processing other files at the current level
+4. WHEN depth limit is configured THEN the system SHALL validate it is a positive integer
+
 ## Future Requirements (Post-MVP)
 
 ### Advanced Security (V2)
