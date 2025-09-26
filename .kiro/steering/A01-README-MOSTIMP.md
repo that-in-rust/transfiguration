@@ -2,7 +2,14 @@
 
 Test-First Development: I should be writing tests FIRST, following the STUB → RED → GREEN → REFACTOR cycle
 
+
+# Product thinking for us
+Think like Shreyas Doshi  - the famous product leader - his minimalism - user journeys mindset
+
 ## The Essence: Executable Specifications Drive Everything
+
+Exectuable Specifications is the concept  - stick to it 
+
 
 **Core Truth**: Traditional user stories fail LLMs because they're designed for human conversation. LLMs need executable blueprints, not ambiguous narratives.
 
