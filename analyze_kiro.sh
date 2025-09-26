@@ -352,10 +352,10 @@ create_output_structure() {
 
 # Main execution function
 main() {
-    log_info "Starting Kiro Behavioral Analysis Pipeline v${SCRIPT_VERSION}"
-    
-    # Parse command line arguments
+    # Parse command line arguments first
     parse_arguments "$@"
+    
+    log_info "Starting Kiro Behavioral Analysis Pipeline v${SCRIPT_VERSION}"
     
     # Show configuration in debug mode
     if [[ "$LOG_LEVEL" == "debug" ]]; then
@@ -379,8 +379,10 @@ main() {
     
     # Initialize logging for this session
     local log_file="$OUTPUT_DIR/logs/analysis_$(date +%Y%m%d_%H%M%S).log"
-    exec 1> >(tee -a "$log_file")
-    exec 2> >(tee -a "$log_file" >&2)
+    log_debug "Log file: $log_file"
+    
+    # Simple logging approach - we'll manually log to file in functions if needed
+    echo "Analysis started at $(date -Iseconds)" > "$log_file"
     
     log_success "Analysis pipeline initialization completed"
     log_info "Ready to begin file discovery and analysis phases"
@@ -392,13 +394,28 @@ main() {
     fi
     
     # Load analysis modules
+    log_debug "Loading analysis modules..."
     source "$SCRIPT_DIR/lib/file_discovery.sh"
+    log_debug "Loaded file_discovery.sh"
     source "$SCRIPT_DIR/lib/error_handling.sh"
+    log_debug "Loaded error_handling.sh"
     source "$SCRIPT_DIR/lib/output_management.sh"
+    log_debug "Loaded output_management.sh"
     
     # Initialize subsystems
-    init_error_handling "$OUTPUT_DIR"
-    init_output_management "$OUTPUT_DIR"
+    log_debug "Initializing error handling..."
+    if declare -f init_error_handling >/dev/null; then
+        init_error_handling "$OUTPUT_DIR"
+    else
+        log_warn "Error handling initialization function not available"
+    fi
+    
+    log_debug "Initializing output management..."
+    if declare -f init_output_management >/dev/null; then
+        init_output_management "$OUTPUT_DIR"
+    else
+        log_warn "Output management initialization function not available"
+    fi
     
     # Run file discovery and validation
     log_info "Starting Phase 1: File Discovery and Validation"

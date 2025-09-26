@@ -6,24 +6,32 @@
 # This module implements comprehensive file discovery, categorization,
 # and validation for the extracted Kiro application files.
 
-# File type categorization patterns
-declare -A FILE_CATEGORIES=(
-    ["json"]="*.json"
-    ["javascript"]="*.js *.mjs *.cjs"
-    ["typescript"]="*.ts *.tsx *.d.ts"
-    ["html"]="*.html *.htm"
-    ["css"]="*.css *.scss *.sass *.less"
-    ["markdown"]="*.md *.markdown"
-    ["yaml"]="*.yml *.yaml"
-    ["xml"]="*.xml *.xsd *.xsl"
-    ["images"]="*.png *.jpg *.jpeg *.gif *.svg *.ico *.webp"
-    ["fonts"]="*.ttf *.otf *.woff *.woff2 *.eot"
-    ["archives"]="*.zip *.tar *.gz *.bz2 *.xz *.7z"
-    ["executables"]="*.exe *.dll *.so *.dylib *.app"
-    ["config"]="*.conf *.cfg *.ini *.properties *.toml"
-    ["logs"]="*.log *.out *.err"
-    ["temp"]="*.tmp *.temp *.cache *.bak *.swp"
-)
+# File type categorization function (compatible with bash 3.2)
+get_file_category_patterns() {
+    local category="$1"
+    
+    case "$category" in
+        "json") echo "*.json" ;;
+        "javascript") echo "*.js *.mjs *.cjs" ;;
+        "typescript") echo "*.ts *.tsx *.d.ts" ;;
+        "html") echo "*.html *.htm" ;;
+        "css") echo "*.css *.scss *.sass *.less" ;;
+        "markdown") echo "*.md *.markdown" ;;
+        "yaml") echo "*.yml *.yaml" ;;
+        "xml") echo "*.xml *.xsd *.xsl" ;;
+        "images") echo "*.png *.jpg *.jpeg *.gif *.svg *.ico *.webp" ;;
+        "fonts") echo "*.ttf *.otf *.woff *.woff2 *.eot" ;;
+        "archives") echo "*.zip *.tar *.gz *.bz2 *.xz *.7z" ;;
+        "executables") echo "*.exe *.dll *.so *.dylib *.app" ;;
+        "config") echo "*.conf *.cfg *.ini *.properties *.toml" ;;
+        "logs") echo "*.log *.out *.err" ;;
+        "temp") echo "*.tmp *.temp *.cache *.bak *.swp" ;;
+        *) echo "" ;;
+    esac
+}
+
+# List of all categories
+FILE_CATEGORIES="json javascript typescript html css markdown yaml xml images fonts archives executables config logs temp"
 
 # File validation functions
 validate_file_readable() {
@@ -107,8 +115,9 @@ categorize_file() {
     local extension="${filename##*.}"
     
     # Check each category
-    for category in "${!FILE_CATEGORIES[@]}"; do
-        local patterns="${FILE_CATEGORIES[$category]}"
+    for category in $FILE_CATEGORIES; do
+        local patterns
+        patterns=$(get_file_category_patterns "$category")
         
         # Convert space-separated patterns to array
         IFS=' ' read -ra pattern_array <<< "$patterns"
