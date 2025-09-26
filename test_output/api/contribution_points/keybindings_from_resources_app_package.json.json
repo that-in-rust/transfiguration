@@ -1,7 +1,0 @@
-[
-  {
-    "command": "kiro.openFile",
-    "key": "ctrl+o",
-    "mac": "cmd+o"
-  }
-]
