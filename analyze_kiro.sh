@@ -401,6 +401,8 @@ main() {
     log_debug "Loaded error_handling.sh"
     source "$SCRIPT_DIR/lib/output_management.sh"
     log_debug "Loaded output_management.sh"
+    source "$SCRIPT_DIR/lib/configuration_analyzer.sh"
+    log_debug "Loaded configuration_analyzer.sh"
     
     # Initialize subsystems
     log_debug "Initializing error handling..."
@@ -430,16 +432,29 @@ main() {
         exit 1
     fi
     
+    # Run configuration analysis
+    log_info "Starting Phase 2: Configuration Analysis"
+    update_progress "configuration_analysis" "started" "Analyzing package.json and product.json files"
+    
+    if run_configuration_analysis "$EXTRACTED_KIRO_PATH" "$OUTPUT_DIR" "$CONFIG_FILE"; then
+        update_progress "configuration_analysis" "completed" "Configuration analysis completed successfully"
+        log_success "Phase 2 completed: Configuration Analysis"
+    else
+        update_progress "configuration_analysis" "failed" "Configuration analysis failed"
+        log_error "Phase 2 failed: Configuration Analysis"
+        exit 1
+    fi
+    
     # Generate initial reports
     generate_cross_references "$OUTPUT_DIR"
     generate_summary_report "$OUTPUT_DIR"
     collect_analysis_statistics "$OUTPUT_DIR"
     
     # Update final status
-    update_analysis_status "phase1_completed" "Core analysis infrastructure and file discovery completed"
+    update_analysis_status "phase2_completed" "File discovery and configuration analysis completed"
     
-    log_success "Analysis pipeline Phase 1 completed successfully"
-    log_info "Ready for Phase 2: Configuration Analysis (to be implemented in next task)"
+    log_success "Analysis pipeline Phases 1-2 completed successfully"
+    log_info "Ready for Phase 3: API Surface Mapping (to be implemented in next task)"
 }
 
 # Execute main function with all arguments
