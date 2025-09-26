@@ -1,0 +1,13 @@
+{
+  "extension_kinds": [],
+  "capabilities_analysis": {
+    "extensions_with_capabilities": 0,
+    "capability_types": []
+  },
+  "engine_requirements": [
+    {
+      "version_requirement": null,
+      "count": 1
+    }
+  ]
+}

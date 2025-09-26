@@ -1,0 +1,16 @@
+[
+  {
+    "command": "kiro.openFile",
+    "title": "Open File",
+    "category": "File",
+    "source_file": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/package.json",
+    "extracted_at": 1758891416.81079
+  },
+  {
+    "command": "kiro.ai.askQuestion",
+    "title": "Ask AI",
+    "category": "AI",
+    "source_file": "/Users/neetipatni/Desktop/amuldotexe-github/branchBgithub/transfiguration/test_extracted_kiro/resources/app/package.json",
+    "extracted_at": 1758891416.810792
+  }
+]

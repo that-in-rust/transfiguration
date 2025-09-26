@@ -1,0 +1,12 @@
+[
+  {
+    "command": "kiro.openFile",
+    "title": "Open File",
+    "category": "File"
+  },
+  {
+    "command": "kiro.ai.askQuestion",
+    "title": "Ask AI",
+    "category": "AI"
+  }
+]
