@@ -158,11 +158,9 @@ extract_typescript_interfaces() {
     # Extract interface definitions using grep and sed (handle indented interfaces)
     while IFS= read -r line; do
         if [[ -n "$line" ]]; then
-            ts_log_debug "Processing line: $line"
             # Extract interface name (handle both export and non-export interfaces)
             local interface_name
             interface_name=$(echo "$line" | sed -n 's/.*interface \([A-Za-z_][A-Za-z0-9_]*\).*/\1/p')
-            ts_log_debug "Extracted interface name: '$interface_name'"
             
             if [[ -n "$interface_name" ]]; then
                 # Create interface entry
