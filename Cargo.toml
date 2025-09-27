@@ -29,6 +29,8 @@ octocrab = "0.32"
 
 # Web scraping
 scraper = "0.18"
+regex = "1.0"
+base64 = "0.21"
 
 # Logging
 tracing = "0.1"
