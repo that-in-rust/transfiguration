@@ -205,8 +205,17 @@ This Phase 2 research builds upon our comprehensive Phase 1 static analysis of K
 
 ## Technical Constraints
 
+### Database Technology Requirement
+- **PostgreSQL Database**: MUST use PostgreSQL as the primary database for research data management
+  - **Reasoning**: Superior full-text search capabilities essential for searching project descriptions, documentation, and technical analysis
+  - **JSON Support**: Native JSONB support for flexible research data schemas that evolve during investigation
+  - **Advanced Indexing**: GIN/GiST indexes for complex queries across research metadata and content
+  - **Collaboration**: Easy sharing via pg_dump/restore and compatibility with managed services (Supabase, Neon)
+  - **Research Analytics**: Advanced aggregation functions and window operations for pattern analysis
+  - **Extensibility**: Rich ecosystem (pg_vector for future semantic search, full-text search extensions)
+
 ### Research Infrastructure Requirements
-- **Data Management**: Structured storage for research findings and analysis
+- **Data Management**: Structured PostgreSQL storage for research findings and analysis
 - **Source Tracking**: Comprehensive attribution and verification systems
 - **Analysis Tools**: Frameworks for pattern recognition and synthesis
 - **Reporting Systems**: Structured output generation for decision-making
