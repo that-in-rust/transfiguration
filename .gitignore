@@ -107,3 +107,15 @@ jspm_packages/
 # Added by cargo
 
 /target
+
+# Downloads for static analysis (excluded from git)
+downloads-for-analysis/
+*.deb
+*.zip
+*.tar.gz
+*.tar.xz
+*.dmg
+*.exe
+*.msi
+*.pkg
+*.app
