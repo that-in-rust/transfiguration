@@ -119,3 +119,9 @@ downloads-for-analysis/
 *.msi
 *.pkg
 *.app
+
+# Allow analysis documentation
+!downloads-for-analysis/analysis-results/
+!downloads-for-analysis/analysis-results/**
+!downloads-for-analysis/*.md
+# Allow analysis documentation
