@@ -14,6 +14,14 @@
 - **Technical Foundation**: Existing 6μs graph operations + proven ISG architecture
 - **Business Impact**: $2.4M/year ROI for 1000-developer enterprise organizations
 
+### **A002_WhenToStopOptimizing.md**
+**PRAGMATIC REALITY CHECK: Performance vs. Product Focus**
+
+- **Core Question**: When Parseltongue already hits <12ms update/<1ms query goals, what still needs optimization?
+- **Capability Analysis**: Systematic comparison of Parseltongue vs. Zed vs. RustRover trade-offs
+- **Decision Framework**: Keep/Consider/Skip matrix for optimization investments
+- **Strategic Insight**: Knowing when to stop optimizing is as valuable as knowing how to optimize
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
