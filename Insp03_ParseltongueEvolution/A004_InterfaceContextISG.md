@@ -80,6 +80,37 @@ Notes:
 - Keep await_cnt and unsafe_cnt also as explicit u8 fields in NodeExtras for readability; ctrl_bits packs a compressed copy for fast filtering.
 - exit_kinds are represented as bitflags in storage; expose as a string array in JSON APIs.
 
+Decode helper (Rust, illustrative)
+
+```rust path=null start=null
+#[derive(Debug, Default, Clone, Copy)]
+pub struct CtrlBits {
+    pub cyclomatic: u8,
+    pub has_loop: bool,
+    pub early_return: bool,
+    pub exit_ok: bool,
+    pub exit_err: bool,
+    pub exit_none: bool,
+    pub exit_panic: bool,
+    pub await_cnt: u8,
+    pub unsafe_cnt: u8,
+}
+
+pub fn decode_ctrl_bits(bits: u32) -> CtrlBits {
+    CtrlBits {
+        cyclomatic: ((bits >> 0) & 0b1111) as u8,
+        has_loop: ((bits >> 4) & 1) != 0,
+        early_return: ((bits >> 5) & 1) != 0,
+        exit_ok: ((bits >> 6) & 1) != 0,
+        exit_err: ((bits >> 7) & 1) != 0,
+        exit_none: ((bits >> 8) & 1) != 0,
+        exit_panic: ((bits >> 9) & 1) != 0,
+        await_cnt: ((bits >> 10) & 0xFF) as u8,
+        unsafe_cnt: ((bits >> 18) & 0xFF) as u8,
+    }
+}
+```
+
 - Extend EdgeKind (or add a typed “EdgeTag” with compact u8) to avoid enum bloat:
 
 | Tag | Meaning | Example emission |
