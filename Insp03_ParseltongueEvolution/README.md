@@ -37,6 +37,13 @@
 - **How**: syn for precise signature harvesting, optional tree-sitter for incremental scope; stable api_digest via canonicalized signatures
 - **Why**: Better "what-implements," "who-calls," "blast radius," and stable "what changed"—while keeping p95 update < 5ms
 
+### **A005_ReasoningWithISG.md**
+**LLM REASONING WITH ISG: CPU-only LLDs that are easy to think about**
+
+- **Short answer**: Yes—structure + minimal interface context + compact deltas let an LLM reason about LLDs without names being perfect.
+- **What it adds**: Layered strategy (Essence→Evidence), mermaid flow, CPU-only signals summary, delta packet, and endpoints.
+- **How it relates**: Builds on A003 (structural rules) and A004 (NodeExtras + signals) to deliver practical JSON-RPC for editors/LLMs.
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
