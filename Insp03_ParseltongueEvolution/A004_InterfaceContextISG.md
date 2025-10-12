@@ -111,6 +111,36 @@ pub fn decode_ctrl_bits(bits: u32) -> CtrlBits {
 }
 ```
 
+Extended NodeExtras (behavioural hints)
+
+```rust path=null start=null
+pub struct NodeExtras {
+    // existing …
+    pub api_digest: u64,
+
+    // NEW --------------------------------
+    pub ctrl_bits: u32,   // layout: [0-3 cyclo][4 has_loop][5 early_ret]…
+    pub cfg_hash: u64,    // 0 = not calculated (CFG shape hash)
+    pub await_cnt: u8,
+    pub unsafe_cnt: u8,
+    pub doc_tags: Arc<[Arc<str>]>,
+}
+```
+
+Optional data-flow edge tags (cheap, noisy-but-useful)
+
+| Tag | From → To | Emit when |
+|---|---|---|
+| WritesField | fn/method → struct.field | any `member =` assign in body |
+| ReadsField | fn/method → struct.field | dot access on RHS |
+| MutatesSelf (flag) | method → self | body contains `self.` with `&mut` |
+
+Notes:
+- These can ride the same EdgeKind/EdgeTag system with a small "Data" segment; exact typing optional.
+- False positives are acceptable; the goal is to surface “possible” behaviours for LLM triage.
+
+For sourcing and implementation tips (rust-analyzer CFG, Clippy lints, MIR CFG, cargo-geiger), see A005_ReasoningWithISG.md (Section: Source-of-truth inspirations).
+
 - Extend EdgeKind (or add a typed “EdgeTag” with compact u8) to avoid enum bloat:
 
 | Tag | Meaning | Example emission |
