@@ -61,6 +61,25 @@ pub struct NodeExtras {
 }
 ```
 
+### Control-flow bit layout (ctrl_bits)
+
+| Bit(s) | Meaning |
+|---|---|
+| 0–3 | cyclomatic (0–15) |
+| 4 | has_loop |
+| 5 | early_return |
+| 6 | exit_ok |
+| 7 | exit_err |
+| 8 | exit_none |
+| 9 | exit_panic |
+| 10–17 | await_cnt (compressed 0–255) |
+| 18–25 | unsafe_cnt (compressed 0–255) |
+| 26–31 | reserved |
+
+Notes:
+- Keep await_cnt and unsafe_cnt also as explicit u8 fields in NodeExtras for readability; ctrl_bits packs a compressed copy for fast filtering.
+- exit_kinds are represented as bitflags in storage; expose as a string array in JSON APIs.
+
 - Extend EdgeKind (or add a typed “EdgeTag” with compact u8) to avoid enum bloat:
 
 | Tag | Meaning | Example emission |
@@ -245,6 +264,13 @@ Emit one compact record per changed node; keep under ~1–2 KB each.
         "callers_sample": ["crate::api::v1::login_handler"],
         "callees_sample": ["crate::auth::validate", "crate::db::users::get"]
     },
+    "control": {
+        "ctrl_bits": "0x0000_0321",
+        "cfg_hash": "0x9f3a…",
+        "exit_kinds": ["OK", "Err"],
+        "await_cnt": 1,
+        "unsafe_cnt": 0
+    },
     "trait_contract": {
         "implements": [{"trait": "Service", "via": "manual"}],
         "requires": [],
@@ -252,7 +278,8 @@ Emit one compact record per changed node; keep under ~1–2 KB each.
     },
     "doc": {
         "first_line": "Logs a user in with password and OTP.",
-        "hash": "0x5ad1…"
+        "hash": "0x5ad1…",
+        "tags": ["auth", "login", "retry"]
     },
     "change": {
         "kind": "modified",
@@ -281,9 +308,10 @@ How the LLM uses this:
   - Keep prior api_digest/shape_digest; classify change: added/removed/modified + breaking/non-breaking (e.g., trait added required method = breaking).
 
 ## Endpoints to expose (stdio JSON-RPC)
-- graph.delta.summarize({ since_digest? }): returns array of LLM Delta Packets for changed nodes only
-- node.describe({ id/hash }): returns full packet for one node
+- graph.delta.summarize({ since_digest? }): returns array of LLM Delta Packets for changed nodes only (includes control.ctrl_bits, control.cfg_hash, control.exit_kinds)
+- node.describe({ id/hash }): returns full packet for one node (node/api/effects/coupling/control/trait_contract/doc/change)
 - risk.rank({ limit }): returns nodes sorted by blast_radius_estimate × centrality × breaking_risk
+- rules.apply/list/stats: manage structural rule execution and metrics
 
 ## Start with these 8 signals (fastest, highest ROI)
 - api_digest + shape_digest
