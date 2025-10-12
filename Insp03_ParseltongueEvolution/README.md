@@ -30,6 +30,13 @@
 - **1-Week Implementation Plan**: Day-by-day breakdown from rules engine to production deployment
 - **Ecosystem Learning**: What to borrow from semgrep, ripgrep, ctags, and rust-analyzer
 
+### **A004_InterfaceContextISG.md**
+**CPU-ONLY INTERFACE CONTEXT: High-ROI ISG Enrichment**
+
+- **What**: Attach compact NodeExtras (vis, flags, module path, generics, where-bounds, derives, doc, api_digest) and add edge tags (Contains/Requires/DefinesAssocType/Reexports/UsesType/Derives)
+- **How**: syn for precise signature harvesting, optional tree-sitter for incremental scope; stable api_digest via canonicalized signatures
+- **Why**: Better "what-implements," "who-calls," "blast radius," and stable "what changed"—while keeping p95 update < 5ms
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
