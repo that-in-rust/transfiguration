@@ -1,164 +1,133 @@
-Sure — that’s an interesting list! It looks like you’re referring to **capabilities or “rules” used in AI agent systems, LLM sandboxes, or workflow engines** (like OpenDevin, AutoGPT, or Cursor-like toolchains). Each of these corresponds to a specific action or “tool” the agent can invoke to interact with the environment. Let’s break them down one by one 👇
+Excellent question — and the short answer is:
+👉 **No, that’s _not_ the complete list.**
+
+The ones you listed —
+`Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput` —
+are a **subset** of a larger ecosystem of “tools” or “rules” that AI agents (like those in systems such as OpenDevin, AutoGPT, or Anthropic’s Claude Ops) can use to interact with the real world.
+
+Let’s break it down more completely so you can see the bigger picture 👇
 
 ---
 
-### 🧭 File and Command Tools
+### 🧩 Categories of Common Agent Tools
 
-#### **Glob**
+#### 🗂️ 1. **File System Tools**
 
-- **Purpose:** Pattern-based file matching.
-- **What it does:** Returns a list of files matching a pattern — e.g., `"*.js"` will match all JavaScript files.
-- **Example:**
+Used for navigating, reading, writing, and manipulating local or project files.
 
-  ```bash
-  glob("src/**/*.ts")
-  ```
-
-  → Lists all `.ts` files recursively in `src`.
-
----
-
-#### **Grep**
-
-- **Purpose:** Search for text inside files.
-- **What it does:** Finds lines that match a given regex or keyword.
-- **Example:**
-
-  ```bash
-  grep("TODO", "src/**/*.ts")
-  ```
-
-  → Finds all occurrences of “TODO” in `.ts` files under `src`.
+| Tool              | Purpose                                           |
+| ----------------- | ------------------------------------------------- |
+| **LS**            | List directory contents                           |
+| **Read**          | Read file content                                 |
+| **Write**         | Write or overwrite a file                         |
+| **Append**        | Append content to a file                          |
+| **Delete**        | Delete a file                                     |
+| **Move / Rename** | Move or rename files                              |
+| **Glob**          | Pattern-based file matching                       |
+| **Grep**          | Search text within files                          |
+| **NotebookRead**  | Parse and extract content from `.ipynb` notebooks |
 
 ---
 
-#### **LS**
+#### 🧠 2. **Code Intelligence / Dev Tools**
 
-- **Purpose:** List directory contents.
-- **What it does:** Equivalent of the Unix `ls` command — shows files and directories.
-- **Example:**
+Enable agents to understand, modify, and execute code.
 
-  ```bash
-  ls("src/components")
-  ```
-
-  → Lists all files/folders in `src/components`.
-
----
-
-#### **Read**
-
-- **Purpose:** Read file contents.
-- **What it does:** Opens and returns the content of a file.
-- **Example:**
-
-  ```bash
-  read("package.json")
-  ```
-
-  → Returns the content of the `package.json` file as text.
+| Tool                  | Purpose                                     |
+| --------------------- | ------------------------------------------- |
+| **BashOutput**        | Run shell commands and return stdout/stderr |
+| **KillShell**         | Kill a running process                      |
+| **RunPython**         | Execute Python code directly                |
+| **RunNode**           | Run JavaScript/TypeScript code              |
+| **LintCode**          | Run linter checks (e.g., ESLint)            |
+| **FormatCode**        | Format code with Prettier or similar        |
+| **TestCode**          | Run unit/integration tests                  |
+| **GitCommit**         | Commit code changes                         |
+| **GitPush / GitPull** | Sync changes with remote repository         |
 
 ---
 
-### 📒 Data & Knowledge Tools
+#### 🌐 3. **Web Tools**
 
-#### **NotebookRead**
+For accessing and retrieving online data.
 
-- **Purpose:** Read notebook (like Jupyter `.ipynb`) files.
-- **What it does:** Extracts code cells, markdown, or outputs from a notebook file so an agent can understand or modify it.
-- **Example:**
-
-  ```bash
-  notebook_read("analysis.ipynb")
-  ```
-
-  → Returns code, text, and metadata from the notebook.
+| Tool           | Purpose                                  |
+| -------------- | ---------------------------------------- |
+| **WebFetch**   | Fetch data from a URL (HTML, JSON, etc.) |
+| **WebSearch**  | Perform a web search query               |
+| **WebScrape**  | Extract specific data from a web page    |
+| **ApiRequest** | Call APIs with parameters and headers    |
 
 ---
 
-### 🌐 Web & Task Tools
+#### 🗓️ 4. **Task / Memory / Planner Tools**
 
-#### **WebFetch**
+Used for reasoning, remembering, and planning future steps.
 
-- **Purpose:** Fetch raw data from a URL.
-- **What it does:** Downloads or retrieves content from the web (HTML, JSON, API response, etc.).
-- **Example:**
-
-  ```bash
-  web_fetch("https://api.github.com/repos/vercel/next.js")
-  ```
-
-  → Returns JSON data from the GitHub API.
-
----
-
-#### **WebSearch**
-
-- **Purpose:** Perform a search query on the web.
-- **What it does:** Like a Google/Bing search; returns links and snippets for a keyword or question.
-- **Example:**
-
-  ```bash
-  web_search("Next.js middleware examples")
-  ```
+| Tool            | Purpose                              |
+| --------------- | ------------------------------------ |
+| **TodoWrite**   | Add items to a to-do list            |
+| **TodoRead**    | Retrieve or view current to-dos      |
+| **MemoryWrite** | Store context or summary permanently |
+| **MemoryRead**  | Retrieve stored context              |
+| **PlanCreate**  | Make a step-by-step plan for a goal  |
+| **PlanExecute** | Run a saved plan                     |
 
 ---
 
-#### **TodoWrite**
+#### 🧩 5. **Data and Document Tools**
 
-- **Purpose:** Write or log a TODO/task item.
-- **What it does:** Adds a note or reminder to a “to-do” list or project tracker (internal memory or file).
-- **Example:**
+For structured data access and transformation.
 
-  ```bash
-  todo_write("Refactor config-manager to support YAML")
-  ```
-
----
-
-### ⚙️ Shell / Process Control
-
-#### **KillShell**
-
-- **Purpose:** Terminate a running shell or subprocess.
-- **What it does:** Stops a process the agent started earlier (like a runaway command).
-- **Example:**
-
-  ```bash
-  kill_shell("build_process")
-  ```
+| Tool                             | Purpose                   |
+| -------------------------------- | ------------------------- |
+| **CsvRead / CsvWrite**           | Read or write CSV data    |
+| **JsonRead / JsonWrite**         | Read/write JSON files     |
+| **YamlRead / YamlWrite**         | Parse YAML files          |
+| **NotebookRead / NotebookWrite** | Read/write `.ipynb` files |
+| **MarkdownRead / MarkdownWrite** | Parse markdown documents  |
 
 ---
 
-#### **BashOutput**
+#### ⚙️ 6. **System / Process Management Tools**
 
-- **Purpose:** Execute a shell command and capture its output.
-- **What it does:** Runs Bash commands and returns stdout/stderr.
-- **Example:**
+For managing environments, dependencies, or system-level tasks.
 
-  ```bash
-  bash_output("npm run build")
-  ```
-
-  → Executes the command and returns the terminal output.
-
----
-
-### 🧩 Summary Table
-
-| Rule             | Category    | Description                           |
-| ---------------- | ----------- | ------------------------------------- |
-| **Glob**         | File System | Match files by pattern                |
-| **Grep**         | File System | Search text inside files              |
-| **LS**           | File System | List directory contents               |
-| **Read**         | File System | Read file content                     |
-| **NotebookRead** | Data        | Parse `.ipynb` notebooks              |
-| **WebFetch**     | Web         | Fetch content from a URL              |
-| **WebSearch**    | Web         | Search the web                        |
-| **TodoWrite**    | Task        | Add a note or to-do                   |
-| **KillShell**    | System      | Terminate a running process           |
-| **BashOutput**   | System      | Run a shell command and return output |
+| Tool                   | Purpose                                  |
+| ---------------------- | ---------------------------------------- |
+| **KillShell**          | Terminate processes                      |
+| **StartShell**         | Start a new shell session                |
+| **EnvRead / EnvWrite** | Read/write environment variables         |
+| **InstallPackage**     | Install dependencies (e.g., via npm/pip) |
+| **UninstallPackage**   | Remove dependencies                      |
 
 ---
 
-Would you like me to tell you how these rules **interact** (e.g., how an AI agent chains them together in a workflow)? That would give a good picture of how they’re used in practice.
+#### 🧮 7. **Computation / Evaluation Tools**
+
+For analysis, experiments, or math-heavy tasks.
+
+| Tool           | Purpose                        |
+| -------------- | ------------------------------ |
+| **PythonEval** | Evaluate Python expressions    |
+| **MathEval**   | Solve mathematical expressions |
+| **PlotData**   | Generate plots/visualizations  |
+
+---
+
+### 💡 TL;DR — The Tools You Listed Belong To:
+
+| Category       | Example Tools         | You Have |
+| -------------- | --------------------- | -------- |
+| File tools     | LS, Read, Grep, Glob  | ✅       |
+| Web tools      | WebFetch, WebSearch   | ✅       |
+| Notebook tools | NotebookRead          | ✅       |
+| System tools   | BashOutput, KillShell | ✅       |
+| Task tools     | TodoWrite             | ✅       |
+
+So yes — your list is _accurate_ but **partial**.
+You can think of it as a **core operational subset**, used mostly for read/search/write workflows and shell execution.
+
+---
+
+Would you like me to show you the **minimal essential toolkit** used by most modern autonomous coding agents (like what Cursor or Devin use)? It’s usually 10–15 tools, highly optimized for codebases.
