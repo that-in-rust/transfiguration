@@ -118,6 +118,117 @@ Why this helps an LLM
 - Identity is name-agnostic: digests, canonical paths, spans; names become presentation-only.
 - Compact deltas let the LLM reason about breakage, blast radius, and test plans without reading entire files.
 
+High-Quality Notes: Behavioural hints (CPU-only)
+
+### Goal  
+Give an LLM enough behavioural hints (not just type-level signatures) so it can answer questions like  
+“will `foo()` always commit the DB?” or “is there an early-return that skips validation?”—while staying 100 % CPU-only and incremental.
+
+Below is a “cheapest-first” menu of extra facts you can bolt onto the current Interface-Signature-Graph. Every line is already extracted by tools such as rust-analyzer’s CFG builder or the `rustc` MIR dump — no SAT solvers, no GPUs, no foreign servers.
+
+----
+
+#### 1 – Harvest control-flow fingerprints (function-level)
+
+| Extra bit | Why an LLM cares | How to get it (≤ 2 ms/function) |
+|---|---|---|
+| `cyclomatic` u8 | branchiness / test surface | count `if/else`, `match`, `loop`, `&&/||` with a syn visitor |
+| `has_loop` bool | possible non-termination | detect `loop` / `while` tokens |
+| `early_return` bool | skipped clean-up risk | scan for `return` outside last block |
+| `exit_kinds` bitflags (`OK`, `Err`, `None`, `Panic`) | error-path reasoning | walk MIR/CFG terminators |
+| `await_cnt`, `unsafe_cnt` u8 | async & safety audit | simple token scan (tree-sitter) |
+| `may_panic` bool | reliability | detect `panic!`, `.unwrap`, `.expect`, `todo!` |
+| `loop_bound_hint` (0 = none, >0 best guess) | complexity | heuristic on literal loop limits |
+
+Add these as a 32-bit bit-field inside `NodeExtras`; no new edges needed.
+
+----
+
+#### 2 – Tiny intra-function CFG thumbprint
+
+If you can afford ~1 KiB extra per function:
+
+1. Use rust-analyzer’s `control_flow` crate (or port its ~1k LOC) – it builds a Basic-Block graph directly from the unexpanded HIR.
+2. Hash the shape of that CFG (sorted adjacency list, ignoring spans) into `cfg_hash: u64`.  
+   • Two versions of a function that only reorder statements get the same `cfg_hash` → zero-noise “did-logic-change?” signal.  
+   • LLM can diff hashes to decide whether to read the body.
+
+Optional: expose a lazy-loaded `cfg_json` (Vec<{block_id, succs}>) on demand.
+
+Cost: ~2–3 µs per unchanged function after incremental hashing.
+
+----
+
+#### 3 – Data-flow stubs (super-cheap)
+
+| EdgeKind | From → To | Emit when |
+|-------------------------|-----------|-----------|
+| `WritesField` | fn/method → struct.field | any `member =` assign in body |
+| `ReadsField` | fn/method → struct.field | dot access on RHS |
+| `MutatesSelf` (edge flag) | method → self | body contains `self.` with `&mut` |
+
+Extraction with a regex over tokens is good enough; false-positives are fine—LLM only needs “possible”.
+
+----
+
+#### 4 – Doc-driven intent
+
+Already parse first doc-line; add:
+
+```rust path=null start=null
+// purpose tags extracted from docs
+// e.g., ["serialize", "cache", "retry"]
+purpose_tags: &[Arc<str>]
+```
+
+Simple unigram matching on verbs/nouns (<200 keywords) gives surprising mileage.
+
+----
+
+#### 5 – Source-of-truth inspirations
+
+| Project / crate | Why copy it | What to cherry-pick |
+|---|---|---|
+| rust-analyzer (`ra_ap_*`) | Incremental CFG builder & loop/panic detection already written | `control_flow`, `hir_def::find_loop_bodies` |
+| Clippy lints | Many single-file data-flow scans that run in microseconds | `nearly_cyclomatic_complexity`, `panic_unwrap_macro` |
+| `cargo +nightly rustc -- -Zunpretty=mir-cfg` | MIR CFG for free without full LLVM | Parse text, compute `exit_kinds`, `may_panic` |
+| cargo-geiger | Proof that scanning for `unsafe` & `extern` costs ~1–2 ms/crate | reuse its visitor |
+
+All of them compile to pure CPU libs; link statically and call per file.
+
+----
+
+### Minimal schema diff
+
+```rust path=null start=null
+pub struct NodeExtras {
+    // existing …
+    pub api_digest: u64,
+
+    // NEW --------------------------------
+    pub ctrl_bits: u32,   // layout: [0-3 cyclo][4 has_loop][5 early_ret]…
+    pub cfg_hash: u64,    // 0 = not calculated
+    pub await_cnt: u8,
+    pub unsafe_cnt: u8,
+    pub doc_tags: Arc<[Arc<str>]>,
+}
+```
+
+Edge additions (`WritesField`, `ReadsField`) are optional; flag them with a new 3-bit “Data” segment in `EdgeKind`.
+
+----
+
+### Pay-off
+
+• 150–300 bytes extra per function → LLM can:
+
+1. Decide which function bodies to read (cfg hash diff).  
+2. Infer error propagation (“returns `Result` but `early_return & exit.Err = true`”).  
+3. Warn on missing clean-up (“has_loop && may_panic”).  
+4. Summarise modules: “90 % of funcs are pure (no writes / no side-effects)”.
+
+All with zero GPU and <10 ms incremental overhead for a 10 k-function crate.
+
 Bottom Line
 - Yes—ISG enables reliable, CPU-only LLD reasoning when augmented with structural rules and minimal interface context.
 - Ship the five high-ROI infra changes in a week, enforce KPIs, and expand only where measurable wins exist.
