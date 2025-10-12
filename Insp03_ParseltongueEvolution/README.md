@@ -22,6 +22,14 @@
 - **Decision Framework**: Keep/Consider/Skip matrix for optimization investments
 - **Strategic Insight**: Knowing when to stop optimizing is as valuable as knowing how to optimize
 
+### **A003_StructuralPatternISG.md**
+**TECHNICAL ARCHITECTURE: Learning from ast-grep for ISG Enhancement**
+
+- **Core Approach**: Adopt ast-grep's structural-pattern approach to emit ISG facts from tree-sitter matches
+- **Concrete Examples**: YAML rules for Implements, Calls, Uses, Derives, Re-exports, Trait bounds edges
+- **1-Week Implementation Plan**: Day-by-day breakdown from rules engine to production deployment
+- **Ecosystem Learning**: What to borrow from semgrep, ripgrep, ctags, and rust-analyzer
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
