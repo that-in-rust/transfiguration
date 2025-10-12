@@ -44,6 +44,12 @@
 - **What it adds**: Layered strategy (Essence→Evidence), mermaid flow, CPU-only signals summary, delta packet, and endpoints.
 - **How it relates**: Builds on A003 (structural rules) and A004 (NodeExtras + signals) to deliver practical JSON-RPC for editors/LLMs.
 
+### **A006_MintoPyramid_ISG_Strategy.md**
+**MINTO PYRAMID SUMMARY: Essence on top, detail in layers**
+
+- **Essence**: CPU-only ISG + structural rules + interface context enable LLMs to reason about LLDs deterministically.
+- **Layers**: SCQA, key messages, decisions/tradeoffs, KPIs, risks, deliverables, and keywords for interop with other LLMs.
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
