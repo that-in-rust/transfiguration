@@ -125,3 +125,7 @@ downloads-for-analysis/
 !downloads-for-analysis/analysis-results/**
 !downloads-for-analysis/*.md
 # Allow analysis documentation
+
+# Cloned repositories for analysis
+parseltongue/
+zed/
