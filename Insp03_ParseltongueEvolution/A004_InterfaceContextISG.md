@@ -179,3 +179,124 @@ flowchart LR
   G --> I[Queries: implements/calls/blast radius]
   H --> I
 ```
+
+Shreyas Doshi-style: minimum risk, maximum output. Ship compact, deterministic signals that unlock impact for an LLM without touching GPUs, networks, or macro expansion. Everything below is CPU-only and incremental.
+
+## Minimal CPU-only signals that help an LLM reason about changes
+
+| Signal | What it helps the LLM do | How to compute (CPU-only, incremental) | Cost |
+|---|---|---|---|
+| API digest + shape digest | Detect breaking vs non-breaking changes even if names are odd | Normalize signature (types/generics/where), hash; “shape” omits identifier names | O(size(sig)) |
+| Public API surface flags | SemVer impact estimation; expose/hidden | Read syn visibility, item kind, extern/const/async/unsafe flags | O(1) |
+| Trait contract map | Know required vs default methods, assoc types; breakage if trait changes | From ItemTrait: list required methods/assoc types; from ItemImpl: satisfied methods | O(size(trait/impl)) |
+| Derives and auto-impls | Understand “implicit” Implements edges | Parse #[derive(...)] into edges; mark derive=true | O(#attrs) |
+| UsesType graph (signatures/fields) | Infer “blast radius” via type coupling | Extract all syn::Type in params/returns/fields; emit UsesType edges | O(#types) |
+| Error surface summary | Reason about error paths and handling | Detect Result<T,E>, anyhow/bail!, thiserror, ? operator count, panic!/unwrap! | O(size(body)) simple scan |
+| Side-effect heuristic | Purity hints; refactor and test impact | Scan for I/O (fs, net), env, time, logging, global statics | O(size(body)) |
+| Concurrency footprint | Deadlock risk, Send/Sync, async edges | Detect Mutex/RwLock/Atomic/Arc/RefCell, tokio::spawn, Send/Sync bounds | O(size(body)) |
+| Unsafe/FFI footprint | Safety review focus | Count unsafe blocks, extern "C", transmute/mem ops | O(size(body)) |
+| cfg/feature gating mask | Reason “does this change ship to target?” | Evaluate cfg-expr for given features/target; mark active | O(#cfg nodes) |
+| Re-export and alias map | Find things despite odd names | Collect pub use x::y as Z; keep alias list | O(#uses) |
+| Centrality metrics | Rank “blast radius” and review order | Degree, SCC membership, simple betweenness approx on Calls/Uses | O(E) or O(V+E) |
+| Complexity/branching hint | Prioritize risky edits | Cheap cyclomatic estimate: count of if/else/match/loop/&&/|| | O(size(body)) |
+| Doc first-line + doc hash | Summarize intent; diff docs | Extract first doc line; 64-bit hash of full doc block | O(#attrs) |
+
+Notes:
+- All can be computed from syn/tree-sitter without macro expansion or runtime.
+- Keep everything incremental: only recompute for changed nodes, reuse normalized caches, and batch per file.
+
+## A tiny “LLM Delta Packet” you can ship per change
+
+Emit one compact record per changed node; keep under ~1–2 KB each.
+
+```json path=null start=null
+{
+    "node": {
+        "hash": "0x6f91…",
+        "kind": "Function",
+        "canonical_path": "crate::auth::login",
+        "file": "src/auth/login.rs",
+        "span": [1234, 1456],
+        "cfg_active": true
+    },
+    "api": {
+        "digest": "0x2b8c…",
+        "shape_digest": "0x9a71…",
+        "vis": "pub",
+        "flags": ["async"],
+        "generics": ["T"],
+        "where_bounds": ["T: Serialize + Send"]
+    },
+    "effects": {
+        "errors": {
+            "returns_result": true,
+            "error_types": ["AuthError"],
+            "uses_anyhow": false,
+            "panic_sites": 0,
+            "question_mark_uses": 3
+        },
+        "side_effects": ["io:fs", "log"],
+        "concurrency": ["tokio::spawn", "Arc", "Mutex"],
+        "unsafe_blocks": 0,
+        "ffi_calls": 0
+    },
+    "coupling": {
+        "uses_types": ["SessionToken", "UserId"],
+        "callers_sample": ["crate::api::v1::login_handler"],
+        "callees_sample": ["crate::auth::validate", "crate::db::users::get"]
+    },
+    "trait_contract": {
+        "implements": [{"trait": "Service", "via": "manual"}],
+        "requires": [],
+        "assoc_types_defined": []
+    },
+    "doc": {
+        "first_line": "Logs a user in with password and OTP.",
+        "hash": "0x5ad1…"
+    },
+    "change": {
+        "kind": "modified",
+        "api_breakage": "non_breaking", 
+        "blast_radius_estimate": 37,
+        "centrality_rank": 12
+    }
+}
+```
+
+How the LLM uses this:
+- Compare api.digest/shape_digest to prior to spot API vs impl-only changes.
+- Use callers_sample/callees_sample + blast_radius_estimate to scope impact.
+- Use effects/error/concurrency to plan tests and safety checks.
+- Use trait_contract to see whether trait changes break implementors.
+
+## How to compute quickly (tie-in to your code)
+- Extend NodeExtras with:
+  - vis/flags, module_path, api_digest, shape_digest, generics, where_bounds, derives, cfg_active, doc_first_line/doc_hash.
+- Add lightweight analyzers:
+  - Error/side-effect/concurrency/unsafe scanners: single pass over function body tokens (syn) with a small allowlist of crate paths (fs, net, env, time, tokio/std sync, log).
+  - Centrality: compute on Calls/Uses subgraph; cache degree + SCC id; betweenness approx only in CI if needed.
+- Edges:
+  - Derives, Reexports, UsesType, Contains/Requires, DefinesAssocType (as tags/bitflags).
+- Diff:
+  - Keep prior api_digest/shape_digest; classify change: added/removed/modified + breaking/non-breaking (e.g., trait added required method = breaking).
+
+## Endpoints to expose (stdio JSON-RPC)
+- graph.delta.summarize({ since_digest? }): returns array of LLM Delta Packets for changed nodes only
+- node.describe({ id/hash }): returns full packet for one node
+- risk.rank({ limit }): returns nodes sorted by blast_radius_estimate × centrality × breaking_risk
+
+## Start with these 8 signals (fastest, highest ROI)
+- api_digest + shape_digest
+- vis/flags (async/const/unsafe/extern)
+- trait contract (required/default/assoc types)
+- derives → Implements edges
+- UsesType from signatures/fields
+- error surface summary
+- concurrency footprint
+- cfg_active mask
+
+Target: p95 update < 5 ms; +≤ 30% RSS; each LLM packet ≤ 1.5 KB.
+
+## Why this helps an LLM
+- It can reason on graph structure (edges) plus minimal semantics (effects/errors/concurrency/contracts) without reading full files.
+- It can classify breakage, scope impact, and propose safe refactors/tests using compact, deterministic facts computed entirely on CPU.
