@@ -109,7 +109,16 @@ jspm_packages/
 /target
 
 # Downloads for static analysis (excluded from git)
-downloads-for-analysis/
+# Exclude entire download analysis folder except for our documentation
+Insp04_DownloadAnalysis/*
+
+# Allow ONLY our analysis documentation and scripts
+!Insp04_DownloadAnalysis/*.md
+!Insp04_DownloadAnalysis/*.sh
+!Insp04_DownloadAnalysis/analysis-results/
+!Insp04_DownloadAnalysis/analysis-results/**/*.md
+
+# Exclude all binary files globally
 *.deb
 *.zip
 *.tar.gz
@@ -119,13 +128,28 @@ downloads-for-analysis/
 *.msi
 *.pkg
 *.app
+*.jar
+*.so
+*.node
+*.wasm
+*.pak
+*.dat
+*.bin
+*.ttf
+*.otf
+*.dll
+*.dylib
 
-# Allow analysis documentation
-!downloads-for-analysis/analysis-results/
-!downloads-for-analysis/analysis-results/**
-!downloads-for-analysis/*.md
-# Allow analysis documentation
-
-# Cloned repositories for analysis
+# Cloned repositories for analysis (completely excluded)
 parseltongue/
 zed/
+Insp04_DownloadAnalysis/github-repos/
+Insp04_DownloadAnalysis/jetbrains-debs/
+Insp04_DownloadAnalysis/ai-tools/
+Insp04_DownloadAnalysis/chat-apps/
+Insp04_DownloadAnalysis/claude-native/
+Insp04_DownloadAnalysis/cli-tools/
+Insp04_DownloadAnalysis/editors/
+Insp04_DownloadAnalysis/extracted/
+Insp04_DownloadAnalysis/ides/
+Insp04_DownloadAnalysis/web-frameworks/
