@@ -351,6 +351,24 @@ Emit one compact record per changed node; keep under ~1–2 KB each.
 }
 ```
 
+Schema and local validation
+- JSON Schema: Insp03_ParseltongueEvolution/schemas/llm_delta_packet.schema.json
+- Validate locally with ajv-cli (Node.js):
+
+```bash path=null start=null
+# install once
+npm install -g ajv-cli ajv-formats
+
+# validate a packet file against the schema
+ajv validate \
+  -s Insp03_ParseltongueEvolution/schemas/llm_delta_packet.schema.json \
+  -d /path/to/packet.json \
+  -c ajv-formats
+```
+
+Notes:
+- ctrl_bits may be emitted as an integer or hex string; the schema accepts both. Exit kinds are strings ["OK","Err","None","Panic"].
+
 How the LLM uses this:
 - Compare api.digest/shape_digest to prior to spot API vs impl-only changes.
 - Use callers_sample/callees_sample + blast_radius_estimate to scope impact.

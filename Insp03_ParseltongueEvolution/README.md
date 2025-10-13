@@ -50,6 +50,13 @@
 - **Essence**: CPU-only ISG + structural rules + interface context enable LLMs to reason about LLDs deterministically.
 - **Layers**: SCQA, key messages, decisions/tradeoffs, KPIs, risks, deliverables, and keywords for interop with other LLMs.
 
+### **A007_ArchitecturalEvolution_ISG.md**
+**ARCHITECTURAL BLUEPRINT: ISG‑centric pipeline for AI code reasoning**
+
+- **What**: Rope → CST → HIR → ISG pipeline with Salsa; declarative ISG queries; ISG diffs for LLM grounding
+- **Why**: Stable, token‑efficient, deterministic context for deep impact analysis, architectural validation, and agentic refactoring
+- **How**: Blend Zed (rope/TS), rust‑analyzer (HIR/Salsa), ast‑grep (rules); integrate A004/A005 CPU‑only signals
+
 ## 🚀 **Strategic Positioning Transformation**
 
 ### **Before: Niche Tool**
