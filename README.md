@@ -12,14 +12,19 @@ everything's organized into `InspXXX_theme` folders because apparently i have op
 
 ```
 transfiguration/
-├── Insp00_Tools/                 # scripts that actually work
-├── Insp01_IDEAnalysis/           # why your ide is slow (and how to fix it)
-├── Insp02_RustPerformance/       # making rust go brrrr  
-├── Insp03_ParseltongueEvolution/ # how to turn a side project into actual value
-├── Insp04_DownloadAnalysis/      # deconstructing how software gets to your computer
-├── Insp05_EvolutionAnalysis/     # ide trends that matter (and ones that don't)
-├── parseltongue/                 # the thing we're trying to make better
-└── zed/                         # learning from people who actually know what they're doing
+├── Insp09_ActiveWorkspaces_StrategicInitiatives/  # 🚀 active development and strategic projects
+│   ├── Insp00_Tools/                 # scripts that actually work
+│   ├── Insp01_IDEAnalysis/           # why your ide is slow (and how to fix it)
+│   ├── Insp02_RustPerformance/       # making rust go brrrr
+│   ├── Insp03_ParseltongueEvolution/ # how to turn a side project into actual value
+│   └── Insp05_EvolutionAnalysis/     # ide trends that matter (and ones that don't)
+│
+└── Insp04_DownloadAnalysis/          # 📦 analysis of third-party tools and downloads
+    ├── parseltongue/                 # the thing we're trying to make better
+    ├── zed/                         # learning from people who actually know what they're doing
+    ├── ai-tools/                    # various ai-powered development tools
+    ├── editors/                     # downloaded editor binaries and analysis
+    └── [analysis subfolders]         # various deconstructed software
 ```
 
 ## what's inside
@@ -46,20 +51,26 @@ transfiguration/
 
 for performance nerds:
 ```bash
-cd Insp02_RustPerformance/
+cd Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/
 # start with the overview, then dive into the hybrid architecture stuff
 ```
 
 for people who make product decisions:
 ```bash
-cd Insp03_ParseltongueEvolution/
+cd Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/
 # actual business impact analysis, not just "wouldn't it be cool if..."
 ```
 
 for ide builders:
 ```bash
-cd Insp01_IDEAnalysis/
+cd Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/
 # learn from systems that actually work in production
+```
+
+for tool analysis:
+```bash
+cd Insp04_DownloadAnalysis/
+# deconstructed software, downloads, and third-party analysis
 ```
 
 ## some numbers because apparently people like those
@@ -75,6 +86,21 @@ cd Insp01_IDEAnalysis/
 2. if we reverse engineer something, it's legal black-box analysis only  
 3. performance claims come with benchmarks
 4. business impact comes with real numbers
+
+## repository structure
+
+this repo is organized into two main categories:
+
+### 🚀 active workspaces & strategic initiatives (`Insp09/`)
+- projects currently under development or active strategic analysis
+- original research, implementation work, and business strategy
+- these are the folders you'll want to explore for ongoing work
+
+### 📦 download analysis (`Insp04/`)
+- third-party software, tools, and downloads that we've analyzed
+- large binary files, cloned repositories, and deconstructed installers
+- gitignored by default to keep the repo lightweight
+- contains our analysis of how other people build software
 
 ## philosophy
 
