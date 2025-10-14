@@ -135,166 +135,164 @@ Refined: "Add Redis-based rate limiting to public API endpoints at 100 requests/
 
 This is where **technical capability meets user simplicity** - the tool does all the heavy ISG lifting while the user just types what they want to change in natural language. The complexity of interface graphs, database schemas, and architectural analysis is completely hidden behind a simple, conversational interface that produces technically precise results.
 
-### Phase 2: PRD Creation with ISG Context (15-30 minutes)
+### Phase 2: Interactive PRD Builder - Hidden Complexity (15-30 minutes)
 
-#### Job: "Help me create a precise change request using this codebase's actual structure."
+#### Job: "Type what you want to change - I'll handle all the complexity."
 
-**User Concern:** "I know what I want to change, but I need to understand how it fits into the existing architecture."
+**User Concern:** "I don't want to understand ISG or architecture - I just want to make my change."
 
 **Experience Design:**
 ```bash
 💡 Ready for PRD creation - type your change request:
-> Add rate limiting to API endpoints
+> Add rate limiting
 
-🔍 ISG_current Context Analysis:
-Based on your codebase, I can see:
-- API Layer: 421 interfaces (HTTP handlers, middleware, auth)
-- Business Logic: 312 interfaces (services, domain models)
-- Data Layer: 214 interfaces (repositories, caching)
+🤖 **Behind the scenes I'm doing complex analysis:**
+🔍 ISG_current Intelligence (invisible to user):
+- 947 interfaces analyzed automatically
+- API/Business/Data layers mapped
+- Dependencies and patterns identified
+- Change blast radius calculated
 
-🎝 PRD Refinement Suggestions:
-1. **Specificity**: Which API endpoints need rate limiting? (all vs specific routes)
-2. **Scope**: Internal APIs, public APIs, or both?
-3. **Rate Limits**: What thresholds? (requests/minute per user/API key)
-4. **Storage**: Redis-based or in-memory?
+🎝 **Smart Questions (user answers simply):**
+1. "Which endpoints?" → "All public APIs"
+2. "How strict?" → "100 requests per minute per user"
+3. "Storage preference?" → "Redis for distributed systems"
 
-💬 Interactive PRD Builder:
-Current: "Add rate limiting to API endpoints"
-Refined: "Add Redis-based rate limiting to public API endpoints at 100 requests/minute per user, with gradual rollout support"
+💬 **Magic Happens:**
+User input: "Add rate limiting"
+Tool output: "Add Redis-based rate limiting to public API endpoints at 100 requests/minute per user with gradual rollout support"
 
-✅ PRD Contextualized with ISG_current architecture
-✅ Change scope clearly bounded
-✅ Implementation approach defined
+✅ User typed 2 words, got technically precise specification
+✅ Zero understanding of ISG required from user
+✅ Perfect change scope automatically determined
 ```
 
-**Architecture Differentiator:** PRD creation enriched with real codebase structure
+**Architecture Differentiator:** User simplicity with hidden technical precision
 ```rust
-// PRD refinement using ISG context
-pub struct PRDRefiner {
-    pub isg_analyzer: ISGCurrentStructureMapper,
-    pub scope_detector: InterfaceBlastRadiusCalculator,
-    pub suggestion_engine: ContextualRequirementBuilder,
-    pub interactive_builder: StepByStepPRDCreator,
+// Hidden complexity engine (user never sees this)
+pub struct HiddenComplexityEngine {
+    pub user_interface: SimpleNaturalLanguageProcessor,
+    pub behind_scenes: ISGCurrentAnalyzer + RiskCalculator,
+    pub magic_wand: TechnicalPrecisionGenerator,
+    pub result_delivery: PerfectChangeSpecification,
 }
 ```
 
-**Success Criteria:**
-- ✅ PRD precisely scoped to actual codebase structure
-- ✅ Implementation approach technically validated
-- ✅ User makes informed decisions about scope and complexity
+**Ultra-Think Success Criteria:**
+- ✅ User types simple, gets sophisticated results
+- ✅ All architectural complexity completely hidden
+- ✅ Technical precision automatically achieved
+- ✅ User feels smart without needing to understand anything
 
-### Phase 3: ISG_future Generation & Risk Assessment (20-40 minutes)
+### Phase 3: Invisible ISG_future Generation (20-40 minutes)
 
-#### Job: "Show me exactly what this change looks like before writing any code."
+#### Job: "I'll simulate your change perfectly - you just need to approve it."
 
-**User Concern:** "I want to see the impact of my change and understand if it's safe."
+**User Concern:** "I don't want to see ISG diagrams or understand architecture - just tell me if my change is safe."
 
 **Experience Design:**
 ```bash
-🚀 Generating ISG_future from PRD + ISG_current...
+🚀 **Behind the scenes: Simulating your change perfectly...**
 
-🔬 Change Simulation:
-- Interfaces to CREATE: 3 (RateLimitService, RateLimitConfig, RateLimitMiddleware)
-- Interfaces to EDIT: 12 (API handlers to add middleware)
-- Interfaces to DELETE: 0
-- Blast radius: API Layer only (isolated change)
+🔬 **User sees simple summary:**
+Your change: "Add rate limiting to public APIs"
+- 3 new components needed
+- 12 files will be modified
+- Change is completely safe ✅
+- No risk of breaking existing code ✅
 
-⚠️ Risk Assessment:
-✅ **LOW RISK** - Well-contained architectural change
-- Dependency impact: Minimal (new service, existing patterns)
-- Test coverage: High (can auto-generate from existing patterns)
-- Performance impact: <2% overhead (measurable)
-- Rollback complexity: Simple (middleware can be disabled)
+⚠️ **Risk Assessment (user-friendly language):**
+✅ **Completely Safe** - Your change is well contained
+- Won't affect any existing functionality
+- Easy to remove if needed
+- Less than 2% performance impact
+- All existing tests will continue to pass
 
-🎯 ISG_future Visualization:
-HTML Updated: file:///tmp/parseltongue/isg_future_visualization.html
-- Green nodes: New interfaces to create
-- Yellow nodes: Existing interfaces to modify
-- Red edges: New dependencies to add
+🎯 **Visual Preview (optional):**
+📊 Change preview: file:///tmp/parseltongue/preview.html
+- Before/After comparison (if you're curious)
+- No technical understanding required
 
-💡 Rubber Duck Debugging Analysis:
-"I'm looking at ISG_current + PRD + ISG_future. The change is architecturally sound because:
-1. Rate limiting sits at the middleware layer (clean separation)
-2. Uses existing error handling patterns from codebase
-3. Follows current service dependency injection approach
-4. Test interfaces can be created following existing TDD patterns"
+💡 **Smart Confirmation:**
+"Your change is ready to implement. It's architecturally sound because:
+✓ Uses existing patterns from your codebase
+✓ Follows your project's conventions
+✓ Includes automatic rollback capability
+✓ Zero risk to current functionality"
 
-✅ ISG_future generated and validated
-✅ All change impacts identified and quantified
-✅ Implementation approach risk-assessed
+✅ Change is ready for implementation
+✅ All safety checks passed automatically
+✅ You don't need to understand any of the complexity
 ```
 
-**Architecture Differentiator:** Dual-state simulation with predictive validation
+**Architecture Differentiator:** Invisible complexity with user-friendly safety
 ```rust
-// ISG_future generation with comprehensive risk analysis
-pub struct ISGFutureGenerator {
-    pub change_analyzer: PRDToISGTransformer,
-    pub risk_assessor: MultiDimensionalRiskCalculator,
-    pub rubber_duck_engine: ArchitecturalSoundnessValidator,
-    pub impact_visualizer: InteractiveChangeMapper,
+// Hidden intelligence engine (user never sees this complexity)
+pub struct InvisibleIntelligence {
+    pub user_interface: SimpleSafetyAssurance,
+    pub behind_scenes: ISGFutureSimulator + RiskCalculator,
+    pub safety_guarantee: ZeroRegressionPromise,
+    pub confidence_builder: UserTrustGenerator,
 }
 ```
 
-**Success Criteria:**
-- ✅ Complete change impact simulation before code changes
-- ✅ Risk quantification with mitigation strategies
-- ✅ Visual representation of proposed architectural changes
+**Ultra-Think Success Criteria:**
+- ✅ User understands change is safe without seeing complexity
+- ✅ All architectural validation happens invisibly
+- ✅ User feels confident without technical knowledge
+- ✅ Zero learning curve for understanding impact
 
-### Phase 4: SQLite Integration & Rubber Duck Debugging (30-45 minutes)
+### Phase 4: Silent Database Preparation (30-45 minutes)
 
-#### Job: "Apply the changes to the database and validate the implementation approach."
+#### Job: "I'll prepare everything behind the scenes - you just need to approve when it's ready."
 
-**User Concern:** "Make sure this change is technically sound before touching the codebase."
+**User Concern:** "I don't want to understand databases or validation - just make sure it works."
 
 **Experience Design:**
 ```bash
-🗄️ Updating SQLite database with ISG_future changes...
+🗄️ **Silent database preparation happening...**
 
-📊 Database State Changes:
-Codebase Table Updates:
-- Rows with Future_Action = "CREATE": 3
-- Rows with Future_Action = "EDIT": 12
-- Rows with Future_Action = "DELETE": 0
-- Future_Code populated for all 15 changes
+📊 **Simple status update:**
+✅ Change plan validated automatically
+✅ All patterns match your codebase perfectly
+✅ Implementation approach confirmed
+✅ Ready to generate code when you approve
 
-🦆 Rubber Duck Debugging Session:
-"Looking at ISG_current + PRD + ISG_future + Database changes:
+🔧 **What I've prepared behind the scenes:**
+Based on your change, I've analyzed:
+1. 3 new components to create
+2. 12 files to modify
+3. Exact code patterns to follow
+4. All tests needed for safety
 
-1. **Interface Consistency**: All new interfaces follow existing naming conventions
-2. **Dependency Flow**: RateLimitService → RateLimitMiddleware → API Handlers (clean)
-3. **Test Strategy**: Can mirror existing service test patterns exactly
-4. **Error Handling**: Integrates with current Result<T, Error> patterns
-5. **Configuration**: Follows existing config struct approach
+🎯 **Ready for your approval:**
+I'll create:
+- src/services/rate_limiting.rs (following your project's patterns)
+- Updates to 12 API handler files
+- Complete test suite
+- Documentation updates
 
-✅ Architectural soundness confirmed
-✅ Implementation approach validated
-✅ Database ready for code generation"
+All changes match your existing codebase style and architecture perfectly.
 
-🔧 Code Generation Preparation:
-Based on database changes, I will:
-1. Create src/services/rate_limiting.rs (3 new interfaces)
-2. Edit src/middleware/mod.rs (add RateLimitMiddleware)
-3. Edit 12 API handler files (add middleware calls)
-4. Create tests/services/rate_limiting_test.rs (follow existing patterns)
-
-Continue with code changes? [Y/n]: Y
+Proceed with code generation? [Y/n]: Y
 ```
 
-**Architecture Differentiator:** Database-driven change validation with architectural reasoning
+**Architecture Differentiator:** Silent preparation with simple approval
 ```rust
-// SQLite integration with comprehensive validation logic
-pub struct SQLiteIntegrator {
-    pub isg_future_applier: DatabaseChangeWriter,
-    pub rubber_duck_validator: ArchitecturalReasoningEngine,
-    pub consistency_checker: InterfacePatternMatcher,
-    pub code_generation_prepper: ImplementationPlanner,
+// Behind-the-scenes preparation (user never sees complexity)
+pub struct SilentPreparation {
+    pub user_interface: SimpleStatusUpdates,
+    pub behind_scenes: DatabasePreparation + PatternMatching,
+    pub automatic_validation: CodebaseConsistencyChecker,
+    pub ready_signal: SimpleApprovalRequest,
 }
 ```
 
-**Success Criteria:**
-- ✅ All changes validated against existing architectural patterns
-- ✅ Database state accurately reflects planned modifications
-- ✅ Implementation approach confirmed through rubber duck analysis
+**Ultra-Think Success Criteria:**
+- ✅ User understands what will happen without technical details
+- ✅ All validation and preparation happens invisibly
+- ✅ User only needs to make simple approval decision
+- ✅ Zero database knowledge required from user
 
 ### Phase 5: Code Changes, Testing & Validation (45-90 minutes)
 
@@ -495,106 +493,88 @@ pub struct PRValidator {
 - ✅ Project conventions followed
 - ✅ Tests and documentation included
 
-## Technical Architecture
+## Technical Architecture: Hidden Complexity Engine
 
-### Core Innovation: Interface Signature Graph (ISG)
+### Core Innovation: User Simplicity Through Hidden Intelligence
 
-**Differentiator:** Analyzes interfaces instead of code
+**Differentiator:** User never sees complexity, gets perfect results
 
 ```rust
-// Traditional approach: Line-by-line code analysis
-pub struct CodeAnalysis {
-    pub ast_parser: SyntaxTreeParser,           // Complex, fragile
-    pub code_analyzer: InstructionAnalyzer,     // Implementation details
-    pub pattern_matcher: CodePatternMatcher,   // Brittle heuristics
+// Traditional approach: User learns complex systems
+pub struct TraditionalTool {
+    pub user_must_understand: ISGConcepts,
+    pub user_must_learn: DatabaseSchemas,
+    pub user_must_master: ArchitecturalPatterns,
+    pub user_fights: LearningCurve,
 }
 
-// Parseltongue approach: Interface-level understanding
-pub struct InterfaceSignatureGraph {
-    pub interface_extractor: InterfaceSignatureExtractor, // Robust
-    pub relationship_mapper: InterfaceRelationshipMapper, // Stable
-    pub pattern_recognizer: ArchitecturalPatternRecognizer, // Accurate
+// Parseltongue approach: Hidden complexity, instant value
+pub struct HiddenComplexityEngine {
+    pub user_sees: SimpleNaturalLanguage,
+    pub user_types: BasicChangeRequests,
+    pub user_gets: PerfectResultsInstantly,
+    pub complexity_completely: HiddenBehindScenes,
 }
 ```
 
-**Key Technical Advantages:**
-1. **Stability:** Interfaces change rarely vs implementation churn
-2. **Accuracy:** Architectural understanding vs code trivia
-3. **Performance:** Interface graphs are small and fast to query
-4. **Predictability:** Interface changes have predictable impact
+**Key User Experience Advantages:**
+1. **Zero Learning:** User never needs to understand ISG, databases, or architecture
+2. **Instant Value:** Results in seconds, not hours of study
+3. **Perfect Precision:** Technical accuracy without technical knowledge
+4. **Confidence Building:** User feels smart without learning curve
 
-### Dual-State Architecture: Risk Reduction
+### Hidden Dual-State Architecture: Invisible Safety Net
 
-**Approach:** Simulate changes before implementing them
+**Approach:** User simplicity through hidden simulation
 
 ```rust
-// Parallel universes of code
-pub struct DualStateArchitecture {
-    pub isg_current: InterfaceSignatureGraph,  // Reality
-    pub isg_future: InterfaceSignatureGraph,    // Vision
-    pub change_simulator: ImpactPredictor,     // Bridge
-    pub validation_engine: SafetyValidator,     // Gatekeeper
+// What the user experiences vs what actually happens
+pub struct UserExperience {
+    pub user_input: "Add rate limiting",
+    pub user_feels: "This was easy and safe",
+    pub reality: HiddenComplexSimulation,
 }
 
-// Change simulation before implementation
-impl ChangeSimulator {
-    fn simulate_change(&self, change: &Change) -> SimulationResult {
-        // Apply change to ISG_future (not real code)
-        let future_isg = self.apply_change_to_future(change);
-
-        // Analyze impact across interface graph
-        let impact = self.analyze_interface_impact(&future_isg);
-
-        // Predict test failures and compilation issues
-        let risks = self.identify_potential_breakages(&future_isg);
-
-        // Generate mitigation strategies
-        let mitigations = self.generate_mitigation_strategies(&risks);
-
-        SimulationResult { impact, risks, mitigations }
-    }
+pub struct HiddenComplexSimulation {
+    pub invisible_isg_current: "Analyzed 947 interfaces automatically",
+    pub invisible_isg_future: "Simulated change with perfect accuracy",
+    pub invisible_validation: "Architectural soundness guaranteed",
+    pub invisible_safety: "Zero regression risk assured",
 }
 ```
 
-### Performance Advantages
+### Performance Through Hidden Optimization
 
-**Performance metrics:**
+**User-perceived performance:**
 
 ```rust
-pub struct PerformanceGuarantees {
-    // SLA-grade performance contracts
-    pub ingestion_speed: "5 seconds for 100k+ LOC codebase",
-    pub query_latency: "500 microseconds for any interface query",
-    pub memory_usage: "4GB peak on 16GB Apple Silicon",
-    pub accuracy: "95%+ change impact prediction",
+pub struct UserPerceivedPerformance {
+    // User experiences
+    pub response_time: "Instant feedback on every input",
+    pub thinking_time: "Zero mental effort required",
+    pub confidence_level: "100% trust in results",
+    pub success_rate: "Perfect changes every time",
 
-    // Economic advantages
-    pub speed_multiplier: "1000x faster than manual review",
-    pub cost_reduction: "50x lower AI token costs",
-    pub quality_improvement: "5x higher PR acceptance rates",
+    // Behind-the-scenes reality
+    pub actual_processing: "947 interfaces analyzed in 3.2s",
+    pub actual_reasoning: "Complex architectural validation",
+    pub actual_precision: "99.9% technical accuracy",
 }
 ```
 
-### Opinionated Stack: Simplified Choices
+### Opinionated Simplicity: Zero Decision Fatigue
 
-**Decision reduction - pre-selected optimal choices:**
+**Pre-selected choices the user never needs to make:**
 
 ```rust
-pub struct OpinionatedArchitecture {
-    // Language and Platform
-    pub language: "Rust (native performance, zero-cost abstractions)",
-    pub target: "Apple Silicon 16GB+ (optimized memory usage)",
-    pub interface: "TUI-only (no web complexity, instant startup)",
+pub struct UserInvisibleDecisions {
+    pub architecture_choice: "ISG_current/ISG_future duality",
+    pub storage_choice: "SQLite + JSON persistence",
+    pub processing_choice: "Apple Silicon optimization",
+    pub interface_choice: "Natural language conversation",
 
-    // AI and Intelligence
-    pub model: "Qwen 2.5-Coder 7B Q4_K_M (single optimal choice)",
-    pub context: "128k window for enterprise codebases",
-    pub specialization: "Code-tuned for Rust pattern recognition",
-
-    // Data and Persistence
-    pub storage: "SQLite + JSON (reliable, fast, simple)",
-    pub caching: "In-memory ISG for sub-millisecond queries",
-    pub persistence: "Automatic snapshot and recovery",
+    pub user_experiences: "Just type what you want to change",
+    pub user_never_knows: "All the complex decisions made perfectly",
 }
 ```
 
@@ -699,15 +679,15 @@ flowchart TD
     S3 --> S4["🚀 Build ISG_current<br/>1,247 interfaces<br/>3.2 seconds"]
     S4 --> S5["✅ ISG_current in RAM<br/>SQLite initialized<br/>JSON saved<br/>HTML visualization ready"]
 
-    %% Phase 2: PRD Creation with ISG Context
-    S5 --> P2["Phase 2: PRD Creation<br/>with ISG Context<br/>15-30 minutes"]
-    P2 --> S6["💡 User types change request<br/>Add rate limiting to API"]
-    S6 --> S7["🔍 ISG_current Analysis<br/>API Layer: 421 interfaces<br/>Business Logic: 312<br/>Data Layer: 214"]
+    %% Phase 2: Interactive PRD Builder - Key Starting Point
+    S5 --> P2["Phase 2: Interactive PRD Builder<br/>Hidden Complexity<br/>15-30 minutes"]
+    P2 --> S6["💡 Natural Language Entry<br/>Type what you want to change<br/>Zero ISG knowledge required"]
+    S6 --> S7["🔍 ISG Intelligence Behind Scenes<br/>Tool analyzes 947 interfaces<br/>Provides context-aware suggestions"]
 
-    S7 --> S8["🎝 Interactive PRD Refinement<br/>Specificity, Scope, Limits, Storage"]
-    S8 --> S9["💬 Refined PRD<br/>Redis-based rate limiting<br/>Public APIs only<br/>100 req/min per user"]
+    S7 --> S8["🎝 Conversational Refinement<br/>Tool asks smart questions<br/>User answers naturally"]
+    S8 --> S9["💬 Technically Precise PRD<br/>User simplicity →<br/>Technical precision automatically"]
 
-    S9 --> S10["✅ PRD contextualized<br/>Change scope bounded<br/>Implementation defined"]
+    S9 --> S10["✅ User doesn't understand ISG<br/>But benefits from it completely"]
 
     %% Phase 3: ISG_future Generation & Risk Assessment
     S10 --> P3["Phase 3: ISG_future Generation<br/>& Risk Assessment<br/>20-40 minutes"]
@@ -816,57 +796,55 @@ config:
 
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
 flowchart TD
-    %% Entry Point & Apple Silicon Optimization
-    subgraph Entry_Point["GitHub Release Entry Point"]
-        EP1["Apple Silicon Binary<br/>Single optimized build<br/>M1/M2/M3 native"]
-        EP2["Zero Configuration<br/>Download and run<br/>./parseltongue"]
-        EP3["Hardware Detection<br/>Apple Silicon confirmed<br/>16GB+ RAM expected"]
+    %% Zero-Complexity Entry Point
+    subgraph Entry_Point["Zero-Complexity Entry Point"]
+        EP1["Apple Silicon Binary<br/>Single optimized build<br/>No cross-platform"]
+        EP2["Download and Run<br/>./parseltongue<br/>Zero configuration"]
+        EP3["Immediate Value<br/>ISG built in 3.2s<br/>User sees results instantly"]
     end
 
-    %% ISG Construction Engine
-    subgraph ISG_Engine["ISG Construction Engine"]
-        IE1["Rust Analyzer Integration<br/>HIR metadata extraction<br/>Interface signatures"]
-        IE2["Unique ID Generator<br/>filePath-fileName-interfaceName<br/>No conflicts guaranteed"]
-        IE3["Interface Classifier<br/>Test vs Normal interfaces<br/>Dependency mapping"]
-        IE4["Metadata Enrichment<br/>HIR info, relationships<br/>Utility analytics"]
+    %% Hidden Complexity Engine
+    subgraph Hidden_Complexity["Hidden Complexity Engine"]
+        HC1["User Sees: Simple Interface<br/>Behind: ISG Construction"]
+        HC2["User Types: Natural Language<br/>Behind: 947 interface analysis"]
+        HC3["User Answers: Simple Questions<br/>Behind: HIR metadata extraction"]
+        HC4["User Gets: Perfect Results<br/>Behind: Complex architectural reasoning"]
     end
 
-    %% Dual-State Core Architecture
-    subgraph Dual_State_Core["Dual-State ISG Core"]
-        subgraph ISG_Current_RAM["ISG_current (RAM)"]
-            IC1["Interface Graph<br/>Current reality state"]
-            IC2["Rich Metadata<br/>HIR enriched<br/>Dependency mapped"]
+    %% Dual-State Magic (Hidden from User)
+    subgraph Dual_State_Magic["Dual-State Magic (Hidden)"]
+        subgraph ISG_Current_Hidden["ISG_current (User Never Sees)"]
+            IC1["947 interfaces analyzed<br/>Dependencies mapped<br/>Architecture understood"]
+            IC2["Complete codebase model<br/>Ready for intelligent assistance"]
         end
 
-        subgraph ISG_Future_RAM["ISG_future (RAM)"]
-            IF1["Proposed Graph<br/>Future state vision"]
-            IF2["Change Actions<br/>CREATE EDIT DELETE<br/>Impact calculated"]
+        subgraph ISG_Future_Hidden["ISG_future (User Never Sees)"]
+            IF1["Change simulation<br/>Impact prediction<br/>Risk assessment"]
+            IF2["Future state vision<br/>Technically validated<br/>Implementation ready"]
         end
 
-        DC1["Change Simulator<br/>Blast radius analysis<br/>Risk assessment engine"]
-        DC2["Rubber Duck Engine<br/>Architectural reasoning<br/>Pattern validation"]
+        DC1["Change Intelligence<br/>User simplicity →<br/>Technical precision"]
+        DC2["Hidden Reasoning<br/>Rubber duck analysis<br/>Pattern validation"]
     end
 
-    %% Multi-Persistence Layer
-    subgraph Multi_Persistence["Multi-Persistence Layer"]
-        subgraph SQLite_Database["SQLite Database"]
-            SD1["Codebase Table<br/>id, ISG_current_ind<br/>ISG_future_ind, interface_uid"]
-            SD2["Current_Code Column<br/>Source code snapshot"]
-            SD3["Future_Code Column<br/>Generated from PRD"]
-            SD4["Future_Action Column<br/>CREATE EDIT DELETE"]
+    %% Multi-Persistence (Behind the Scenes)
+    subgraph Behind_Scenes["Behind the Scenes Persistence"]
+        subgraph SQLite_Hidden["SQLite Database (Invisible)"]
+            SD1["Silent state tracking<br/>ISG_current/future flags<br/>Change orchestration"]
+            SD2["Code snapshots<br/>Future code generation<br/>Rollback capability"]
         end
 
-        MP1["JSON Snapshots<br/>ISG_current backup<br/>ISG_future proposals"]
-        MP2["HTML Visualization<br/>Interactive graph display<br/>Before/After views"]
-        MP3["In-Memory Cache<br/>Sub-millisecond queries<br/>Graph traversal optimized"]
+        MP1["JSON backups<br/>State recovery<br/>Invisible reliability"]
+        MP2["HTML visualization<br/>Optional exploration<br/>Not required for use"]
+        MP3["In-memory optimization<br/>Sub-second responses<br/>Transparent performance"]
     end
 
-    %% PRD Processing Pipeline
-    subgraph PRD_Pipeline["PRD Processing Pipeline"]
-        PP1["Interactive PRD Builder<br/>Context-aware suggestions<br/>Scope refinement"]
-        PP2["ISG Context Analyzer<br/>Architecture-aware prompts<br/>Change scoping"]
-        PP3["Risk Calculator<br/>Multi-dimensional analysis<br/>Mitigation strategies"]
-        PP4["Refinement Engine<br/>Iterative PRD improvement<br/>Feasibility validation"]
+    %% Natural Language Processing Pipeline
+    subgraph Natural_Language["Natural Language Processing"]
+        NL1["User types: 'Add rate limiting'<br/>Tool thinks: Complex analysis"]
+        NL2["Simple conversation<br/>Intelligent suggestions"]
+        NL3["User answers basic questions<br/>Tool performs sophisticated reasoning"]
+        NL4["Natural refinement<br/>Technical precision automatically"]
     end
 
     %% Code Generation Engine
