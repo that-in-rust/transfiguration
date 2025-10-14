@@ -197,3 +197,55 @@ Each loop eliminates different classes of risk before expensive commitments.
 - **From**: Linear Progress → **To**: Multi-Loop Refinement
 
 This represents a fundamental elevation in how complex software is designed and built, akin to the shift from hand-coding assembly to using compilers.
+
+## Local Anthropic-Compatible API
+
+**Seamless Local Integration:**
+Parseltongue supports local Ollama with the same Anthropic API key format developers already use, creating a zero-configuration drop-in replacement experience.
+
+**Anthropic Key Format for Local Ollama:**
+```bash
+# Standard Anthropic format
+export ANTHROPIC_API_KEY=sk-ant-xxx
+
+# Local Ollama (same format, different value)
+export ANTHROPIC_API_KEY=sk-ant-local-qwen25-7b
+export ANTHROPIC_BASE_URL=http://localhost:8080  # Local proxy
+```
+
+**Technical Implementation:**
+- **Local Proxy**: FastAPI service accepting Anthropic-style requests
+- **Format Conversion**: Transforms Anthropic message format ↔ Ollama format
+- **Key Validation**: Accepts any key starting with "sk-ant-" for local use
+- **Zero Code Changes**: Parseltongue uses same client library and authentication
+
+**User Experience Benefits:**
+- **No Learning Curve**: Same environment variables and key format
+- **Drop-in Replacement**: Switch between cloud and local with one config change
+- **Existing Tooling**: Works with all Anthropic-compatible integrations
+- **Familiar Workflow**: Developers keep their current mental model
+
+**Configuration Examples:**
+```bash
+# Production (Anthropic Cloud)
+export ANTHROPIC_API_KEY=sk-ant-production-key
+export ANTHROPIC_BASE_URL=https://api.anthropic.com
+
+# Development (Local Ollama)
+export ANTHROPIC_API_KEY=sk-ant-local-dev-key
+export ANTHROPIC_BASE_URL=http://localhost:8080
+```
+
+**Performance Advantages:**
+- **Qwen 2.5-Coder 7B**: 60-90 tokens/sec, 128k context, ~4.25GB model
+- **Apple Silicon Optimization**: Metal acceleration on 16GB+ RAM
+- **Privacy**: All processing stays local on Apple Silicon
+- **Cost Efficiency**: No API charges for local processing
+
+**Focused Product Benefits:**
+- **Rust Specialization**: Optimized for Rust codebase analysis
+- **Apple Silicon**: Native Metal performance and thermal efficiency
+- **Developer Experience**: Seamless integration with existing workflows
+- **Strategic Flexibility**: Choose cloud vs local based on needs
+
+This approach provides the best of both worlds - the familiarity of Anthropic's API with the performance, privacy, and specialization of local Ollama deployment.
