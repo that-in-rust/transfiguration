@@ -8,332 +8,353 @@
 
 **Key Innovation:** Interface Signature Graph (ISG) + Dual-State Architecture that shows architectural structure and simulates changes before implementation.
 
-## User Journey: Install → First Contribution
+## User Journey: GitHub Release → First Working Code Change
 
-### Phase 0: System Validation & Installation (0-10 minutes)
+### Phase 1: Entry Point & ISG Construction (5-15 minutes)
 
-#### Job: "Is this going to work on my system and is it worth installing?"
+#### Job: "Give me immediate value with zero configuration."
 
-**User Concern:** "I don't want to waste time on tools that won't work or require complex setup."
-
-**Experience Design:**
-```bash
-# One-command system validation
-curl -sSL https://get.parseltongue.sh | sh
-
-# Intelligent system check
-✓ Apple Silicon M1/M2/M3 detected - optimized
-✓ 16GB+ RAM found - sufficient for model
-✓ Rust 1.70+ installed - compatible
-⚠  Ollama not found - installing Qwen 2.5-Coder 7B Q4_K_M (~4.25GB)
-✓ Model download: 60-90 tokens/sec, 128k context
-✓ System ready: <5s codebase analysis, <1ms queries
-```
-
-**Architecture Differentiator:** Pre-flight validation that prevents failed installations
-```rust
-// System validator with intelligent recommendations
-pub struct SystemValidator {
-    pub apple_silicon_check: AppleSiliconOptimizer,
-    pub memory_analyzer: MemoryRequirementValidator,
-    pub rust_toolchain: RustCompatibilityChecker,
-    pub ollama_installer: OneClickModelDeployment,
-}
-```
-
-**Success Criteria:**
-- ✅ < 60 seconds from curl to first successful analysis
-- ✅ Zero manual configuration required
-- ✅ Intelligent fallbacks for different system specs
-
-### Phase 1: First Value Discovery (10-30 minutes)
-
-#### Job: "Show me this actually works on a real project"
-
-**User Concern:** "I don't want to read docs - show me it works immediately."
+**User Concern:** "I don't want to waste time on setup - I want to understand this codebase now."
 
 **Experience Design:**
 ```bash
-# Auto-detect Rust projects and offer immediate analysis
-$ parseltongue
-🔍 Found 3 Rust projects in current directory:
-   1. ./my-rust-app (5.2k LOC)
-   2. ./dependency (1.1k LOC)
-   3. ./tests (800 LOC)
+# Single entry point - GitHub Release
+curl -sSL https://github.com/that-in-rust/parseltongue/releases/latest/download/parseltongue-darwin-arm64.tar.gz | tar xz
+chmod +x parseltongue
 
-🎯 Quick start suggestion: Analyze ./my-rust-app (your main project)
-[Y/n]? Y
+# Immediate value - go to any Rust project
+cd path/to/my-rust-project
+./parseltongue
 
-⚡ Building Interface Signature Graph...
+🔍 Apple Silicon detected - optimized build active
+🚀 Building Interface Signature Graph...
 ✓ 1,247 interfaces analyzed in 3.2 seconds
-✓ 42 architectural patterns identified
-✓ 12 potential contribution opportunities found
+✓ ISG_current created in RAM
+✓ SQLite database initialized
+✓ JSON snapshot saved
+✓ HTML visualization ready: file:///tmp/parseltongue/isg_visualization.html
 
-💡 Ready for natural language queries!
-Try: "parseltongue ask 'where should I add error handling?'"
+💡 Ready for PRD creation - type your change request:
 ```
 
-**Architecture Differentiator:** Zero-config immediate value demonstration
+**Architecture Differentiator:** Zero-config immediate codebase understanding
 ```rust
-// Intelligent project discovery with immediate analysis
-pub struct ProjectDiscovery {
-    pub rust_project_finder: RustProjectDetector,
-    pub quick_analyzer: SubSecondISGGeneration,
-    pub pattern_matcher: ImmediateInsightEngine,
-    pub opportunity_scout: ContributionOpportunityFinder,
+// Immediate ISG construction with rich metadata
+pub struct ISGConstructor {
+    pub interface_detector: RustAnalyzerInterface,
+    pub signature_builder: UniqueIdentifierGenerator,      // filePath-fileName-interfaceName
+    pub metadata_enricher: HIRDependencyAnalyzer,
+    pub persistence_layer: SQLiteJSONDualPersistence,
+    pub visualizer: InteractiveHTMLGraphGenerator,
 }
 ```
 
 **Success Criteria:**
-- ✅ < 30 seconds from first run to architectural insights
-- ✅ Immediate actionable contribution opportunities identified
-- ✅ No manual configuration or setup required
+- ✅ < 30 seconds from download to working ISG
+- ✅ Zero installation steps beyond download
+- ✅ Immediate visualization of codebase structure
 
-### Phase 2: Architectural Understanding (30-60 minutes)
+### Phase 2: PRD Creation with ISG Context (15-30 minutes)
 
-#### Job: "Help me understand how this codebase actually works"
+#### Job: "Help me create a precise change request using this codebase's actual structure."
 
-**User Concern:** "This codebase is huge and I'm afraid of breaking something."
+**User Concern:** "I know what I want to change, but I need to understand how it fits into the existing architecture."
 
 **Experience Design:**
 ```bash
-$ parseltongue ask "what are the main architectural components?"
+💡 Ready for PRD creation - type your change request:
+> Add rate limiting to API endpoints
 
-🏗️  Core Architecture (3 main layers):
-   1. API Layer (421 interfaces)
-      - HTTP handlers, request/response models
-      - Authentication middleware
-      - Rate limiting and validation
+🔍 ISG_current Context Analysis:
+Based on your codebase, I can see:
+- API Layer: 421 interfaces (HTTP handlers, middleware, auth)
+- Business Logic: 312 interfaces (services, domain models)
+- Data Layer: 214 interfaces (repositories, caching)
 
-   2. Business Logic (312 interfaces)
-      - Domain models, service layer
-      - Business rules and validation
-      - Event handling and workflows
+🎝 PRD Refinement Suggestions:
+1. **Specificity**: Which API endpoints need rate limiting? (all vs specific routes)
+2. **Scope**: Internal APIs, public APIs, or both?
+3. **Rate Limits**: What thresholds? (requests/minute per user/API key)
+4. **Storage**: Redis-based or in-memory?
 
-   3. Data Layer (214 interfaces)
-      - Database repositories, query builders
-      - Data access objects, caching layer
-      - Migration and schema management
+💬 Interactive PRD Builder:
+Current: "Add rate limiting to API endpoints"
+Refined: "Add Redis-based rate limiting to public API endpoints at 100 requests/minute per user, with gradual rollout support"
 
-🔗 Key Dependencies:
-   API Layer → Business Logic → Data Layer
-   All layers depend on shared error handling and logging
-
-💡 Contribution Opportunities:
-   - High Impact: API layer rate limiting enhancement
-   - Low Risk: Data layer query optimization
-   - Learning: Business logic feature addition
+✅ PRD Contextualized with ISG_current architecture
+✅ Change scope clearly bounded
+✅ Implementation approach defined
 ```
 
-**Architecture Differentiator:** Interface-centric understanding vs code-level analysis
+**Architecture Differentiator:** PRD creation enriched with real codebase structure
 ```rust
-// Architectural pattern recognition and explanation
-pub struct ArchitecturalIntelligence {
-    pub pattern_detector: LayerIdentification,
-    pub dependency_mapper: InterfaceRelationshipMapper,
-    pub opportunity_ranker: ImpactVsRiskAnalyzer,
-    pub explainer: NaturalLanguageArchitecturalDescription,
+// PRD refinement using ISG context
+pub struct PRDRefiner {
+    pub isg_analyzer: ISGCurrentStructureMapper,
+    pub scope_detector: InterfaceBlastRadiusCalculator,
+    pub suggestion_engine: ContextualRequirementBuilder,
+    pub interactive_builder: StepByStepPRDCreator,
 }
 ```
 
 **Success Criteria:**
-- ✅ Comprehensive architectural understanding in < 5 minutes
-- ✅ Risk-assessed contribution opportunities
-- ✅ Clear mental model of codebase structure
+- ✅ PRD precisely scoped to actual codebase structure
+- ✅ Implementation approach technically validated
+- ✅ User makes informed decisions about scope and complexity
 
-### Phase 3: Safe Contribution Planning (1-2 hours)
+### Phase 3: ISG_future Generation & Risk Assessment (20-40 minutes)
 
-#### Job: "Help me plan a change that won't break everything"
+#### Job: "Show me exactly what this change looks like before writing any code."
 
-**User Concern:** "I want to contribute but I'm afraid of introducing regressions."
+**User Concern:** "I want to see the impact of my change and understand if it's safe."
 
 **Experience Design:**
 ```bash
-$ parseltongue propose "Add rate limiting to API endpoints"
+🚀 Generating ISG_future from PRD + ISG_current...
 
-🎯 Change Impact Analysis:
-   • Interfaces to modify: 12 (API layer)
-   • Interfaces to add: 3 (rate limiting service)
-   • Blast radius: API layer only (isolated)
-   • Risk level: LOW (well-contained change)
+🔬 Change Simulation:
+- Interfaces to CREATE: 3 (RateLimitService, RateLimitConfig, RateLimitMiddleware)
+- Interfaces to EDIT: 12 (API handlers to add middleware)
+- Interfaces to DELETE: 0
+- Blast radius: API Layer only (isolated change)
 
-🔬 Predictive Simulation:
-   Current Request Flow:
-   Client → HTTP Handler → Service → Database
+⚠️ Risk Assessment:
+✅ **LOW RISK** - Well-contained architectural change
+- Dependency impact: Minimal (new service, existing patterns)
+- Test coverage: High (can auto-generate from existing patterns)
+- Performance impact: <2% overhead (measurable)
+- Rollback complexity: Simple (middleware can be disabled)
 
-   Proposed Request Flow:
-   Client → Rate Limiter → HTTP Handler → Service → Database
+🎯 ISG_future Visualization:
+HTML Updated: file:///tmp/parseltongue/isg_future_visualization.html
+- Green nodes: New interfaces to create
+- Yellow nodes: Existing interfaces to modify
+- Red edges: New dependencies to add
 
-⚠️  Identified Risks:
-   - Rate limiter performance bottleneck (mitigation: Redis cache)
-   - Existing client compatibility (mitigation: gradual rollout)
-   - Testing complexity (mitigation: integration test templates)
+💡 Rubber Duck Debugging Analysis:
+"I'm looking at ISG_current + PRD + ISG_future. The change is architecturally sound because:
+1. Rate limiting sits at the middleware layer (clean separation)
+2. Uses existing error handling patterns from codebase
+3. Follows current service dependency injection approach
+4. Test interfaces can be created following existing TDD patterns"
 
-✅ Change Safety Score: 8.5/10
-
-📋 Implementation Plan:
-   1. Create rate limiting service (2 interfaces)
-   2. Add rate limiting middleware (1 interface)
-   3. Update API handlers to use middleware (12 interfaces)
-   4. Add comprehensive tests (existing patterns)
-   5. Update documentation (README + API docs)
-
-💡 Pro Tip: Start with a single endpoint for validation
+✅ ISG_future generated and validated
+✅ All change impacts identified and quantified
+✅ Implementation approach risk-assessed
 ```
 
-**Architecture Differentiator:** Dual-state architecture with predictive simulation
+**Architecture Differentiator:** Dual-state simulation with predictive validation
 ```rust
-// Change simulation with risk assessment
-pub struct ChangeSimulator {
-    pub impact_analyzer: BlastRadiusCalculator,
-    pub dependency_checker: InterfaceDependencyGraph,
-    pub risk_assessor: MultiDimensionalRiskAnalysis,
-    pub mitigation_generator: RiskMitigationStrategies,
+// ISG_future generation with comprehensive risk analysis
+pub struct ISGFutureGenerator {
+    pub change_analyzer: PRDToISGTransformer,
+    pub risk_assessor: MultiDimensionalRiskCalculator,
+    pub rubber_duck_engine: ArchitecturalSoundnessValidator,
+    pub impact_visualizer: InteractiveChangeMapper,
 }
 ```
 
 **Success Criteria:**
-- ✅ Change impact prediction with > 90% accuracy
-- ✅ Risk mitigation strategies automatically generated
-- ✅ Implementation plan with step-by-step guidance
+- ✅ Complete change impact simulation before code changes
+- ✅ Risk quantification with mitigation strategies
+- ✅ Visual representation of proposed architectural changes
 
-### Phase 4: Confident Implementation (2-4 hours)
+### Phase 4: SQLite Integration & Rubber Duck Debugging (30-45 minutes)
 
-#### Job: "Guide me through implementing this change safely"
+#### Job: "Apply the changes to the database and validate the implementation approach."
 
-**User Concern:** "I have the plan but I'm nervous about the actual implementation."
+**User Concern:** "Make sure this change is technically sound before touching the codebase."
 
 **Experience Design:**
 ```bash
-$ parseltongue implement --guided "rate limiting"
+🗄️ Updating SQLite database with ISG_future changes...
 
-🛠️  Step 1: Create RateLimiting Service
-   File to create: src/services/rate_limiting.rs
-   Interfaces: RateLimitService, RateLimitConfig
+📊 Database State Changes:
+Codebase Table Updates:
+- Rows with Future_Action = "CREATE": 3
+- Rows with Future_Action = "EDIT": 12
+- Rows with Future_Action = "DELETE": 0
+- Future_Code populated for all 15 changes
 
-   [S]how template [C]reate manually [A]bort? S
+🦆 Rubber Duck Debugging Session:
+"Looking at ISG_current + PRD + ISG_future + Database changes:
 
-// Shows optimized template
+1. **Interface Consistency**: All new interfaces follow existing naming conventions
+2. **Dependency Flow**: RateLimitService → RateLimitMiddleware → API Handlers (clean)
+3. **Test Strategy**: Can mirror existing service test patterns exactly
+4. **Error Handling**: Integrates with current Result<T, Error> patterns
+5. **Configuration**: Follows existing config struct approach
+
+✅ Architectural soundness confirmed
+✅ Implementation approach validated
+✅ Database ready for code generation"
+
+🔧 Code Generation Preparation:
+Based on database changes, I will:
+1. Create src/services/rate_limiting.rs (3 new interfaces)
+2. Edit src/middleware/mod.rs (add RateLimitMiddleware)
+3. Edit 12 API handler files (add middleware calls)
+4. Create tests/services/rate_limiting_test.rs (follow existing patterns)
+
+Continue with code changes? [Y/n]: Y
+```
+
+**Architecture Differentiator:** Database-driven change validation with architectural reasoning
+```rust
+// SQLite integration with comprehensive validation logic
+pub struct SQLiteIntegrator {
+    pub isg_future_applier: DatabaseChangeWriter,
+    pub rubber_duck_validator: ArchitecturalReasoningEngine,
+    pub consistency_checker: InterfacePatternMatcher,
+    pub code_generation_prepper: ImplementationPlanner,
+}
+```
+
+**Success Criteria:**
+- ✅ All changes validated against existing architectural patterns
+- ✅ Database state accurately reflects planned modifications
+- ✅ Implementation approach confirmed through rubber duck analysis
+
+### Phase 5: Code Changes, Testing & Validation (45-90 minutes)
+
+#### Job: "Apply the changes, run tests, and ensure everything works."
+
+**User Concern:** "I want to see the actual code changes and verify they work correctly."
+
+**Experience Design:**
+```bash
+🛠️ Applying code changes based on database state...
+
+✅ Step 1: Creating RateLimiting Service
+File: src/services/rate_limiting.rs
+// Generated from database Future_Code column
 pub struct RateLimitService {
-    limiter: Arc<RateLimiter>,
+    limiter: Arc<RedisRateLimiter>,
     config: RateLimitConfig,
 }
 
-impl RateLimitService {
-    pub fn new(config: RateLimitConfig) -> Self { /* ... */ }
-    pub fn check_rate(&self, key: &str) -> Result<(), RateLimitError> { /* ... */ }
+✅ Step 2: Adding Rate Limiting Middleware
+File: src/middleware/mod.rs
+// Generated from database Future_Code column
+pub struct RateLimitMiddleware {
+    service: Arc<RateLimitService>,
 }
 
-💡 Template uses existing error handling patterns from codebase
+✅ Step 3: Updating API Handlers (12 files)
+Files: src/handlers/*.rs
+// Generated from database Future_Code column
+// Each handler updated to use RateLimitMiddleware
 
-✅ Template created at src/services/rate_limiting.rs
-🧪 Test generated at tests/services/rate_limiting_test.rs
+✅ Step 4: Creating Tests
+File: tests/services/rate_limiting_test.rs
+// Generated following existing test patterns
 
-🛠️  Step 2: Add Rate Limiting Middleware
-   File to modify: src/middleware/mod.rs
+🧪 Running Test Suite:
+cargo test
+   Compiling parseltongue_project v0.1.0
+    Finished test [unoptimized + debuginfo] target(s) in 2.45s
+     Running unittests src/main.rs
+     Running tests/test_rate_limiting.rs
 
-   [A]pply change [S]how diff [V]iew code [A]bort? A
+✅ All 142 existing tests + 8 new tests PASS
+✅ Compilation successful with 0 warnings
+✅ No regressions detected
 
-✅ Middleware added successfully
-🧪 Integration tests updated automatically
-📝 Documentation updated in README.md
+📊 Change Summary:
+- Files created: 2
+- Files modified: 13
+- Lines added: 156
+- Lines changed: 24
+- Test coverage: 100% for new code
 
-🛠️  Step 3: Update API Handlers (12 interfaces)
-   Progress: ████████████████████ 12/12
-
-✅ All handlers updated
-🧪 All tests passing: 142 existing + 8 new
-
-🎯 Ready for PR!
+🎯 Ready for user confirmation
+Review changes in: file:///tmp/parseltongue/code_changes_diff.html
 ```
 
-**Architecture Differentiator:** Guided implementation with automatic test generation
+**Architecture Differentiator:** Database-driven code generation with comprehensive validation
 ```rust
-// Step-by-step implementation with validation
-pub struct GuidedImplementation {
-    pub template_generator: ContextualCodeTemplates,
-    pub test_generator: AutomaticTestCreation,
-    pub change_applier: SafeCodeModification,
-    pub validator: ContinuousValidation,
+// Automated code generation with full validation
+pub struct CodeGenerator {
+    pub database_reader: SQLiteChangeReader,
+    pub code_writer: StructuredCodeGenerator,
+    pub test_runner: ComprehensiveTestValidator,
+    pub regression_checker: ChangeImpactAnalyzer,
 }
 ```
 
 **Success Criteria:**
-- ✅ Step-by-step guidance reduces implementation anxiety
-- ✅ Automatic test generation ensures safety
-- ✅ Continuous validation prevents breaking changes
+- ✅ All code changes applied automatically from database
+- ✅ 100% test coverage for new functionality
+- ✅ Zero regressions in existing functionality
+- ✅ Compilation successful with clean output
 
-### Phase 5: Quality Contribution Submission (4-6 hours)
+### Phase 6: User Confirmation & Commit (15-30 minutes)
 
-#### Job: "Help me create a high-quality PR that gets accepted"
+#### Job: "Review the changes and commit them with proper documentation."
 
-**User Concern:** "I've implemented the change but will maintainers accept it?"
+**User Concern:** "I want to understand exactly what changed and make a proper commit."
 
 **Experience Design:**
 ```bash
-$ parseltongue submit --project iggy
+📋 Change Summary for User Review:
+🎯 PRD Fulfilled: "Add Redis-based rate limiting to public API endpoints at 100 requests/minute per user"
 
-🔍 PR Quality Analysis:
-   ✓ Code follows project style guide
-   ✓ Tests cover all new functionality
-   ✓ Documentation is comprehensive
-   ✓ Commit messages follow project conventions
-   ✓ Breaking changes properly documented
-   ✓ Performance impact measured (< 2% overhead)
+📊 Technical Implementation:
+✅ RateLimitService created with Redis backend
+✅ RateLimitMiddleware integrated into 12 API endpoints
+✅ Comprehensive test suite added (8 new tests)
+✅ Configuration options added to config.rs
+✅ Documentation updated in README.md
 
-📝 PR Draft Generated:
-   Title: feat: Add configurable rate limiting to API layer
+🔍 Visual Change Review:
+Open: file:///tmp/parseltongue/final_changes_visualization.html
+- Before/After ISG comparison
+- Dependency flow changes
+- Test coverage map
 
-   Body:
-   ## Problem
-   API endpoints currently have no rate limiting, making them vulnerable
-   to abuse and potential DoS attacks.
+✅ Confirm changes? [Y/n]: Y
 
-   ## Solution
-   Added configurable rate limiting middleware using token bucket algorithm.
-   - Configurable limits per endpoint
-   - Redis-based distributed rate limiting
-   - Graceful degradation when Redis is unavailable
-   - Comprehensive logging and metrics
+📝 Generating Commit with Intelligent Message:
+git add .
+git commit -m "feat: add Redis-based rate limiting to public API endpoints
 
-   ## Testing
-   - Unit tests for rate limiting logic (100% coverage)
-   - Integration tests for API endpoints
-   - Load testing showing < 2% performance overhead
-   - Chaos testing for Redis failure scenarios
+- Add RateLimitService with configurable rate limits
+- Implement RateLimitMiddleware for request throttling
+- Apply middleware to 12 public API endpoints
+- Add comprehensive test suite with 100% coverage
+- Update configuration and documentation
 
-   ## Breaking Changes
-   None - feature is behind optional configuration
+Fixes #1234
+🤖 Generated with Parseltongue ISG-driven development
 
-   🎯 PR Score: 9.2/10 (High quality, ready for review)
+Co-Authored-By: Claude <noreply@anthropic.com>"
 
-💡 Community Alignment:
-   ✓ This addresses issue #1234 from project roadmap
-   ✓ Similar implementations discussed in Discord last week
-   ✓ Maintainer @username expressed interest in rate limiting
+✅ Commit created: 7f3a9b2
+🔄 Recreating ISG_current from updated codebase...
+✓ 1,262 interfaces analyzed (was 1,247)
+✓ ISG_current updated in RAM
+✓ SQLite database refreshed with current state
+✓ JSON snapshot updated
 
-🚀 Ready to submit?
-[Y/n]? Y
-
-✅ PR created: https://github.com/iggy-rs/iggy/pull/567
-🎯 Next: Monitor PR feedback and respond to reviews
+🎉 Change complete and fully integrated!
 ```
 
-**Architecture Differentiator:** Community intelligence integration for PR optimization
+**Architecture Differentiator:** Complete closed-loop change integration with state synchronization
 ```rust
-// Community-aligned contribution optimization
-pub struct CommunityIntelligence {
-    pub project_analyzer: GitHubProjectAnalyzer,
-    pub style_matcher: ProjectConventionDetector,
-    pub pr_optimizer: QualityAndAlignmentScorer,
-    pub community_context: DiscordAndGitHubIntegration,
+// Final integration with state synchronization
+pub struct ChangeIntegrator {
+    pub change_applier: CodeAndTestApplier,
+    pub user_confirmation: InteractiveReviewInterface,
+    pub commit_generator: IntelligentCommitCreator,
+    pub isg_reconstructor: PostChangeISGRebuilder,
 }
 ```
 
 **Success Criteria:**
-- ✅ > 90% PR acceptance rate through pre-validation
-- ✅ Community-aligned contributions that address real needs
-- ✅ Professional reputation building through quality submissions
+- ✅ User fully understands all changes applied
+- ✅ Professional commit with proper message generated
+- ✅ ISG_current rebuilt to reflect actual codebase state
+- ✅ Complete audit trail from PRD to working code
 
 ### Phase 5: Submit Quality PR (4-6 hours)
 
@@ -561,144 +582,9 @@ This creates a product that helps developers understand codebases and become val
 
 ```mermaid
 ---
-title: Parseltongue User Journey - Installation to First Contribution
-accTitle: Complete User Journey Flow for Rust Developers
-accDescr: A comprehensive flowchart showing the 5-phase journey from system installation through first accepted PR, with timing estimates and success criteria at each stage.
-config:
-  theme: "base"
-  themeVariables:
-    primaryColor: "#ECECFF"
-    primaryTextColor: "#2E2E5F"
-    primaryBorderColor: "#2E2E5F"
-    lineColor: "#2E2E5F"
-    secondaryColor: "#F6F8FF"
-    tertiaryColor: "#FFF9E6"
-    sectionBkgColor: "#E6F3FF"
-    altSectionBkgColor: "#FFFAE6"
-    gridColor: "#D0D0E6"
-    fontFamily: "system-ui, -apple-system, sans-serif"
-    fontSize: "14px"
-  flowchart:
-    nodeSpacing: 75
-    rankSpacing: 75
-    defaultRenderer: "elk"
-    useMaxWidth: false
-    htmlLabels: true
-    wrappingWidth: 150
----
-
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
-flowchart LR
-    %% Phase 0: System Validation & Installation
-    P0["Phase 0: System Validation<br/>0-10 minutes"] --> D1{"Apple Silicon<br/>M1/M2/M3?"}
-    D1 -- "Yes" --> S1["✓ Optimized Configuration"]
-    D1 -- "No" --> S2["⚠ Generic x86 Config"]
-
-    S1 --> D2{"16GB+ RAM?"}
-    S2 --> D2
-    D2 -- "Yes" --> S3["✓ Sufficient Memory"]
-    D2 -- "No" --> S4["⚠ Memory Warnings"]
-
-    S3 --> D3{"Rust 1.70+?"}
-    S4 --> D3
-    D3 -- "Yes" --> S5["✓ Compatible Toolchain"]
-    D3 -- "No" --> S6["⚠ Install Rust First"]
-
-    S5 --> D4{"Ollama Available?"}
-    S6 --> D4
-    D4 -- "Yes" --> S7["✓ Use Existing Ollama"]
-    D4 -- "No" --> S8["🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M ~4.25GB"]
-
-    S7 --> S9["✅ System Ready<br/><5s codebase analysis<br/><1ms queries"]
-    S8 --> S9
-
-    %% Phase 1: First Value Discovery
-    S9 --> P1["Phase 1: First Value Discovery<br/>10-30 minutes"]
-    P1 --> D5{"Auto-Detect Rust<br/>Projects?"}
-    D5 -- "Yes" --> S10["🔍 Found N Projects<br/>Show sizes & complexity"]
-    D5 -- "No" --> S11["❌ No Rust Projects<br/>Exit with guidance"]
-
-    S10 --> D6{"Suggest Main Project<br/>User: Y/n?"}
-    D6 -- "Y" --> S12["⚡ Build ISG<br/>1,247 interfaces<br/>3.2 seconds"]
-
-    S12 --> S13["✅ Architectural Insights<br/>42 patterns identified<br/>12 opportunities found"]
-    S13 --> S14["💡 Ready for Queries<br/>Where should I add<br/>error handling?"]
-
-    %% Phase 2: Architectural Understanding
-    S14 --> P2["Phase 2: Architectural Understanding<br/>30-60 minutes"]
-    P2 --> S15["📝 Natural Language Query<br/>What are main components?"]
-    S15 --> S16["🏗️ Architecture Analysis<br/>3 main layers identified"]
-
-    S16 --> S17["API Layer<br/>421 interfaces<br/>HTTP handlers, auth, rate limiting"]
-    S16 --> S18["Business Logic<br/>312 interfaces<br/>Domain models, services, events"]
-    S16 --> S19["Data Layer<br/>214 interfaces<br/>Repositories, queries, caching"]
-
-    S17 --> S20["🔗 Key Dependencies<br/>API → Business → Data"]
-    S18 --> S20
-    S19 --> S20
-
-    S20 --> S21["💡 Opportunity Ranking<br/>High Impact: API enhancements<br/>Low Risk: Data optimization"]
-
-    %% Phase 3: Safe Contribution Planning
-    S21 --> P3["Phase 3: Safe Contribution Planning<br/>1-2 hours"]
-    P3 --> S22["🎯 Change Proposal<br/>Add rate limiting to API"]
-
-    S22 --> S23["🔬 Impact Analysis<br/>12 interfaces to modify<br/>3 interfaces to add<br/>Risk: LOW (isolated)"]
-
-    S23 --> S24["⚠️ Risk Assessment<br/>Performance bottleneck<br/>Client compatibility<br/>Testing complexity"]
-
-    S24 --> S25["✅ Safety Score: 8.5/10<br/>Mitigation strategies generated"]
-    S25 --> S26["📋 Implementation Plan<br/>Step-by-step guidance<br/>Template recommendations"]
-
-    %% Phase 4: Confident Implementation
-    S26 --> P4["Phase 4: Confident Implementation<br/>2-4 hours"]
-    P4 --> S27["🛠️ Guided Implementation<br/>Step 1: Create Service"]
-
-    S27 --> D7{"Template Options<br/>[S]how [C]reate [A]bort"}
-    D7 -- "S" --> S28["✅ RateLimiting Service<br/>Optimized template<br/>Existing patterns used"]
-
-    S28 --> S29["🧪 Auto-Generated Tests<br/>Integration test templates<br/>Follow project conventions"]
-
-    S29 --> S30["🛠️ Step 2: Add Middleware<br/>Apply changes safely"]
-    S30 --> S31["✅ Middleware Integrated<br/>All handlers updated<br/>12/12 complete"]
-
-    S31 --> S32["🧪 All Tests Passing<br/>142 existing + 8 new<br/>0 failures"]
-
-    %% Phase 5: Quality Submission
-    S32 --> P5["Phase 5: Quality Submission<br/>4-6 hours"]
-    P5 --> S33["🔍 PR Quality Analysis<br/>Style guide compliance<br/>Test coverage validation"]
-
-    S33 --> S34["✅ Quality Score: 9.2/10<br/>Ready for review"]
-    S34 --> S35["📝 PR Draft Generated<br/>Problem/Solution/Breaking<br/>Testing documentation"]
-
-    S35 --> S36["🎯 PR Created<br/>https://github.com/project/pull/567"]
-    S36 --> S37["🚀 Monitor Feedback<br/>Respond to reviews<br/>Iterate if needed"]
-
-    %% Success Criteria
-    S37 --> S38["✅ First Accepted PR<br/>Total time: 4-6 hours<br/>vs 40+ hours manual"]
-
-    %% Styling for phase differentiation
-    classDef phase0 fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
-    classDef phase1 fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
-    classDef phase2 fill:#F6F8FF,stroke:#2E2E5F,stroke-width:2px
-    classDef phase3 fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
-    classDef phase4 fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
-    classDef phase5 fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
-    classDef success fill:#D4EDDA,stroke:#155724,stroke-width:3px
-    classDef decision fill:#FFF3CD,stroke:#856404,stroke-width:2px
-
-    class P0,P1,P2,P3,P4,P5 phase0,phase1,phase2,phase3,phase4,phase5
-    class D1,D2,D3,D4,D5,D6,D7 decision
-    class S38 success
-```
-
-## System Architecture Diagram
-
-```mermaid
----
-title: Parseltongue System Architecture - Dual-State ISG Design
-accTitle: Complete System Architecture for Interface-Centric Code Analysis
-accDescr: A comprehensive architecture diagram showing the dual-state Interface Signature Graph system, from TUI interface through SQLite persistence to local LLM integration.
+title: Parseltongue Technical Workflow - GitHub Release to Working Code
+accTitle: Complete Technical Workflow for ISG-Driven Development
+accDescr: A comprehensive flowchart showing the 6-phase technical workflow from GitHub download through database-driven code changes, with ISG_current/ISG_future duality and validation loops.
 config:
   theme: "base"
   themeVariables:
@@ -724,137 +610,293 @@ config:
 
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
 flowchart TD
-    %% User Interface Layer
-    subgraph UI_Layer["User Interface Layer"]
-        UI1["TUI Interface<br/>ratatui-native<br/><500ms startup"]
-        UI2["Three Commands<br/>analyze ask propose implement"]
+    %% Phase 1: GitHub Release & ISG Construction
+    P1["Phase 1: GitHub Release<br/>& ISG Construction<br/>5-15 minutes"] --> S1["Download Apple Silicon<br/>Binary from GitHub<br/>Release Page"]
+
+    S1 --> S2["./parseltongue in<br/>Rust project directory"]
+    S2 --> S3["🔍 Apple Silicon detected<br/>Optimized build active"]
+    S3 --> S4["🚀 Build ISG_current<br/>1,247 interfaces<br/>3.2 seconds"]
+    S4 --> S5["✅ ISG_current in RAM<br/>SQLite initialized<br/>JSON saved<br/>HTML visualization ready"]
+
+    %% Phase 2: PRD Creation with ISG Context
+    S5 --> P2["Phase 2: PRD Creation<br/>with ISG Context<br/>15-30 minutes"]
+    P2 --> S6["💡 User types change request<br/>Add rate limiting to API"]
+    S6 --> S7["🔍 ISG_current Analysis<br/>API Layer: 421 interfaces<br/>Business Logic: 312<br/>Data Layer: 214"]
+
+    S7 --> S8["🎝 Interactive PRD Refinement<br/>Specificity, Scope, Limits, Storage"]
+    S8 --> S9["💬 Refined PRD<br/>Redis-based rate limiting<br/>Public APIs only<br/>100 req/min per user"]
+
+    S9 --> S10["✅ PRD contextualized<br/>Change scope bounded<br/>Implementation defined"]
+
+    %% Phase 3: ISG_future Generation & Risk Assessment
+    S10 --> P3["Phase 3: ISG_future Generation<br/>& Risk Assessment<br/>20-40 minutes"]
+    P3 --> S11["🚀 Generate ISG_future<br/>from PRD + ISG_current"]
+    S11 --> S12["🔬 Change Simulation<br/>CREATE: 3 interfaces<br/>EDIT: 12 interfaces<br/>DELETE: 0 interfaces"]
+
+    S12 --> S13["⚠️ Risk Assessment<br/>LOW RISK - Well contained<br/>Minimal dependencies<br/>High test coverage<br/><2% performance impact"]
+
+    S13 --> S14["🎯 ISG_future Visualization<br/>HTML updated<br/>Green nodes: New<br/>Yellow nodes: Modified<br/>Red edges: Dependencies"]
+
+    S14 --> S15["💡 Rubber Duck Debugging<br/>Architectural soundness<br/>Pattern consistency<br/>Integration strategy"]
+
+    S15 --> S16["✅ ISG_future validated<br/>Impacts quantified<br/>Risk assessed"]
+
+    %% Phase 4: SQLite Integration & Validation
+    S16 --> P4["Phase 4: SQLite Integration<br/>& Rubber Duck Debugging<br/>30-45 minutes"]
+    P4 --> S17["🗄️ Update SQLite Database<br/>Future_Action populated<br/>Future_Code generated"]
+
+    S17 --> S18["📊 Database State<br/>CREATE rows: 3<br/>EDIT rows: 12<br/>DELETE rows: 0"]
+
+    S18 --> S19["🦆 Rubber Duck Validation<br/>Interface consistency<br/>Dependency flow<br/>Test strategy<br/>Error handling patterns"]
+
+    S19 --> S20["🔧 Code Generation Prep<br/>Implementation plan<br/>File list<br/>Change strategy"]
+
+    S20 --> S21["✅ Database ready<br/>Architectural validation<br/>Implementation confirmed"]
+
+    %% Phase 5: Code Changes & Testing
+    S21 --> P5["Phase 5: Code Changes<br/>& Testing<br/>45-90 minutes"]
+    P5 --> S22["🛠️ Apply Code Changes<br/>From database state"]
+    S22 --> S23["✅ Step 1: Create Service<br/>src/services/rate_limiting.rs"]
+    S23 --> S24["✅ Step 2: Add Middleware<br/>src/middleware/mod.rs"]
+    S24 --> S25["✅ Step 3: Update Handlers<br/>12 API handler files"]
+    S25 --> S26["✅ Step 4: Create Tests<br/>tests/services/rate_limiting_test.rs"]
+
+    S26 --> S27["🧪 Run Test Suite<br/>cargo test"]
+    S27 --> S28["✅ 142 existing + 8 new<br/>tests PASS<br/>Compilation successful<br/>0 regressions"]
+
+    S28 --> S29["📊 Change Summary<br/>Files created: 2<br/>Files modified: 13<br/>Lines added: 156<br/>Test coverage: 100%"]
+
+    S29 --> S30["🎯 Ready for<br/>user confirmation"]
+
+    %% Phase 6: User Confirmation & Commit
+    S30 --> P6["Phase 6: User Confirmation<br/>& Commit<br/>15-30 minutes"]
+    P6 --> S31["📋 Change Review<br/>PRD fulfilled<br/>Implementation complete<br/>Documentation updated"]
+
+    S31 --> D1{"✅ Confirm changes?<br/>Review diff<br/>Check visualization"}
+    D1 -- "Y" --> S32["📝 Intelligent Commit<br/>Professional message<br/>Conventional format"]
+    D1 -- "N" --> S33["🔄 Iterate on changes<br/>Back to Phase 5"]
+
+    S32 --> S34["✅ Commit created<br/>7f3a9b2"]
+    S34 --> S35["🔄 Rebuild ISG_current<br/>1,262 interfaces<br/>Database refreshed<br/>JSON updated"]
+
+    S35 --> S36["🎉 Change complete<br/>Fully integrated<br/>Closed-loop workflow"]
+
+    %% Success Criteria
+    S36 --> S37["✅ Working Code Change<br/>Total time: 2-3 hours<br/>vs 8+ hours manual<br/>Zero regressions"]
+
+    %% Styling for phase differentiation
+    classDef phase1 fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
+    classDef phase2 fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase3 fill:#F6F8FF,stroke:#2E2E5F,stroke-width:2px
+    classDef phase4 fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase5 fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase6 fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
+    classDef success fill:#D4EDDA,stroke:#155724,stroke-width:3px
+    classDef decision fill:#FFF3CD,stroke:#856404,stroke-width:2px
+    classDef database fill:#E8F5E8,stroke:#28A745,stroke-width:2px
+    classDef isg fill:#FFF0F5,stroke:#E91E63,stroke-width:2px
+
+    class P1,P2,P3,P4,P5,P6 phase1,phase2,phase3,phase4,phase5,phase6
+    class D1 decision
+    class S37 success
+    class S17,S18 database
+    class S4,S11,S35 isg
+```
+
+## System Architecture Diagram
+
+```mermaid
+---
+title: Parseltongue Apple Silicon Architecture - Optimized ISG-Driven Development
+accTitle: Apple Silicon Optimized System Architecture for ISG-Driven Development
+accDescr: A comprehensive architecture diagram showing the Apple Silicon-optimized Parseltongue system with dual-state ISG architecture, SQLite persistence, and database-driven code generation pipeline.
+config:
+  theme: "base"
+  themeVariables:
+    primaryColor: "#ECECFF"
+    primaryTextColor: "#2E2E5F"
+    primaryBorderColor: "#2E2E5F"
+    lineColor: "#2E2E5F"
+    secondaryColor: "#F6F8FF"
+    tertiaryColor: "#FFF9E6"
+    sectionBkgColor: "#E6F3FF"
+    altSectionBkgColor: "#FFFAE6"
+    gridColor: "#D0D0E6"
+    fontFamily: "system-ui, -apple-system, sans-serif"
+    fontSize: "14px"
+  flowchart:
+    nodeSpacing: 75
+    rankSpacing: 75
+    defaultRenderer: "elk"
+    useMaxWidth: false
+    htmlLabels: true
+    wrappingWidth: 150
+---
+
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
+flowchart TD
+    %% Entry Point & Apple Silicon Optimization
+    subgraph Entry_Point["GitHub Release Entry Point"]
+        EP1["Apple Silicon Binary<br/>Single optimized build<br/>M1/M2/M3 native"]
+        EP2["Zero Configuration<br/>Download and run<br/>./parseltongue"]
+        EP3["Hardware Detection<br/>Apple Silicon confirmed<br/>16GB+ RAM expected"]
     end
 
-    %% Command Processing Layer
-    subgraph CMD_Processing["Command Processing"]
-        CP1["Health Checks<br/>300ms SLA"]
-        CP2["API Key Detection<br/>Local vs Cloud"]
-        CP3["Repository Ingestion<br/>≤5s for 100k LOC"]
+    %% ISG Construction Engine
+    subgraph ISG_Engine["ISG Construction Engine"]
+        IE1["Rust Analyzer Integration<br/>HIR metadata extraction<br/>Interface signatures"]
+        IE2["Unique ID Generator<br/>filePath-fileName-interfaceName<br/>No conflicts guaranteed"]
+        IE3["Interface Classifier<br/>Test vs Normal interfaces<br/>Dependency mapping"]
+        IE4["Metadata Enrichment<br/>HIR info, relationships<br/>Utility analytics"]
     end
 
-    %% Core Architecture - Dual State
-    subgraph Dual_State["Dual-State Architecture"]
-        subgraph ISG_Current["ISG_current (Reality)"]
-            ISGC1["Interface Graph<br/>What exists now"]
-            ISGC2["Node Metadata<br/>signatures line numbers<br/>interface types"]
+    %% Dual-State Core Architecture
+    subgraph Dual_State_Core["Dual-State ISG Core"]
+        subgraph ISG_Current_RAM["ISG_current (RAM)"]
+            IC1["Interface Graph<br/>Current reality state"]
+            IC2["Rich Metadata<br/>HIR enriched<br/>Dependency mapped"]
         end
 
-        subgraph ISG_Future["ISG_future (Vision)"]
-            ISGF1["Interface Graph<br/>What should exist"]
-            ISGF2["Change Actions<br/>CREATE EDIT DELETE<br/>impact analysis"]
+        subgraph ISG_Future_RAM["ISG_future (RAM)"]
+            IF1["Proposed Graph<br/>Future state vision"]
+            IF2["Change Actions<br/>CREATE EDIT DELETE<br/>Impact calculated"]
         end
 
-        DS1["Change Simulator<br/>Blast radius calculator<br/>Risk assessment<br/>Mitigation strategies"]
+        DC1["Change Simulator<br/>Blast radius analysis<br/>Risk assessment engine"]
+        DC2["Rubber Duck Engine<br/>Architectural reasoning<br/>Pattern validation"]
     end
 
-    %% Persistence Layer
-    subgraph Persistence_Layer["Persistence Layer"]
-        subgraph SQLite_Bridge["SQLite Bridge"]
-            SL1["Codebase Table<br/>interface_uid<br/>current/future_code<br/>future_action"]
-            SL2["Snapshot Operations<br/>≤500ms save/load<br/>Consistency validation"]
+    %% Multi-Persistence Layer
+    subgraph Multi_Persistence["Multi-Persistence Layer"]
+        subgraph SQLite_Database["SQLite Database"]
+            SD1["Codebase Table<br/>id, ISG_current_ind<br/>ISG_future_ind, interface_uid"]
+            SD2["Current_Code Column<br/>Source code snapshot"]
+            SD3["Future_Code Column<br/>Generated from PRD"]
+            SD4["Future_Action Column<br/>CREATE EDIT DELETE"]
         end
 
-        PL1["In-Memory Cache<br/>Sub-millisecond queries<br/>ISG graph persistence"]
+        MP1["JSON Snapshots<br/>ISG_current backup<br/>ISG_future proposals"]
+        MP2["HTML Visualization<br/>Interactive graph display<br/>Before/After views"]
+        MP3["In-Memory Cache<br/>Sub-millisecond queries<br/>Graph traversal optimized"]
     end
 
-    %% Intelligence Layer
-    subgraph Intelligence_Layer["Intelligence Layer"]
-        subgraph Local_LLM["Local LLM Integration"]
-            LL1["Ollama Local<br/>Qwen 2.5-Coder 7B<br/>Q4_K_M quantization"]
-            LL2["Model Configuration<br/>128k context<br/>60-90 tokens/sec<br/>4.25GB memory"]
-        end
-
-        IL1["Architectural Intelligence<br/>Pattern recognition<br/>Dependency mapping<br/>Opportunity ranking"]
+    %% PRD Processing Pipeline
+    subgraph PRD_Pipeline["PRD Processing Pipeline"]
+        PP1["Interactive PRD Builder<br/>Context-aware suggestions<br/>Scope refinement"]
+        PP2["ISG Context Analyzer<br/>Architecture-aware prompts<br/>Change scoping"]
+        PP3["Risk Calculator<br/>Multi-dimensional analysis<br/>Mitigation strategies"]
+        PP4["Refinement Engine<br/>Iterative PRD improvement<br/>Feasibility validation"]
     end
 
-    %% Code Analysis Layer
-    subgraph Code_Analysis["Code Analysis Layer"]
-        CA1["Syn Parser<br/>Rust AST extraction<br/>Interface signatures"]
-        CA2["Interface Extractor<br/>Function Method Trait<br/>Struct Enum Module"]
-        CA3["Relationship Mapper<br/>Interface dependencies<br/>Architectural patterns"]
+    %% Code Generation Engine
+    subgraph Code_Generation["Database-Driven Code Generation"]
+        CG1["SQLite Reader<br/>Future_Code extraction<br/>Change orchestration"]
+        CG2["Structured Generator<br/>Template-based creation<br/>Pattern-consistent"]
+        CG3["Test Auto-Creator<br/>Follows existing patterns<br/>100% coverage target"]
+        CG4["Regression Checker<br/>Before/After validation<br/>Zero regression guarantee"]
     end
 
-    %% Output & Integration Layer
-    subgraph Output_Integration["Output and Integration"]
-        OI1["Code Templates<br/>Context-aware<br/>Project-specific patterns"]
-        OI2["Test Generation<br/>Automatic creation<br/>Project conventions"]
-        OI3["Documentation<br/>README updates<br/>API documentation"]
+    %% Apple Silicon Optimized Components
+    subgraph Apple_Silicon_Opt["Apple Silicon Optimizations"]
+        AS1["Metal Performance Shaders<br/>Graph rendering acceleration"]
+        AS2["Neural Engine Utilization<br/>LLM inference speedup<br/>Local model optimization"]
+        AS3["Unified Memory Architecture<br/>16GB+ optimized<br/>RAM usage tuning"]
+        AS4["Multi-Core Processing<br/>Performance cores parallel<br/>Efficiency cores background"]
+    end
+
+    %% Validation & Integration
+    subgraph Validation_Integration["Validation & Integration"]
+        VI1["Comprehensive Test Suite<br/>cargo test automation<br/>Regression prevention"]
+        VI2["Intelligent Commit Generator<br/>Conventional format<br/>Change documentation"]
+        VI3["ISG Reconstruction<br/>Post-change rebuild<br/>State synchronization"]
+        VI4["Closed-Loop Integration<br/>PRD → ISG → Code → ISG<br/>Continuous validation"]
     end
 
     %% Data Flow Connections
-    UI1 --> UI2
-    UI2 --> CP1
-    UI2 --> CP2
-    UI2 --> CP3
+    EP1 --> EP2
+    EP2 --> EP3
+    EP3 --> IE1
 
-    CP1 --> ISGC1
-    CP2 --> LL1
-    CP3 --> CA1
+    IE1 --> IE2
+    IE2 --> IE3
+    IE3 --> IE4
+    IE4 --> IC1
 
-    CA1 --> CA2
-    CA2 --> CA3
-    CA3 --> ISGC1
+    IC1 --> IC2
+    IC1 --> DC1
+    DC1 --> IF1
+    IF1 --> IF2
+    DC2 --> IC2
+    DC2 --> IF2
 
-    ISGC1 --> ISGC2
-    ISGC1 --> DS1
-    DS1 --> ISGF1
-    ISGF1 --> ISGF2
+    IC2 --> SD1
+    IF2 --> SD1
+    SD1 --> SD2
+    SD1 --> SD3
+    SD1 --> SD4
+    SD2 --> MP1
+    SD3 --> MP1
+    MP1 --> MP2
+    MP2 --> MP3
 
-    ISGC2 --> SL1
-    ISGF2 --> SL1
-    SL1 --> SL2
-    SL2 --> PL1
+    EP3 --> PP1
+    PP1 --> PP2
+    PP2 --> PP3
+    PP3 --> PP4
+    PP4 --> DC1
 
-    PL1 --> IL1
-    LL1 --> IL1
-    LL2 --> LL1
-    IL1 --> OI1
+    SD4 --> CG1
+    CG1 --> CG2
+    CG2 --> CG3
+    CG3 --> CG4
+    CG4 --> VI1
 
-    OI1 --> OI2
-    OI2 --> OI3
-    OI3 --> UI1
+    AS1 --> MP2
+    AS2 --> DC2
+    AS3 --> MP3
+    AS4 --> CG2
 
-    %% Performance Annotations
-    subgraph Performance_SLAs["Performance SLAs"]
-        PS1["Ingestion: ≤5s<br/>2.1MB file dump"]
-        PS2["Queries: ≤500µs<br/>Basic interface lookups"]
-        PS3["Simulation: ≤1ms<br/>Change impact analysis"]
-        PS4["PRD Loop: ≤30s<br/>Full iteration cycle"]
+    VI1 --> VI2
+    VI2 --> VI3
+    VI3 --> VI4
+    VI4 --> IC1
+
+    %% Performance Optimizations
+    subgraph Apple_Silicon_Perf["Apple Silicon Performance"]
+        ASP1["ISG Ingestion: ≤3 seconds<br/>Metal-accelerated parsing"]
+        ASP2["Query Response: ≤200µs<br/>Unified memory access"]
+        ASP3["Change Simulation: ≤500µs<br/>Neural Engine inference"]
+        ASP4["Code Generation: ≤5 seconds<br/>Multi-core parallelization"]
     end
 
-    %% Guardrails
-    subgraph Implementation_Guardrails["Implementation Guardrails"]
-        IG1["TUI-Only Interface<br/>No web complexity"]
-        IG2["Signatures-Only<br/>Interface-level analysis"]
-        IG3["Compile-Time<br/>Type safety validation"]
-        IG4["Apple Silicon<br/>16GB+ optimization"]
+    %% Implementation Constraints
+    subgraph Implementation_Constraints["Opinionated Constraints"]
+        IC1["Single Binary Distribution<br/>Apple Silicon only<br/>No cross-platform complexity"]
+        IC2["16GB+ RAM Assumption<br/>Optimized memory usage<br/>No low-end device support"]
+        IC3["Local-First Architecture<br/>No cloud dependencies<br/>Offline operation guaranteed"]
+        IC4["TUI-Only Interface<br/>Zero web complexity<br/>Instant startup guaranteed"]
     end
 
-    %% Styling for layer differentiation
-    classDef ui fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
-    classDef processing fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
-    classDef core fill:#F6F8FF,stroke:#2E2E5F,stroke-width:3px
-    classDef persistence fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
-    classDef intelligence fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
-    classDef analysis fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
-    classDef output fill:#FFFAE6,stroke:#2E2E5F,stroke-width:2px
-    classDef metrics fill:#D4EDDA,stroke:#155724,stroke-width:2px
-    classDef guards fill:#F8D7DA,stroke:#721C24,stroke-width:2px
+    %% Styling for component differentiation
+    classDef entry fill:#E6F3FF,stroke:#2E2E5F,stroke-width:3px
+    classDef isg fill:#FFF0F5,stroke:#E91E63,stroke-width:3px
+    classDef persistence fill:#E8F5E8,stroke:#28A745,stroke-width:2px
+    classDef pipeline fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
+    classDef generation fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
+    classDef optimization fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
+    classDef validation fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
+    classDef performance fill:#F8D7DA,stroke:#721C24,stroke-width:2px
+    classDef constraints fill:#D1ECF1,stroke:#0C5460,stroke-width:2px
 
-    class UI1,UI2 ui
-    class CP1,CP2,CP3 processing
-    class ISGC1,ISGC2,ISGF1,ISGF2,DS1 core
-    class SL1,SL2,PL1 persistence
-    class LL1,LL2,IL1 intelligence
-    class CA1,CA2,CA3 analysis
-    class OI1,OI2,OI3 output
-    class PS1,PS2,PS3,PS4 metrics
-    class IG1,IG2,IG3,IG4 guards
+    class EP1,EP2,EP3 entry
+    class IC1,IC2,IF1,IF2,DC1,DC2 isg
+    class SD1,SD2,SD3,SD4,MP1,MP2,MP3 persistence
+    class PP1,PP2,PP3,PP4 pipeline
+    class CG1,CG2,CG3,CG4 generation
+    class AS1,AS2,AS3,AS4 optimization
+    class VI1,VI2,VI3,VI4 validation
+    class ASP1,ASP2,ASP3,ASP4 performance
+    class IC1,IC2,IC3,IC4 constraints
 ```
 
 ---
