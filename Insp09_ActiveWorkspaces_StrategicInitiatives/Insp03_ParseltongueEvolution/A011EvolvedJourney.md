@@ -961,3 +961,7 @@ flowchart TD
 ---
 
 Parseltongue is a tool for helping Rust developers make fast, confident OSS contributions through architectural intelligence and predictive change simulation.
+
+---
+
+## 🧠 ISG Enrichment: Rust-Analyzer Integration Insights
