@@ -231,13 +231,17 @@ export ANTHROPIC_BASE_URL=http://localhost:8080  # Local proxy
 export ANTHROPIC_API_KEY=sk-ant-production-key
 export ANTHROPIC_BASE_URL=https://api.anthropic.com
 
-# Development (Local Ollama)
-export ANTHROPIC_API_KEY=sk-ant-local-dev-key
+# Development (Local Ollama - OPINIONATED)
+export ANTHROPIC_API_KEY=sk-ant-local-qwen25
 export ANTHROPIC_BASE_URL=http://localhost:8080
+export OLLAMA_MODEL=qwen2.5-coder:7b-q4_k_m  # Optional - our opinionated default
+export OLLAMA_BASE_URL=http://localhost:11434  # Optional - standard Ollama port
 ```
 
 **Performance Advantages:**
-- **Qwen 2.5-Coder 7B**: 60-90 tokens/sec, 128k context, ~4.25GB model
+- **Qwen 2.5-Coder 7B Q4_K_M**: 60-90 tokens/sec, 128k context, ~4.25GB model
+- **Fastest Large-Context Option**: Optimized quantization for speed
+- **Code-Tuned**: Specifically trained for code analysis and generation
 - **Apple Silicon Optimization**: Metal acceleration on 16GB+ RAM
 - **Privacy**: All processing stays local on Apple Silicon
 - **Cost Efficiency**: No API charges for local processing
@@ -751,37 +755,60 @@ impl OllamaClient {
 }
 ```
 
-#### Recommended Model Configuration
+#### Opinionated Model Configuration
 ```rust
-// Optimized models for different tasks
+// WE ARE OPINIONATED - Qwen 2.5-Coder 7B Q4_K_M
 pub struct ModelConfig {
-    pub analysis_model: String,      // Fast, accurate code analysis
-    pub generation_model: String,    // Creative code generation
-    pub chat_model: String,          // Conversational assistance
+    pub default_model: String,       // Single model for all tasks
+    pub quantization: String,        // Q4_K_M for optimal performance
+    pub context_window: usize,       // 128k context
+    pub tokens_per_second: u32,      // 60-90 tokens/sec
+    pub memory_usage_gb: f32,        // ~4.25GB RAM
+    pub specialization: String,      // Code-tuned for Rust
 }
 
 impl Default for ModelConfig {
     fn default() -> Self {
         Self {
-            // Based on current Ollama ecosystem (2025-01)
-            analysis_model: "qwen2.5-coder:7b".to_string(),     // Excellent Rust understanding
-            generation_model: "deepseek-coder:6.7b".to_string(), // Strong code generation
-            chat_model: "llama3.1:8b".to_string(),              // Good reasoning, fast
+            // OPINIONATED: Qwen 2.5-Coder 7B is the optimal choice
+            default_model: "qwen2.5-coder:7b-q4_k_m".to_string(),
+            quantization: "Q4_K_M".to_string(),           // Fastest large-ctx option
+            context_window: 128_000,                       // Large context for big codebases
+            tokens_per_second: 75,                         // 60-90 tokens/sec realistic
+            memory_usage_gb: 4.25,                         // ~4.25GB model size
+            specialization: "code-tuned".to_string(),      // Optimized for code analysis
         }
     }
 }
 
-// Model selection strategy
+// Simplified task selection - we use the same model for everything
 impl ModelConfig {
-    pub fn select_for_task(&self, task: &TaskType) -> &str {
-        match task {
-            TaskType::ArchitecturalAnalysis => &self.analysis_model,
-            TaskType::CodeGeneration => &self.generation_model,
-            TaskType::Refactoring => &self.analysis_model,  // Precision over creativity
-            TaskType::Documentation => &self.chat_model,
-            TaskType::Debugging => &self.analysis_model,
+    pub fn select_for_task(&self, _task: &TaskType) -> &str {
+        // OPINIONATED: Qwen 2.5-Coder 7B excels at ALL tasks
+        // No need for multiple models - reduces complexity and improves consistency
+        &self.default_model
+    }
+
+    pub fn model_specs(&self) -> ModelSpecs {
+        ModelSpecs {
+            name: "Qwen 2.5-Coder 7B Q4_K_M",
+            context: self.context_window,
+            speed_range: "60-90 tokens/sec",
+            memory_usage: "~4.25GB",
+            optimization: "Fastest large-ctx option; code-tuned",
+            apple_silicon: "Metal acceleration optimized",
         }
     }
+}
+
+#[derive(Debug, Clone)]
+pub struct ModelSpecs {
+    pub name: &'static str,
+    pub context: usize,
+    pub speed_range: &'static str,
+    pub memory_usage: &'static str,
+    pub optimization: &'static str,
+    pub apple_silicon: &'static str,
 }
 ```
 
@@ -1222,13 +1249,12 @@ pub struct EnvConfigProvider;
 
 impl ConfigProvider for EnvConfigProvider {
     fn get_base_url(&self) -> Result<String, ConfigError> {
-        env::var("OLLAMA_BASE_URL")
-            .map_err(|_| ConfigError::MissingRequired("OLLAMA_BASE_URL"))
+        env::var("OLLAMA_BASE_URL").unwrap_or_else(|_| "http://localhost:11434".to_string())
     }
 
     fn get_model(&self) -> Result<String, ConfigError> {
-        env::var("OLLAMA_MODEL")
-            .map_err(|_| ConfigError::MissingRequired("OLLAMA_MODEL"))
+        // OPINIONATED: Default to Qwen 2.5-Coder 7B Q4_K_M
+        env::var("OLLAMA_MODEL").unwrap_or_else(|_| "qwen2.5-coder:7b-q4_k_m".to_string())
     }
 
     fn get_timeout_ms(&self) -> u32 {
