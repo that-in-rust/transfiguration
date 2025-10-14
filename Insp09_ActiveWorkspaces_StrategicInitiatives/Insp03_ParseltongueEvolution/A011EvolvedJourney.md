@@ -606,7 +606,7 @@ flowchart TD
     I --> K{Ollama Available?}
     J --> K
     K -- Yes --> L[✓ Use Existing Ollama]
-    K -- No --> M[🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M (~4.25GB)]
+    K -- No --> M[🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M ~4.25GB]
 
     L --> N[✅ System Ready<br/><5s codebase analysis<br/><1ms queries]
     M --> N
@@ -725,7 +725,7 @@ flowchart LR
     %% User Interface Layer
     subgraph UI["User Interface Layer"]
         TUI[TUI Interface<br/>ratatui-native<br/><500ms startup]
-        CMD[Three Commands<br/>• analyze<br/>• ask<br/>• propose<br/>• implement]
+        CMD[Three Commands<br/>analyze. ask. propose. implement]
     end
 
     %% Command Processing Layer
@@ -744,7 +744,7 @@ flowchart LR
 
         subgraph ISG_FUTURE["ISG_future (Vision)"]
             FUTURE[Interface Graph<br/>What should exist]
-            FUTURE_META[Change Actions<br/>CREATE|EDIT|DELETE<br/>impact analysis]
+            FUTURE_META[Change Actions<br/>CREATE.EDIT.DELETE<br/>impact analysis]
         end
 
         SIMULATOR[Change Simulator<br/>Blast radius calculator<br/>Risk assessment<br/>Mitigation strategies]
@@ -773,7 +773,7 @@ flowchart LR
     %% Code Analysis Layer
     subgraph ANALYSIS["Code Analysis Layer"]
         PARSER[Syn Parser<br/>Rust AST extraction<br/>Interface signatures]
-        EXTRACTOR[Interface Extractor<br/>Function|Method|Trait<br/>Struct|Enum|Module]
+        EXTRACTOR[Interface Extractor<br/>Function.Method.Trait<br/>Struct.Enum.Module]
         REL_MAPPER[Relationship Mapper<br/>Interface dependencies<br/>Architectural patterns]
     end
 
