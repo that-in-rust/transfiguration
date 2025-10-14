@@ -587,94 +587,95 @@ config:
     wrappingWidth: 150
 ---
 
-flowchart TD
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
+flowchart LR
     %% Phase 0: System Validation & Installation
-    A[Phase 0: System Validation<br/>0-10 minutes] --> B{Apple Silicon<br/>M1/M2/M3?}
-    B -- Yes --> C[✓ Optimized Configuration]
-    B -- No --> D[⚠ Generic x86 Config]
+    P0["Phase 0: System Validation<br/>0-10 minutes"] --> D1{"Apple Silicon<br/>M1/M2/M3?"}
+    D1 -- "Yes" --> S1["✓ Optimized Configuration"]
+    D1 -- "No" --> S2["⚠ Generic x86 Config"]
 
-    C --> E{16GB+ RAM?}
-    D --> E
-    E -- Yes --> F[✓ Sufficient Memory]
-    E -- No --> G[⚠ Memory Warnings]
+    S1 --> D2{"16GB+ RAM?"}
+    S2 --> D2
+    D2 -- "Yes" --> S3["✓ Sufficient Memory"]
+    D2 -- "No" --> S4["⚠ Memory Warnings"]
 
-    F --> H{Rust 1.70+?}
-    G --> H
-    H -- Yes --> I[✓ Compatible Toolchain]
-    H -- No --> J[⚠ Install Rust First]
+    S3 --> D3{"Rust 1.70+?"}
+    S4 --> D3
+    D3 -- "Yes" --> S5["✓ Compatible Toolchain"]
+    D3 -- "No" --> S6["⚠ Install Rust First"]
 
-    I --> K{Ollama Available?}
-    J --> K
-    K -- Yes --> L[✓ Use Existing Ollama]
-    K -- No --> M[🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M ~4.25GB]
+    S5 --> D4{"Ollama Available?"}
+    S6 --> D4
+    D4 -- "Yes" --> S7["✓ Use Existing Ollama"]
+    D4 -- "No" --> S8["🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M ~4.25GB"]
 
-    L --> N[✅ System Ready<br/><5s codebase analysis<br/><1ms queries]
-    M --> N
+    S7 --> S9["✅ System Ready<br/><5s codebase analysis<br/><1ms queries"]
+    S8 --> S9
 
     %% Phase 1: First Value Discovery
-    N --> O[Phase 1: First Value Discovery<br/>10-30 minutes]
-    O --> P{Auto-Detect Rust<br/>Projects?}
-    P -- Yes --> Q[🔍 Found N Projects<br/>Show sizes & complexity]
-    P -- No --> R[❌ No Rust Projects<br/>Exit with guidance]
+    S9 --> P1["Phase 1: First Value Discovery<br/>10-30 minutes"]
+    P1 --> D5{"Auto-Detect Rust<br/>Projects?"}
+    D5 -- "Yes" --> S10["🔍 Found N Projects<br/>Show sizes & complexity"]
+    D5 -- "No" --> S11["❌ No Rust Projects<br/>Exit with guidance"]
 
-    Q --> S[🎯 Suggest Main Project<br/>User: Y/n?]
-    S --> T[⚡ Build ISG<br/>1,247 interfaces<br/>3.2 seconds]
+    S10 --> D6{"Suggest Main Project<br/>User: Y/n?"}
+    D6 -- "Y" --> S12["⚡ Build ISG<br/>1,247 interfaces<br/>3.2 seconds"]
 
-    T --> U[✅ Architectural Insights<br/>42 patterns identified<br/>12 opportunities found]
-    U --> V[💡 Ready for Queries<br/>Where should I add<br/>error handling?]
+    S12 --> S13["✅ Architectural Insights<br/>42 patterns identified<br/>12 opportunities found"]
+    S13 --> S14["💡 Ready for Queries<br/>Where should I add<br/>error handling?"]
 
     %% Phase 2: Architectural Understanding
-    V --> W[Phase 2: Architectural Understanding<br/>30-60 minutes]
-    W --> X[📝 Natural Language Query<br/>What are main components?]
-    X --> Y[🏗️ Architecture Analysis<br/>3 main layers identified]
+    S14 --> P2["Phase 2: Architectural Understanding<br/>30-60 minutes"]
+    P2 --> S15["📝 Natural Language Query<br/>What are main components?"]
+    S15 --> S16["🏗️ Architecture Analysis<br/>3 main layers identified"]
 
-    Y --> Z[API Layer<br/>421 interfaces<br/>HTTP handlers, auth, rate limiting]
-    Y --> AA[Business Logic<br/>312 interfaces<br/>Domain models, services, events]
-    Y --> BB[Data Layer<br/>214 interfaces<br/>Repositories, queries, caching]
+    S16 --> S17["API Layer<br/>421 interfaces<br/>HTTP handlers, auth, rate limiting"]
+    S16 --> S18["Business Logic<br/>312 interfaces<br/>Domain models, services, events"]
+    S16 --> S19["Data Layer<br/>214 interfaces<br/>Repositories, queries, caching"]
 
-    Z --> CC[🔗 Key Dependencies<br/>API → Business → Data]
-    AA --> CC
-    BB --> CC
+    S17 --> S20["🔗 Key Dependencies<br/>API → Business → Data"]
+    S18 --> S20
+    S19 --> S20
 
-    CC --> DD[💡 Opportunity Ranking<br/>High Impact: API enhancements<br/>Low Risk: Data optimization]
+    S20 --> S21["💡 Opportunity Ranking<br/>High Impact: API enhancements<br/>Low Risk: Data optimization"]
 
     %% Phase 3: Safe Contribution Planning
-    DD --> EE[Phase 3: Safe Contribution Planning<br/>1-2 hours]
-    EE --> FF[🎯 Change Proposal<br/>Add rate limiting to API]
+    S21 --> P3["Phase 3: Safe Contribution Planning<br/>1-2 hours"]
+    P3 --> S22["🎯 Change Proposal<br/>Add rate limiting to API"]
 
-    FF --> GG[🔬 Impact Analysis<br/>12 interfaces to modify<br/>3 interfaces to add<br/>Risk: LOW (isolated)]
+    S22 --> S23["🔬 Impact Analysis<br/>12 interfaces to modify<br/>3 interfaces to add<br/>Risk: LOW (isolated)"]
 
-    GG --> HH[⚠️ Risk Assessment<br/>Performance bottleneck<br/>Client compatibility<br/>Testing complexity]
+    S23 --> S24["⚠️ Risk Assessment<br/>Performance bottleneck<br/>Client compatibility<br/>Testing complexity"]
 
-    HH --> II[✅ Safety Score: 8.5/10<br/>Mitigation strategies generated]
-    II --> JJ[📋 Implementation Plan<br/>Step-by-step guidance<br/>Template recommendations]
+    S24 --> S25["✅ Safety Score: 8.5/10<br/>Mitigation strategies generated"]
+    S25 --> S26["📋 Implementation Plan<br/>Step-by-step guidance<br/>Template recommendations"]
 
     %% Phase 4: Confident Implementation
-    JJ --> KK[Phase 4: Confident Implementation<br/>2-4 hours]
-    KK --> LL[🛠️ Guided Implementation<br/>Step 1: Create Service]
+    S26 --> P4["Phase 4: Confident Implementation<br/>2-4 hours"]
+    P4 --> S27["🛠️ Guided Implementation<br/>Step 1: Create Service"]
 
-    LL --> MM{Template Options<br/>[S]how [C]reate [A]bort}
-    MM --> NN[✅ RateLimiting Service<br/>Optimized template<br/>Existing patterns used]
+    S27 --> D7{"Template Options<br/>[S]how [C]reate [A]bort"}
+    D7 -- "S" --> S28["✅ RateLimiting Service<br/>Optimized template<br/>Existing patterns used"]
 
-    NN --> OO[🧪 Auto-Generated Tests<br/>Integration test templates<br/>Follow project conventions]
+    S28 --> S29["🧪 Auto-Generated Tests<br/>Integration test templates<br/>Follow project conventions"]
 
-    OO --> PP[🛠️ Step 2: Add Middleware<br/>Apply changes safely]
-    PP --> QQ[✅ Middleware Integrated<br/>All handlers updated<br/>12/12 complete]
+    S29 --> S30["🛠️ Step 2: Add Middleware<br/>Apply changes safely"]
+    S30 --> S31["✅ Middleware Integrated<br/>All handlers updated<br/>12/12 complete"]
 
-    QQ --> RR[🧪 All Tests Passing<br/>142 existing + 8 new<br/>0 failures]
+    S31 --> S32["🧪 All Tests Passing<br/>142 existing + 8 new<br/>0 failures"]
 
     %% Phase 5: Quality Submission
-    RR --> SS[Phase 5: Quality Submission<br/>4-6 hours]
-    SS --> TT[🔍 PR Quality Analysis<br/>Style guide compliance<br/>Test coverage validation]
+    S32 --> P5["Phase 5: Quality Submission<br/>4-6 hours"]
+    P5 --> S33["🔍 PR Quality Analysis<br/>Style guide compliance<br/>Test coverage validation"]
 
-    TT --> UU[✅ Quality Score: 9.2/10<br/>Ready for review]
-    UU --> VV[📝 PR Draft Generated<br/>Problem/Solution/Breaking<br/>Testing documentation]
+    S33 --> S34["✅ Quality Score: 9.2/10<br/>Ready for review"]
+    S34 --> S35["📝 PR Draft Generated<br/>Problem/Solution/Breaking<br/>Testing documentation"]
 
-    VV --> WW[🎯 PR Created<br/>https://github.com/project/pull/567]
-    WW --> XX[🚀 Monitor Feedback<br/>Respond to reviews<br/>Iterate if needed]
+    S35 --> S36["🎯 PR Created<br/>https://github.com/project/pull/567"]
+    S36 --> S37["🚀 Monitor Feedback<br/>Respond to reviews<br/>Iterate if needed"]
 
     %% Success Criteria
-    XX --> YY[✅ First Accepted PR<br/>Total time: 4-6 hours<br/>vs 40+ hours manual]
+    S37 --> S38["✅ First Accepted PR<br/>Total time: 4-6 hours<br/>vs 40+ hours manual"]
 
     %% Styling for phase differentiation
     classDef phase0 fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
@@ -686,9 +687,9 @@ flowchart TD
     classDef success fill:#D4EDDA,stroke:#155724,stroke-width:3px
     classDef decision fill:#FFF3CD,stroke:#856404,stroke-width:2px
 
-    class A,N,O,W,EE,KK,SS phase0,phase1,phase2,phase3,phase4,phase5
-    class B,E,H,K,P decision
-    class YY success
+    class P0,P1,P2,P3,P4,P5 phase0,phase1,phase2,phase3,phase4,phase5
+    class D1,D2,D3,D4,D5,D6,D7 decision
+    class S38 success
 ```
 
 ## System Architecture Diagram
@@ -721,116 +722,117 @@ config:
     wrappingWidth: 150
 ---
 
-flowchart LR
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ECECFF', 'primaryTextColor': '#2E2E5F', 'primaryBorderColor': '#2E2E5F', 'lineColor': '#2E2E5F', 'secondaryColor': '#F6F8FF', 'tertiaryColor': '#FFF9E6', 'sectionBkgColor': '#E6F3FF', 'altSectionBkgColor': '#FFFAE6', 'gridColor': '#D0D0E6', 'fontFamily': 'system-ui, -apple-system, sans-serif', 'fontSize': '14px'}, 'flowchart': {'nodeSpacing': 75, 'rankSpacing': 75, 'defaultRenderer': 'elk', 'useMaxWidth': false, 'htmlLabels': true, 'wrappingWidth': 150}}%%
+flowchart TD
     %% User Interface Layer
-    subgraph UI["User Interface Layer"]
-        TUI[TUI Interface<br/>ratatui-native<br/><500ms startup]
-        CMD[Three Commands<br/>analyze. ask. propose. implement]
+    subgraph UI_Layer["User Interface Layer"]
+        UI1["TUI Interface<br/>ratatui-native<br/><500ms startup"]
+        UI2["Three Commands<br/>analyze ask propose implement"]
     end
 
     %% Command Processing Layer
-    subgraph CMD_PROC["Command Processing"]
-        HEALTH[Health Checks<br/>300ms SLA]
-        AUTH[API Key Detection<br/>Local vs Cloud]
-        INGEST[Repository Ingestion<br/>≤5s for 100k LOC]
+    subgraph CMD_Processing["Command Processing"]
+        CP1["Health Checks<br/>300ms SLA"]
+        CP2["API Key Detection<br/>Local vs Cloud"]
+        CP3["Repository Ingestion<br/>≤5s for 100k LOC"]
     end
 
     %% Core Architecture - Dual State
-    subgraph DUAL_STATE["Dual-State Architecture"]
-        subgraph ISG_CURRENT["ISG_current (Reality)"]
-            CURRENT[Interface Graph<br/>What exists now]
-            CURRENT_META[Node Metadata<br/>signatures<br/>line numbers<br/>interface types]
+    subgraph Dual_State["Dual-State Architecture"]
+        subgraph ISG_Current["ISG_current (Reality)"]
+            ISGC1["Interface Graph<br/>What exists now"]
+            ISGC2["Node Metadata<br/>signatures line numbers<br/>interface types"]
         end
 
-        subgraph ISG_FUTURE["ISG_future (Vision)"]
-            FUTURE[Interface Graph<br/>What should exist]
-            FUTURE_META[Change Actions<br/>CREATE.EDIT.DELETE<br/>impact analysis]
+        subgraph ISG_Future["ISG_future (Vision)"]
+            ISGF1["Interface Graph<br/>What should exist"]
+            ISGF2["Change Actions<br/>CREATE EDIT DELETE<br/>impact analysis"]
         end
 
-        SIMULATOR[Change Simulator<br/>Blast radius calculator<br/>Risk assessment<br/>Mitigation strategies]
+        DS1["Change Simulator<br/>Blast radius calculator<br/>Risk assessment<br/>Mitigation strategies"]
     end
 
     %% Persistence Layer
-    subgraph PERSISTENCE["Persistence Layer"]
-        subgraph SQLITE_BRIDGE["SQLite Bridge"]
-            SCHEMA[Codebase Table<br/>interface_uid<br/>current/future_code<br/>future_action]
-            SNAPSHOTS[Snapshot Operations<br/>≤500ms save/load<br/>Consistency validation]
+    subgraph Persistence_Layer["Persistence Layer"]
+        subgraph SQLite_Bridge["SQLite Bridge"]
+            SL1["Codebase Table<br/>interface_uid<br/>current/future_code<br/>future_action"]
+            SL2["Snapshot Operations<br/>≤500ms save/load<br/>Consistency validation"]
         end
 
-        CACHE[In-Memory Cache<br/>Sub-millisecond queries<br/>ISG graph persistence]
+        PL1["In-Memory Cache<br/>Sub-millisecond queries<br/>ISG graph persistence"]
     end
 
     %% Intelligence Layer
-    subgraph INTELLIGENCE["Intelligence Layer"]
-        subgraph LOCAL_LLM["Local LLM Integration"]
-            OLLAMA[Ollama Local<br/>Qwen 2.5-Coder 7B<br/>Q4_K_M quantization]
-            MODEL[Model Configuration<br/>128k context<br/>60-90 tokens/sec<br/>4.25GB memory]
+    subgraph Intelligence_Layer["Intelligence Layer"]
+        subgraph Local_LLM["Local LLM Integration"]
+            LL1["Ollama Local<br/>Qwen 2.5-Coder 7B<br/>Q4_K_M quantization"]
+            LL2["Model Configuration<br/>128k context<br/>60-90 tokens/sec<br/>4.25GB memory"]
         end
 
-        ARCH_INTEL[Architectural Intelligence<br/>Pattern recognition<br/>Dependency mapping<br/>Opportunity ranking]
+        IL1["Architectural Intelligence<br/>Pattern recognition<br/>Dependency mapping<br/>Opportunity ranking"]
     end
 
     %% Code Analysis Layer
-    subgraph ANALYSIS["Code Analysis Layer"]
-        PARSER[Syn Parser<br/>Rust AST extraction<br/>Interface signatures]
-        EXTRACTOR[Interface Extractor<br/>Function.Method.Trait<br/>Struct.Enum.Module]
-        REL_MAPPER[Relationship Mapper<br/>Interface dependencies<br/>Architectural patterns]
+    subgraph Code_Analysis["Code Analysis Layer"]
+        CA1["Syn Parser<br/>Rust AST extraction<br/>Interface signatures"]
+        CA2["Interface Extractor<br/>Function Method Trait<br/>Struct Enum Module"]
+        CA3["Relationship Mapper<br/>Interface dependencies<br/>Architectural patterns"]
     end
 
     %% Output & Integration Layer
-    subgraph OUTPUT["Output & Integration"]
-        TEMPLATES[Code Templates<br/>Context-aware<br/>Project-specific patterns]
-        TESTS[Test Generation<br/>Automatic creation<br/>Project conventions]
-        DOCS[Documentation<br/>README updates<br/>API documentation]
+    subgraph Output_Integration["Output and Integration"]
+        OI1["Code Templates<br/>Context-aware<br/>Project-specific patterns"]
+        OI2["Test Generation<br/>Automatic creation<br/>Project conventions"]
+        OI3["Documentation<br/>README updates<br/>API documentation"]
     end
 
     %% Data Flow Connections
-    TUI --> CMD
-    CMD --> HEALTH
-    CMD --> AUTH
-    CMD --> INGEST
+    UI1 --> UI2
+    UI2 --> CP1
+    UI2 --> CP2
+    UI2 --> CP3
 
-    HEALTH --> ISG_CURRENT
-    AUTH --> OLLAMA
-    INGEST --> PARSER
+    CP1 --> ISGC1
+    CP2 --> LL1
+    CP3 --> CA1
 
-    PARSER --> EXTRACTOR
-    EXTRACTOR --> REL_MAPPER
-    REL_MAPPER --> CURRENT
+    CA1 --> CA2
+    CA2 --> CA3
+    CA3 --> ISGC1
 
-    CURRENT --> CURRENT_META
-    CURRENT --> SIMULATOR
-    SIMULATOR --> FUTURE
-    FUTURE --> FUTURE_META
+    ISGC1 --> ISGC2
+    ISGC1 --> DS1
+    DS1 --> ISGF1
+    ISGF1 --> ISGF2
 
-    CURRENT_META --> SCHEMA
-    FUTURE_META --> SCHEMA
-    SCHEMA --> SNAPSHOTS
-    SNAPSHOTS --> CACHE
+    ISGC2 --> SL1
+    ISGF2 --> SL1
+    SL1 --> SL2
+    SL2 --> PL1
 
-    CACHE --> ARCH_INTEL
-    OLLAMA --> ARCH_INTEL
-    MODEL --> OLLAMA
-    ARCH_INTEL --> TEMPLATES
+    PL1 --> IL1
+    LL1 --> IL1
+    LL2 --> LL1
+    IL1 --> OI1
 
-    TEMPLATES --> TESTS
-    TESTS --> DOCS
-    DOCS --> TUI
+    OI1 --> OI2
+    OI2 --> OI3
+    OI3 --> UI1
 
     %% Performance Annotations
-    subgraph PERF_SLAS["Performance SLAs"]
-        SLA1[Ingestion: ≤5s<br/>2.1MB file dump]
-        SLA2[Queries: ≤500µs<br/>Basic interface lookups]
-        SLA3[Simulation: ≤1ms<br/>Change impact analysis]
-        SLA4[PRD Loop: ≤30s<br/>Full iteration cycle]
+    subgraph Performance_SLAs["Performance SLAs"]
+        PS1["Ingestion: ≤5s<br/>2.1MB file dump"]
+        PS2["Queries: ≤500µs<br/>Basic interface lookups"]
+        PS3["Simulation: ≤1ms<br/>Change impact analysis"]
+        PS4["PRD Loop: ≤30s<br/>Full iteration cycle"]
     end
 
     %% Guardrails
-    subgraph GUARDRAILS["Implementation Guardrails"]
-        CONSTRAINT1[TUI-Only Interface<br/>No web complexity]
-        CONSTRAINT2[Signatures-Only<br/>Interface-level analysis]
-        CONSTRAINT3[Compile-Time<br/>Type safety validation]
-        CONSTRAINT4[Apple Silicon<br/>16GB+ optimization]
+    subgraph Implementation_Guardrails["Implementation Guardrails"]
+        IG1["TUI-Only Interface<br/>No web complexity"]
+        IG2["Signatures-Only<br/>Interface-level analysis"]
+        IG3["Compile-Time<br/>Type safety validation"]
+        IG4["Apple Silicon<br/>16GB+ optimization"]
     end
 
     %% Styling for layer differentiation
@@ -844,15 +846,15 @@ flowchart LR
     classDef metrics fill:#D4EDDA,stroke:#155724,stroke-width:2px
     classDef guards fill:#F8D7DA,stroke:#721C24,stroke-width:2px
 
-    class UI,TUI,CMD ui
-    class CMD_PROC,HEALTH,AUTH,INGEST processing
-    class DUAL_STATE,ISG_CURRENT,ISG_FUTURE,CURRENT,FUTURE,SIMULATOR core
-    class PERSISTENCE,SQLITE_BRIDGE,SCHEMA,SNAPSHOTS,CACHE persistence
-    class INTELLIGENCE,OLLAMA,MODEL,ARCH_INTEL intelligence
-    class ANALYSIS,PARSER,EXTRACTOR,REL_MAPPER analysis
-    class OUTPUT,TEMPLATES,TESTS,DOCS output
-    class PERF_SLAS,SLA1,SLA2,SLA3,SLA4 metrics
-    class GUARDRAILS,CONSTRAINT1,CONSTRAINT2,CONSTRAINT3,CONSTRAINT4 guards
+    class UI1,UI2 ui
+    class CP1,CP2,CP3 processing
+    class ISGC1,ISGC2,ISGF1,ISGF2,DS1 core
+    class SL1,SL2,PL1 persistence
+    class LL1,LL2,IL1 intelligence
+    class CA1,CA2,CA3 analysis
+    class OI1,OI2,OI3 output
+    class PS1,PS2,PS3,PS4 metrics
+    class IG1,IG2,IG3,IG4 guards
 ```
 
 ---
