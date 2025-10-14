@@ -557,4 +557,304 @@ This creates a product that helps developers understand codebases and become val
 
 ---
 
+## User Journey Diagram
+
+```mermaid
+---
+title: Parseltongue User Journey - Installation to First Contribution
+accTitle: Complete User Journey Flow for Rust Developers
+accDescr: A comprehensive flowchart showing the 5-phase journey from system installation through first accepted PR, with timing estimates and success criteria at each stage.
+config:
+  theme: "base"
+  themeVariables:
+    primaryColor: "#ECECFF"
+    primaryTextColor: "#2E2E5F"
+    primaryBorderColor: "#2E2E5F"
+    lineColor: "#2E2E5F"
+    secondaryColor: "#F6F8FF"
+    tertiaryColor: "#FFF9E6"
+    sectionBkgColor: "#E6F3FF"
+    altSectionBkgColor: "#FFFAE6"
+    gridColor: "#D0D0E6"
+    fontFamily: "system-ui, -apple-system, sans-serif"
+    fontSize: "14px"
+  flowchart:
+    nodeSpacing: 75
+    rankSpacing: 75
+    defaultRenderer: "elk"
+    useMaxWidth: false
+    htmlLabels: true
+    wrappingWidth: 150
+---
+
+flowchart TD
+    %% Phase 0: System Validation & Installation
+    A[Phase 0: System Validation<br/>0-10 minutes] --> B{Apple Silicon<br/>M1/M2/M3?}
+    B -- Yes --> C[✓ Optimized Configuration]
+    B -- No --> D[⚠ Generic x86 Config]
+
+    C --> E{16GB+ RAM?}
+    D --> E
+    E -- Yes --> F[✓ Sufficient Memory]
+    E -- No --> G[⚠ Memory Warnings]
+
+    F --> H{Rust 1.70+?}
+    G --> H
+    H -- Yes --> I[✓ Compatible Toolchain]
+    H -- No --> J[⚠ Install Rust First]
+
+    I --> K{Ollama Available?}
+    J --> K
+    K -- Yes --> L[✓ Use Existing Ollama]
+    K -- No --> M[🚀 Auto-Install Qwen 2.5-Coder<br/>7B Q4_K_M (~4.25GB)]
+
+    L --> N[✅ System Ready<br/><5s codebase analysis<br/><1ms queries]
+    M --> N
+
+    %% Phase 1: First Value Discovery
+    N --> O[Phase 1: First Value Discovery<br/>10-30 minutes]
+    O --> P{Auto-Detect Rust<br/>Projects?}
+    P -- Yes --> Q[🔍 Found N Projects<br/>Show sizes & complexity]
+    P -- No --> R[❌ No Rust Projects<br/>Exit with guidance]
+
+    Q --> S[🎯 Suggest Main Project<br/>User: Y/n?]
+    S --> T[⚡ Build ISG<br/>1,247 interfaces<br/>3.2 seconds]
+
+    T --> U[✅ Architectural Insights<br/>42 patterns identified<br/>12 opportunities found]
+    U --> V[💡 Ready for Queries<br/>"Where should I add<br/>error handling?"]
+
+    %% Phase 2: Architectural Understanding
+    V --> W[Phase 2: Architectural Understanding<br/>30-60 minutes]
+    W --> X[📝 Natural Language Query<br/>"What are main components?"]
+    X --> Y[🏗️ Architecture Analysis<br/>3 main layers identified]
+
+    Y --> Z[API Layer<br/>421 interfaces<br/>HTTP handlers, auth, rate limiting]
+    Y --> AA[Business Logic<br/>312 interfaces<br/>Domain models, services, events]
+    Y --> BB[Data Layer<br/>214 interfaces<br/>Repositories, queries, caching]
+
+    Z --> CC[🔗 Key Dependencies<br/>API → Business → Data]
+    AA --> CC
+    BB --> CC
+
+    CC --> DD[💡 Opportunity Ranking<br/>High Impact: API enhancements<br/>Low Risk: Data optimization]
+
+    %% Phase 3: Safe Contribution Planning
+    DD --> EE[Phase 3: Safe Contribution Planning<br/>1-2 hours]
+    EE --> FF[🎯 Change Proposal<br/>"Add rate limiting to API"]
+
+    FF --> GG[🔬 Impact Analysis<br/>12 interfaces to modify<br/>3 interfaces to add<br/>Risk: LOW (isolated)]
+
+    GG --> HH[⚠️ Risk Assessment<br/>Performance bottleneck<br/>Client compatibility<br/>Testing complexity]
+
+    HH --> II[✅ Safety Score: 8.5/10<br/>Mitigation strategies generated]
+    II --> JJ[📋 Implementation Plan<br/>Step-by-step guidance<br/>Template recommendations]
+
+    %% Phase 4: Confident Implementation
+    JJ --> KK[Phase 4: Confident Implementation<br/>2-4 hours]
+    KK --> LL[🛠️ Guided Implementation<br/>Step 1: Create Service]
+
+    LL --> MM{Template Options<br/>[S]how [C]reate [A]bort}
+    MM --> NN[✅ RateLimiting Service<br/>Optimized template<br/>Existing patterns used]
+
+    NN --> OO[🧪 Auto-Generated Tests<br/>Integration test templates<br/>Follow project conventions]
+
+    OO --> PP[🛠️ Step 2: Add Middleware<br/>Apply changes safely]
+    PP --> QQ[✅ Middleware Integrated<br/>All handlers updated<br/>12/12 complete]
+
+    QQ --> RR[🧪 All Tests Passing<br/>142 existing + 8 new<br/>0 failures]
+
+    %% Phase 5: Quality Submission
+    RR --> SS[Phase 5: Quality Submission<br/>4-6 hours]
+    SS --> TT[🔍 PR Quality Analysis<br/>Style guide compliance<br/>Test coverage validation]
+
+    TT --> UU[✅ Quality Score: 9.2/10<br/>Ready for review]
+    UU --> VV[📝 PR Draft Generated<br/>Problem/Solution/Breaking<br/>Testing documentation]
+
+    VV --> WW[🎯 PR Created<br/>https://github.com/project/pull/567]
+    WW --> XX[🚀 Monitor Feedback<br/>Respond to reviews<br/>Iterate if needed]
+
+    %% Success Criteria
+    XX --> YY[✅ First Accepted PR<br/>Total time: 4-6 hours<br/>vs 40+ hours manual]
+
+    %% Styling for phase differentiation
+    classDef phase0 fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
+    classDef phase1 fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase2 fill:#F6F8FF,stroke:#2E2E5F,stroke-width:2px
+    classDef phase3 fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase4 fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
+    classDef phase5 fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
+    classDef success fill:#D4EDDA,stroke:#155724,stroke-width:3px
+    classDef decision fill:#FFF3CD,stroke:#856404,stroke-width:2px
+
+    class A,N,O,W,EE,KK,SS phase0,phase1,phase2,phase3,phase4,phase5
+    class B,E,H,K,P decision
+    class YY success
+```
+
+## System Architecture Diagram
+
+```mermaid
+---
+title: Parseltongue System Architecture - Dual-State ISG Design
+accTitle: Complete System Architecture for Interface-Centric Code Analysis
+accDescr: A comprehensive architecture diagram showing the dual-state Interface Signature Graph system, from TUI interface through SQLite persistence to local LLM integration.
+config:
+  theme: "base"
+  themeVariables:
+    primaryColor: "#ECECFF"
+    primaryTextColor: "#2E2E5F"
+    primaryBorderColor: "#2E2E5F"
+    lineColor: "#2E2E5F"
+    secondaryColor: "#F6F8FF"
+    tertiaryColor: "#FFF9E6"
+    sectionBkgColor: "#E6F3FF"
+    altSectionBkgColor: "#FFFAE6"
+    gridColor: "#D0D0E6"
+    fontFamily: "system-ui, -apple-system, sans-serif"
+    fontSize: "14px"
+  flowchart:
+    nodeSpacing: 75
+    rankSpacing: 75
+    defaultRenderer: "elk"
+    useMaxWidth: false
+    htmlLabels: true
+    wrappingWidth: 150
+---
+
+flowchart LR
+    %% User Interface Layer
+    subgraph UI["User Interface Layer"]
+        TUI[TUI Interface<br/>ratatui-native<br/><500ms startup]
+        CMD[Three Commands<br/>• analyze<br/>• ask<br/>• propose<br/>• implement]
+    end
+
+    %% Command Processing Layer
+    subgraph CMD_PROC["Command Processing"]
+        HEALTH[Health Checks<br/>300ms SLA]
+        AUTH[API Key Detection<br/>Local vs Cloud]
+        INGEST[Repository Ingestion<br/>≤5s for 100k LOC]
+    end
+
+    %% Core Architecture - Dual State
+    subgraph DUAL_STATE["Dual-State Architecture"]
+        subgraph ISG_CURRENT["ISG_current (Reality)"]
+            CURRENT[Interface Graph<br/>What exists now]
+            CURRENT_META[Node Metadata<br/>signatures<br/>line numbers<br/>interface types]
+        end
+
+        subgraph ISG_FUTURE["ISG_future (Vision)"]
+            FUTURE[Interface Graph<br/>What should exist]
+            FUTURE_META[Change Actions<br/>CREATE|EDIT|DELETE<br/>impact analysis]
+        end
+
+        SIMULATOR[Change Simulator<br/>Blast radius calculator<br/>Risk assessment<br/>Mitigation strategies]
+    end
+
+    %% Persistence Layer
+    subgraph PERSISTENCE["Persistence Layer"]
+        subgraph SQLITE_BRIDGE["SQLite Bridge"]
+            SCHEMA[Codebase Table<br/>interface_uid<br/>current/future_code<br/>future_action]
+            SNAPSHOTS[Snapshot Operations<br/>≤500ms save/load<br/>Consistency validation]
+        end
+
+        CACHE[In-Memory Cache<br/>Sub-millisecond queries<br/>ISG graph persistence]
+    end
+
+    %% Intelligence Layer
+    subgraph INTELLIGENCE["Intelligence Layer"]
+        subgraph LOCAL_LLM["Local LLM Integration"]
+            OLLAMA[Ollama Local<br/>Qwen 2.5-Coder 7B<br/>Q4_K_M quantization]
+            MODEL[Model Configuration<br/>128k context<br/>60-90 tokens/sec<br/>4.25GB memory]
+        end
+
+        ARCH_INTEL[Architectural Intelligence<br/>Pattern recognition<br/>Dependency mapping<br/>Opportunity ranking]
+    end
+
+    %% Code Analysis Layer
+    subgraph ANALYSIS["Code Analysis Layer"]
+        PARSER[Syn Parser<br/>Rust AST extraction<br/>Interface signatures]
+        EXTRACTOR[Interface Extractor<br/>Function|Method|Trait<br/>Struct|Enum|Module]
+        REL_MAPPER[Relationship Mapper<br/>Interface dependencies<br/>Architectural patterns]
+    end
+
+    %% Output & Integration Layer
+    subgraph OUTPUT["Output & Integration"]
+        TEMPLATES[Code Templates<br/>Context-aware<br/>Project-specific patterns]
+        TESTS[Test Generation<br/>Automatic creation<br/>Project conventions]
+        DOCS[Documentation<br/>README updates<br/>API documentation]
+    end
+
+    %% Data Flow Connections
+    TUI --> CMD
+    CMD --> HEALTH
+    CMD --> AUTH
+    CMD --> INGEST
+
+    HEALTH --> ISG_CURRENT
+    AUTH --> OLLAMA
+    INGEST --> PARSER
+
+    PARSER --> EXTRACTOR
+    EXTRACTOR --> REL_MAPPER
+    REL_MAPPER --> CURRENT
+
+    CURRENT --> CURRENT_META
+    CURRENT --> SIMULATOR
+    SIMULATOR --> FUTURE
+    FUTURE --> FUTURE_META
+
+    CURRENT_META --> SCHEMA
+    FUTURE_META --> SCHEMA
+    SCHEMA --> SNAPSHOTS
+    SNAPSHOTS --> CACHE
+
+    CACHE --> ARCH_INTEL
+    OLLAMA --> ARCH_INTEL
+    MODEL --> OLLAMA
+    ARCH_INTEL --> TEMPLATES
+
+    TEMPLATES --> TESTS
+    TESTS --> DOCS
+    DOCS --> TUI
+
+    %% Performance Annotations
+    subgraph PERF_SLAS["Performance SLAs"]
+        SLA1[Ingestion: ≤5s<br/>2.1MB file dump]
+        SLA2[Queries: ≤500µs<br/>Basic interface lookups]
+        SLA3[Simulation: ≤1ms<br/>Change impact analysis]
+        SLA4[PRD Loop: ≤30s<br/>Full iteration cycle]
+    end
+
+    %% Guardrails
+    subgraph GUARDRAILS["Implementation Guardrails"]
+        CONSTRAINT1[TUI-Only Interface<br/>No web complexity]
+        CONSTRAINT2[Signatures-Only<br/>Interface-level analysis]
+        CONSTRAINT3[Compile-Time<br/>Type safety validation]
+        CONSTRAINT4[Apple Silicon<br/>16GB+ optimization]
+    end
+
+    %% Styling for layer differentiation
+    classDef ui fill:#E6F3FF,stroke:#2E2E5F,stroke-width:2px
+    classDef processing fill:#FFF9E6,stroke:#2E2E5F,stroke-width:2px
+    classDef core fill:#F6F8FF,stroke:#2E2E5F,stroke-width:3px
+    classDef persistence fill:#E6FFE6,stroke:#2E2E5F,stroke-width:2px
+    classDef intelligence fill:#F0E6FF,stroke:#2E2E5F,stroke-width:2px
+    classDef analysis fill:#FFE6E6,stroke:#2E2E5F,stroke-width:2px
+    classDef output fill:#FFFAE6,stroke:#2E2E5F,stroke-width:2px
+    classDef metrics fill:#D4EDDA,stroke:#155724,stroke-width:2px
+    classDef guards fill:#F8D7DA,stroke:#721C24,stroke-width:2px
+
+    class UI,TUI,CMD ui
+    class CMD_PROC,HEALTH,AUTH,INGEST processing
+    class DUAL_STATE,ISG_CURRENT,ISG_FUTURE,CURRENT,FUTURE,SIMULATOR core
+    class PERSISTENCE,SQLITE_BRIDGE,SCHEMA,SNAPSHOTS,CACHE persistence
+    class INTELLIGENCE,OLLAMA,MODEL,ARCH_INTEL intelligence
+    class ANALYSIS,PARSER,EXTRACTOR,REL_MAPPER analysis
+    class OUTPUT,TEMPLATES,TESTS,DOCS output
+    class PERF_SLAS,SLA1,SLA2,SLA3,SLA4 metrics
+    class GUARDRAILS,CONSTRAINT1,CONSTRAINT2,CONSTRAINT3,CONSTRAINT4 guards
+```
+
+---
+
 Parseltongue is a tool for helping Rust developers make fast, confident OSS contributions through architectural intelligence and predictive change simulation.
