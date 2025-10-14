@@ -621,11 +621,11 @@ flowchart TD
     S --> T[⚡ Build ISG<br/>1,247 interfaces<br/>3.2 seconds]
 
     T --> U[✅ Architectural Insights<br/>42 patterns identified<br/>12 opportunities found]
-    U --> V[💡 Ready for Queries<br/>"Where should I add<br/>error handling?"]
+    U --> V[💡 Ready for Queries<br/>Where should I add<br/>error handling?]
 
     %% Phase 2: Architectural Understanding
     V --> W[Phase 2: Architectural Understanding<br/>30-60 minutes]
-    W --> X[📝 Natural Language Query<br/>"What are main components?"]
+    W --> X[📝 Natural Language Query<br/>What are main components?]
     X --> Y[🏗️ Architecture Analysis<br/>3 main layers identified]
 
     Y --> Z[API Layer<br/>421 interfaces<br/>HTTP handlers, auth, rate limiting]
@@ -640,7 +640,7 @@ flowchart TD
 
     %% Phase 3: Safe Contribution Planning
     DD --> EE[Phase 3: Safe Contribution Planning<br/>1-2 hours]
-    EE --> FF[🎯 Change Proposal<br/>"Add rate limiting to API"]
+    EE --> FF[🎯 Change Proposal<br/>Add rate limiting to API]
 
     FF --> GG[🔬 Impact Analysis<br/>12 interfaces to modify<br/>3 interfaces to add<br/>Risk: LOW (isolated)]
 
