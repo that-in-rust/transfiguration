@@ -4,6 +4,33 @@ Status: v0.1 (DB reset allowed; no migrations/rollback required)
 
 Goal: Rewrite A011’s experience as executable specifications in a Rust-native stack with a Claude-like terminal UI, adding explicit LLM setup flows and rigorous, testable contracts.
 
+
+============
+Section 01
+============
+
+
+Top level version of happy path
+1. User downloads binary from github OR compiles from source by cloning the repo
+2. User goes to the Rust git repository he wants to work on and copies the binary to the root folder
+3. User runs `./parseltongue` and is greeted by a UI which is very similar to Claude Code
+4. Background task is triggered to tell the user
+  - What is their system configuration - is it Apple Silicon with 16GB+ RAM OR NOT
+    - If yes ask them if
+      - they want to enter anthropic key OR
+      - they want to trigger one-click setup for Ollama if it does NOT exist
+        - if it exists ask them to enter the Ollama anthropic format key
+          - export ANTHROPIC_BASE_URL=https://api.company.ai/api/anthropic OR http://localhost:934/v1 (inspired by platform 9 and 3 quarters)
+          - export ANTHROPIC_AUTH_TOKEN=z000zzzZz000000z0z00zz00z00zz00z.Z0Zz0zZZzZzZzZzw
+
+
+
+============
+Section 02
+============
+
+
+
 ---
 
 ## 0. Glossary and Constraints
