@@ -39,7 +39,7 @@ Phase 1 target
     - If user interrupts LLM suggests to trigger ISG_current creation again because that is the keystone of this tool
 
 
-
+Phase 1 scope ends
 
 
 ============
