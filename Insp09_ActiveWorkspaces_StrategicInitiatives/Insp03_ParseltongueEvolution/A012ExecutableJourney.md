@@ -11,6 +11,8 @@ Section 01
 
 
 Top level version of happy path
+Phase 1 target
+
 1. User downloads binary from github OR compiles from source by cloning the repo
 2. User goes to the Rust git repository he wants to work on and copies the binary to the root folder
 3. User runs `./parseltongue` and is greeted by a UI which is very similar to Claude Code
@@ -28,7 +30,15 @@ Top level version of happy path
     - If no then ask them to enter anthropic key - comprehensive list of anthropic keys providers from z.ai to anthropic itself (Opinionated take of what order and comments we offer, so example we could z.ai is $ xx per unit token and ab performance against say anthropic which is better performance but higher cost and so on... eventually reminding them that if they had apple silicon of 16GB RAM then it would have been zero)
       - If they have anthropic key which works, then move to next step
       - If they do not have anthropic key then ask them exit the application or enter the anthropic key again
-5. 
+5. Now Ollama or anthropic is configured and validated else the user would have exited
+6. Backgrounds tasks in progress
+  - ISG_current is built and you can ask questions to the ISG_current using the chat with a default question being triggered
+    - How many top level modules does my codebase have & what is the token size of my ISG_current?
+    - This will prove that the LLM is working because without the LLM this would not have been possible
+    - If ISG_current creation fails it auto-tries while telling the user
+    - If user interrupts LLM suggests to trigger ISG_current creation again because that is the keystone of this tool
+
+
 
 
 
