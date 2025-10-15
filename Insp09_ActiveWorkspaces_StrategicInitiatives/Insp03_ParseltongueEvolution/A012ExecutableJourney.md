@@ -22,6 +22,9 @@ Top level version of happy path
         - if it exists ask them to enter the Ollama anthropic format key
           - export ANTHROPIC_BASE_URL=https://api.company.ai/api/anthropic OR http://localhost:934/v1 (inspired by platform 9 and 3 quarters)
           - export ANTHROPIC_AUTH_TOKEN=z000zzzZz000000z0z00zz00z00zz00z.Z0Zz0zZZzZzZzZzz
+        - if it does not exist then they say Ollama_Yes to install it and then we trigger a set of commands to install Ollama with our pre-configured model qwen2.5-coder:7b
+          - this will be often 0.5x slower than a usual anthropic paid api key and little lesser on the quality of reasoning but with context length 128k
+          - we are simulating that in future the SOTA local LLMs will be faster than what they are today, so that users do not feel a lot of difference, and thus we will wait for the reality to arrive there
     - If no then ask them to enter anthropic key - comprehensive list of anthropic keys providers from z.ai to anthropic itself (Opinionated take of what order and comments we offer, so example we could z.ai is $ xx per unit token and ab performance against say anthropic which is better performance but higher cost and so on... eventually reminding them that if they had apple silicon of 16GB RAM then it would have been zero)
       - If they have anthropic key which works, then move to next step
       - If they do not have anthropic key then ask them exit the application or enter the anthropic key again
