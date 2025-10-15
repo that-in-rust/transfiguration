@@ -53,7 +53,7 @@ Section 02
 ## 0. Glossary and Constraints
 
 - ISG: Interface Signature Graph (current/future duality)
-- LLM: Local LLM with OpenAI-compatible HTTP API
+- LLM: Anthropic-compatible HTTP API (local Ollama or remote providers)
 - DB: Local SQLite used as a volatile state engine (resettable from codebase)
 - OS support: Apple Silicon focus acceptable; cross-platform not required in v0.1
 - No migrations: DB is derived from codebase; `pt reset` re-derives all state
@@ -70,44 +70,30 @@ This section is the single source of truth for end-to-end UX. All engineering mu
 Job: “Help me run locally with a Claude-like TUI, including a working local LLM.”
 
 Preconditions
-- Segment focus: Apple Silicon (M1/M2/M3), 16GB+ RAM recommended; TUI-only; offline by default
 - Rust tool binary available: `parseltongue` (Apple Silicon build acceptable)
 - Developer has a Rust project directory
 
 Flow (CLI transcript; user-visible only)
 ```bash
 $ ./parseltongue
+🔎 System check…
+  • Platform: macOS (Apple Silicon) — auto-detected
+  • RAM: 16 GB — auto-detected
+  • Status: ✓ Optimal for local LLM
+
 🔎 Checking local LLM connectivity…
-  • Searching common endpoints
-    - http://localhost:11434/v1 (Ollama)
-    - http://localhost:1234/v1 (LM Studio)
-    - http://127.0.0.1:8000/v1 (generic)
+  • Searching endpoint: http://localhost:11434/v1 (Ollama)
 ✗ No local LLM found
 
 
-💡 Options
-  [1] Install and start Ollama (recommended)
-  [2] I already have an endpoint → enter URL
-  [3] Skip LLM (reduced capabilities)
+💡 Detected Apple Silicon with 16GB+ RAM
+  [1] One-click Ollama setup (recommended, local, $0)
+  [2] Use a remote Anthropic-compatible API provider (enter key/URL)
 > 1
 
-📦 One-time setup (Ollama on macOS):
-  1) If Homebrew is not installed:
-     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  2) Install Ollama:
-     brew install ollama
-  3) Start the Ollama server (foreground):
-     ollama serve &>~/.parseltongue/ollama.log &
-     # or run as a service: brew services start ollama
-  4) Pull a local coding model:
-     ollama pull qwen2.5-coder:7b
-     # alternatives: deepseek-coder:7b, codellama:7b-code
-  5) Verify the OpenAI-compatible API:
-     curl -s http://localhost:11434/v1/models | jq '.data[].id'
-     # expected: ["qwen2.5-coder:7b", ...]
+🔄 Starting one-click Ollama installation…
 
-
-Straightforward bootstrap script (copy-paste):
+[Auto-executing installation script]
 ```bash
 set -euo pipefail
 
@@ -128,31 +114,39 @@ until curl -sSf http://localhost:11434/v1/models >/dev/null; do
 done
 printf "\n"
 
-# Pull a coder model if missing
+# Pull qwen2.5-coder:7b (the only supported model for v0.1)
 if ! ollama list | grep -q 'qwen2.5-coder:7b'; then
   ollama pull qwen2.5-coder:7b
 fi
 
-export PT_LLM_URL=${PT_LLM_URL:-http://localhost:11434/v1}
+# Set Anthropic-compatible base URL for local Ollama
+export ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-http://localhost:11434/v1}
 
-# Launch Parseltongue from current directory or PATH
-if [ -x ./parseltongue ]; then
-  ./parseltongue
-else
-  parseltongue
-fi
+echo "Ollama setup complete. Resuming Parseltongue..."
 ```
 
-🧭 Alternative: LM Studio
-  - Download: https://lmstudio.ai
-  - Start the server (OpenAI-compatible), choose a coder model, ensure the endpoint shows http://localhost:1234/v1
+
+📑 Remote API provider template (Anthropic-compatible only):
+  - Provider: <name> (e.g., Anthropic, z.ai, etc.)
+  - Endpoint URL: <https://…/v1>
+  - Auth variable: ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN
+  - $/million tokens: <fill>
+  - Performance vs Anthropic official: <fill>
+  - Latency: <fill>
+  - Opinionated guidance: <fill>
+  - Note: With Apple Silicon 16GB+, local Ollama = $0
 
 Press Enter when ready…
 
 🔁 Retrying LLM connectivity…
-✓ Found LLM: http://localhost:11434/v1 (OpenAI-compatible)
+✓ Found LLM: http://localhost:11434/v1 (Ollama with Anthropic-compatible wrapper)
 ✓ Model available: qwen2.5-coder:7b
+✓ Context: 128k tokens
+✓ Performance note: ~0.5x speed vs paid Anthropic API; slightly lower reasoning quality
 ✓ Test prompt roundtrip OK (250ms)
+
+🤖 Sanity check (auto):
+  “How many top level modules does my codebase have & what is the token size of my ISG_current?”
 
 🚀 Building ISG_current…
 ✓ 1,247 interfaces analyzed in 3.4s
@@ -172,12 +166,14 @@ Postconditions
 Errors and Recovery
 - LLM timeout: show actionable guidance (check server, model, firewall)
 - Unsupported API schema: ask for a custom endpoint URL; provide examples
+- Invalid API key: prompt to re-enter; “Exit” quits immediately; no “Skip LLM” path on failure
+- ISG_current build failure: auto-retry while notifying user; if user interrupts, suggest re-triggering ISG_current creation (it is the keystone of this tool)
 - DB errors: offer `pt reset` to rebuild from codebase
 
 Acceptance Criteria
 - ≤ 60s from binary run to usable TUI with validated LLM (if provider present)
 - Clear, copy-pastable instructions for the common local LLMs
-- Skippable LLM preserves non-LLM features with clear capability note
+- No “Skip LLM” option—LLM is required; user must install Ollama or provide remote key
 
 
 ### 1.2 Interactive PRD Builder (Claude-like TUI)
@@ -185,7 +181,7 @@ Acceptance Criteria
 Job: “Type what I want; you make it precise.”
 
 Preconditions
-- LLM validated (or skipped with capability note)
+- LLM validated (required; no skip option)
 - ISG_current available
 
 Flow (user-visible)
@@ -311,20 +307,36 @@ flowchart TD
 ```
 
 LLM Integration (v0.1)
-- OpenAI-compatible HTTP client (reqwest)
-- Autodetect common local endpoints; allow manual URL
+- Anthropic-compatible HTTP API (universal)
+  - Local: Ollama with Anthropic-format wrapper at http://localhost:11434/v1
+  - Remote: Anthropic.com, z.ai, or other Anthropic-compatible providers
+- Autodetect local Ollama endpoint; allow manual URL for remote
 - Streaming optional; minimal backpressure
-- Config precedence: CLI flags → env (PT_LLM_URL, ANTHROPIC_API_KEY) → discovery
+- Config precedence: CLI flags → env → discovery
 
-Environment variable compatibility (Claude parity)
-- Recognized key: ANTHROPIC_API_KEY (single standard key when auth is required)
-- Local engines (Ollama/LM Studio) typically do not require a key
-- Keys are never printed; only used as Authorization headers when needed
+Environment variables (Anthropic schema)
+- ANTHROPIC_BASE_URL: Endpoint URL
+  - Local Ollama: http://localhost:11434/v1
+  - Platform 9¾ reference: http://localhost:934/v1 (custom proxy)
+  - Remote: https://api.anthropic.com/v1 or similar
+- ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN: Authentication (remote only)
+- Local Ollama does not require a key
+- Keys are never printed; only used as Authorization headers
 
 Examples
 ```bash
-export PT_LLM_URL=http://localhost:11434/v1
-export ANTHROPIC_API_KEY="{{ANTHROPIC_API_KEY}}"  # only if your endpoint requires a key
+# Local Ollama (default, no key required)
+export ANTHROPIC_BASE_URL=http://localhost:11434/v1
+./parseltongue
+
+# Remote Anthropic provider
+export ANTHROPIC_BASE_URL=https://api.anthropic.com/v1
+export ANTHROPIC_API_KEY="{{ANTHROPIC_API_KEY}}"
+./parseltongue
+
+# Alternative: Platform 9¾ local proxy
+export ANTHROPIC_BASE_URL=http://localhost:934/v1
+export ANTHROPIC_AUTH_TOKEN="{{ANTHROPIC_AUTH_TOKEN}}"
 ./parseltongue
 ```
 
@@ -371,7 +383,7 @@ pub trait CodeGenerator {
 ```
 
 3.2 Implementations (L2: Std / L3: External)
-- LLMClientOpenAI (reqwest)
+- LLMClientAnthropic (reqwest; Anthropic-compatible schema)
 - RustAnalyzerAdapter (ra_ap_* crates)
 - SQLiteStore (rusqlite; reset on demand)
 - HtmlVisualizer (static assets under cache/)
@@ -513,7 +525,7 @@ Pass/Fail Gates
 
 ## 6. Security & Privacy (v0.1)
 
-- Local-first; no network egress unless user sets PT_LLM_URL to remote
+- Local-first; no network egress unless user sets ANTHROPIC_BASE_URL to remote
 - Secrets via env/keychain; never printed or logged
 - File writes are atomic; no destructive actions without confirmation
 
@@ -537,8 +549,11 @@ sequenceDiagram
   T->>D: Detect LLM
   D-->>T: Found/Not found
   alt Not found
-    T->>U: Offer guided install (Ollama/URL/Skip)
+    T->>U: Offer guided install (Ollama/remote URL)
     U-->>T: Selection
+    alt Ollama selected
+      T->>T: Auto-install Ollama
+    end
   end
   T->>L: Test prompt
   L-->>T: OK
@@ -609,7 +624,7 @@ flowchart LR
     G[HtmlVisualizer]
   end
   subgraph L3[Externals]
-    H[OpenAI HTTP]
+    H[Anthropic HTTP]
     I[rust-analyzer crates]
     J[ratatui/crossterm]
   end
