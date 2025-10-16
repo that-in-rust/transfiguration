@@ -26,6 +26,17 @@ Notes from Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthrop
 
 
 
+### Filtered Batch 1 (Lines 1-50): Command-Line Options and Descriptions
+**Summary:** JSON-like structures for CLI commands, e.g., "name": "--secret-file", "description": "Provide a", "args": { "template": "filepaths" }.
+**Predictions:** Configuration data for Warp's command-line interface, including options for databases, regions, sessions, and other features.
+
+### Filtered Batch 2 (Lines 51-100): Continued Command-Line Options
+**Summary:** More JSON structures for CLI options, e.g., "name": "--vst3-plugindir", "description": "Require all casks", "args": { "name": "WHEN" }.
+**Predictions:** Additional configuration for tools like Rust, Docker, Kubernetes, Git, and others, indicating Warp integrates with multiple development ecosystems.
+
+### Next Filtered Batches
+- Continue with batches 3-21 for remaining configurations.
+
 ### Insights for Parseltongue
 - **Rust Compilation:** Warp uses advanced Rust features (async, traits).
 - **AI Integration:** Likely uses LLMs for code suggestions (strings show API calls).
@@ -36,22 +47,6 @@ Notes from Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthrop
 - Use Ghidra for pseudo-code generation.
 - Study open-source terminals like Alacritty for comparison.
 - Implement similar ISG for code analysis in Parseltongue.
-
-
-## Batch Analysis (500-Line Batches)
-
-### Batch 1 (Lines 1-500): ELF Relocation Tables
-**Summary:** All 500 lines are "R_X86_64_RELATIVE" entries, indicating dynamic linking offsets for functions and variables.
-**Predictions:** This is the relocation table for resolving addresses at runtime. Suggests Warp uses many external libraries (GLIBC, etc.), typical for a complex application. Likely early in the binary structure.
-
-### Batch 2 (Lines 501-1000): Mixed Disassembly and Relocations
-**Summary:** Starts with assembly instructions (e.g., "4eaa62: 0f 83 32", "4eb1e5: ff 15 b5"), ends with more "R_X86_64_RELATIVE" entries.
-**Predictions:** Transition from relocation tables to actual code disassembly. The assembly shows function calls, jumps, and memory operations, indicating the start of executable code sections.
-
-
-### Next Batches
-- Continue with batches 11-100 for remaining code sections.
-
 
 
 
