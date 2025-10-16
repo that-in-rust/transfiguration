@@ -94,7 +94,14 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
       - text-splitter
       - tf-idf-vectorizer
       - linfa (v0.7+)
-
+4. Pensieve has 2 parts
+  - Rata-TUI interface to interact with graph-database
+  - Command line interface to interact with graph-database
+  - interact
+    - ingest new codebase
+    - upsert into codebase
+    - delete from codebase
+5. Parseltongue codebase significanlty modularized
 
 # How many tools do we build
 1. Pensieve
