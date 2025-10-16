@@ -102,6 +102,9 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
     - upsert into codebase
     - delete from codebase
 5. Parseltongue codebase significanlty modularized
+  - We need a tool which can
+    - ingest with codebase-type as parameter basis which the parsing algo & chunking algo (ISG) changes
+    - 
 
 # How many tools do we build
 1. Pensieve
