@@ -82,9 +82,17 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
 # Ideal Tech Stack or Structure
 
 1. CozoDB for persistent storage of ISG_current and ISG_future
-  - this will also have the current_code and future_code as relational --something something 
+  - this will also have the current_code and future_code as relational --something something
 2. Claude-Code like Rata-TUI experience
-3. 
+3. Pensieve
+  - PK is filePath-fileName-interfaceName for rust OR non-rust
+    - rust codebase parsed via syn because we need roundtrip parsing + context addition via rust analyzer
+    - non-rust codebase parsed via tree-sitter
+    - txt codebase parsed via 
+      - text-splitter
+      - tf-idf-vectorizer
+      - linfa (v0.7+)
+
 
 # How many tools do we build
 1. Pensieve
