@@ -60,8 +60,8 @@ flowchart TD
 ---
 config:
   flowchart:
-    nodeSpacing: 75
-    rankSpacing: 75
+    nodeSpacing: 50
+    rankSpacing: 100
     curve: basis
 ---
 flowchart TD
@@ -145,8 +145,8 @@ flowchart TD
 ---
 config:
   flowchart:
-    nodeSpacing: 75
-    rankSpacing: 75
+    nodeSpacing: 40
+    rankSpacing: 120
     curve: basis
 ---
 flowchart TD
@@ -238,7 +238,11 @@ flowchart TD
     classDef integration fill:#fff3e0,stroke:#f57c00,stroke-width:2px
     classDef sdk fill:#fce4ec,stroke:#e91e63,stroke-width:2px
 
-**Comprehensive Architecture Analysis Summary (All 9 Batches - Lines 1-5632):**
+    class Runtime runtime
+    class TerminalRenderer,CommandParser,ToolExecutor,SessionManager,PluginLoader,PluginRegistry,AgentFramework,HookSystem,HookValidator,HookExecutor,SDKRuntime,TSSDKImpl,PySDKImpl,TSAgentEngine,PyAgentEngine,PreToolValidator,CommandRules,SecurityScanner,PostToolProcessor,ValidationTool,SettingsManager,ProjectSettings,UserSettings,PluginSettings,SecuritySettings,AuthManager,TokenManager,PermissionManager,SecurityValidator,HookSecurity,MCPClient,MCPServers,OAuthFlows,WebSearchAPI,ValidationLayer,DevContainer,BuildTools,TestFramework,LintTools,ExampleTemplates,SQLiteDB,ConversationStore,ContextCache,PluginData,HookState component
+```
+
+# Comprehensive Architecture Analysis Summary (All 9 Batches - Lines 1-5632)
 
 ## **Claude Code - Enterprise-Grade AI Development Platform**
 
