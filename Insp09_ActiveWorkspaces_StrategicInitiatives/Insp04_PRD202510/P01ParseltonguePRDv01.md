@@ -81,7 +81,8 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
 
 # Ideal Tech Stack or Structure
 
-1. CozoDB for persistent storage of ISG_current and ISG_future
+1. Parseltongue
+  - CozoDB for persistent storage of ISG_current and ISG_future
   - this will also have the current_code and future_code as relational --something something
 2. Claude-Code like Rata-TUI experience
 3. Pensieve - 3 use cases 1. Rust 2. Non-Rust 3. Docs
