@@ -1869,3 +1869,73 @@ parseltongue/
 
 ---
 
+## Core Vision
+Parseltongue is a dual-state interface signature graph (ISG) tool that simulates code changes before execution, enabling safe, high-quality PRs in hours for Rust OSS contributors.
+
+## What We're Sure About
+
+### 1. Technical Foundation
+- **ISG as Source of Truth:** Interface signatures + call graphs for stable, fast analysis.
+- **Dual-State Overlay:** ISG_current vs ISG_future for risk scoring without full rebuilds.
+- **Pluggable Parsers:** syn + tree-sitter for Rust/non-Rust code; PDF/MD for docs.
+- **Storage:** CozoDB for graph queries; optional vector index for retrieval.
+
+### 2. User Journey (The Wedge)
+- **Time-to-First-PR:** Install → Analyze → Propose → Implement → Check → Submit in ≤4 hours.
+- **Acceptance Rate:** >80% without rework via simulation and templates.
+- **Maintainer Mode:** Opt-in policies for high-acceptance PRs.
+
+### 3. MVP Scope (6-8 Weeks)
+- **CLI Commands:** analyze, propose, implement, check, submit.
+- **Patterns:** Rate limiting, error handling, test scaffolds.
+- **Simulation:** Blast radius prediction via call graphs.
+- **Curated Repos:** 3 OSS Rust projects for validation.
+
+## What We're Uncertain About (But Will Test)
+
+### 1. Enrichment Depth
+- **When to Add MIR/CFG:** Only if acceptance stalls; start with types+dataflow.
+- **Rust-Analyzer Integration:** For type/trait info—prototype with metadata extraction.
+
+### 2. LLM Integration
+- **Graph-to-Prompt:** Structural prefixes for risky edits; A/B test vs. templates.
+- **Local vs. Cloud:** Ollama for privacy; Anthropic for quality.
+
+### 3. Adoption Loops
+- **Maintainer Buy-In:** Start with policy files; measure PR acceptance.
+- **Contributor Retention:** Track TTFPR and follow-up PRs.
+
+## Simulation of Next 30 Days
+
+### Week 1: Foundation
+- **Actions:** Implement name index in ISG; add simple type signatures; build dual-state delta store.
+- **Outcomes:** Analyze ≤5s, propose ≤5s; basic risk scoring.
+- **Metrics:** 90% interface prediction accuracy on 1 repo.
+
+### Week 2: Patterns & Simulation
+- **Actions:** Template engine for 3 patterns; integrate compile/test gates.
+- **Outcomes:** First end-to-end PR on curated repo; 70% acceptance.
+- **Risks:** Repo idiosyncrasies break templates—mitigate with per-repo overrides.
+
+### Week 3: CLI Polish & Testing
+- **Actions:** Full CLI loop; property tests for "split then join == original".
+- **Outcomes:** TTFPR p50 ≤6h; CI/CD for analysis pipeline.
+- **Metrics:** 80% local compile/test pass pre-submit.
+
+### Week 4: Maintainer Mode & A/B
+- **Actions:** .parseltongue.yml parser; A/B structural prefixes.
+- **Outcomes:** 10 maintainer opt-ins; +20% acceptance lift from structure.
+- **Kill Criteria:** If TTFPR >8h or acceptance <60%, pivot to simpler tool.
+
+## Long-Term (90 Days)
+- **Enrichment Ladder:** cfg awareness → trait resolution → MIR-lite.
+- **Surfaces:** VS Code extension; GitHub Actions integration.
+- **Metrics:** 100 active contributors; maintainer NPS >8.
+
+## Immediate Next Actions
+1. Edit ISG store to add name index (O(1) lookups).
+2. Prototype type signature extraction from syn.
+3. Run analysis on a small Rust repo to validate.
+4. Update this PRD with test results.
+
+**Confidence Level:** 70% on core wedge; test fast, iterate hard.
