@@ -88,7 +88,7 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
   - PK is filePath-fileName-interfaceName for rust OR non-rust
     - rust codebase parsed via syn because we need roundtrip parsing + context addition via rust analyzer
     - non-rust codebase parsed via tree-sitter
-  - PK for txt codebase parsed via input-parameters as token-count and using the below libraries to create a primary key which is filepath-fileName-A<number>4-word-theme-extracted-via-CPU
+  - PK for txt codebase parsed via input-parameters as token-count - default can be 500 tokens with 50 buffer and using the below libraries to create a primary key which is filepath-fileName-A<number>4-word-theme-extracted-via-CPU
       - text-splitter
       - tf-idf-vectorizer
       - linfa (v0.7+)
