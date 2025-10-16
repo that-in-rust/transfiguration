@@ -1,6 +1,8 @@
 What we are a little sure about for Parseltongue at 202510160900 hrs
 
 
+# Early Experience v1
+
 1. User downloads binary from github OR compiles from source by cloning the repo
 2. User goes to the Rust git repository he wants to work on and copies the binary to the root folder
 3. User runs `./parseltongue` and is greeted by a UI which is very similar to Claude Code
@@ -26,6 +28,7 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
     - If ISG_current creation fails it auto-tries while telling the user
     - If user interrupts LLM suggests to trigger ISG_current creation again because that is the keystone of this tool
 
+# Overall view v1
 
 1. User arrives at the codebase via claude-code fork called Parseltongue
 2. Interface Signature Graph is created in RAM as ISG_current
@@ -75,4 +78,6 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
                 - if user gives go ahead then we
                     - make a commit with list of changes
                     - recreate ISG_current from ISG_future; update the SQLlite database according to the current codebase from scratch
+
+# Ideal Tech Stack or Structure
 
