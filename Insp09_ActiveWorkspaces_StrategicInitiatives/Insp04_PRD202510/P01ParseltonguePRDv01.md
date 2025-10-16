@@ -45,7 +45,7 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
     - a visualization in HTML based on ISG which can help the user understand
         - control flow of codebase
         - overall structure of code
-3. The codebase is copied into SQLlite database
+3. The codebase is copied into CozoDB database
     - Table Codebase has following columns
         - id
         - ISG_current_ind (0 or 1)
@@ -67,17 +67,17 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
                 - if ISG_future is possible then lets have base value of ISG_current as a default value and then change it according to what you think is the correct logic
                     - what test-interfaces will be deleted, edited, created
                     - what non-test-interfaces will be deleted, edited, created
-                - now reflect these ISG_future changes in the SQLlite database in ISG_current_ind, ISG_future_ind, Future_Code and Future_Action columns
-                - now use the rubber duck debugging menthod to look at ISG_current + PRD + ISG_future + those rows in SQLlite database which have Future_Code and Future_Action columns as not null
+                - now reflect these ISG_future changes in the CozoDB database in ISG_current_ind, ISG_future_ind, Future_Code and Future_Action columns
+                - now use the rubber duck debugging menthod to look at ISG_current + PRD + ISG_future + those rows in CozoDB database which have Future_Code and Future_Action columns as not null
                 - if the LLM thinks that we need to refine the solutioning further, make changes to ISG_future and repeat the process
                 - if the LLM thinks that we need to refine the PRD further then go back to previous step
-                - if finally the LLM feels very confident of the changes, we reflect the changes in the SQLlite database in the codebase
+                - if finally the LLM feels very confident of the changes, we reflect the changes in the CozoDB database in the codebase
                 - now we run all the tests and compile the codebase
                 - if the tests fail then we go back to previous step
                 - if the tests pass then we show the visualization of changes in ISG to the user + results of compilation + tests + request behavorial confirmation
                 - if user gives go ahead then we
                     - make a commit with list of changes
-                    - recreate ISG_current from ISG_future; update the SQLlite database according to the current codebase from scratch
+                    - recreate ISG_current from ISG_future; update the CozoDB database according to the current codebase from scratch
 
 # Ideal Tech Stack or Structure
 
