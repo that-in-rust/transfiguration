@@ -83,4 +83,13 @@ What we are a little sure about for Parseltongue at 202510160900 hrs
 
 1. CozoDB for persistent storage of ISG_current and ISG_future
   - this will also have the current_code and future_code as relational --something something 
-2. 
+2. Claude-Code like Rata-TUI experience
+3. 
+
+# How many tools do we build
+1. Pensieve
+  - Rata-TUI that asks for Anthropic Key OR Ollama anthropic format key
+    - if you are Apple M1 with 16GB+ RAM then we install Ollama for you
+    - if you are not then we ask you to enter anthropic key OR exit
+  - You point us to the folder you want to analyze - give us full path and a parameter rust OR non-rust OR txt
+    - 
