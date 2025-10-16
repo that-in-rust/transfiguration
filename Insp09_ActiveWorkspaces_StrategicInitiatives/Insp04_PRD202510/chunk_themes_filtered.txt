@@ -5,6 +5,7 @@ W04-chunksAB/warp_chunk_48856.txt|warp_chunk_48856.txt|], "description": "Provid
 W04-chunksAB/warp_chunk_48857.txt|warp_chunk_48857.txt|"name": "xr" } ]
 W04-chunksAB/warp_chunk_48858.txt|warp_chunk_48858.txt|"name": "import", "description": "Imports
 W04-chunksAB/warp_chunk_48859.txt|warp_chunk_48859.txt|"name": "PLUGIN_TYPE", "suggestions": [
+W04-chunksAB/warp_chunk_48860.txt|warp_chunk_48860.txt|"template": [ "folders" ],
 W04-chunksAB/warp_chunk_48861.txt|warp_chunk_48861.txt|"name": "remove_id", "description": "Remove
 W04-chunksAB/warp_chunk_48862.txt|warp_chunk_48862.txt|{ "name": [ "--help",
 W04-chunksAB/warp_chunk_48864.txt|warp_chunk_48864.txt|{ "name": "--sessionId", "description":
@@ -60,6 +61,8 @@ W04-chunksAB/warp_chunk_48922.txt|warp_chunk_48922.txt|"description": "Ignore `r
 W04-chunksAB/warp_chunk_48923.txt|warp_chunk_48923.txt|"name": "message-format" } },
 W04-chunksAB/warp_chunk_48925.txt|warp_chunk_48925.txt|}, { "name": "--examples",
 W04-chunksAB/warp_chunk_48926.txt|warp_chunk_48926.txt|"description": "Override a configuration
+W04-chunksAB/warp_chunk_48927.txt|warp_chunk_48927.txt|"template": "filepaths", "filterTemplateSuggestions": "_NuFrRa_(m=[])=>{let
+W04-chunksAB/warp_chunk_48928.txt|warp_chunk_48928.txt|"generators": { "template": "filepaths",
 W04-chunksAB/warp_chunk_48930.txt|warp_chunk_48930.txt|"options": [ { "name":
 W04-chunksAB/warp_chunk_48931.txt|warp_chunk_48931.txt|} }, { "name":
 W04-chunksAB/warp_chunk_48932.txt|warp_chunk_48932.txt|], "description": "Ignore relative
@@ -79,6 +82,7 @@ W04-chunksAB/warp_chunk_48947.txt|warp_chunk_48947.txt|"description": "Transport
 W04-chunksAB/warp_chunk_48948.txt|warp_chunk_48948.txt|"args": { "name": "value",
 W04-chunksAB/warp_chunk_48949.txt|warp_chunk_48949.txt|"name": "value", "description": "Frequency"
 W04-chunksAB/warp_chunk_48950.txt|warp_chunk_48950.txt|"name": "--tag", "description": "Custom
+W04-chunksAB/warp_chunk_48951.txt|warp_chunk_48951.txt|"template": "folders", "isVariadic": true
 W04-chunksAB/warp_chunk_48952.txt|warp_chunk_48952.txt|"description": "English (US)" },
 W04-chunksAB/warp_chunk_48953.txt|warp_chunk_48953.txt|}, { "name": "--prof-startup",
 W04-chunksAB/warp_chunk_48954.txt|warp_chunk_48954.txt|"name": "-y, --yes", "description":
@@ -285,6 +289,7 @@ W04-chunksAB/warp_chunk_49184.txt|warp_chunk_49184.txt|"name": "--lock-once", "d
 W04-chunksAB/warp_chunk_49187.txt|warp_chunk_49187.txt|"--debug" ], "description": "Log
 W04-chunksAB/warp_chunk_49188.txt|warp_chunk_49188.txt|"name": "fail", "description": "Log
 W04-chunksAB/warp_chunk_49189.txt|warp_chunk_49189.txt|{ "name": "--no-rebuild", "description":
+W04-chunksAB/warp_chunk_49190.txt|warp_chunk_49190.txt|"template": "folders" } },
 W04-chunksAB/warp_chunk_49191.txt|warp_chunk_49191.txt|"-v", "--version" ], "description":
 W04-chunksAB/warp_chunk_49192.txt|warp_chunk_49192.txt|"description": "Build projects in
 W04-chunksAB/warp_chunk_49193.txt|warp_chunk_49193.txt|"name": "milliseconds", "default": "10800000"
@@ -297,11 +302,13 @@ W04-chunksAB/warp_chunk_49200.txt|warp_chunk_49200.txt|"name": ["modify", "m"], 
 W04-chunksAB/warp_chunk_49201.txt|warp_chunk_49201.txt|}, { "name": "run",
 W04-chunksAB/warp_chunk_49202.txt|warp_chunk_49202.txt|} }, { "name":
 W04-chunksAB/warp_chunk_49203.txt|warp_chunk_49203.txt|{ "name": "--no-color", "description":
+W04-chunksAB/warp_chunk_49204.txt|warp_chunk_49204.txt|"template": "filepaths" } },
 W04-chunksAB/warp_chunk_49205.txt|warp_chunk_49205.txt|"name": "install", "description": "Install
 W04-chunksAB/warp_chunk_49207.txt|warp_chunk_49207.txt|"options": [ { "name":
 W04-chunksAB/warp_chunk_49208.txt|warp_chunk_49208.txt|"--generate-name", "-g" ], "description":
 W04-chunksAB/warp_chunk_49209.txt|warp_chunk_49209.txt|}, { "name": "--keyring",
 W04-chunksAB/warp_chunk_49210.txt|warp_chunk_49210.txt|{ "name": "--repo", "description":
+W04-chunksAB/warp_chunk_49211.txt|warp_chunk_49211.txt|"template": "filepaths" } },
 W04-chunksAB/warp_chunk_49212.txt|warp_chunk_49212.txt|"icon": "fig://icon?type=kubernetes", "options": [
 W04-chunksAB/warp_chunk_49213.txt|warp_chunk_49213.txt|"name": "pipeline" } },
 W04-chunksAB/warp_chunk_49214.txt|warp_chunk_49214.txt|"-r", "--remote" ], "description":
@@ -639,6 +646,7 @@ W04-chunksAB/warp_chunk_49598.txt|warp_chunk_49598.txt|}, { "name": [
 W04-chunksAB/warp_chunk_49599.txt|warp_chunk_49599.txt|} }, { "name":
 W04-chunksAB/warp_chunk_49601.txt|warp_chunk_49601.txt|{ "name": [ "-j",
 W04-chunksAB/warp_chunk_49602.txt|warp_chunk_49602.txt|}, { "name": "--path",
+W04-chunksAB/warp_chunk_49603.txt|warp_chunk_49603.txt|"suggestions": [ "1", "2",
 W04-chunksAB/warp_chunk_49605.txt|warp_chunk_49605.txt|} }, { "name":
 W04-chunksAB/warp_chunk_49606.txt|warp_chunk_49606.txt|"description": "Disable interactive mode
 W04-chunksAB/warp_chunk_49607.txt|warp_chunk_49607.txt|] }, { "name":
@@ -725,6 +733,7 @@ W04-chunksAB/warp_chunk_49695.txt|warp_chunk_49695.txt|}, { "name": [
 W04-chunksAB/warp_chunk_49696.txt|warp_chunk_49696.txt|"args": { "name": "file",
 W04-chunksAB/warp_chunk_49697.txt|warp_chunk_49697.txt|}, { "name": "get",
 W04-chunksAB/warp_chunk_49698.txt|warp_chunk_49698.txt|], "description": "Path to
+W04-chunksAB/warp_chunk_49699.txt|warp_chunk_49699.txt|"isVariadic": true, "suggestions": [
 W04-chunksAB/warp_chunk_49700.txt|warp_chunk_49700.txt|}, { "name": "charge.dispute.closed",
 W04-chunksAB/warp_chunk_49701.txt|warp_chunk_49701.txt|"name": "balance.available", "description": "Occurs
 W04-chunksAB/warp_chunk_49702.txt|warp_chunk_49702.txt|"--show-headers" ], "description": "Shows
@@ -748,6 +757,7 @@ W04-chunksAB/warp_chunk_49726.txt|warp_chunk_49726.txt|{ "name": "-force", "requ
 W04-chunksAB/warp_chunk_49727.txt|warp_chunk_49727.txt|}, { "name": "-var-file",
 W04-chunksAB/warp_chunk_49728.txt|warp_chunk_49728.txt|"name": "--terragrunt-no-auto-retry", "description": "Don't
 W04-chunksAB/warp_chunk_49729.txt|warp_chunk_49729.txt|}, { "name": "--terragrunt-ignore-dependency-order",
+W04-chunksAB/warp_chunk_49730.txt|warp_chunk_49730.txt|"template": [ "filepaths" ]
 W04-chunksAB/warp_chunk_49731.txt|warp_chunk_49731.txt|}, { "name": "--terragrunt-include-dir",
 W04-chunksAB/warp_chunk_49732.txt|warp_chunk_49732.txt|"--help" ], "description": "Show
 W04-chunksAB/warp_chunk_49733.txt|warp_chunk_49733.txt|{ "name": "--terragrunt-iam-assume-role-session-name", "description":
@@ -767,6 +777,7 @@ W04-chunksAB/warp_chunk_49749.txt|warp_chunk_49749.txt|"name": "linter or code",
 W04-chunksAB/warp_chunk_49751.txt|warp_chunk_49751.txt|{ "name": "--outFile", "description":
 W04-chunksAB/warp_chunk_49752.txt|warp_chunk_49752.txt|}, { "name": "PermitLocalCommand"
 W04-chunksAB/warp_chunk_49753.txt|warp_chunk_49753.txt|], "description": "SSH jumphost"
+W04-chunksAB/warp_chunk_49754.txt|warp_chunk_49754.txt|"suggestions": [ "text", "json",
 W04-chunksAB/warp_chunk_49755.txt|warp_chunk_49755.txt|"-q", "--quiet" ], "description":
 W04-chunksAB/warp_chunk_49756.txt|warp_chunk_49756.txt|"name": [ "-l", "--login"
 W04-chunksAB/warp_chunk_49757.txt|warp_chunk_49757.txt|"name": "Teleport proxy address",
@@ -806,6 +817,7 @@ W04-chunksAB/warp_chunk_49797.txt|warp_chunk_49797.txt|"description": "Ngrok.com
 W04-chunksAB/warp_chunk_49799.txt|warp_chunk_49799.txt|"--quiet" ], "description": "Do
 W04-chunksAB/warp_chunk_49800.txt|warp_chunk_49800.txt|}, { "name": "restart",
 W04-chunksAB/warp_chunk_49801.txt|warp_chunk_49801.txt|"description": "Path on the
+W04-chunksAB/warp_chunk_49802.txt|warp_chunk_49802.txt|"suggestions": [ "table", "json",
 W04-chunksAB/warp_chunk_49804.txt|warp_chunk_49804.txt|}, { "name": "-header-key",
 W04-chunksAB/warp_chunk_49806.txt|warp_chunk_49806.txt|"name": "-mfa", "description": "Supply
 W04-chunksAB/warp_chunk_49807.txt|warp_chunk_49807.txt|"-h" ], "description": "Display
@@ -822,6 +834,7 @@ W04-chunksAB/warp_chunk_49819.txt|warp_chunk_49819.txt|}, { "name": "-header-key
 W04-chunksAB/warp_chunk_49820.txt|warp_chunk_49820.txt|"-t" ], "description": "Number
 W04-chunksAB/warp_chunk_49821.txt|warp_chunk_49821.txt|"requiresSeparator": true, "args": {
 W04-chunksAB/warp_chunk_49822.txt|warp_chunk_49822.txt|{ "name": "-client-cert", "description":
+W04-chunksAB/warp_chunk_49823.txt|warp_chunk_49823.txt|"suggestions": [ "auth", "database",
 W04-chunksAB/warp_chunk_49824.txt|warp_chunk_49824.txt|"args": { "name": "string"
 W04-chunksAB/warp_chunk_49827.txt|warp_chunk_49827.txt|"args": { "name": "string"
 W04-chunksAB/warp_chunk_49828.txt|warp_chunk_49828.txt|"name": "string" }, "priority":
@@ -929,6 +942,7 @@ W04-chunksAB/warp_chunk_49937.txt|warp_chunk_49937.txt|], "description": "When y
 W04-chunksAB/warp_chunk_49938.txt|warp_chunk_49938.txt|"-ProgressAction", "-proga" ], "args":
 W04-chunksAB/warp_chunk_49939.txt|warp_chunk_49939.txt|}, { "name": [
 W04-chunksAB/warp_chunk_49942.txt|warp_chunk_49942.txt|} ], "description": "Stores
+W04-chunksAB/warp_chunk_49943.txt|warp_chunk_49943.txt|"suggestions": [ "Break", "Suspend",
 W04-chunksAB/warp_chunk_49946.txt|warp_chunk_49946.txt|"name": "System.Object" } ],
 W04-chunksAB/warp_chunk_49947.txt|warp_chunk_49947.txt|], "description": "To get
 W04-chunksAB/warp_chunk_49948.txt|warp_chunk_49948.txt|"args": [], "description": "Gets
@@ -969,6 +983,7 @@ W04-chunksAB/warp_chunk_49990.txt|warp_chunk_49990.txt|"-ea" ], "args": [
 W04-chunksAB/warp_chunk_49991.txt|warp_chunk_49991.txt|"description": "Creates a new
 W04-chunksAB/warp_chunk_49992.txt|warp_chunk_49992.txt|], "description": "Displays detailed
 W04-chunksAB/warp_chunk_49993.txt|warp_chunk_49993.txt|"name": [ "-InformationAction", "-infa"
+W04-chunksAB/warp_chunk_49994.txt|warp_chunk_49994.txt|"suggestions": [ "Break", "Suspend",
 W04-chunksAB/warp_chunk_49995.txt|warp_chunk_49995.txt|} ], "description": "Creates
 W04-chunksAB/warp_chunk_49996.txt|warp_chunk_49996.txt|}, { "name": "-Name",
 W04-chunksAB/warp_chunk_49997.txt|warp_chunk_49997.txt|"args": [ { "name":
@@ -1005,6 +1020,7 @@ W04-chunksAB/warp_chunk_50030.txt|warp_chunk_50030.txt|"name": [ "-WarningVariab
 W04-chunksAB/warp_chunk_50031.txt|warp_chunk_50031.txt|}, { "name": "-PassThru",
 W04-chunksAB/warp_chunk_50032.txt|warp_chunk_50032.txt|], "description": "To sort
 W04-chunksAB/warp_chunk_50033.txt|warp_chunk_50033.txt|"name": "Credssp" }, {
+W04-chunksAB/warp_chunk_50034.txt|warp_chunk_50034.txt|"suggestions": [ "Break", "Suspend",
 W04-chunksAB/warp_chunk_50035.txt|warp_chunk_50035.txt|], "args": [ {
 W04-chunksAB/warp_chunk_50036.txt|warp_chunk_50036.txt|], "description": "Determines how
 W04-chunksAB/warp_chunk_50037.txt|warp_chunk_50037.txt|}, { "name": "-PassThru",
@@ -1018,6 +1034,7 @@ W04-chunksAB/warp_chunk_50044.txt|warp_chunk_50044.txt|"-OutVariable", "-ov" ], 
 W04-chunksAB/warp_chunk_50045.txt|warp_chunk_50045.txt|"args": [ { "name":
 W04-chunksAB/warp_chunk_50046.txt|warp_chunk_50046.txt|], "args": [ {
 W04-chunksAB/warp_chunk_50047.txt|warp_chunk_50047.txt|"args": [ { "name":
+W04-chunksAB/warp_chunk_50048.txt|warp_chunk_50048.txt|"suggestions": [ "Break", "Suspend",
 W04-chunksAB/warp_chunk_50049.txt|warp_chunk_50049.txt|}, { "name": "-LicenseUri",
 W04-chunksAB/warp_chunk_50050.txt|warp_chunk_50050.txt|"-ea" ], "args": [
 W04-chunksAB/warp_chunk_50051.txt|warp_chunk_50051.txt|} ], "description": "Determines
