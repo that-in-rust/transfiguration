@@ -172,7 +172,485 @@ flowchart TD
 
 ---
 
-## 🛠️ Technical Architecture Details (A013 Foundation)
+## 🏗️ Technical Architecture Overview
+
+```mermaid
+graph TB
+    %% Core Infrastructure Layer
+    TUI[ratatui TUI<br/>Terminal Interface] --> CMD[Command Router<br/>/doctor, /model, /reset]
+    CMD --> LLM[Anthropic Client<br/>qwen2.5-coder:7b<br/>Context Management]
+    CMD --> ISG[ISG Extractor<br/>Syn-based AST Parser<br/>Rich Metadata]
+
+    %% Data Persistence Layer
+    ISG --> DB[(Cozo Database<br/>Embedded RocksDB<br/>Graph Relations)]
+    DB --> EXPORT[HTML Export<br/>JSON Snapshots<br/>Visualization]
+
+    %% Agent Orchestration Layer
+    CMD --> AGENTS[Agent Coordinator<br/>Journey Selection<br/>Context Routing]
+    AGENTS --> BUG[🐛 Bug Slayer<br/>Rust Analysis<br/>Pattern Matching]
+    AGENTS --> RESEARCH[🔍 Research Detective<br/>Codebase Analysis<br/>Pattern Discovery]
+    AGENTS --> ACADEMIC[📚 Research Scholar<br/>Document Processing<br/>Citation Networks]
+
+    %% Shared Services
+    AGENTS -.->|Uses| LLM
+    BUG -.->|Uses| ISG
+    RESEARCH -.->|Uses| ISG
+    ACADEMIC -.->|Uses| DOC[Document Processor<br/>Multi-format Support]
+
+    %% External Integrations
+    ISG -.->|Reads| FS[(File System<br/>Rust Source Files<br/>Academic Documents)]
+    BUG -.->|Writes| FS
+    EXPORT -.->|Generates| WEB[Web Interface<br/>Interactive Viz<br/>Export Options]
+
+    %% Styling
+    classDef core fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef agents fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef data fill:#e8f5e8,stroke:#388e3c,stroke-width:3px
+    classDef external fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    class TUI,CMD,LLM,ISG,AGENTS core
+    class BUG,RESEARCH,ACADEMIC agents
+    class DB,EXPORT,DOC data
+    class FS,WEB external
+```
+
+---
+
+## 🔄 Cross-Journey Data Flow & Learning
+
+```mermaid
+flowchart LR
+    %% Input Sources
+    RUST[🐛 Rust Bug Reports<br/>GitHub Issues<br/>Error Logs] --> BUG[Bug Analysis Agent<br/>Pattern Recognition<br/>Error Categorization]
+    CODEBASE[🔍 Code Repositories<br/>Git History<br/>API Documentation] --> RESEARCH[Pattern Discovery<br/>Architecture Analysis<br/>Design Explanation]
+    PAPERS[📚 Academic Papers<br/>Research PDFs<br/>Conference Proceedings] --> ACADEMIC[Document Processing<br/>Citation Analysis<br/>Gap Identification]
+
+    %% Agent Processing
+    BUG --> SHARED[Shared Infrastructure<br/>Syn AST Parser<br/>Cozo Database<br/>LLM Client]
+    RESEARCH --> SHARED
+    ACADEMIC --> SHARED
+
+    %% Cross-Journey Learning
+    BUG -.->|Bug Insights| RESEARCH
+    RESEARCH -.->|Pattern Knowledge| BUG
+    ACADEMIC -.->|Research Validation| RESEARCH
+    RESEARCH -.->|Academic Context| ACADEMIC
+
+    %% Output Generation
+    SHARED --> RUST_OUT[🐛 Pull Requests<br/>Bug Fixes<br/>Test Cases]
+    SHARED --> RESEARCH_OUT[🔍 Learning Resources<br/>Pattern Documentation<br/>Best Practices]
+    SHARED --> ACADEMIC_OUT[📚 Research Summaries<br/>Implementation Gaps<br/>Innovation Opportunities]
+
+    %% Ecosystem Impact
+    RUST_OUT -->|Improves| ECOSYSTEM[Rust Open Source<br/>Community Health<br/>Code Quality]
+    RESEARCH_OUT -->|Enhances| LEARNING[Developer Skills<br/>Code Understanding<br/>Best Practices]
+    ACADEMIC_OUT -->|Advances| INNOVATION[Research→Practice<br/>Academic Impact<br/>Industry Progress]
+```
+
+---
+
+## ⚡ Performance Architecture & Optimizations
+
+```mermaid
+graph TD
+    %% Performance Bottlenecks
+    BOTTLENECK[Performance Challenges<br/>• Large Codebases<br/>• Complex Queries<br/>• LLM Context Limits<br/>• Memory Usage]
+
+    %% Optimization Strategies
+    BOTTLENECK --> SLICING[Context Slicing<br/>Load only affected<br/>code signatures]
+    BOTTLENECK --> INCREMENTAL[Incremental Updates<br/>Git diff-based<br/>partial rebuilding]
+    BOTTLENECK --> CACHING[Query Caching<br/>Datalog result caching<br/>for repeated queries]
+    BOTTLENECK --> PARALLEL[Parallel Processing<br/>Concurrent AST analysis<br/>across multiple files]
+
+    %% Implementation Techniques
+    SLICING --> TECHNIQUE1[Syn Visitor Pattern<br/>Selective AST traversal<br/>Memory-efficient parsing]
+    INCREMENTAL --> TECHNIQUE2[Git Integration<br/>Change detection<br/>Targeted updates only]
+    CACHING --> TECHNIQUE3[LRU Cache<br/>Query result storage<br/>Subgraph memoization]
+    PARALLEL --> TECHNIQUE4[Rayon Parallelism<br/>File-level concurrency<br/>Thread pool management]
+
+    %% Performance Targets
+    TECHNIQUE1 --> TARGET1[≤5s Ingestion<br/>100k LOC codebases<br/>Full AST preservation]
+    TECHNIQUE2 --> TARGET2[<100ms Queries<br/>Subgraph retrieval<br/>Datalog optimization]
+    TECHNIQUE3 --> TARGET3[90% Cache Hit Rate<br/>Repeated pattern queries<br/>Memory efficiency]
+    TECHNIQUE4 --> TARGET4[Linear Scaling<br/>Multi-core utilization<br/>Resource isolation]
+
+    %% Monitoring & Feedback
+    TARGET1 --> MONITOR[Performance Monitoring<br/>Metrics Collection<br/>Bottleneck Detection]
+    TARGET2 --> MONITOR
+    TARGET3 --> MONITOR
+    TARGET4 --> MONITOR
+    MONITOR --> OPTIMIZE[Continuous Optimization<br/>Algorithm Tuning<br/>Resource Allocation]
+```
+
+---
+
+## 🛡️ Safety & Reliability Architecture
+
+```mermaid
+flowchart TD
+    %% Safety Layers
+    INPUT[User Input<br/>Commands & Files] --> VALIDATE[Input Validation<br/>Command Parsing<br/>File Safety Checks]
+
+    %% Error Handling Strategy
+    VALIDATE --> TRY[Execute Operation<br/>With Error Boundaries<br/>Resource Limits]
+    TRY -->|Success| COMPLETE[Operation Complete<br/>State Persisted<br/>Audit Logged]
+
+    %% Failure Recovery
+    TRY -->|Failure| ERROR[Error Detected<br/>Categorize & Log<br/>Determine Recovery Strategy]
+
+    ERROR --> RECOVERY{Recovery Type?}
+    RECOVERY -->|Retryable| RETRY[Retry with Backoff<br/>Exponential Backoff<br/>Circuit Breaker]
+    RECOVERY -->|Data Error| ROLLBACK[Rollback Changes<br/>Restore Previous State<br/>Data Consistency]
+    RECOVERY -->|System Error| RESET[Full System Reset<br/>Database Rebuild<br/>Clean State]
+
+    %% Validation Loops
+    RETRY --> VALIDATE
+    ROLLBACK --> VALIDATE
+    RESET --> VALIDATE
+
+    %% Safety Checks
+    COMPLETE --> SAFETY[Post-Operation Safety<br/>• Graph Invariants<br/>• No Dangling Edges<br/>• Type Consistency]
+    SAFETY -->|✅ Valid| FINAL[Final State<br/>Ready for Use]
+    SAFETY -->|❌ Invalid| ERROR
+
+    %% Audit Trail
+    VALIDATE -.->|Log| AUDIT[Comprehensive Audit<br/>Operation History<br/>Performance Metrics]
+    TRY -.->|Log| AUDIT
+    COMPLETE -.->|Log| AUDIT
+    ERROR -.->|Log| AUDIT
+```
+
+---
+
+## 🔐 Security Architecture
+
+```mermaid
+graph TB
+    %% Security Perimeter
+    EXTERNAL[External Requests<br/>Network Traffic<br/>File System Access] --> FIREWALL[Security Firewall<br/>Request Filtering<br/>Access Control]
+
+    %% Authentication & Authorization
+    FIREWALL --> AUTH[Authentication<br/>API Key Validation<br/>Token Verification]
+    AUTH --> AUTHZ[Authorization<br/>Permission Checking<br/>Capability Assessment]
+
+    %% Execution Security
+    AUTHZ --> SANDBOX[Secure Execution<br/>Process Isolation<br/>Resource Limits]
+    SANDBOX --> CODEGEN[Code Generation<br/>Safe Template Engine<br/>Input Sanitization]
+    SANDBOX --> TESTS[Test Execution<br/>Isolated Environment<br/>Output Validation]
+
+    %% Data Security
+    CODEGEN --> ENCRYPTION[Data Encryption<br/>Sensitive Data Protection<br/>Secure Storage]
+    TESTS --> ENCRYPTION
+
+    %% Monitoring & Alerting
+    FIREWALL -.->|Monitor| SECURITY_MONITOR[Security Monitoring<br/>Anomaly Detection<br/>Threat Analysis]
+    SANDBOX -.->|Monitor| SECURITY_MONITOR
+    ENCRYPTION -.->|Monitor| SECURITY_MONITOR
+
+    %% Security Policies
+    SECURITY_MONITOR --> POLICY[Security Policies<br/>• Local-First Default<br/>• Explicit Remote Config<br/>• Key Never Logged<br/>• Sandboxed Execution]
+    POLICY --> COMPLIANCE[Compliance Checking<br/>Policy Enforcement<br/>Violation Reporting]
+
+    %% Incident Response
+    COMPLIANCE -->|Violation| INCIDENT[Security Incident<br/>Alert Generation<br/>Response Procedures]
+    INCIDENT --> RECOVERY[Incident Recovery<br/>System Restoration<br/>Forensic Analysis]
+```
+
+---
+
+## 📈 Implementation Timeline & Phases
+
+```mermaid
+gantt
+    title Parseltongue 3-Journey Implementation Timeline
+    dateFormat YYYY-MM-DD
+    section Phase 1: Rust Bug Solving (MVP)
+    Platform Detection     :done, 2025-01-01, 2d
+    Ollama Integration    :done, after Platform Detection, 3d
+    Syn-based ISG         :done, after Ollama Integration, 5d
+    Cozo Persistence      :done, after Syn-based ISG, 3d
+    TUI Shell             :done, after Cozo Persistence, 4d
+    PRD Chat              :done, after TUI Shell, 4d
+    Codegen Stub          :done, after PRD Chat, 3d
+
+    section Phase 2: Codebase Research
+    Advanced Pattern Analysis :2025-02-01, 7d
+    Incremental Updates       :after Advanced Pattern Analysis, 5d
+    Interactive Visualization :after Incremental Updates, 6d
+    Cross-Crate Learning      :after Interactive Visualization, 4d
+
+    section Phase 3: Academic Research
+    Document Pipeline         :2025-03-01, 8d
+    Citation Networks         :after Document Pipeline, 6d
+    Gap Detection             :after Citation Networks, 5d
+    Research Synthesis        :after Gap Detection, 4d
+
+    section Integration & Polish
+    Cross-Journey Integration :2025-04-01, 10d
+    Performance Optimization  :after Cross-Journey Integration, 7d
+    Security Hardening        :after Performance Optimization, 5d
+    Testing & Validation      :after Security Hardening, 8d
+```
+
+---
+
+## 📊 Success Metrics Dashboard
+
+```mermaid
+graph LR
+    %% Metric Categories
+    TECHNICAL[Technical Excellence<br/>• ≤60s startup time<br/>• ≤5s 100k LOC ingestion<br/>• <100ms query response<br/>• 95%+ accuracy rates]
+
+    STRATEGIC[Strategic Impact<br/>• 80% bug resolution rate<br/>• 70% time reduction<br/>• 100+ pattern library<br/>• 200+ research papers]
+
+    ADOPTION[Developer Adoption<br/>• 1000+ active users<br/>• 50+ open source contributions<br/>• 90% satisfaction rate<br/>• 10+ enterprise pilots]
+
+    %% Measurement Flow
+    USERS[Developer Community<br/>Usage Patterns<br/>Feedback Loops] --> METRICS[Metrics Collection<br/>Performance Tracking<br/>Usage Analytics]
+    METRICS --> DASHBOARD[Real-time Dashboard<br/>KPI Visualization<br/>Trend Analysis]
+
+    %% Success Indicators
+    TECHNICAL -->|Feeds| DASHBOARD
+    STRATEGIC -->|Feeds| DASHBOARD
+    ADOPTION -->|Feeds| DASHBOARD
+
+    %% Outcome Tracking
+    DASHBOARD --> INSIGHTS[Data-Driven Insights<br/>Performance Optimization<br/>Feature Prioritization]
+    INSIGHTS --> ROADMAP[Product Roadmap<br/>Feature Planning<br/>Resource Allocation]
+
+    %% Continuous Improvement
+    ROADMAP --> IMPROVE[Continuous Improvement<br/>A/B Testing<br/>Performance Tuning]
+    IMPROVE --> USERS
+
+    %% Styling
+    classDef metrics fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef outcome fill:#e8f5e8,stroke:#388e3c,stroke-width:3px
+
+    class TECHNICAL,STRATEGIC,ADOPTION metrics
+    class METRICS,DASHBOARD,INSIGHTS,ROADMAP process
+    class USERS,IMPROVE outcome
+```
+
+---
+
+## 🔗 Integration Architecture: How Journeys Work Together
+
+```mermaid
+flowchart TD
+    %% Entry Points
+    DEVELOPER[Developer Experience<br/>Single Entry Point<br/>Journey Selection UI]
+
+    %% Journey Orchestration
+    DEVELOPER --> ORCHESTRATOR[Agent Orchestrator<br/>Journey Routing<br/>Context Management]
+
+    %% Individual Journeys
+    ORCHESTRATOR --> BUG_JOURNEY[🐛 Bug Solving Journey<br/>Rust Analysis → Fix → Test → PR]
+    ORCHESTRATOR --> RESEARCH_JOURNEY[🔍 Research Journey<br/>Pattern Discovery → Analysis → Documentation]
+    ORCHESTRATOR --> ACADEMIC_JOURNEY[📚 Academic Journey<br/>Document Processing → Citation → Synthesis]
+
+    %% Shared Infrastructure
+    SHARED[Shared Infrastructure<br/>Syn AST Parser<br/>Cozo Database<br/>LLM Client<br/>Document Processor]
+
+    BUG_JOURNEY -.->|Uses| SHARED
+    RESEARCH_JOURNEY -.->|Uses| SHARED
+    ACADEMIC_JOURNEY -.->|Uses| SHARED
+
+    %% Cross-Journey Learning
+    BUG_JOURNEY -.->|Bug Insights| RESEARCH_JOURNEY
+    RESEARCH_JOURNEY -.->|Pattern Knowledge| BUG_JOURNEY
+    ACADEMIC_JOURNEY -.->|Research Validation| RESEARCH_JOURNEY
+    RESEARCH_JOURNEY -.->|Pattern Context| ACADEMIC_JOURNEY
+
+    %% Output Integration
+    OUTPUT[Unified Output System<br/>Multiple Export Formats<br/>Cross-Referenced Results]
+
+    BUG_JOURNEY -->|Generates| OUTPUT
+    RESEARCH_JOURNEY -->|Generates| OUTPUT
+    ACADEMIC_JOURNEY -->|Generates| OUTPUT
+
+    %% External Integrations
+    OUTPUT -->|Exports to| GITHUB[GitHub Integration<br/>PR Creation<br/>Issue Tracking]
+    OUTPUT -->|Exports to| WEB[Web Dashboard<br/>Interactive Visualization<br/>Team Sharing]
+    OUTPUT -->|Exports to| API[REST API<br/>External Tool Integration<br/>CI/CD Pipelines]
+```
+
+---
+
+## 💡 Innovation Pipeline: From Research to Production
+
+```mermaid
+flowchart LR
+    %% Academic Research Input
+    ACADEMIC[📚 Academic Research<br/>Latest CS Papers<br/>Research Breakthroughs<br/>Theoretical Advances]
+
+    %% Analysis & Processing
+    ACADEMIC --> PROCESSING[Research Processing<br/>Citation Network Analysis<br/>Gap Identification<br/>Implementation Opportunities]
+
+    %% Pattern Extraction
+    PROCESSING --> PATTERNS[Pattern Discovery<br/>Research→Pattern Translation<br/>Best Practice Identification<br/>Innovation Opportunities]
+
+    %% Codebase Enhancement
+    PATTERNS --> CODEBASE[Codebase Research<br/>Pattern Application<br/>Architecture Improvements<br/>Code Quality Enhancement]
+
+    %% Bug Resolution
+    CODEBASE --> BUG_FIXING[Bug Resolution<br/>Pattern-Guided Fixes<br/>Root Cause Analysis<br/>Prevention Strategies]
+
+    %% Production Impact
+    BUG_FIXING --> PRODUCTION[Production Code<br/>Open Source Contributions<br/>Industry Best Practices<br/>Developer Learning]
+
+    %% Feedback Loop
+    PRODUCTION -->|Validates| ACADEMIC
+    PATTERNS -->|Informs| PRODUCTION
+
+    %% Continuous Learning
+    PRODUCTION -.->|Usage Data| ML[Machine Learning<br/>Pattern Effectiveness<br/>Success Rate Optimization]
+    ML -.->|Improves| PROCESSING
+```
+
+---
+
+## 🏆 Success Metrics Visualization
+
+```mermaid
+graph TB
+    %% Time-based Metrics
+    TIME[⏱️ Time Efficiency<br/>• 80% faster bug resolution<br/>• 70% faster codebase research<br/>• 10x faster academic processing<br/>• ≤60s system startup]
+
+    %% Quality Metrics
+    QUALITY[✨ Quality Improvements<br/>• 90%+ bug fix success rate<br/>• 95%+ research accuracy<br/>• 100+ pattern library<br/>• 200+ processed papers]
+
+    %% Learning Metrics
+    LEARNING[📚 Learning Impact<br/>• 50+ open source contributions<br/>• 1000+ developers trained<br/>• 90% satisfaction rate<br/>• Industry recognition]
+
+    %% Ecosystem Metrics
+    ECOSYSTEM[🌍 Ecosystem Growth<br/>• Rust community engagement<br/>• Academic collaboration<br/>• Industry partnerships<br/>• Open source health]
+
+    %% Measurement Framework
+    METRICS[Metrics Collection<br/>Real-time Tracking<br/>Automated Reporting] --> VISUALIZATION[Interactive Dashboard<br/>Trend Analysis<br/>Progress Visualization]
+
+    TIME -->|Feeds| METRICS
+    QUALITY -->|Feeds| METRICS
+    LEARNING -->|Feeds| METRICS
+    ECOSYSTEM -->|Feeds| METRICS
+
+    VISUALIZATION --> DECISIONS[Data-Driven Decisions<br/>Feature Prioritization<br/>Resource Allocation<br/>Strategic Planning]
+
+    DECISIONS --> OPTIMIZATION[Continuous Optimization<br/>Performance Tuning<br/>Feature Enhancement<br/>User Experience]
+```
+
+---
+
+## 🌟 The Complete Parseltongue Vision: 3 Journeys United
+
+```mermaid
+mindmap
+    root((🐍 Parseltongue<br/>3-Journey Platform))
+        Rust_Ecosystem
+            Bug_Solving
+                Async_Analysis
+                Lifetime_Resolution
+                Performance_Fixes
+            Pattern_Research
+                Architecture_Discovery
+                Design_Explanation
+                Best_Practice_Guidance
+        Academic_Bridge
+            Document_Processing
+                PDF_Analysis
+                Citation_Networks
+                Research_Synthesis
+            Implementation_Gaps
+                Opportunity_Identification
+                Practice_Validation
+                Innovation_Pipeline
+        Technical_Foundation
+            Syn_AST_Parsing
+                Metadata_Enrichment
+                Type_Analysis
+                Dependency_Mapping
+            Cozo_Graph_DB
+                Query_Optimization
+                Incremental_Updates
+                Export_Capabilities
+            Performance_Engineering
+                Context_Slicing
+                Parallel_Processing
+                Memory_Management
+        Developer_Experience
+            Unified_Interface
+                Journey_Selection
+                Context_Sharing
+                Cross-Learning
+            Rich_Visualization
+                Interactive_Diagrams
+                Progress_Tracking
+                Export_Options
+            Community_Features
+                Open_Source_Contributions
+                Learning_Resources
+                Team_Collaboration
+```
+
+---
+
+## 📋 Implementation Checklist & Progress Tracking
+
+```mermaid
+gantt
+    title P14 Implementation Progress
+    dateFormat YYYY-MM-DD
+    section Core Infrastructure ✅
+    Platform Detection     :done, 2025-01-01, 2d
+    Ollama Integration    :done, after Platform Detection, 3d
+    Syn AST Parser        :done, after Ollama Integration, 5d
+    Cozo Database         :done, after Syn AST Parser, 3d
+
+    section Journey 1: Bug Solving 🐛
+    Rust Bug Analysis     :active, 2025-01-15, 7d
+    Solution Generation   :after Rust Bug Analysis, 5d
+    Test Integration      :after Solution Generation, 4d
+    PR Creation           :after Test Integration, 3d
+
+    section Journey 2: Codebase Research 🔍
+    Pattern Discovery     :2025-02-01, 6d
+    Design Analysis       :after Pattern Discovery, 5d
+    Documentation         :after Design Analysis, 4d
+    Export System         :after Documentation, 3d
+
+    section Journey 3: Academic Research 📚
+    Document Processing   :2025-02-15, 8d
+    Citation Analysis     :after Document Processing, 6d
+    Gap Detection         :after Citation Analysis, 5d
+    Synthesis Engine      :after Gap Detection, 4d
+
+    section Integration & Polish
+    Cross-Journey Learning :2025-03-15, 10d
+    Performance Optimization :after Cross-Journey Learning, 7d
+    Security & Testing    :after Performance Optimization, 8d
+    Release Preparation   :after Security & Testing, 5d
+```
+
+---
+
+## 🚀 The Complete 3-Journey Technical Architecture
+
+This comprehensive Mermaid diagram collection provides **complete visual intuition** for the Parseltongue 3-journey platform, showing:
+
+1. **🏗️ Technical Architecture Overview** - Core components and data flow
+2. **🔄 Cross-Journey Data Flow** - How the 3 journeys interconnect and learn from each other
+3. **⚡ Performance Architecture** - Optimization strategies and implementation techniques
+4. **🛡️ Safety & Reliability** - Error handling, validation, and recovery mechanisms
+5. **🔐 Security Architecture** - Protection layers and monitoring systems
+6. **📈 Implementation Timeline** - Phase-by-phase development schedule
+7. **📊 Success Metrics Dashboard** - Progress tracking and KPI visualization
+8. **🔗 Integration Architecture** - How journeys work together as a unified platform
+9. **💡 Innovation Pipeline** - Research-to-production workflow
+10. **🏆 Success Metrics Visualization** - Comprehensive measurement framework
+11. **🌟 Mind Map Vision** - Complete system overview and relationships
+12. **📋 Implementation Checklist** - Progress tracking and milestone management
+
+**Each diagram builds specific intuition** about different aspects of the system, from high-level architecture to detailed implementation strategies!
 
 ### Core Data Model (Cozo Schema)
 ```text
