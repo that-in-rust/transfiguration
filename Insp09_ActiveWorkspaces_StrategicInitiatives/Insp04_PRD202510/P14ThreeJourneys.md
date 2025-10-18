@@ -57,48 +57,58 @@ flowchart TD
     %% Journey Selection
     Start(["Developer starts<br/>Parseltongue journey"]) --> JourneyChoice{"Choose your<br/>development journey"}
 
-    %% Journey 1: Rust Bug Solving
+    %% Journey 1: Rust Bug Solving with PRD Iteration
     JourneyChoice -->|🐛 Bug Solving| RustStart["Found bug in<br/>tokio/serde/diesel"]
-    RustStart --> SynParser["Syn-based AST Parser<br/>Full crate parsing<br/>Rich metadata extraction"]
-    SynParser --> CozoDB[("Cozo Database<br/>sig_metadata, isg_edges<br/>code_blobs relations")]
-    SynParser --> LLMClient["Anthropic-compatible Client<br/>qwen2.5-coder:7b model<br/>Context slicing for efficiency"]
-    LLMClient --> BugAnalyzer["Bug Analysis Agent<br/>Categorizes: borrow/async/perf<br/>Uses Datalog queries on ISG"]
-    BugAnalyzer --> SolutionAgent["Solution Agent<br/>Proposes idiomatic fixes<br/>Validates against Rust patterns"]
-    SolutionAgent --> TestAgent["cargo test Integration<br/>Generates regression tests<br/>Validates fix compilation"]
-    TestAgent --> RustPR["Pull request ready<br/>with tests & explanation"]
+    RustStart --> Ingest1["Ingest Codebase<br/>Build ISG with Syn"]
+    Ingest1 --> CozoDB[("Cozo Database<br/>ISG + Citation + Pattern Graphs")]
+    RustStart --> PRD1["PRD Iteration Loop<br/>Refine with ISG validation"]
+    CozoDB -.->|ISG Context| PRD1
+    PRD1 --> Approved1{User<br/>Approves?}
+    Approved1 -->|✅ Yes| BugAnalyzer["Bug Analysis + Solution<br/>ISG-guided fixes"]
+    Approved1 -->|❌ No| PRD1
+    BugAnalyzer --> TestAgent["cargo test Integration<br/>Validate compilation"]
+    TestAgent --> RustPR["Pull request ready<br/>with tests"]
 
-    %% Journey 2: Codebase Research
+    %% Journey 2: Codebase Research with Query Iteration
     JourneyChoice -->|🔍 Codebase Research| ResearchStart["Research patterns in<br/>large Rust codebase"]
-    ResearchStart --> PatternExtractor["Pattern Discovery Agent<br/>AST analysis via Syn<br/>Identifies architectural patterns"]
-    PatternExtractor --> AnalysisAgent["Deep Analysis Agent<br/>Explains design decisions<br/>Connects to ecosystem context"]
-    AnalysisAgent --> CozoQueries["Datalog Query Engine<br/>Subgraph queries<br/>Reachability analysis"]
-    CozoQueries --> DocumentationAgent["Documentation Generator<br/>Creates learning resources<br/>HTML export optional"]
-    DocumentationAgent --> InsightAgent["Insight Synthesis Agent<br/>Pattern improvement suggestions<br/>Cross-codebase connections"]
-    InsightAgent --> ResearchComplete["Research package<br/>Complete analysis + resources"]
+    ResearchStart --> Ingest2["Ingest Codebase<br/>Build Pattern Graph"]
+    Ingest2 --> CozoDB
+    ResearchStart --> QUERY2["Query Iteration Loop<br/>Refine with ISG scope"]
+    CozoDB -.->|Pattern Context| QUERY2
+    QUERY2 --> Approved2{User<br/>Approves?}
+    Approved2 -->|✅ Yes| PatternAnalysis["Pattern Discovery<br/>+ Analysis + Documentation"]
+    Approved2 -->|❌ No| QUERY2
+    PatternAnalysis --> ResearchComplete["Research package<br/>with visualizations"]
 
-    %% Journey 3: Academic Research
-    JourneyChoice -->|📚 Academic Research| AcademicStart["Research latest CS papers<br/>on async Rust/distributed systems"]
-    AcademicStart --> DocumentProcessor["Multi-format Document Processor<br/>PDF/LaTeX/Markdown parsing<br/>Citation extraction"]
-    DocumentProcessor --> ResearchAnalyzer["Research Analysis Agent<br/>Categorizes research areas<br/>Identifies novel contributions"]
-    ResearchAnalyzer --> CitationTracker["Citation Network Tracker<br/>Links to existing work<br/>Implementation gap analysis"]
-    CitationTracker --> ConnectionAgent["Connection Agent<br/>Links academic to practice<br/>Finds application opportunities"]
-    ConnectionAgent --> SynthesisAgent["Synthesis Agent<br/>Creates developer insights<br/>Proposes implementation paths"]
-    SynthesisAgent --> AcademicOutput["Research package<br/>Synthesized insights + gaps"]
+    %% Journey 3: Academic Research with Research Plan Iteration
+    JourneyChoice -->|📚 Academic Research| AcademicStart["Research CS papers<br/>on async Rust"]
+    AcademicStart --> Ingest3["Ingest Documents<br/>Build Citation Network"]
+    Ingest3 --> CozoDB
+    AcademicStart --> PLAN3["Research Plan Iteration<br/>Refine with citation graph"]
+    CozoDB -.->|Citation Context| PLAN3
+    PLAN3 --> Approved3{User<br/>Approves?}
+    Approved3 -->|✅ Yes| ResearchAnalysis["Citation Analysis<br/>+ Gap Detection + Synthesis"]
+    Approved3 -->|❌ No| PLAN3
+    ResearchAnalysis --> AcademicOutput["Research insights<br/>with implementation paths"]
 
-    %% Shared Infrastructure Connections
-    SynParser -.->|Uses| SharedInfra["Document Processor<br/>Code Analyzer<br/>Research Synthesizer<br/>Multi-modal Interfaces"]
-    PatternExtractor -.->|Uses| SharedInfra
-    DocumentProcessor -.->|Uses| SharedInfra
+    %% Shared Infrastructure
+    CozoDB -.->|Persistent Storage| SharedInfra["Shared Infrastructure<br/>RocksDB + Datalog<br/>LLM Client + TUI"]
 
     %% Cross-Journey Learning
-    BugAnalyzer -.->|Feeds insights| PatternExtractor
-    AnalysisAgent -.->|Informs| ResearchAnalyzer
-    ResearchAnalyzer -.->|Validates| SolutionAgent
+    BugAnalyzer -.->|Bug patterns| PatternAnalysis
+    PatternAnalysis -.->|Code patterns| ResearchAnalysis
+    ResearchAnalysis -.->|Academic validation| BugAnalyzer
 
     %% Outcomes and Impact
     RustPR -->|Contributes to| Ecosystem["Rust Open Source<br/>Ecosystem"]
     ResearchComplete -->|Improves| Learning["Developer<br/>Learning & Skills"]
     AcademicOutput -->|Advances| Innovation["Research to<br/>Practice Bridge"]
+    
+    %% Styling
+    classDef iteration fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px
+    class PRD1,QUERY2,PLAN3,Approved1,Approved2,Approved3 iteration
+    class RustPR,ResearchComplete,AcademicOutput success
 ```
 
 ---
@@ -112,17 +122,40 @@ flowchart TD
     Developer["Rust Developer<br/>finds tokio async bug"] --> TUI["ratatui TUI<br/>Slash commands"]
     TUI --> SynParser["Syn-based AST Parser<br/>Full crate parsing<br/>Rich metadata extraction"]
     SynParser --> CozoDB[("Cozo Database<br/>sig_metadata, isg_edges<br/>code_blobs relations")]
-    TUI --> LLMClient["Anthropic-compatible Client<br/>qwen2.5-coder:7b model<br/>Context slicing for efficiency"]
+    
+    %% PRD Iteration Loop
+    Developer --> PRD_DRAFT["Generate Draft PRD<br/>Initial problem understanding"]
+    PRD_DRAFT --> ISG_QUERY["Query ISG for Context<br/>Find affected interfaces<br/>Check dependencies"]
+    
+    CozoDB --> ISG_QUERY
+    ISG_QUERY --> VALIDATE{PRD Complete?<br/>All deps found?<br/>Constraints clear?}
+    
+    VALIDATE -->|❌ No| REFINE["Refine PRD<br/>Ask clarifying questions<br/>Add ISG constraints"]
+    REFINE --> PRD_DRAFT
+    
+    VALIDATE -->|✅ Yes| PRD_FINAL["Final PRD<br/>ISG-validated<br/>User approved"]
+    
+    %% Bug Analysis with ISG
+    PRD_FINAL --> LLMClient["Anthropic-compatible Client<br/>qwen2.5-coder:7b model<br/>Context slicing for efficiency"]
     LLMClient --> BugAnalyzer["Bug Analysis Agent<br/>Categorizes: borrow/async/perf<br/>Uses Datalog queries on ISG"]
     BugAnalyzer --> SolutionAgent["Solution Agent<br/>Proposes idiomatic fixes<br/>Validates against Rust patterns"]
+    
+    %% Test and Validate
     SolutionAgent --> TestAgent["cargo test Integration<br/>Generates regression tests<br/>Validates fix compilation"]
-    TestAgent --> PRReady["Pull request ready<br/>with tests & explanation"]
+    TestAgent -->|Tests Pass| PRReady["Pull request ready<br/>with tests & explanation"]
+    TestAgent -->|Tests Fail| REFINE
 
     %% Technical constraints and optimizations
     CozoDB -.->|Datalog queries| BugAnalyzer
     SynParser -.->|Full AST context| CozoDB
     LLMClient -.->|≤128k context| SolutionAgent
-    TestAgent -.->|Deterministic| PRReady
+    ISG_QUERY -.->|Context validation| VALIDATE
+    
+    %% Styling
+    classDef critical fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px
+    class PRD_DRAFT,REFINE,VALIDATE critical
+    class PRD_FINAL,PRReady success
 ```
 
 ---
@@ -135,7 +168,22 @@ flowchart TD
 flowchart TD
     Researcher["Developer researches<br/>Rust codebase patterns"] --> TUI["ratatui TUI<br/>Pattern discovery commands"]
     TUI --> SynASTParser["Syn-based AST Parser<br/>Full crate analysis<br/>Rich type metadata"]
-    SynASTParser --> PatternExtractor["Pattern Discovery Agent<br/>AST analysis via Syn<br/>Identifies architectural patterns"]
+    SynASTParser --> CozoDB[("Cozo Database<br/>Pattern metadata<br/>ISG graph")]
+    
+    %% PRD Iteration Loop for Research Query
+    Researcher --> QUERY_DRAFT["Draft Research Query<br/>What patterns to find?<br/>Which codebase areas?"]
+    QUERY_DRAFT --> ISG_SCOPE["Query ISG for Scope<br/>Find relevant modules<br/>Check pattern coverage"]
+    
+    CozoDB --> ISG_SCOPE
+    ISG_SCOPE --> VALIDATE{Query Complete?<br/>Scope clear?<br/>Patterns defined?}
+    
+    VALIDATE -->|❌ No| REFINE["Refine Query<br/>Clarify pattern types<br/>Narrow/expand scope"]
+    REFINE --> QUERY_DRAFT
+    
+    VALIDATE -->|✅ Yes| QUERY_FINAL["Final Research Query<br/>ISG-validated<br/>User approved"]
+    
+    %% Pattern Discovery with ISG
+    QUERY_FINAL --> PatternExtractor["Pattern Discovery Agent<br/>AST analysis via Syn<br/>Identifies architectural patterns"]
     PatternExtractor --> AnalysisAgent["Deep Analysis Agent<br/>Explains design decisions<br/>Connects to ecosystem context"]
     AnalysisAgent --> CozoQueries["Datalog Query Engine<br/>Subgraph queries<br/>Reachability analysis"]
     CozoQueries --> DocumentationAgent["Documentation Generator<br/>Creates learning resources<br/>HTML export optional"]
@@ -146,6 +194,13 @@ flowchart TD
     SynASTParser -.->|Incremental updates| CozoQueries
     AnalysisAgent -.->|Context slicing| LLMClient
     DocumentationAgent -.->|HTML viz export| ResearchOutput
+    ISG_SCOPE -.->|Scope validation| VALIDATE
+    
+    %% Styling
+    classDef critical fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px
+    class QUERY_DRAFT,REFINE,VALIDATE critical
+    class QUERY_FINAL,ResearchOutput success
 ```
 
 ---
@@ -158,7 +213,22 @@ flowchart TD
 flowchart TD
     Academic["CS Researcher<br/>processes academic papers"] --> TUI["ratatui TUI<br/>Document analysis commands"]
     TUI --> DocumentProcessor["Multi-format Document Processor<br/>PDF/LaTeX/Markdown parsing<br/>Citation extraction"]
-    DocumentProcessor --> ResearchAnalyzer["Research Analysis Agent<br/>Categorizes research areas<br/>Identifies novel contributions"]
+    DocumentProcessor --> CozoDB[("Cozo Database<br/>Citation network<br/>Document chunks")]
+    
+    %% PRD Iteration Loop for Research Questions
+    Academic --> RESEARCH_DRAFT["Draft Research Questions<br/>What concepts to explore?<br/>Which papers to analyze?"]
+    RESEARCH_DRAFT --> DOC_QUERY["Query Document Graph<br/>Find relevant papers<br/>Check citation coverage"]
+    
+    CozoDB --> DOC_QUERY
+    DOC_QUERY --> VALIDATE{Questions Complete?<br/>Papers identified?<br/>Scope appropriate?}
+    
+    VALIDATE -->|❌ No| REFINE["Refine Questions<br/>Expand/narrow scope<br/>Add citation context"]
+    REFINE --> RESEARCH_DRAFT
+    
+    VALIDATE -->|✅ Yes| RESEARCH_FINAL["Final Research Plan<br/>Document-graph validated<br/>User approved"]
+    
+    %% Research Analysis with Citation Network
+    RESEARCH_FINAL --> ResearchAnalyzer["Research Analysis Agent<br/>Categorizes research areas<br/>Identifies novel contributions"]
     ResearchAnalyzer --> CitationTracker["Citation Network Tracker<br/>Links to existing work<br/>Implementation gap analysis"]
     CitationTracker --> ConnectionAgent["Connection Agent<br/>Links academic to practice<br/>Finds application opportunities"]
     ConnectionAgent --> SynthesisAgent["Synthesis Agent<br/>Creates developer insights<br/>Proposes implementation paths"]
@@ -168,6 +238,13 @@ flowchart TD
     ResearchAnalyzer -.->|Cross-reference| CitationTracker
     ConnectionAgent -.->|Validate claims| ImplementationValidator
     SynthesisAgent -.->|Actionable insights| ResearchPackage
+    DOC_QUERY -.->|Citation validation| VALIDATE
+    
+    %% Styling
+    classDef critical fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px
+    class RESEARCH_DRAFT,REFINE,VALIDATE critical
+    class RESEARCH_FINAL,ResearchPackage success
 ```
 
 ---
@@ -777,8 +854,11 @@ export COZO_DB_PATH=".parseltongue/parseltongue.cozo"
 3. **Syn-based ISG Extraction** - Full AST parsing with Syn for rich metadata
 4. **Cozo Persistence** - Single source of truth for graph + metadata
 5. **TUI Shell** - ratatui + slash commands (/doctor, /model, /reset)
-6. **PRD Chat** - Conversation refinement with context slicing
-7. **Codegen Stub** - Rate limiting scaffold + cargo test integration
+6. **PRD Iteration Loop** - ⚡ **CRITICAL**: ISG validation before execution
+7. **ISG Query Engine** - Fast Datalog queries for dependency validation
+8. **Approval Gates** - User confirmation before code generation
+9. **Codegen with Tests** - Generate fixes + regression tests
+10. **Failure Recovery** - Rollback to PRD refinement on test failures
 
 ### Phase 2: Codebase Research Enhancement
 1. **Advanced Syn Pattern Analysis** - Machine learning-enhanced pattern recognition
@@ -816,6 +896,65 @@ export COZO_DB_PATH=".parseltongue/parseltongue.cozo"
 
 ---
 
+## 🔄 Critical Architecture Change: PRD Iteration with ISG Validation
+
+**Major Update**: All three journeys now include **mandatory PRD/Query/Plan iteration loops** with ISG/graph validation **before** any execution or code generation.
+
+### Why This Matters
+
+The previous architecture had a critical flaw: it attempted to go directly from user request to execution without proper context validation. This led to:
+- ❌ Incorrect solutions due to missing ISG context
+- ❌ Incomplete understanding of dependencies and constraints
+- ❌ No user confirmation before potentially disruptive changes
+- ❌ Wasted LLM calls and compute on invalid plans
+
+### The New Flow (All Journeys)
+
+```mermaid
+flowchart LR
+    USER[User Request] --> INGEST[Ingest & Build Graph<br/>ISG/Citation/Pattern]
+    USER --> DRAFT[Draft Plan/PRD/Query]
+    INGEST --> GRAPH[(Cozo Graph)]
+    GRAPH --> VALIDATE[Validate Against Graph<br/>Check completeness]
+    DRAFT --> VALIDATE
+    VALIDATE -->|❌ Incomplete| REFINE[Refine Plan<br/>Ask Questions]
+    REFINE --> DRAFT
+    VALIDATE -->|✅ Complete| APPROVE{User<br/>Approval?}
+    APPROVE -->|✅ Yes| EXECUTE[Execute with High Confidence]
+    APPROVE -->|❌ No| REFINE
+    EXECUTE --> OUTPUT[Quality Output<br/>Tests Pass]
+```
+
+### Journey-Specific Applications
+
+**Journey 1: Bug Solving**
+- **What's validated**: PRD against ISG (dependencies, types, constraints)
+- **Iteration**: Refine understanding of affected interfaces and call chains
+- **Approval**: User confirms fix approach before code generation
+- **Fallback**: Tests fail → back to refinement
+
+**Journey 2: Codebase Research**
+- **What's validated**: Research query against pattern graph (scope, coverage)
+- **Iteration**: Expand/narrow scope based on discovered patterns
+- **Approval**: User confirms research questions before analysis
+- **Fallback**: Incomplete results → refine query scope
+
+**Journey 3: Academic Research**
+- **What's validated**: Research plan against citation network (paper coverage)
+- **Iteration**: Adjust paper selection and research questions
+- **Approval**: User confirms research direction before synthesis
+- **Fallback**: Missing citations → expand document set
+
+### Implementation Requirements (P16)
+
+1. **ISG Query Engine** - Fast Datalog queries for context validation
+2. **Multi-turn Refinement** - Conversation loop with user
+3. **Approval Gates** - Explicit user confirmation before execution
+4. **Failure Recovery** - Rollback to refinement on test/validation failures
+5. **Audit Trail** - Log all PRD iterations and approvals
+
+---
+
 ## 🌟 The Technical Vision
 
 By implementing these **3 high-impact journeys** on the solid A013 architecture foundation with **Syn-powered metadata enrichment**, Parseltongue becomes:
@@ -824,10 +963,18 @@ By implementing these **3 high-impact journeys** on the solid A013 architecture 
 2. **A Research-Grade Code Analyzer** - Academic-quality pattern extraction with full type information
 3. **An Innovation Bridge** - Connecting cutting-edge research to practical development with citation networks
 
-**Technical North Star**: **"The most reliable, efficient, and insightful AI assistant for serious Rust development, powered by comprehensive AST analysis and metadata enrichment"**
+**Technical North Star**: **"The most reliable, efficient, and insightful AI assistant for serious Rust development, powered by comprehensive AST analysis, metadata enrichment, and ISG-validated decision making"**
 
 This technical implementation ensures Parseltongue delivers **maximum value** to developers in their most challenging and time-consuming workflows, with the performance and reliability required for production use.
 
+### ✅ Architecture Validated
+
+**P15 Validation**: This architecture has been validated against:
+- ✅ Rust-exclusive tech stack (RocksDB and LaTeX C++ dependencies accepted)
+- ✅ PRD iteration loops integrated into all journeys
+- ✅ Journey-specific primary key strategies defined
+- ✅ No critical architectural inconsistencies identified
+
 ---
 
-**Next Technical Evolution**: P15 will add advanced Datalog features, vector search capabilities, and distributed processing for enterprise-scale codebases., as well as integrating natural language processing (NLP) for improved code analysis and generation.
+**Next Steps**: **P16** will implement the PRD iteration loop, namespaced primary keys, and custom LLM HTTP client before beginning core development.
