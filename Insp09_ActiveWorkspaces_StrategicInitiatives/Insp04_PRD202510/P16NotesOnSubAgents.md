@@ -88,6 +88,277 @@ Total Used:                ~13-16 GB ✅ Fits!
 
 ---
 
+## 🎯 Refined Architecture: 7-8 Sub-Agents + 1 Reasoning LLM
+
+### The Key Insight: Context Length Preservation
+
+**Problem**: If you feed the reasoning LLM (Qwen 14B) with raw CozoDB results, ISG graphs, and all search data, you quickly **exhaust its context window** and get poor quality outputs.
+
+**Solution**: Use **7-8 parallel sub-agents** (small, smart models) to:
+1. Query CozoDB for relevant ISG nodes/edges
+2. Explore the "blast radius" (dependencies, callers, related types)
+3. **Summarize and filter** the results into concise reports
+4. Feed only the **enriched summaries** to the reasoning LLM
+
+**Result**: The reasoning LLM gets high-quality, filtered context within its budget (20K tokens), while sub-agents handle the heavy data processing in parallel.
+
+---
+
+### Architecture Pattern: Filter → Enrich → Reason → Validate
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ PHASE 1: PARALLEL SUB-AGENTS (7-8 agents, 3K-8K ctx each)  │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ Agent 1 (Search)    → Query CozoDB for dependencies        │ 3K tokens
+│                     → Summarize: "5 deps on tokio::spawn"  │
+│                                                             │
+│ Agent 2 (Search)    → Find similar code patterns           │ 4K tokens
+│                     → Summarize: "3 Builder impls found"   │
+│                                                             │
+│ Agent 3 (Validate)  → Check type bounds in blast radius    │ 3K tokens
+│                     → Summarize: "Trait Send required"     │
+│                                                             │
+│ Agent 4 (Validate)  → Verify lifetime constraints          │ 3K tokens
+│                     → Summarize: "'a must outlive 'b"      │
+│                                                             │
+│ Agent 5 (Refine)    → Explore API alternatives             │ 8K tokens
+│                     → Summarize: "2 async alternatives"    │
+│                                                             │
+│ Agent 6 (Refine)    → Check visibility/encapsulation       │ 4K tokens
+│                     → Summarize: "Module is pub(crate)"    │
+│                                                             │
+│ Agent 7 (Context)   → Gather historical PRD patterns       │ 8K tokens
+│                     → Summarize: "Similar fix in v0.3.2"   │
+│                                                             │
+│ Agent 8 (Context)   → Vector search for similar bugs       │ 8K tokens
+│                     → Summarize: "4 related borrow errs"   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+                           ↓ (All summaries: ~5-10K tokens total)
+┌─────────────────────────────────────────────────────────────┐
+│ PHASE 2: REASONING LLM (Qwen 14B, 20K ctx budget)          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ Input: Filtered summaries from 7-8 agents (~5-10K)         │
+│        + User request (~1K)                                 │
+│        + ISG schema context (~2K)                           │
+│        Total: ~8-13K tokens (well within budget!)           │
+│                                                             │
+│ Task: Reason deeply about the plan                         │
+│       - Predict ISG changes needed                          │
+│       - Design code modifications                           │
+│       - Check for edge cases                                │
+│       - Generate confidence score                           │
+│                                                             │
+│ Output: Detailed PRD with predicted changes (~3K tokens)    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+                           ↓ (Only if confidence > 80%)
+┌─────────────────────────────────────────────────────────────┐
+│ PHASE 3: VALIDATION (No LLM, just tooling)                 │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ 1. Apply predicted changes to temp workspace               │
+│ 2. Run `cargo check` (fast, ~5-10 sec)                     │
+│ 3. If errors → Route back to Agent 5-6 for refinement      │
+│ 4. If success → Run `cargo test` (if applicable)           │
+│ 5. If all pass → Present to user for approval              │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Sub-Agent Responsibilities (The 7-8 Team Members)
+
+| Agent # | Role | Model | Context Budget | Job Description | Output Format |
+|---------|------|-------|----------------|-----------------|---------------|
+| **1-2** | **Search** | MiniLM 22M | 3-4K tokens | Query CozoDB for ISG nodes, dependencies, call graphs | Bullet-point summaries: "Found X deps, Y similar funcs" |
+| **3-4** | **Validation** | SmolLM2 135M | 3-4K tokens | Check type bounds, lifetimes, trait requirements in blast radius | Constraint list: "Must implement Send, 'a outlives 'b" |
+| **5-6** | **Refinement** | MiniCPM4 500M | 4-8K tokens | Explore alternatives, check visibility, suggest API improvements | Structured options: "Alternative A: async, B: blocking" |
+| **7-8** | **Context** | Gemma 270M | 8K tokens | Vector search for similar bugs/patterns, historical PRD lookup | Comparison report: "Similar to issue #42 (fixed with X)" |
+
+**Why 3K-8K context per agent?**
+- Small enough to run fast (200-400 t/s for tiny models)
+- Large enough to understand CozoDB query results + blast radius
+- Forces agents to **summarize**, not copy-paste raw data
+- Total parallel processing: 7-8 agents × 5K avg = 35-40K tokens processed, but only 5-10K passed to reasoning LLM
+
+---
+
+### How This Maps to the Three Journeys
+
+#### Journey 1: Bug Fixing (Borrow Checker Error)
+
+**User Request**: "Fix lifetime error in `spawn` function"
+
+**Phase 1 - Parallel Sub-Agents (7-8 running simultaneously):**
+
+```rust
+// Agent 1: Search for function definition
+Query: ?[uid, name, metadata] := *isg_nodes{uid, name, level: 4, kind: "FN"}
+                                  name ~= ".*spawn.*"
+Summary: "Found spawn() in runtime.rs:42, takes &self + future: F"
+
+// Agent 2: Find dependencies
+Query: ?[dep] := *isg_edges{src: "spawn_fn_uid", dst: dep, kind: "DEPENDS"}
+Summary: "Depends on JoinHandle, tokio::task::spawn_local"
+
+// Agent 3: Check lifetime constraints (blast radius)
+Query: [Analyze lifetime params in spawn signature + callers]
+Summary: "Caller requires 'static bound, but future has 'a lifetime"
+
+// Agent 4: Validate trait bounds
+Query: [Check trait requirements in context]
+Summary: "Future must implement Send + 'static for cross-thread spawn"
+
+// Agent 5: Explore alternatives
+Query: [Find similar async spawn patterns]
+Summary: "Alternative: Use spawn_local (no 'static), or add 'static bound"
+
+// Agent 6: Check visibility
+Query: ?[visibility] := *isg_nodes{uid: "spawn_fn_uid", metadata}
+Summary: "Function is pub, used in 3 external crates"
+
+// Agent 7: Historical context
+Query: [Vector search for similar lifetime fixes]
+Summary: "Similar issue fixed in v0.2.1 by adding where F: 'static bound"
+
+// Agent 8: Similar bugs
+Query: [HNSW search on error message embedding]
+Summary: "4 related borrow errors, all solved by lifetime annotation"
+```
+
+**Phase 2 - Reasoning LLM (Qwen 14B):**
+
+**Input (filtered summaries, ~8K tokens total)**:
+```
+User: Fix lifetime error in spawn
+Context from agents:
+  - spawn() signature: &self, future: F
+  - Caller needs 'static, function has 'a
+  - Must implement Send + 'static for tokio
+  - pub function, used externally
+  - Historical fix: Add where F: 'static
+  - Similar bugs: 4 cases, same pattern
+```
+
+**Reasoning Output**:
+```
+PRD: Add 'static bound to spawn generic parameter
+
+Predicted ISG Changes:
+  - L4 function: spawn<F: Future + Send + 'static>
+  - Impact: 3 external callers may need Arc wrapper
+  
+Confidence: 95% (high - matches historical pattern)
+Code change: Add "+ 'static" to where clause
+
+Validation needed: Check if external callers already satisfy 'static
+```
+
+**Phase 3 - Validation**:
+```bash
+1. Apply change: fn spawn<F: Future + Send + 'static>(...)
+2. cargo check → ✅ Success
+3. cargo test → ✅ All pass
+4. Present to user with context
+```
+
+**Time Estimate**: 
+- Phase 1: 7-8 agents parallel, ~5-10 sec
+- Phase 2: Reasoning LLM, ~30-45 sec
+- Phase 3: Cargo check, ~10 sec
+- **Total: ~1 minute vs 5-10 min single-threaded**
+
+---
+
+#### Journey 2: Pattern Research (Find Builder Pattern)
+
+**Phase 1 - Sub-Agents**:
+- Agent 1-2: Search for struct + impl with `build()` method
+- Agent 3-4: Validate pattern matches (must have `new()` → setters → `build()`)
+- Agent 5-6: Find similar patterns in other types
+- Agent 7-8: Compare with external Rust pattern library (vector search)
+
+**Phase 2 - Reasoning LLM**:
+- Input: Summaries of 12 Builder candidates, pattern validation results
+- Output: Categorized list: "5 true Builders, 3 partial, 4 false positives"
+
+**Phase 3 - No validation needed** (research task, no code changes)
+
+---
+
+#### Journey 3: Code Generation (Add new async feature)
+
+**Phase 1 - Sub-Agents**:
+- Agent 1-2: Search for existing async patterns, API boundaries
+- Agent 3-4: Validate public API constraints, module visibility
+- Agent 5-6: Check dependencies on tokio runtime, error handling patterns
+- Agent 7-8: Find similar features in historical PRDs (vector search)
+
+**Phase 2 - Reasoning LLM**:
+- Input: API constraints, dependency graph, historical patterns
+- Output: Detailed PRD with struct definitions, trait impls, error types
+
+**Phase 3 - Validation**:
+- Apply changes → cargo check → cargo test → User approval
+
+---
+
+### Context Length Budget Comparison
+
+| Approach | Agent Count | Total Tokens Processed | Tokens to Reasoning LLM | LLM Context Used |
+|----------|-------------|------------------------|-------------------------|------------------|
+| **No Sub-Agents** | 1 (reasoning only) | 50K+ raw ISG data | 50K+ (overflow!) | 100% exhausted ❌ |
+| **With 7-8 Sub-Agents** | 7-8 + 1 reasoning | 40K (distributed) | 5-10K (summaries) | ~50% efficiently used ✅ |
+
+**Key Benefit**: The reasoning LLM has **10-15K tokens free** for deep thinking, edge case analysis, and multi-turn refinement, instead of being overwhelmed with raw data.
+
+---
+
+### Data Enrichment Strategy: Minimal Context, Maximum Value
+
+Each sub-agent follows this pattern:
+
+1. **Query CozoDB** (exact/graph/vector search)
+2. **Explore blast radius** (dependencies, callers, related types within 2-3 hops)
+3. **Extract key insights** (constraints, patterns, alternatives)
+4. **Summarize concisely** (bullet points, structured data, max 500-1000 tokens)
+5. **Pass to reasoning LLM** (only the enriched summary, not raw results)
+
+**Example - Agent 3 (Validation)**:
+
+```
+Raw CozoDB result (3K tokens):
+  uid: "spawn_fn_uid"
+  metadata: {
+    "signature": "fn spawn<F: Future>(&self, future: F) -> JoinHandle",
+    "lifetimes": ["'a", "'b"],
+    "trait_bounds": ["F: Future", "F::Output: Send"],
+    "callers": ["runtime_main", "task_executor", "worker_thread"],
+    ... (2.5K more tokens of detailed AST data)
+  }
+
+Enriched summary (300 tokens):
+  Lifetime Constraints:
+    - Caller 'runtime_main' requires F: 'static
+    - Current bound missing 'static
+    - Conflict: 'a (function lifetime) vs 'static (caller requirement)
+  
+  Recommendation:
+    - Add where F: 'static
+    - Impact: All callers already satisfy this (checked)
+  
+  Confidence: High (90%)
+```
+
+**Result**: 10x compression (3K → 300 tokens) while **increasing** information density!
+
+---
+
 ## 🚀 Technical Deep-Dive (Original Content)
 
 To blend the tiny LLM sub-agents (e.g., MiniLM 22M for filtering, STLM 50M for classification, SmolLM2 135M for quick tagging) with CozoDB's CPU-based search capabilities, we can create a hybrid system that leverages CozoDB's strengths in exact/graph/relational queries (via Datalog, up to 250K+ QPS read-only) and vector proximity search (HNSW for approximate nearest neighbors with L2/Cosine/IP metrics, fully CPU-optimized). This "mixing" avoids over-relying on agents for every search—instead, use CozoDB for efficient, low-latency CPU searches (milliseconds for graph traversals or vector queries on millions of nodes), and route results to agents for semantic enhancement, validation, or refinement. It's perfect for ISG workflows, as CozoDB natively supports graph-vector hybrids (e.g., combine vector similarity with recursive traversals).
