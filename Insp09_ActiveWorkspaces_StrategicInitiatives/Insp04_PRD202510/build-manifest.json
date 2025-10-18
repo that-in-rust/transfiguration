@@ -1,0 +1,327 @@
+{
+  "metadata": {
+    "name": "Parseltongue Component Builder",
+    "version": "1.0",
+    "description": "Modular JSON-driven build system for Parseltongue components",
+    "author": "Cascade AI Assistant"
+  },
+  "config": {
+    "basePath": "src/",
+    "outputDir": "target/",
+    "dependencies": {
+      "rust": ">=1.70.0",
+      "cargo": "latest",
+      "tools": ["cargo", "rustfmt", "clippy"]
+    }
+  },
+  "components": {
+    "system-detective": {
+      "type": "crate",
+      "description": "Hardware and service detection",
+      "dependencies": [],
+      "features": ["auto-detect", "service-scanner", "profile-builder"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new system-detective --lib",
+          "description": "Initialize the system detective crate"
+        },
+        {
+          "name": "add-dependencies",
+          "command": "cd system-detective && cargo add serde serde_json sysinfo",
+          "description": "Add core dependencies for system detection"
+        },
+        {
+          "name": "implement-hardware-detection",
+          "files": [
+            {
+              "path": "system-detective/src/lib.rs",
+              "content": "// Hardware detection implementation\npub mod hardware {\n    pub fn detect() -> HardwareProfile { /* implementation */ }\n}"
+            }
+          ],
+          "description": "Implement hardware detection functionality"
+        }
+      ],
+      "testSteps": [
+        {
+          "name": "unit-tests",
+          "command": "cd system-detective && cargo test",
+          "description": "Run unit tests for system detective"
+        }
+      ],
+      "variants": {
+        "basic": "Simple hardware detection only",
+        "full": "Complete system profiling with service scanning",
+        "minimal": "Hardware detection only, no dependencies"
+      }
+    },
+    "universal-isg": {
+      "type": "crate",
+      "description": "Interface Signature Graph for semantic understanding",
+      "dependencies": ["system-detective"],
+      "features": ["semantic-hashing", "incremental-updates", "multi-language"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new universal-isg --lib",
+          "description": "Initialize the ISG crate"
+        },
+        {
+          "name": "add-dependencies",
+          "command": "cd universal-isg && cargo add serde serde_json sha2 tree-sitter",
+          "description": "Add dependencies for parsing and hashing"
+        }
+      ],
+      "testSteps": [
+        {
+          "name": "unit-tests",
+          "command": "cd universal-isg && cargo test",
+          "description": "Run ISG unit tests"
+        }
+      ],
+      "variants": {
+        "rust-only": "Rust AST/HIR based ISG",
+        "tree-sitter": "Tree-sitter grammar based ISG",
+        "hybrid": "Combined AST + tree-sitter approach",
+        "incremental": "Incremental ISG updates only"
+      }
+    },
+    "graph-atlas": {
+      "type": "crate",
+      "description": "Graph database wrapper with KV storage",
+      "dependencies": ["universal-isg"],
+      "features": ["cozodb", "embedded", "query-optimization"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new graph-atlas --lib",
+          "description": "Initialize graph atlas crate"
+        },
+        {
+          "name": "add-cozodb-dependency",
+          "command": "cd graph-atlas && cargo add cozo-lib",
+          "description": "Add CozoDB dependency"
+        }
+      ],
+      "testSteps": [
+        {
+          "name": "integration-tests",
+          "command": "cd graph-atlas && cargo test --test integration",
+          "description": "Run integration tests with CozoDB"
+        }
+      ],
+      "variants": {
+        "cozodb-only": "Pure CozoDB implementation",
+        "with-caching": "Add query result caching",
+        "with-indexing": "Custom indexing strategies"
+      }
+    },
+    "intent-parser": {
+      "type": "crate",
+      "description": "Natural language to structured intent parsing",
+      "dependencies": ["universal-isg", "graph-atlas"],
+      "features": ["llm-integration", "validation", "clarification"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new intent-parser --lib",
+          "description": "Initialize intent parser crate"
+        }
+      ],
+      "testSteps": [],
+      "variants": {
+        "anthropic-only": "Claude API integration",
+        "ollama-first": "Local Ollama models preferred",
+        "multi-provider": "Support multiple LLM providers"
+      }
+    },
+    "delta-reasoner": {
+      "type": "crate",
+      "description": "Calculate semantic differences with confidence scoring",
+      "dependencies": ["universal-isg", "graph-atlas", "intent-parser"],
+      "features": ["constraint-solving", "risk-assessment", "rollback-planning"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new delta-reasoner --lib",
+          "description": "Initialize delta reasoner crate"
+        }
+      ],
+      "testSteps": [],
+      "variants": {
+        "conservative": "High confidence thresholds",
+        "aggressive": "Lower confidence thresholds for speed",
+        "adaptive": "Adjust thresholds based on context"
+      }
+    },
+    "validation-loop": {
+      "type": "crate",
+      "description": "AI self-validation and testing",
+      "dependencies": ["delta-reasoner"],
+      "features": ["test-generation", "self-critique", "iterative-refinement"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new validation-loop --lib",
+          "description": "Initialize validation loop crate"
+        }
+      ],
+      "testSteps": [],
+      "variants": {
+        "single-iteration": "One-pass validation",
+        "multi-iteration": "Iterative improvement until confidence threshold",
+        "parallel": "Parallel validation strategies"
+      }
+    },
+    "universal-tui-chat": {
+      "type": "crate",
+      "description": "Terminal UI for conversational interfaces",
+      "dependencies": ["validation-loop"],
+      "features": ["markdown-rendering", "history-management", "llm-routing"],
+      "buildSteps": [
+        {
+          "name": "create-crate-structure",
+          "command": "cargo new universal-tui-chat --lib",
+          "description": "Initialize TUI chat crate"
+        },
+        {
+          "name": "add-tui-dependencies",
+          "command": "cd universal-tui-chat && cargo add ratatui tokio",
+          "description": "Add TUI and async dependencies"
+        }
+      ],
+      "testSteps": [],
+      "variants": {
+        "basic": "Simple chat interface",
+        "rich": "Markdown rendering and syntax highlighting",
+        "intelligent": "Context-aware suggestions and completions"
+      }
+    }
+  },
+  "buildOrder": [
+    "system-detective",
+    "universal-isg",
+    "graph-atlas",
+    "intent-parser",
+    "delta-reasoner",
+    "validation-loop",
+    "universal-tui-chat"
+  ],
+  "integration": {
+    "workspace": {
+      "name": "parseltongue-workspace",
+      "members": [
+        "system-detective",
+        "universal-isg",
+        "graph-atlas",
+        "intent-parser",
+        "delta-reasoner",
+        "validation-loop",
+        "universal-tui-chat"
+      ]
+    },
+    "orchestrator": {
+      "name": "orchestrator",
+      "description": "Composition layer that combines all components",
+      "dependencies": [
+        "system-detective",
+        "universal-isg",
+        "graph-atlas",
+        "intent-parser",
+        "delta-reasoner",
+        "validation-loop",
+        "universal-tui-chat"
+      ]
+    }
+  },
+  "iterationStrategies": {
+    "isg-approaches": [
+      {
+        "name": "rust-analyzer-only",
+        "description": "Use only Rust analyzer for ISG generation",
+        "modifications": {
+          "universal-isg": {
+            "features": ["rust-only"],
+            "dependencies": ["ra_ap_syntax", "ra_ap_hir"]
+          }
+        }
+      },
+      {
+        "name": "tree-sitter-enhanced",
+        "description": "Use tree-sitter for better parsing with Rust analyzer fallback",
+        "modifications": {
+          "universal-isg": {
+            "features": ["tree-sitter", "hybrid"],
+            "dependencies": ["tree-sitter", "tree-sitter-rust"]
+          }
+        }
+      },
+      {
+        "name": "incremental-only",
+        "description": "Only compute ISG differences, not full graphs",
+        "modifications": {
+          "universal-isg": {
+            "features": ["incremental"],
+            "dependencies": []
+          }
+        }
+      }
+    ],
+    "storage-backends": [
+      {
+        "name": "cozodb-only",
+        "description": "Pure CozoDB implementation",
+        "modifications": {
+          "graph-atlas": {
+            "features": ["cozodb-only"],
+            "dependencies": ["cozo-lib"]
+          }
+        }
+      },
+      {
+        "name": "with-sqlite-fallback",
+        "description": "CozoDB with SQLite fallback for compatibility",
+        "modifications": {
+          "graph-atlas": {
+            "features": ["cozodb", "sqlite-fallback"],
+            "dependencies": ["cozo-lib", "rusqlite"]
+          }
+        }
+      }
+    ]
+  },
+  "qualityChecks": {
+    "linting": "cargo clippy -- -D warnings",
+    "formatting": "cargo fmt --check",
+    "testing": "cargo test",
+    "documentation": "cargo doc --no-deps",
+    "security": "cargo audit"
+  },
+  "deploymentTargets": {
+    "binary": {
+      "name": "parseltongue",
+      "dependencies": [
+        "system-detective",
+        "universal-isg",
+        "graph-atlas",
+        "intent-parser",
+        "delta-reasoner",
+        "validation-loop",
+        "universal-tui-chat",
+        "orchestrator"
+      ]
+    },
+    "library": {
+      "name": "parseltongue-core",
+      "dependencies": [
+        "system-detective",
+        "universal-isg",
+        "graph-atlas",
+        "intent-parser",
+        "delta-reasoner",
+        "validation-loop",
+        "universal-tui-chat"
+      ]
+    }
+  }
+}
