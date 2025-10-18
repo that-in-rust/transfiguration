@@ -181,9 +181,39 @@ graph TB
     CMD --> LLM[Anthropic Client<br/>qwen2.5-coder:7b<br/>Context Management]
     CMD --> ISG[ISG Extractor<br/>Syn-based AST Parser<br/>Rich Metadata]
 
+    ISG --> DB[(Cozo Database<br/>Graph Database<br/>Embedded Storage)]
+
     %% Data Persistence Layer
-    ISG --> DB[(Cozo Database<br/>Embedded RocksDB<br/>Graph Relations)]
+    ISG --> DB
     DB --> EXPORT[HTML Export<br/>JSON Snapshots<br/>Visualization]
+
+    %% Agent Orchestration Layer
+    CMD --> AGENTS[Agent Coordinator<br/>Journey Selection<br/>Context Routing]
+    AGENTS --> BUG[🐛 Bug Slayer<br/>Rust Analysis<br/>Pattern Matching]
+    AGENTS --> RESEARCH[🔍 Research Detective<br/>Codebase Analysis<br/>Pattern Discovery]
+    AGENTS --> ACADEMIC[📚 Research Scholar<br/>Document Processing<br/>Citation Networks]
+
+    %% Shared Services
+    AGENTS -.->|Uses| LLM
+    BUG -.->|Uses| ISG
+    RESEARCH -.->|Uses| ISG
+    ACADEMIC -.->|Uses| DOC[Document Processor<br/>Multi-format Support]
+
+    %% External Integrations
+    ISG -.->|Reads| FS[(File System<br/>Rust Source Files<br/>Academic Documents)]
+    BUG -.->|Writes| FS
+    EXPORT -.->|Generates| WEB[Web Interface<br/>Interactive Viz<br/>Export Options]
+
+    %% Styling
+    classDef core fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef agents fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef data fill:#e8f5e8,stroke:#388e3c,stroke-width:3px
+    classDef external fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    class TUI,CMD,LLM,ISG,AGENTS core
+    class BUG,RESEARCH,ACADEMIC agents
+    class DB,EXPORT,DOC data
+    class FS,WEB external
 
     %% Agent Orchestration Layer
     CMD --> AGENTS[Agent Coordinator<br/>Journey Selection<br/>Context Routing]
