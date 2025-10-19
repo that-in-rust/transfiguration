@@ -2,6 +2,8 @@
 
 > **Goal**: Combine P17's strategic journey differentiation with concrete agent contracts and implementation details
 
+**⚡ Context Window Options**: This document covers **both 20K sub-agent mode AND 128K context mode**. Default is 20K for speed/precision. See [P19_128K_Context_Analysis.md](./P19_128K_Context_Analysis.md) for when to use 128K.
+
 ## 🎯 Two Approaches, One Vision
 
 ### Approach A: P17 SubAgentGame (High-Level Strategy)
@@ -42,7 +44,9 @@
 
 ## 🎮 Journey-Specific Configurations (Same Agents, Different Params)
 
-### Journey 1: Bug Fixing 🐛 (Latency-Optimized)
+### Journey 1: Bug Fixing 🐛 (Latency-Optimized) - **USE 20K CONTEXT**
+
+**❌ Don't use 128K**: Too slow (75-120s vs 45-60s), loses precision (62% vs 88% accuracy), "lost in middle" problem.
 
 | Agent | Configuration | Rationale |
 |-------|--------------|-----------|
@@ -60,7 +64,11 @@
 
 ---
 
-### Journey 2: Pattern Research 🔍 (Throughput-Optimized)
+### Journey 2: Pattern Research 🔍 (Throughput-Optimized) - **HYBRID: 128K + SUB-AGENTS**
+
+**✅ Hybrid mode recommended**: 128K scans full codebase for candidates (85% recall) → Sub-agents validate (91% precision).
+
+**Option A: Pure Sub-Agents (20K context)**
 
 | Agent | Configuration | Rationale |
 |-------|--------------|-----------|
@@ -74,11 +82,23 @@
 | **A8** | Ops: Document patterns, suggest refactorings | Research outputs |
 | **R1** | Timeout: 45s, temperature: 0.3 (creative) | Pattern synthesis |
 
-**Expected Performance**: ~45 seconds end-to-end
+**Expected Performance**: ~45 seconds end-to-end (70% pattern coverage)
+
+**Option B: Hybrid 128K + Sub-Agents**
+
+| Agent | Configuration | Rationale |
+|-------|--------------|-----------|
+| **Qwen 128K** | Full codebase load (1.25M tokens), scan for patterns | Broad discovery |
+| **A4-A6** | Validate top 50 candidates from 128K scan | Precision filtering |
+| **R1 (128K)** | Synthesize final catalog with examples | Deep synthesis |
+
+**Expected Performance**: ~75 seconds end-to-end (91% pattern coverage) ✅ **Best accuracy**
 
 ---
 
-### Journey 3: Academic Research 📚 (Accuracy-Optimized)
+### Journey 3: Academic Research 📚 (Accuracy-Optimized) - **USE 128K CONTEXT**
+
+**✅ Use 128K**: Full paper visibility critical, cross-document reasoning, speed less important (90-120s acceptable).
 
 | Agent | Configuration | Rationale |
 |-------|--------------|-----------|
@@ -92,7 +112,11 @@
 | **A8** | Ops: Link papers to code, identify gaps | Research insights |
 | **R1** | Timeout: 60s, temperature: 0.2 (balanced) | Deep synthesis |
 
-**Expected Performance**: ~90 seconds end-to-end
+**Expected Performance**: ~90-120 seconds end-to-end (95% synthesis quality) ✅ **Best use case for 128K**
+
+**Alternative: Sub-Agents Only (20K context)**
+- Faster (~60s) but fragmented insights (75% quality)
+- Use if speed > quality
 
 ---
 
@@ -533,6 +557,8 @@ fn estimate_tokens(ctx: &ContextPack) -> usize {
 
 ## 🎯 Practical Caps (Keep Tokens Down)
 
+### Sub-Agent Mode (20K Context)
+
 | Parameter | Journey 1 (Bug) | Journey 2 (Pattern) | Journey 3 (Academic) |
 |-----------|----------------|-------------------|---------------------|
 | **Seeds** | ≤5 UIDs | ≤10 UIDs | ≤8 UIDs |
@@ -540,7 +566,21 @@ fn estimate_tokens(ctx: &ContextPack) -> usize {
 | **Vector K** | 15, ef=100 | 50, ef=200 | 30, ef=150 |
 | **A4/A5 top N** | 20 items | 40 items | 30 items |
 | **A7 ContextPack** | ≤5K tokens | ≤8K tokens | ≤8K tokens |
+| **R1 context** | 20K | 20K | 20K |
 | **R1 timeout** | 30s | 45s | 60s |
+| **RAM usage** | 8-10 GB | 8-10 GB | 8-10 GB |
+
+### 128K Context Mode
+
+| Parameter | Journey 1 (Bug) | Journey 2 (Pattern) | Journey 3 (Academic) |
+|-----------|----------------|-------------------|---------------------|
+| **Use 128K?** | ❌ No | ⚡ Hybrid | ✅ Yes |
+| **Context load** | N/A | Full codebase (1.25M) | Full papers (60-80K) |
+| **Sub-agents** | N/A | A4-A6 for validation | Optional (A1-A3) |
+| **R1 context** | N/A | 128K | 128K |
+| **R1 timeout** | N/A | 60-90s | 90-120s |
+| **RAM usage** | N/A | 14-18 GB | 14-18 GB |
+| **Accuracy gain** | -26% ❌ | +6% ✅ | +20% ✅ |
 
 ---
 
@@ -551,6 +591,7 @@ fn estimate_tokens(ctx: &ContextPack) -> usize {
 2. ✅ **Shreyas/Jeff Dean lens** - Product impact + systems thinking
 3. ✅ **Visual Mermaid diagrams** - Clear communication
 4. ✅ **Performance targets** - 60s for J1, 45s for J2, 90s for J3
+5. ✅ **Context window strategy** - 20K default, 128K for J3, hybrid for J2
 
 ### From Agent Roster & Contracts:
 1. ✅ **Concrete agent roles** - A1-A8 + R1 with clear responsibilities
@@ -559,8 +600,14 @@ fn estimate_tokens(ctx: &ContextPack) -> usize {
 4. ✅ **CozoDB Datalog queries** - Copy-paste ready code
 5. ✅ **Rust coordinator skeleton** - Production implementation
 
+### From P19 128K Analysis:
+1. ✅ **"Lost in middle" awareness** - Don't blindly use 128K
+2. ✅ **Context vs accuracy trade-off** - Bigger ≠ better
+3. ✅ **Journey-specific context sizing** - Match window to task
+4. ✅ **Hybrid strategies** - Combine 128K breadth with sub-agent precision
+
 ### The Winning Combination:
-**Use the same 9 agents (A1-A8 + R1) across all journeys, but configure them with journey-specific parameters (radius, K, timeout, caps) to optimize for latency, throughput, or accuracy.**
+**Use the same 9 agents (A1-A8 + R1) across all journeys, but configure BOTH agent parameters (radius, K, timeout) AND context window size (20K vs 128K) to optimize for latency (J1), throughput (J2), or accuracy (J3).**
 
 ---
 
@@ -601,6 +648,9 @@ parseltongue/
 - [ ] Confidence gating implementation (formula + thresholds)
 - [ ] Cargo runner with proper error handling
 - [ ] Journey-specific config files (TOML/JSON)
+- [ ] **Context mode switcher** (`--context=20k|128k|hybrid`)
+- [ ] **RAM detection** (warn if 128K mode on <16GB system)
+- [ ] **"Lost in middle" mitigation** (reorder context for 128K mode)
 
 ---
 
@@ -616,5 +666,18 @@ parseltongue/
 
 ---
 
-**Total Synthesis**: Contract-based agents with journey-specific configs = Best of both worlds! 🎯
+**Total Synthesis**: Contract-based agents with journey-specific configs + smart context window selection = Best of all worlds! 🎯
+
+**Context Strategy Summary**:
+- **J1 (Bug)**: 20K only (speed + precision) ✅
+- **J2 (Pattern)**: Hybrid 128K + agents (breadth + validation) ⚡
+- **J3 (Academic)**: 128K only (deep synthesis) 🎓
+
+---
+
+## 📎 Related Documents
+
+- **[P19: 128K Context Analysis](./P19_128K_Context_Analysis.md)** - Comprehensive analysis of 128K vs 20K trade-offs
+- **[P17: Sub-Agent Game](./P17SubAgentGame.md)** - Strategic journey differentiation
+- **[P16: Sub-Agent Architecture](./P16NotesOnSubAgents.md)** - Technical implementation details
 

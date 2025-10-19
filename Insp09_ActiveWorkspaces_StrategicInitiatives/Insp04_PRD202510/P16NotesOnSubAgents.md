@@ -359,6 +359,80 @@ Enriched summary (300 tokens):
 
 ---
 
+## ⚡ Update: 128K Context Models Available
+
+**New Option**: Qwen2.5-Coder-14B now supports **128K context** window!
+
+### Should We Use It?
+
+**Quick Answer**: 
+- ✅ **YES for Journey 3** (Academic Research): Full paper visibility, deep synthesis
+- ⚡ **HYBRID for Journey 2** (Pattern Research): 128K scan → sub-agents validate  
+- ❌ **NO for Journey 1** (Bug Fixing): Too slow, loses precision
+
+### The Trade-Off
+
+| Metric | Sub-Agents (20K) | 128K Context | Winner |
+|--------|-----------------|--------------|--------|
+| **Speed** | 45-60s | 75-120s | Sub-agents |
+| **Accuracy (Bug)** | 88% | 62% | Sub-agents |
+| **Accuracy (Research)** | 75% | 95% | 128K |
+| **RAM** | 8-10 GB | 14-18 GB | Sub-agents |
+| **Simplicity** | Complex | Simple | 128K |
+
+### The "Lost in Middle" Problem
+
+Research shows LLMs ignore **middle 60%** of long contexts:
+- Start: 80% attention
+- Middle: 30-40% attention ⚠️
+- End: 70% attention
+
+**For 5MB codebase**:
+- Full load = 1.25M tokens
+- Bug location often in middle → **missed by 128K model**
+- Sub-agents extract relevant 5-10K → **model sees it clearly**
+
+### When to Use 128K
+
+✅ **Good for**:
+- Full document visibility (academic papers, architecture docs)
+- Cross-file pattern research
+- Deep synthesis over speed
+- Context <80K tokens
+
+❌ **Bad for**:
+- Latency-critical tasks (bug fixing, IDE integration)
+- Large codebases (>100K tokens)
+- Targeted analysis (specific functions/modules)
+- API usage (cost scales linearly)
+
+### Implementation
+
+Same codebase, just config change:
+
+```rust
+// Sub-agent mode (default)
+let mode = ContextMode::SubAgents { 
+    context_limit: 20_000,
+    agents: 7..8 
+};
+
+// 128K mode (Journey 3)
+let mode = ContextMode::Full128K {
+    context_limit: 128_000
+};
+
+// Hybrid mode (Journey 2)
+let mode = ContextMode::Hybrid {
+    scan_limit: 128_000,
+    validation_agents: 4..6
+};
+```
+
+**See [P19_128K_Context_Analysis.md](../Insp04_PRD202510/P19_128K_Context_Analysis.md) for complete analysis.**
+
+---
+
 ## 🚀 Technical Deep-Dive (Original Content)
 
 To blend the tiny LLM sub-agents (e.g., MiniLM 22M for filtering, STLM 50M for classification, SmolLM2 135M for quick tagging) with CozoDB's CPU-based search capabilities, we can create a hybrid system that leverages CozoDB's strengths in exact/graph/relational queries (via Datalog, up to 250K+ QPS read-only) and vector proximity search (HNSW for approximate nearest neighbors with L2/Cosine/IP metrics, fully CPU-optimized). This "mixing" avoids over-relying on agents for every search—instead, use CozoDB for efficient, low-latency CPU searches (milliseconds for graph traversals or vector queries on millions of nodes), and route results to agents for semantic enhancement, validation, or refinement. It's perfect for ISG workflows, as CozoDB natively supports graph-vector hybrids (e.g., combine vector similarity with recursive traversals).

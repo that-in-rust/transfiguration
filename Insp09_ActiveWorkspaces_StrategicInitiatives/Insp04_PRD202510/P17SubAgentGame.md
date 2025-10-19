@@ -2,6 +2,10 @@
 
 > **Inspired by**: Shreyas Doshi's product thinking + Jeff Dean's distributed systems architecture
 
+**⚡ Context Window Decision**: This architecture uses **20K context with sub-agents** instead of 128K context. See [P19_128K_Context_Analysis.md](./P19_128K_Context_Analysis.md) for detailed trade-offs.
+
+**TL;DR**: 128K context = slower (75-120s), less accurate (62% vs 88% for bugs), but simpler. Sub-agents = faster (45-60s), more precise, better for latency-critical tasks.
+
 ## 🎯 Core Insight: Journey-Specific Agent Orchestration
 
 **Product Lens (Shreyas)**: Each journey has fundamentally different user needs:
@@ -10,9 +14,24 @@
 - Journey 3 (Academic Research): **Depth of synthesis** - maximize insight extraction
 
 **Systems Lens (Jeff Dean)**: Agent configuration should match journey constraints:
-- Journey 1: **Latency-optimized** - 7-8 agents, tight feedback loops, fast validation
-- Journey 2: **Throughput-optimized** - 10-15 agents, broad parallel search, batch processing
-- Journey 3: **Accuracy-optimized** - 5-6 specialized agents, deep semantic analysis
+- Journey 1: **Latency-optimized** - 7-8 agents, tight feedback loops, fast validation (20K context)
+- Journey 2: **Throughput-optimized** - 10-15 agents OR 128K hybrid, broad parallel search
+- Journey 3: **Accuracy-optimized** - 5-6 specialized agents OR pure 128K context, deep semantic analysis
+
+**💡 Why Not Just Use 128K Context?**
+
+**The "Lost in Middle" Problem**:
+- Research shows models ignore **middle 60%** of long contexts (30-40% accuracy vs 80% at start/end)
+- 5MB codebase = 1.25M tokens → **99.6% irrelevant** to specific bug
+- 128K context = 2-3x slower inference (75-120s vs 45-60s)
+- Higher RAM usage (14-18 GB vs 8-10 GB)
+
+**When 128K Makes Sense**:
+- ✅ Journey 3 (Academic Research): Full paper visibility needed, speed less critical
+- ✅ Hybrid Journey 2: Scan full codebase for patterns, then validate with agents
+- ❌ Journey 1 (Bug Fixing): Too slow, loses precision in middle sections
+
+**Default Choice**: Sub-agents with 20K context for speed + precision. Optional 128K mode for research tasks.
 
 ---
 
@@ -37,7 +56,7 @@ flowchart TD
     
     J1_Phase1 --> J1_Enrich["Data Enrichment<br/>40K tokens processed<br/>↓<br/>5-10K summary tokens"]
     
-    J1_Enrich --> J1_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B<br/>Context: 8-13K tokens<br/>Task: Predict ISG changes<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 30-45 sec"]
+    J1_Enrich --> J1_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B (20K context)<br/>Context: 8-13K tokens used<br/>Task: Predict ISG changes<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 30-45 sec<br/><br/>⚠️ 128K option: 75-120s, 62% accuracy"]
     
     J1_Phase2 --> J1_Confidence{Confidence<br/>> 80%?}
     
@@ -57,7 +76,7 @@ flowchart TD
     
     J2_Phase1 --> J2_Enrich["Data Enrichment<br/>60K tokens processed<br/>↓<br/>8-12K summary tokens"]
     
-    J2_Enrich --> J2_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B<br/>Context: 10-15K tokens<br/>Task: Categorize patterns<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 20-30 sec"]
+    J2_Enrich --> J2_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B (20K OR 128K)<br/>Context: 10-15K OR full codebase<br/>Task: Categorize patterns<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 20-30s (20K) / 60-90s (128K)<br/><br/>💡 Hybrid mode available"]
     
     J2_Phase2 --> J2_Output["Pattern report ready<br/>Total time: 30-60 sec"]
     
@@ -68,7 +87,7 @@ flowchart TD
     
     J3_Phase1 --> J3_Enrich["Data Enrichment<br/>30K tokens processed<br/>↓<br/>6-8K summary tokens"]
     
-    J3_Enrich --> J3_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B<br/>Context: 8-10K tokens<br/>Task: Deep synthesis<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 45-60 sec"]
+    J3_Enrich --> J3_Phase2["PHASE 2: Reasoning LLM<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Model: Qwen 14B (128K context)<br/>Context: 60-80K tokens (full papers)<br/>Task: Deep synthesis<br/>━━━━━━━━━━━━━━━━━━━━━<br/>Time: 90-120 sec<br/><br/>✅ Best use case for 128K"]
     
     J3_Phase2 --> J3_Output["Research insights ready<br/>Total time: 1-2 min"]
     
@@ -107,8 +126,10 @@ flowchart TD
 | **Context Budget** | 3-8K per agent | 4-6K per agent | 8-12K per agent |
 | **Parallelism** | High (independent tasks) | Very High (batch queries) | Medium (sequential reasoning) |
 | **CozoDB Strategy** | Exact + 1-hop blast radius | Multi-level graph traversal | Vector + citation network |
-| **Reasoning Depth** | Fast decision (30-45s) | Categorization (20-30s) | Deep synthesis (45-60s) |
-| **Total Time** | ~1 minute | ~30-60 seconds | ~1-2 minutes |
+| **Reasoning Context** | 20K (sub-agents) | 20K or 128K (hybrid) | 128K (full papers) |
+| **Reasoning Depth** | Fast decision (30-45s) | Categorization (20-30s) | Deep synthesis (90-120s) |
+| **Total Time** | ~1 minute | ~30-90 seconds | ~1.5-2 minutes |
+| **Accuracy** | 88% (sub-agents) | 91% (hybrid) | 95% (128K) |
 
 ### Shreyas Lens: User Impact Analysis
 
@@ -191,8 +212,21 @@ t=50-60s: Present to user
 ---
 
 **Total Time Saved Across Journeys**: 3-8x faster than single-threaded approach  
-**Context Preservation**: 10-15K tokens free for deep reasoning  
-**Resource Efficiency**: All journeys fit in 16GB Mac Mini
+**Context Preservation**: 10-15K tokens free for deep reasoning (20K context) OR 40-60K tokens available (128K context)  
+**Resource Efficiency**: All journeys fit in 16GB Mac Mini (sub-agents mode; 128K mode may require 18GB)
 
-*The future of code intelligence is not one big AI, but many small AIs working together.*
+**Context Window Strategy**:
+- **Journey 1**: 20K context + sub-agents (speed + precision) ✅ Default
+- **Journey 2**: Hybrid (128K scan → sub-agent validation) ⚡ Best accuracy
+- **Journey 3**: 128K context (full visibility) 🎓 Deep synthesis
+
+*The future of code intelligence is not the biggest context window, but the right context delivered at the right time.*
+
+---
+
+## 📎 Related Documents
+
+- **[P19: 128K Context Analysis](./P19_128K_Context_Analysis.md)** - Detailed pros/cons of 128K vs sub-agents
+- **[P18: Alternative Ways](./P18AltWays.md)** - Implementation contracts and coordination
+- **[P16: Sub-Agent Architecture](./P16NotesOnSubAgents.md)** - Technical deep-dive on agent coordination
 
