@@ -411,6 +411,70 @@ Risks & Mitigations
 
 —
 
+Open-Source Tool Decomposition: 5 Adoption Scenarios
+
+Foundational tool primitives (independent)
+- ISG builder (library + CLI): Build ISGL1 (filepath-filename-InterfaceName) with L2/L3 constituents for understanding; Cozo adapters; HNSW-ready.
+- CodeGraph store (library + CLI): Single write-surface keyed by ISGL1; Current_Code, Future_Code, Future_Action, current_fid, future_fid, candidate_diff_id, validation_status; import/export.
+- Summarizer (library + CLI): One-line summaries per ISGL1; rule-first, LLM-late fallback; provenance flags.
+- Embed/Index builder (CLI): Code+summary embeddings; HNSW build/update; shard/merge; stats.
+- Retrieval engine (library + CLI): Two-hop Datalog + vector KNN; hierarchical ranking (L1>L2>L3); Needed shortlist.
+- Pattern/Anti-pattern KB (library + CLI): Templates, examples, thresholds, success metrics.
+- Constraints + RA overlay client (library): didOpen buffers; diagnostics; bounds inspector.
+- Context packer (library): Needed-first order; ≤3K tokens; start/early/middle/end.
+- Deterministic transforms (library + CLI): Rule-backed diffs for bounds/lifetimes/cfg consolidation.
+- Reasoner adapter (library): Local llama.cpp + remote Claude via one interface; confidence scorer.
+- Local orchestrator (daemon + CLI): Multi-model scheduler; resource caps; KV reuse; JSON-RPC.
+- Preflight gate (CLI): RA overlay → cargo check → selective tests; structured report.
+- Diagnostics mapper (CLI): Map diagnostics to ISGL1 + CodeGraph rows; blast radius.
+- Git integration (CLI): Present/apply diff; rollback; signed commits; templates.
+- Ratatui TUI (binary): Panes for Needed shortlist, diff, diagnostics, CodeGraph rows, metrics; offline-capable.
+
+Scenarios
+1) Graph + Gate core (smallest reliable slice)
+- Tools: CodeGraph store, Preflight gate, RA overlay client, Git integration
+- Outcome: Safe apply pipeline (diff → CodeGraph.Future_Code → Preflight → flip → commit). Zero LLM required.
+
+2) Understand-first analysis kit
+- Tools: ISG builder, Summarizer, Embed/Index, Retrieval engine, Diagnostics mapper, TUI
+- Outcome: Precise discovery/triage with hierarchical retrieval and 1-line summaries; no writes.
+
+3) Local-first fix (deterministic + minimal LLM)
+- Tools: Scenario 1 + Deterministic transforms + Constraints/RA overlay + Context packer + Reasoner adapter
+- Outcome: Rule-backed patches first; LLM only if needed; same CodeGraph-only writes; Preflight enforces safety.
+
+4) Parallel candidates with local orchestrator
+- Tools: Local orchestrator + Retrieval engine + Deterministic transforms + Reasoner adapter + Preflight gate + CodeGraph + TUI
+- Outcome: 3–5 parallel candidate diffs ranked by constraints/patterns; best proceeds to Preflight.
+
+5) CI toolkit and headless hooks
+- Tools: Preflight gate + ISG builder (impact) + Selective tests + Diagnostics mapper + Git integration + JSON reporters
+- Outcome: Pre-commit/pre-push/PR checks that explain failures in ISGL1 terms; headless, reproducible, IDE-free.
+
+Interfaces and boundaries
+- All CLIs: JSON in/out; libraries are trait-first for swappable engines.
+- CodeGraph is the only write surface; everything else is read-only analysis/context.
+- Deterministic transforms propose diffs; they never write—Preflight + CodeGraph gate every change.
+
+HP-themed names (tool → name)
+- ISG builder → MarauderMap
+- CodeGraph store → Pensieve
+- Summarizer → Remembrall
+- Embed/Index builder → Portkey
+- Retrieval engine → FlooNetwork
+- Pattern/Anti-pattern KB → RestrictedSection
+- Constraints/RA overlay → Revelio
+- Context packer → BeadedBag
+- Deterministic transforms → Spellbook
+- Reasoner adapter → Prefect
+- Local orchestrator → PhoenixOrder
+- Preflight gate → Patronus
+- Diagnostics mapper → Howler
+- Git integration → OwlPost
+- TUI → DailyProphet
+
+—
+
 Appendix A: Local Model Matrix (indicative)
 - A1: 22–50M encoder (Q4) — 50–150 MB.
 - A4: MiniLM 22M (Q4) — ~40–80 MB.
