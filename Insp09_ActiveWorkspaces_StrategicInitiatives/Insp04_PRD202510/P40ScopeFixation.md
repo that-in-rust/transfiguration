@@ -16,6 +16,8 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
     - llama.cpp because Ollama does not allow parallelism
     - CozoDB because it is a graph database
     - We will be based on Claude Code as a plugin or skill or something because we want to focus on the core differentiation which is ISG & similar Aggregated Code Context which can ensure reliable bug solving with high accuracy
+        - Hence ideally whatever we want to be part of Parseltongue could be a Cargo Library or Tool, it ensures we can experminent with combination permutations
+        - We will 
     - Core Data Model: Interface Signature Graph (ISG)
         - Nodes: function signatures, impl blocks, trait items, types, public APIs, macro-expanded interfaces.
         - Edges: CALLS, IMPLEMENTS, USES, DEPENDS, REQUIRES_BOUND, FEATURE_GATED_BY.
