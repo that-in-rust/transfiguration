@@ -1,4 +1,36 @@
 
+# Deconstruction Enrichment v1 — From Reverse-Engineering to Actionable Architecture
+
+Goal
+- Translate raw deconstruction notes into actionable, testable architecture insights for Parseltongue.
+- Anchor findings to Interface Signature Graphs (ISGL1-first), CodeGraph (single write surface), and Preflight safety gates.
+
+Method (reliability-first)
+- Evidence → Hypothesis → Testable Claim → Tool/Flow Mapping.
+- Deterministic-first, LLM-late; ensure every proposal is verifiable with small, automatable checks.
+
+Artifacts Referenced
+- anthropics-claude-code notes (repo structure, agents, hooks, changelog).
+- Warp binary disassembly and string extraction metadata.
+
+Key Outcomes (executive summary)
+- ISG applicability: Interfaces and plugin agent specs align with ISGL1 keys; use summaries to compress context.
+- Retrieval: Combine exact (dir tree, symbols, agent files) with vectors (strings/changelog) for high-precision shortlist.
+- Safety: In-memory overlays (didOpen) + cargo check/nextest replicate Claude’s guarded behavior for code edits.
+- Orchestration: Many small local subagents plus an optional planner/critic (cloud or local 7B) for hard cases.
+
+Actionable Mappings (tools)
+- interface-graph-builder: ingest code and derive ISGL1 keys from agent files and hook specs.
+- interface-summary-generator: 1‑line summaries of agents, commands, hooks to reduce tokens.
+- embedding-index-builder: embed summaries and key strings for HNSW.
+- hybrid-retrieval-engine: shortlist relevant interfaces given an error/goal.
+- deterministic-patch-engine: rule-backed changes for bounds/lifetimes/cfg in Rust tooling.
+- preflight-safety-gate: RA overlay + cargo check + selective tests.
+- codegraph-write-surface: only location for Future_Code/Current_Code edits.
+
+TDD Hooks
+- Each claim below includes a “Check” item describing a test or measurement to keep the doc grounded.
+
 Trying to learn from Claude Code and Warp.Dev
 
 Notes from Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthropics-claude-code-8a5edab282632443 (1).txt 
@@ -9,12 +41,16 @@ Notes from Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthrop
 - **ELF 64-bit x86-64:** Warp is compiled for Linux with dynamic linking.
 - **Stripped Binary:** No debug symbols, making source code recovery impossible.
 - **Dependencies:** GLIBC, GLIBCXX, ALSA, ZSTD, SQLite—indicates Rust with system integration for terminal features.
+- Check: ensure interface-summary-generator captures terminal-facing interfaces (render, input) as ISGL1 summaries.
+- Map: retrieval via hybrid-retrieval-engine using strings (“render”, “pty”, “alsa”) to locate relevant ISGL1 nodes.
 
 ### Analysis Process
 - **Full Disassembly:** 22.5 MB of assembly code extracted.
 - **String Extraction:** 2.3 MB of readable strings (library names, error messages).
 - **Chunking:** Split into 50,151 500-line chunks for LLM processing.
 - **Duplicates:** Hash analysis found minimal duplicates (mostly identical padding).
+- Check: embedding-index-builder recall@K ≥ 0.9 on sampled labeled chunks; measure with held-out evaluation.
+- Map: offline-debugging-tui to visualize cluster themes vs ISGL1 coverage (gap-list-reporter).
 
 ### 4-Word Summaries of Key Chunks
 **Note:** Chunks sorted in chunk_themes_sorted_by_number.txt for logical order.
@@ -23,16 +59,22 @@ Notes from Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthrop
 - Chunk 1000: Library dependency references
 - Chunk 10000: Memory allocation routines
 - Chunk 50000: Terminal UI rendering
+- Check: interface-summary-generator should produce stable summaries; drift < 5% between runs.
+- Map: diagnostics-scope-mapper to connect errors surfaced in UI components back to ISGL1.
 
 
 
 ### Filtered Batch 1 (Lines 1-50): Command-Line Options and Descriptions
 **Summary:** JSON-like structures for CLI commands, e.g., "name": "--secret-file", "description": "Provide a", "args": { "template": "filepaths" }.
 **Predictions:** Configuration data for Warp's command-line interface, including options for databases, regions, sessions, and other features.
+**Check:** hybrid-retrieval-engine must return CLI parser modules when seeded with option tokens.
+**Map:** pattern-knowledge-base entries for common CLI parsing anti-patterns (ambiguous flags, overlapping short options).
 
 ### Filtered Batch 2 (Lines 51-100): Continued Command-Line Options
 **Summary:** More JSON structures for CLI options, e.g., "name": "--vst3-plugindir", "description": "Require all casks", "args": { "name": "WHEN" }.
 **Predictions:** Additional configuration for tools like Rust, Docker, Kubernetes, Git, and others, indicating Warp integrates with multiple development ecosystems.
+**Check:** embedding-index-builder must cluster options by subsystem (git/docker/k8s) with purity ≥ 0.85.
+**Map:** context-pack-builder places subsystem summaries early to guide the reasoner.
 
 ### Filtered Batch 3 (Lines 101-150): Further Command-Line Options
 **Summary:** Continued JSON structures for CLI options, e.g., "name": "--curve", "description": "Print help information", "args": { "name": "speed" }.
