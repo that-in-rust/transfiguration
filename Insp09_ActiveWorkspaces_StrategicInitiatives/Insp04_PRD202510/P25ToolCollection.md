@@ -280,6 +280,10 @@ Tools (each is independent; combine as needed)
     * **Cross-Language Pattern Mapping**: Maps equivalent patterns between Rust, C++, and Python (e.g., RAII, async patterns, error handling) for polyglot teams.
     * **Performance Pattern Analyzer**: Identifies performance-critical patterns (allocation patterns, async boundaries, lock contention) with micro-benchmarking data.
     * **Trait Implementation Patterns**: Catalogs common trait implementation patterns (Builder, Iterator, Future) with automatic suggestion of missing trait bounds.
+    * **Claude Code Plugin Pattern Integration**: Specialized pattern templates for Claude Code commands, hooks, agents, and workflows with plugin.json compatibility validation and MCP integration patterns.
+    * **Multi-Agent Coordination Patterns**: Agent orchestration patterns for parallel discovery, validation, reasoning, and safety phases with standardized contracts and communication protocols.
+    * **Journey-Specific Pattern Curation**: Pattern subsets optimized for bug solving (Journey 1), pattern research (Journey 2), and academic research (Journey 3) with journey-specific success metrics.
+    * **Test-First Architecture Patterns**: Executable specification patterns for contracts, preconditions, postconditions, and error conditions with DI scaffolding and mock generation.
 
 - constraints-overlay-analyzer
   - Purpose: rust-analyzer didOpen buffers; collect diagnostics; compute required/current/missing bounds.
@@ -366,6 +370,14 @@ Tools (each is independent; combine as needed)
     * **Dependency Update Coordinator**: Orchestrates Cargo ecosystem navigation with deep dependency graph analysis, security scanning, and update impact prediction across entire workspaces.
     * **Trait Resolution Orchestrator**: Manages trait solver visualization with ambiguity detection, impl suggestion engine, and interactive trait resolution tree debugging.
     * **Protocol Card Engine**: Orchestrates paper-to-protocol conversion with structured extraction, validation, and scaffold generation for research replication workflows.
+    * **Claude Code Plugin Orchestrator**: Manages Claude Code plugin lifecycle with hot reloading, command registration, agent orchestration, and hook execution with proper error boundaries and resource isolation.
+    * **Multi-Agent Workflow Coordinator**: Orchestrates complex multi-agent workflows (A1-A6 + R1) with parallel execution, result aggregation, confidence scoring, and human approval gates for enterprise deployment.
+    * **Reliability-First Optimization Engine**: Prioritizes first-apply correctness over speed with deterministic transforms, CPU-bound static analysis, and minimal LLM usage while achieving 95%+ success rates through confidence gating.
+    * **Apple Silicon Performance Tuner**: Hardware-aware optimization for M1/M2/M3 with Metal-accelerated quantization (Q4_K_M), dynamic parallelism throttling, and memory pressure management for 16GB+ systems.
+    * **Journey-Specific Workflow Adapter**: Supports 7 distinct user journeys (Single-Pass Fix, Investigate-First, Low-Memory, Air-gapped, CI Gate, Test-First, Zero-LLM) with adaptive resource allocation and success criteria per journey.
+    * **Token Economy Optimizer**: Achieves p95 ≤3K tokens per fix through intelligent context curation, deterministic-first approach, and LLM-late gating while maintaining 97%+ first-apply correctness rates.
+    * **Local Subagent Architecture**: Efficient local model orchestration using tiny models (22M-270M) for data processing and 2-7B models for reasoning, achieving 10x context compression while maintaining information density.
+    * **Safety-First Validation Pipeline**: Multi-stage validation (rust-analyzer overlay → cargo check → selective tests) with zero writes before pass+approval, complete audit trails, and automatic rollback capabilities.
 
 - preflight-safety-gate
   - Purpose: Validate candidate diffs with RA overlay → cargo check --quiet → selective tests.
@@ -651,6 +663,14 @@ Three-Word Tool Aliases (reference)
   - Outputs: run manifest, metrics.
   - Actions: schedule → execute → checkpoint → resume.
   - Example CLI: async-job-orchestrator run pipeline.yaml
+  - Diverse Ideas:
+    * **5-Orchestration Strategy Engine**: Supports 5 distinct Claude+Local orchestration patterns (Claude-as-Reasoner, Claude-as-Orchestrator, Local-first with Escalation, Spec Planner + Implementor, Critic/Selector) with automatic strategy selection based on network availability, memory constraints, and complexity requirements.
+    * **Apple Silicon Performance Optimizer**: Metal-aware orchestration with Q4_K_M quantization, dynamic parallelism throttling, and memory pressure management achieving 30-110 tok/s throughput for 2-7B models with automatic KV cache optimization.
+    * **Token Economy Manager**: Enforces ≤3K token budget through intelligent context curation, deterministic-first processing, and LLM-late gating while maintaining 97%+ first-apply correctness rates across all orchestration strategies.
+    * **Enterprise Adoption Scenario Engine**: Supports 5 deployment strategies (Constellation, Two-Pillars + Orchestrator, Triptych Planes, Fix-Engine Centric, Monorepo Workspace) with compliance-friendly separation, CI-ready pipelines, and modular adoption patterns.
+    * **HP-Themed Architecture Integration**: MarauderMap (ISG builder), Pensieve (CodeGraph store), Remembrall (Summarizer), Portkey (Embed/Index), FlooNetwork (Retrieval), RestrictedSection (Patterns), Revelio (Constraints), BeadedBag (Context), Spellbook (Transforms), Prefect (Reasoner), PhoenixOrder (Orchestrator), Patronus (PreFlight), Howler (Diagnostics), OwlPost (Git), DailyProphet (TUI) with unified JSON contracts.
+    * **Multi-Strategy Resource Manager**: Dynamic resource allocation across 5 orchestration patterns with memory-aware model selection (2-7B local vs cloud), automatic fallback strategies, and performance monitoring with p95 ≤120s targets.
+    * **Open-Source Tool Decomposition**: Modular primitive architecture supporting 5 adoption scenarios from Graph+Gate core (zero LLM) through Understand-first analysis kit, Local-first fixes, Parallel candidates, to CI toolkit with headless hooks and JSON reporters.
 
 Appendix A: Local Model Matrix (indicative)
 - A1: 22–50M encoder (Q4) — 50–150 MB.
@@ -658,6 +678,24 @@ Appendix A: Local Model Matrix (indicative)
 - A5: SmolLM2 135M (Q4) — ~300–500 MB.
 - A6-helper: Gemma 270M (Q4) — ~600–800 MB.
 - R1: Qwen2.5 7B (Q4_K_M) — ~4.5–6.5 GB VRAM-equivalent on Metal; CPU fallback slower.
+
+Appendix C: Claude Code Plugin Architecture Integration
+- 5-Phase Journey Integration: Discovery (A1-A3), Validation (A4-A6), Reasoning (R1), Safety (PreFlight), Presentation (Diff + Apply) with 60-90s target time
+- Multi-Agent System: 11 specialized agents (A1-A6 + R1 + safety-gate + diff-presenter + learning-orchestrator) with standardized contracts
+- Performance Metrics: 95%+ first-apply correctness, 85-95% confidence scoring, p95 ≤120s resolution time, 3K token economy
+- Hardware Optimization: Apple Silicon Metal acceleration, Q4_K_M quantization, 16GB+ memory optimization with dynamic throttling
+- Safety Validation: Zero writes before PreFlight pass, rust-analyzer overlay validation, cargo check pipeline, automatic rollback capabilities
+- Journey-Specific Workflows: Single-Pass Fix, Investigate-First, Low-Memory, Air-gapped, CI Gate, Test-First, Zero-LLM modes with adaptive resource allocation
+- Plugin Lifecycle Management: Hot reloading, command registration (/rust:debug-bug, /rust:validate-fix, /rust:build-isg), agent orchestration, hook execution
+- Learning Loop Integration: Pattern effectiveness tracking, historical bug storage, confidence calibration, continuous improvement per codebase
+
+Appendix D: Orchestration Strategies & Performance Analysis
+- 5 Claude+Local Orchestration Patterns: Claude-as-Reasoner (60-90s), Claude-as-Orchestrator (70-100s), Local-first with Escalation (55-85s), Spec Planner + Implementor (80-120s), Critic/Selector (70-110s)
+- Apple Silicon Performance Matrix: Qwen2.5 7B (30-55 tok/s decode, 600-1200 tok/s prefill), Qwen 3B (60-110 tok/s decode, 1200-2200 tok/s prefill), 2-3B implementors (80-140 tok/s), 270M (220-450 tok/s), 135M (400-800 tok/s), 22-50M encoders (800-1500 tok/s)
+- Memory Optimization: 16GB+ support with dynamic throttling, Q4_K_M quantization, Metal layer downshift on pressure, KV cache optimization preventing thrash
+- Token Throughput Engineering: Parallel scaling with 65-80% effective aggregate throughput, deterministic-first processing achieving 30% zero-LLM rate on common errors, escalation logic preventing token thrash
+- Enterprise Adoption Framework: Constellation (maximum modularity), Two-Pillars + Orchestrator (compliance-friendly), Triptych Planes (performance budgets), Fix-Engine Centric (fastest value), Monorepo Workspace (team coherence)
+- Performance Targets: FACR ≥97%, tokens_per_fix p95 ≤3K, validation_accuracy ≥98%, time_to_safe_fix p95 ≤120s, memory_footprint ≤12GB standard mode
 
 Appendix B: Pattern Inventory (top 10 by incidence)
 1) async_spawn_send (Send + 'static bounds)

@@ -22,15 +22,19 @@ Use this as a filter for Rust Tools or Libraries you are ideating
             - Current_Code (canonical pre-edit slice),
             - Future_Code (candidate patch slice, ephemeral until approval),
             - Future_Action (None|Create|Edit|Delete),
-            - current_fid (0/1: in current bug scope),
-            - future_fid (0/1: planned to change),
-            - candidate_diff_id, validation_status (Pending|RA_OK|Cargo_OK|Tests_OK|Failed),
-            - last_applied_commit, updated_at.
+            - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code),
+            - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
         - Rule: All code-iteration writes happen only in CodeGraph. All other CozoDB tables (ISG nodes/edges, embeddings, pattern KB indices) are read-only context stores and never mutate code.
-        - Flow: PreFlight compiles Future_Code via RA overlay; on approval, flip Future→Current, clear future_* flags, persist commit id; embeddings refresh can be deferred.
+        - Flow: PreFlight compiles Future_Code via RA overlay; on approval, flip Future→Current, clear future_* flags
     - Many types of ISGs can be created
         - ISGL1 (interface node keyed as filepath-filename-InterfaceName, 1 level below file/module)
-        - ISGL2 is 1 extra distance below file / module
+        - ISGL2 is 1 extra distance below file / module for e.g. if a function is inside main function in main.rs that will be ISGL3
+        - ISGL3 is 1 extra distance below ISGL2 for e.g. if a function is inside main function and then further inside another function in main.rs that will be ISGL3
+        - ISGs are a proxy for what we called Aggregated Code Context
+            - It is not just about interface signatures, it can be any pyramidal way to aggregate the codebase
+            - for e.g. we can using sub-agents generically summarize all ISGL1 related code blobs to 1 liner summaries, and that will be significantly HQ code context and much lesser than the actual codebase
+            - for e.g. we can try to get HIR or other Rust analyzer meta-data for all ISGL1 related code blobs and that will be significantly HQ code context and much lesser than the actual codebase
+
 - Appendix A: Local Model Matrix (indicative)
     - 22–50M encoder (Q4) — 50–150 MB.
     - MiniLM 22M (Q4) — ~40–80 MB.
