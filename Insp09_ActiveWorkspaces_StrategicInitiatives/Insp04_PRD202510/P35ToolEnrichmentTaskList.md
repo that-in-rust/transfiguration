@@ -61,10 +61,10 @@ Scope
 - [x] P24ClaudePlugin02.md (0–300)
 - [x] P24ClaudePlugin02.md (300–599)
 - [x] P25ToolCollection.md (0–276) - ✅ ENRICHED with 1000 IQ diverse ideas
-- [ ] P31ChatPRDNotes.md (0–300)
-- [ ] P31ChatPRDNotes.md (300–305)
-- [ ] P34DeepNotes.md (0–300)
-- [ ] P34DeepNotes.md (300–600)
+- [x] P31ChatPRDNotes.md (0–300)
+- [x] P31ChatPRDNotes.md (300–305)
+- [x] P34DeepNotes.md (0–300) - ✅ ENRICHED with essential user onboarding, hardware detection, and Parseltongue architectural philosophy
+- [x] P34DeepNotes.md (300–600) - ✅ ENRICHED with production-ready LLM prompt engineering, deterministic workflows, and validation gate architectures
 - [ ] P34DeepNotes.md (600–900)
 - [ ] P34DeepNotes.md (900–1200)
 - [ ] P34DeepNotes.md (1200–1500)

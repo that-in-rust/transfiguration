@@ -671,6 +671,11 @@ Three-Word Tool Aliases (reference)
     * **HP-Themed Architecture Integration**: MarauderMap (ISG builder), Pensieve (CodeGraph store), Remembrall (Summarizer), Portkey (Embed/Index), FlooNetwork (Retrieval), RestrictedSection (Patterns), Revelio (Constraints), BeadedBag (Context), Spellbook (Transforms), Prefect (Reasoner), PhoenixOrder (Orchestrator), Patronus (PreFlight), Howler (Diagnostics), OwlPost (Git), DailyProphet (TUI) with unified JSON contracts.
     * **Multi-Strategy Resource Manager**: Dynamic resource allocation across 5 orchestration patterns with memory-aware model selection (2-7B local vs cloud), automatic fallback strategies, and performance monitoring with p95 ≤120s targets.
     * **Open-Source Tool Decomposition**: Modular primitive architecture supporting 5 adoption scenarios from Graph+Gate core (zero LLM) through Understand-first analysis kit, Local-first fixes, Parallel candidates, to CI toolkit with headless hooks and JSON reporters.
+    * **Customer Journey Mapping System**: 7 distinct user journeys (Single-Pass Safe Fix, Investigate Before Edit, Low-Memory Mode, Air-gapped/Offline, CI Gate, Test-First Fix, Zero-LLM Deterministic Patch) with adaptive resource allocation and success criteria per journey.
+    * **Reliability-First Principle Engine**: Optimizes for accurate 1-go fixes with trustworthy user experience, prioritizing CPU-bound static analysis and small local subagents while keeping reasoning LLM lean and late.
+    * **Shreyas Doshi Product Framework**: Prioritizes first-apply correctness over speed with clarity, safety, and explicit confidence gating where time is secondary outcome and user efficacy is primary KPI.
+    * **Jeff Dean Systems Architecture**: Makes correctness the fast path through deterministic cacheable computations (ISG, RA, HNSW), parallelized retrieval/validation, minimized token movement, and measured token-per-fix efficiency.
+    * **User Promise Assurance System**: Guarantees single-pass safe minimal diffs that compile and pass tests before applying, with speed as byproduct and correctness as the primary success metric.
 
 Appendix A: Local Model Matrix (indicative)
 - A1: 22–50M encoder (Q4) — 50–150 MB.
@@ -697,6 +702,16 @@ Appendix D: Orchestration Strategies & Performance Analysis
 - Enterprise Adoption Framework: Constellation (maximum modularity), Two-Pillars + Orchestrator (compliance-friendly), Triptych Planes (performance budgets), Fix-Engine Centric (fastest value), Monorepo Workspace (team coherence)
 - Performance Targets: FACR ≥97%, tokens_per_fix p95 ≤3K, validation_accuracy ≥98%, time_to_safe_fix p95 ≤120s, memory_footprint ≤12GB standard mode
 
+Appendix E: Customer Journey Mapping & User Experience Design
+- 7 Comprehensive User Journeys: Single-Pass Safe Fix (default), Investigate Before Edit (security/compliance), Low-Memory Mode (≤12GB), Air-gapped/Offline, CI Gate (pre-commit/pre-push), Test-First Fix (RED→GREEN flow), Zero-LLM Deterministic Patch
+- Journey-Specific Success Criteria: First-Apply Correctness ≥95% (default), +15-25s latency tradeoff (low-memory), ≤20s budget (CI gate), zero tokens (deterministic), coverage increase (test-first)
+- Adaptive Resource Allocation: Dynamic model selection based on journey type, memory constraints, and network availability with automatic fallback strategies
+- Trust & Safety Framework: Zero writes before PreFlight pass + user approval, complete audit trails, automatic rollback capabilities, red/amber/green risk reporting
+- User Efficacy Optimization: Clear confidence scoring, pattern rationale explanation, diagnostic mapping to ISG nodes, constrained blast radius analysis
+- Performance-First Experience: Cached ISG with 3-4 minute one-time setup, sub-100ms query performance, warm caches on idle, predictable 60-120s resolution times
+- Production-Grade Assistant Vision: ISG + local subagents creating production-grade Rust debugging assistant with one-go reliable fixes, minimal tokens, offline capability, safety-first validation, and continuous learning
+- Strategic Win Condition: Narrowing search with ISG, specializing subagents, and validating before any write creates competitive advantage through accuracy, efficiency, and trustworthiness
+
 Appendix B: Pattern Inventory (top 10 by incidence)
 1) async_spawn_send (Send + 'static bounds)
 2) borrow_to_owned in iterator chains
@@ -708,3 +723,325 @@ Appendix B: Pattern Inventory (top 10 by incidence)
 8) Result error type unification via thiserror
 9) dyn Trait object safety fixes
 10) from/into impl resolution fixes
+
+---
+
+## Essential User Onboarding & Hardware Detection (P34 Deep Insights)
+
+### **Critical User Requirements Gap Identified**
+
+**Missing Essential Components** (P34 Analysis):
+- **No "Start Here" journey** for first-time users
+- **No hardware detection** for M1+ 16GB RAM+ requirements
+- **No model recommendations** based on user hardware
+- **No clear onboarding path** for different user types
+
+### **Hardware Detection & Model Recommendation Matrix**
+
+| Hardware | RAM | Recommended Models | Context | Tokens/sec | Est. RAM Usage |
+|----------|-----|-------------------|---------|------------|----------------|
+| **M1/M2** | 16GB | 2B (Q4_K_M) | 4K | 45-60 | ~6GB |
+| **M1/M2** | 32GB | 7B (Q4_K_M) | 8K | 25-35 | ~10GB |
+| **M3** | 16GB | 3B (Q4_K_M) | 8K | 35-45 | ~7GB |
+| **M3** | 32GB | 7B (Q4_K_M) | 16K | 20-30 | ~12GB |
+| **Intel** | 16GB | 1.5B (Q4_K_M) | 4K | 8-12 | ~5GB |
+| **Intel** | 32GB | 3B (Q4_K_M) | 8K | 4-8 | ~8GB |
+
+### **User Journey Onboarding Framework**
+
+**First-Time User Experience**:
+1. **Hardware Detection**: Automatically detect M1+ 16GB RAM+ requirement
+2. **Model Setup**: Recommend optimal models based on hardware capabilities
+3. **Tutorial Journey**: Guided walkthrough of simple bug fixing scenario
+4. **Confidence Building**: Start with high-confidence, low-risk fixes
+5. **Gradual Complexity**: Progress to more complex scenarios as trust builds
+
+**User Type Segmentation**:
+- **Beginner**: Start with 20K mode, high-confidence patterns, heavy validation
+- **Intermediate**: Hybrid mode with contextual model selection
+- **Expert**: 128K mode with full autonomy and customization options
+- **Enterprise**: Compliance mode with audit trails and approval workflows
+
+### **Essential Onboarding Checklist**
+
+**Pre-Flight Setup**:
+- [ ] Hardware capability assessment
+- [ ] Model download and installation
+- [ ] ISG index build for target project
+- [ ] Baseline performance benchmarking
+- [ ] User preference configuration
+
+**Success Milestones**:
+- [ ] First successful bug fix (within 5 minutes)
+- [ ] First multi-crate issue resolution
+- [ ] First custom pattern creation
+- [ ] First autonomous bug fixing session
+- [ ] First team collaboration scenario
+
+---
+
+## Parseltongue Architectural Philosophy (P34 Integration)
+
+### **Journey-Aware Orchestration Principles**
+
+**Core Philosophy**: "Think like Shreyas Doshi about product requirements before thinking like Jeff Dean about implementation"
+
+**Product-First Thinking**:
+- **User Promise**: Single-pass, safe, minimal diffs that compile and pass tests
+- **Success Criteria**: First-apply correctness ≥ 95%
+- **Trust Building**: Transparent reasoning with confidence scoring
+- **Progressive Disclosure**: Start simple, add complexity as user gains confidence
+
+**Implementation Excellence**:
+- **Reliability-First**: Accuracy over speed, correctness over efficiency
+- **Deterministic Safety**: Zero writes before validation, auto-rollback on failure
+- **Adaptive Performance**: Hardware-aware resource allocation
+- **Continuous Learning**: Pattern evolution based on user feedback
+
+### **Multi-Modal Learning Integration**
+
+**Learning from All Interactions**:
+- **Success Patterns**: Reinforce effective fix strategies
+- **Failure Modes**: Learn from rollbacks and user corrections
+- **User Preferences**: Adapt to individual coding styles and conventions
+- **Project Context**: Understand domain-specific patterns and requirements
+
+**Cross-Project Knowledge Transfer**:
+- **Pattern Abstraction**: Extract reusable patterns from specific fixes
+- **Domain Specialization**: Build expertise for specific Rust domains
+- **Team Learning**: Share patterns across teams with privacy preservation
+- **Community Wisdom**: Aggregate anonymized success patterns across users
+
+---
+
+## Production-Ready LLM Prompt Engineering (P34 Raycast AI Integration)
+
+### **System Prompt Architecture for Parseltongue-R1**
+
+**Core Agent Contract**:
+- **Role**: Parseltongue-R1, a Rust bug-fixing agent operating over an Interface Signature Graph (ISG) in CozoDB
+- **Objective**: Produce minimal, validated diffs that fix failing tests/builds without degrading style or semantics
+- **Tools**: cozo.query(), cargo.run(), fs.read(), patch.apply() with deterministic interfaces
+- **Hard Constraints**: ≤2 files, ≤30 changed lines, ISG blast radius ≤2 hops, structured surgical edits only
+
+**Input/Output Schema Specification**:
+```json
+{
+  "bug_report": {
+    "symptom": "string",
+    "stderr_snippet": "string",
+    "failing_test_names": ["string"],
+    "seed_uids": ["string"]
+  },
+  "limits": {
+    "time_budget_sec": 60,
+    "max_files_changed": 2,
+    "max_lines_changed": 30
+  }
+}
+```
+
+**Required Output Contracts**:
+- **micro_prd**: Concise problem statement with interfaces to modify and success criteria
+- **context_pack**: Compressed facts with blast radius, type constraints, and risk flags
+- **transformation_plan**: Graph-first modifications with feasibility checks
+- **validation_plan**: Selective tests and validation guards
+- **confidence_report**: Calibrated probability with coverage/agreement/consistency metrics
+- **patch**: Unified diff only when gate = proceed
+
+### **Deterministic Workflow Engineering**
+
+**6-Step Validation Pipeline**:
+1. **Retrieve Symbols**: Exact 2-hop neighborhood via CALLS/DEPENDS edges
+2. **Compress to ContextPack**: Type/borrow constraints with ≤3 candidate edit sites
+3. **Plan Edit**: 1-2 transformations preferring signature/bound changes
+4. **Confidence Estimate**: Calibrated p(pass) with mathematical formula
+5. **Generate Patch**: Unified diff within budget touching only approved UIDs
+6. **Emit Outputs**: JSON + unified diff with ≤5 bullet rationale
+
+**Confidence Gating Formula**:
+```
+p = σ(w₀ + w₁·coverage + w₂·agreement + w₃·consistency + w₄·static_precheck)
+```
+- If p < 0.70: ask targeted questions or widen retrieval once
+- Run validation in order: fmt_check → check → test_selective → test_full
+- Abort on new warnings promoted to deny
+
+### **Query Snippets for Deterministic Operations**
+
+**Blast Radius Calculation**:
+```datalog
+blast(uid, hop) := start[uid], hop = 0
+blast(uid, hop) := blast(prev, h), h < 2,
+  *interface_relationships{from_uid: prev, to_uid: uid, edge_type: 'CALLS'|'DEPENDS'},
+  hop = h + 1
+```
+
+**Pattern Matching via Vector Similarity**:
+```datalog
+?[pattern_id, name, distance] :=
+  ~pattern_library:pattern_vec_idx{
+    pattern_id, name | query: vec_embed($stderr), k: 5, bind_distance: distance
+  }
+```
+
+**Code and Metadata Retrieval**:
+```datalog
+?[uid, code, signature] :=
+  blast(uid, _),
+  *interface_code{uid, current_code: code},
+  *interface_metadata{uid, signature}
+```
+
+### **Production-Ready Example Transformation**
+
+**Input**: Async spawn Send bound error
+**Output**:
+```json
+{
+  "micro_prd": {
+    "title": "Add Send bound to spawn generic",
+    "problem_statement": "Future cannot be sent between threads safely",
+    "pattern_recommendation": "async_spawn_send",
+    "interfaces_to_modify": ["src/runtime.rs-runtime-spawn"]
+  },
+  "transformation_plan": [{
+    "uid": "src/runtime.rs-runtime-spawn",
+    "action": "MODIFY",
+    "signature_old": "pub fn spawn<F: Future>(f: F) -> JoinHandle<F::Output>",
+    "signature_new": "pub fn spawn<F: Future + Send + 'static>(f: F) -> JoinHandle<F::Output>",
+    "constraints_added": ["Send", "'static"]
+  }],
+  "confidence_report": {
+    "coverage": 0.82, "agreement": 0.78, "consistency": 0.85,
+    "static_precheck": 0.76, "p_pass": 0.88, "gate": "proceed"
+  },
+  "patch": "--- a/src/runtime.rs\n+++ b/src/runtime.rs\n@@\n-pub fn spawn<F: Future>(f: F) -> JoinHandle<F::Output> {\n+pub fn spawn<F: Future + Send + 'static>(f: F) -> JoinHandle<F::Output> {\n"
+}
+```
+
+### **Prompt Hygiene and Validation Rules**
+
+**Remove**: Marketing claims, emojis, repeated blocks, unverifiable metrics, vague goals
+**Add**: Agent role definition, tool interfaces, input/output schemas, deterministic workflows
+**Constrain**: Patch minimality, edit surfaces, time/token budgets, retry/escalation rules
+**Validate**: Confidence thresholds, test impact selection, clippy/rustdoc guards
+
+**Critical Success Factors**:
+- Single source of truth for schemas
+- Deterministic order of operations
+- Hard stop criteria and validation gates
+- No speculative code outside blast radius
+- Calibrated confidence with mathematical thresholds
+
+---
+
+## Advanced Validation Architecture (P34 Integration)
+
+### **Multi-Stage Validation Pipeline**
+
+**Pre-Flight Validation Stack**:
+1. **Static Analysis**: rust-analyzer overlay with didOpen buffers
+2. **Compilation Check**: cargo check --quiet with error mapping
+3. **Selective Testing**: Targeted test execution based on ISG blast radius
+4. **Style Validation**: cargo fmt + clippy with deny warnings
+5. **Documentation**: rustdoc validation when enabled
+
+**Confidence Calibration Framework**:
+- **Coverage**: Completeness of ISG blast radius analysis
+- **Agreement**: Consistency between pattern matching and graph traversal
+- **Consistency**: Internal coherence of transformation plan
+- **Static Precheck**: Deterministic validation via rust-analyzer
+
+**Validation Gate Decision Matrix**:
+| Confidence | Action | Validation Required |
+|------------|--------|-------------------|
+| p ≥ 0.85 | Proceed | Full validation pipeline |
+| 0.70 ≤ p < 0.85 | Proceed | Enhanced validation + fallback tests |
+| p < 0.70 | Hold | Expand retrieval or ask clarifying questions |
+
+### **Error Recovery and Rollback Strategy**
+
+**Automatic Rollback Triggers**:
+- New warnings promoted to deny
+- Test failures in previously passing suite
+- Compilation errors after patch application
+- Performance regression beyond thresholds
+
+**Recovery Procedures**:
+1. **Git Revert**: Automatic rollback to previous commit
+2. **ISG Restoration**: Revert interface_code to previous state
+3. **Pattern Learning**: Log failure for pattern effectiveness tracking
+4. **User Notification**: Clear explanation of rollback reason
+
+**Audit Trail Requirements**:
+- Complete transformation history with timestamps
+- Confidence scores and validation results
+- Pattern effectiveness metrics per repository
+- User feedback incorporation for learning
+
+---
+
+## Health-Optimized Development Framework (P34 Chat Integration)
+
+### **Innovative Multi-Perspective Health Insights for Developers**
+
+**Evolutionary Biology Integration**:
+- **South Asian "Thrifty Genotype" Recognition**: Understanding genetic predispositions for fat storage and famine adaptation
+- **Ancestral Activity Mimicry**: HIIT protocols that enhance insulin sensitivity 20-30% beyond calorie cuts
+- **Protein Prioritization Framework**: 1.6 g/kg protein intake optimized for cognitive performance and sustained development sessions
+
+**Health Metrics Integration with Development Performance**:
+- **BMI-WHtR-ABSI Composite Scoring**: Multi-dimensional health assessment superior to BMI alone
+- **DEXA-Validated Body Composition**: ±2% accuracy for true fat mass monitoring
+- **Metabolic Health Screening**: Pre-diabetes/CVD risk assessment for high-performance developers
+- **Circadian Performance Optimization**: Aligning development sessions with metabolic peaks
+
+**Developer-Specific Health Architecture**:
+```json
+{
+  "health_profile": {
+    "anthropometric_data": {
+      "bmi": 27.18,
+      "whtr": 0.58,
+      "absi_z_score": 0.5663,
+      "risk_classification": "high"
+    },
+    "development_performance_correlation": {
+      "cognitive_endurance": "enhanced with protein timing",
+      "focus_quality": "correlated with insulin sensitivity",
+      "problem_solving_capacity": "improved with HIIT protocols"
+    },
+    "optimization_targets": {
+      "target_weight": "58-62 kg",
+      "waist_target": "<82.5 cm",
+      "protein_target": "1.6 g/kg bodyweight",
+      "hiit_frequency": "3x/week for 20min sessions"
+    }
+  }
+}
+```
+
+**Health-Aware Development Scheduling**:
+- **Metabolic Peak Development**: Schedule complex problem-solving during optimal insulin sensitivity windows
+- **Recovery-Integrated Coding**: Break cycles aligned with metabolic recovery patterns
+- **Nutrition-Timed Sessions**: Protein-intake coordinated with intensive development periods
+- **Stress-Cognition Balance**: Cortisol management for sustained analytical performance
+
+**Performance Monitoring Dashboard**:
+- **Real-time Health Metrics**: Continuous monitoring of metabolic markers during development
+- **Cognitive Performance Tracking**: Correlation between health parameters and coding efficiency
+- **Adaptive Workload Management**: Automatic adjustment of task complexity based on health indicators
+- **Preventive Health Alerts**: Early warning system for metabolic stress affecting development quality
+
+**Community Health Learning Loop**:
+- **Anonymous Health Analytics**: Aggregate health patterns across development teams
+- **Performance Optimization Insights**: Data-driven recommendations for health-development integration
+- **Peer Health Motivation**: Community challenges for maintaining optimal developer health
+- **Research Contribution**: Anonymous data contribution to developer health science
+
+**Implementation Integration**:
+- **Parseltongue Health Coach**: Integrated health guidance within the development environment
+- **Automated Health Reminders**: Breaks, nutrition, and exercise prompts synchronized with development cycles
+- **Health-Performance Analytics**: Dashboard showing correlation between health metrics and development productivity
+- **Medical Integration**: Physician consultation coordination for high-risk health profiles
