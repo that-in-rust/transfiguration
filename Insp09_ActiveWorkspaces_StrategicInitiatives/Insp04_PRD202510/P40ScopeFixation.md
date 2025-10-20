@@ -4,22 +4,39 @@ Use this as a filter for Rust Tools or Libraries you are ideating
 
 - ANTHROPIC_KEY will be the orchestrator and reasoning LLM
 - Executive Summary
-    - Reliability-First Principle (per P24 comment):
+    - User Segment: Developers on large Rust codebases ONLY
+    - Reliability-First Principle:
         - Optimize for accurate 1-go fixes that feel trustworthy and increase user efficacy.
         - Prefer CPU-bound static analysis (rust-analyzer overlays, ISG traversals) and small, local, free subagents.
         - Keep the reasoning LLM as lean and late as possible; minimize context/tokens; use deterministic transforms whenever feasible.
     - Shreyas Doshi (product framing): Prioritize first-apply correctness over speed. Design for clarity, safety, and explicit confidence gating. Time is a secondary outcome.
     - Jeff Dean (systems framing): Make correctness the fast path. Push work to deterministic, cacheable computations (ISG, RA, HNSW). Parallelize retrieval/validation; minimize token movement; measure token-per-fix and cache hit rates.
     - User Promise: “When I hit a Rust bug, the system produces a single-pass, safe, minimal diff that compiles and (when present) passes tests before applying. Speed is a byproduct; correctness is the KPI.”
+- Constraints of tech stack
+    - llama.cpp because Ollama does not allow parallelism
+    - CozoDB because it is a graph database
+    - We will be based on Claude Code as a plugin or skill or something because we want to focus on the core differentiation which is ISG & similar Aggregated Code Context which can ensure reliable bug solving with high accuracy
+    - CodeGraph is the single write surface for all code changes
+        - indexed by ISGL1 key (filepath-filename-InterfaceName)
+        - columns (minimal, opinionated):
+            - Current_Code (canonical pre-edit slice),
+            - Future_Code (candidate patch slice, ephemeral until approval),
+            - Future_Action (None|Create|Edit|Delete),
+            - current_fid (0/1: in current bug scope),
+            - future_fid (0/1: planned to change),
+            - candidate_diff_id, validation_status (Pending|RA_OK|Cargo_OK|Tests_OK|Failed),
+            - last_applied_commit, updated_at.
+        - Rule: All code-iteration writes happen only in CodeGraph. All other CozoDB tables (ISG nodes/edges, embeddings, pattern KB indices) are read-only context stores and never mutate code.
+        - Flow: PreFlight compiles Future_Code via RA overlay; on approval, flip Future→Current, clear future_* flags, persist commit id; embeddings refresh can be deferred.
+    - Many types of ISGs can be created
+        - ISGL1 (interface node keyed as filepath-filename-InterfaceName, 1 level below file/module)
+        - ISGL2 is 1 extra distance below file / module
 - Appendix A: Local Model Matrix (indicative)
-    - A1: 22–50M encoder (Q4) — 50–150 MB.
-    - A4: MiniLM 22M (Q4) — ~40–80 MB.
-    - A5: SmolLM2 135M (Q4) — ~300–500 MB.
-    - A6-helper: Gemma 270M (Q4) — ~600–800 MB.
-    - R1: Qwen2.5 7B (Q4_K_M) — ~4.5–6.5 GB VRAM-equivalent on Metal; CPU fallback slower.
-
-
-
+    - 22–50M encoder (Q4) — 50–150 MB.
+    - MiniLM 22M (Q4) — ~40–80 MB.
+    - SmolLM2 135M (Q4) — ~300–500 MB.
+    - Gemma 270M (Q4) — ~600–800 MB.
+    - Qwen2.5 7B (Q4_K_M) — ~4.5–6.5 GB VRAM-equivalent on Metal
 
 
 
