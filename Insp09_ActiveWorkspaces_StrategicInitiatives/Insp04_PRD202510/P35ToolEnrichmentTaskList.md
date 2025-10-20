@@ -65,10 +65,10 @@ Scope
 - [x] P31ChatPRDNotes.md (300–305)
 - [x] P34DeepNotes.md (0–300) - ✅ ENRICHED with essential user onboarding, hardware detection, and Parseltongue architectural philosophy
 - [x] P34DeepNotes.md (300–600) - ✅ ENRICHED with production-ready LLM prompt engineering, deterministic workflows, and validation gate architectures
-- [ ] P34DeepNotes.md (600–900)
-- [ ] P34DeepNotes.md (900–1200)
-- [ ] P34DeepNotes.md (1200–1500)
-- [ ] P34DeepNotes.md (1500–1800)
+- [x] P34DeepNotes.md (600–900) - ✅ ENRICHED with Shreyas Doshi minimalist product thinking, highest-ROI architectural decisions, and job story framework
+- [x] P34DeepNotes.md (900–1200) - ✅ ENRICHED with feasibility validation, beaconized context packing, workspace-aware retrieval, and calibrated confidence systems
+- [x] P34DeepNotes.md (1200–1500) - ✅ ENRICHED with accuracy-first principles, multi-crate architecture, pattern enforcement, and comprehensive validation frameworks
+- [x] P34DeepNotes.md (1500–1800) - ✅ ENRICHED with adaptive multi-candidate strategies, zero-write validation systems, and LSP-based preflight architectures
 - [ ] P34DeepNotes.md (1800–2100)
 - [ ] P34DeepNotes.md (2100–2400)
 - [ ] P34DeepNotes.md (2400–2700)

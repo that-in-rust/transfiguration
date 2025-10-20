@@ -1045,3 +1045,804 @@ blast(uid, hop) := blast(prev, h), h < 2,
 - **Automated Health Reminders**: Breaks, nutrition, and exercise prompts synchronized with development cycles
 - **Health-Performance Analytics**: Dashboard showing correlation between health metrics and development productivity
 - **Medical Integration**: Physician consultation coordination for high-risk health profiles
+
+---
+
+## Shreyas Doshi Minimalist Product Architecture (P34 Deep Analysis)
+
+### **The One-Line Job Story**
+
+**"When I hit a Rust bug, get me to a validated, minimal patch in under 90 seconds."**
+
+### **Highest-ROI, Lowest-Risk Functional Changes**
+
+| Priority | Change | ROI Impact | Effort | Risk | Implementation Time |
+|----------|--------|------------|---------|------|-------------------|
+| **1** | **Caching Basics** (sccache + persistent RA + memoized Cozo) | **5-10x validation speed** | Low | Low | 1-2 days |
+| **2** | **Deterministic 2-Hop Retrieval** (CALLS/DEPENDS with node cap) | **4-10x context compression** | Low | Low | 2-3 days |
+| **3** | **ContextPack v0** (seeds, candidates, type/bound hints) | **3-8x reasoning quality** | Low | Low | 1-2 days |
+| **4** | **Pattern DB v0** (3 high-yield fixes) | **70% bug coverage** | Low | Low | 2-3 days |
+| **5** | **Signature-Only Edits** with hard limits | **95% first-try success** | Low | Low | 1 day |
+| **6** | **Short-Circuit Validation** (fmt → check → failing tests) | **Fast feedback loop** | Low | Low | 1 day |
+| **7** | **Rule-Based Confidence Gate** (trigger + feasibility) | **Zero bad compiles** | Low | Low | 1 day |
+| **8** | **Stable Structural UIDs** (module_path::item_kind::name) | **Prevents reference drift** | Low | Low | 1 day |
+
+### **If You Can Only Build Two Things**
+
+**1. Caching Infrastructure** (Highest Impact)
+- **Why**: PreFlight validation becomes the bottleneck without caching
+- **Components**: sccache, persistent rust-analyzer, memoized Cozo queries
+- **Impact**: Sub-5s validation per candidate vs 30-60s cold starts
+- **Implementation**: Native tool integration, no custom logic needed
+
+**2. Deterministic Retrieval + ContextPack** (Second Highest)
+- **Why**: Reduces reasoning load and eliminates wasted candidates
+- **Components**: 2-hop CALLS/DEPENDS traversal, compressed context packing
+- **Impact**: 4-10x less irrelevant context for reasoning model
+- **Implementation**: Datalog queries + JSON artifact standardization
+
+### **Minimal Viable Pattern Set v0**
+
+**Three High-Yield Rust Fixes** (70% coverage of common bugs):
+
+1. **async_spawn_send**
+   - **Trigger**: "cannot be sent between threads", "future cannot be shared"
+   - **Transform**: Add `Send + 'static` bounds to async function parameters
+   - **Template**: `fn spawn<F: Future + Send + 'static>(f: F) -> JoinHandle<F::Output>`
+
+2. **lifetime_extend**
+   - **Trigger**: "does not live long enough", "borrowed value does not live long enough"
+   - **Transform**: Add lifetime parameters or use references
+   - **Template**: `fn process<'a>(data: &'a str) -> &'a str`
+
+3. **error_propagate**
+   - **Trigger**: "unwrap() used on Result", "expect() used on Result"
+   - **Transform**: Replace with `?` operator or explicit error handling
+   - **Template**: `fn process() -> Result<T, Error> { ...? }`
+
+### **Overcomplication Traps to Avoid**
+
+**High-Complexity, Low-ROI Features**:
+- Multi-agent orchestration systems
+- Complex calibration models with logistic regression
+- Full pattern libraries (100+ patterns)
+- Cross-crate refactoring capabilities
+- Advanced anti-pattern detection
+- Time-travel UI and versioning
+- IMPLEMENTS/HAS_MEMBER edge types
+- Vector search as primary (vs hint)
+
+**Why These Overcomplicate**:
+- Add architectural complexity without proportional user value
+- Increase maintenance burden and failure modes
+- Distract from core job story of fast, reliable fixes
+- Create calibration and tuning nightmares
+
+### **Success Criteria for Minimal Architecture**
+
+**Performance Targets**:
+- **p50 Time to Validated Fix**: ≤90s (after initial indexing)
+- **First-Try Success Rate**: ≥70% (3-pattern set)
+- **Median Patch Size**: 1 file, ≤10 lines
+- **Zero Regressions**: On unrelated test smoke subset
+
+**Technical Metrics**:
+- **ISG Build Time**: ≤3 minutes (one-time)
+- **Query Performance**: <100ms (cached)
+- **Validation Time**: 1-5s per candidate
+- **Memory Usage**: ≤8GB (minimal footprint)
+
+### **One-Week Execution Plan**
+
+**Day 1-2: ISG v0 + Caching**
+- Build interface_metadata + interface_relationships (CALLS/DEPENDS)
+- Implement sccache + persistent rust-analyzer integration
+- Add memoized Cozo query layer
+
+**Day 2-3: Retrieval + Context**
+- Implement 2-hop blast radius with node caps
+- Create ContextPack v0 schema and compression logic
+- Add stable UID generation
+
+**Day 3-4: Pattern DB v0**
+- Encode 3 patterns with signature transforms
+- Add keyword trigger + vector hint logic
+- Implement feasibility checks
+
+**Day 4-5: Validation Pipeline**
+- Short-circuit validation: fmt → check → failing tests
+- Rule-based confidence gate
+- Patch generation with rollback capability
+
+**Day 6-7: Testing + Polish**
+- Evaluate on 10-20 real bugs across 3 patterns
+- Fix top 3 failure modes
+- Performance tuning and documentation
+
+### **The Shreyas Doshi Product Philosophy**
+
+**Core Principles**:
+- **Job Story First**: Every technical decision serves the "bug to patch in 90s" mission
+- **Time to Value**: Prioritize features that reduce time-to-first-success
+- **Simplicity Over Completeness**: Better to do 3 things perfectly than 100 things poorly
+- **Measurable Impact**: Every feature has clear success metrics and ROI targets
+
+**Decision Framework**:
+1. **Does this reduce time to validated fix?**
+2. **Does this increase first-try success rate?**
+3. **Does this add minimal complexity for maximum value?**
+4. **Can we implement this in <3 days with <2 developers?**
+
+If any answer is "no", defer or simplify the feature.
+
+### **Integration with P22 PreFlight Architecture**
+
+**How Minimal Architecture Enhances PreFlight**:
+- **Tighter Scoping**: Fewer, higher-quality candidates for validation
+- **Faster Iteration**: Sub-5s validation enables rapid candidate testing
+- **Reliable Patterns**: Signature-only fixes have predictable PreFlight behavior
+- **Clear Rollback**: Structured edits make PreFlight failure recovery trivial
+
+**PreFlight Amplification Effects**:
+- **Caching**: Turns 30-60s validation into 1-5s feedback loop
+- **Deterministic Retrieval**: Reduces candidate quantity by 4-10x
+- **Pattern Constraints**: Ensures 95% PreFlight pass rate on first try
+
+---
+
+## Feasibility-Validated Architecture (P34 Mathematical Analysis)
+
+### **Performance Mathematics Validation**
+
+**LLM Throughput Calculations**:
+- **Assumptions**: Qwen2.5-Coder-7B at 30-40 tokens/s on 16GB machine
+- **Input**: 10-15K tokens (compressed context)
+- **Output**: 300-800 tokens (generated diff)
+- **Processing Time**:
+  ```
+  T_LLM = output_tokens / tokens_per_sec + KV_processing_overhead
+  T_LLM ≈ 600/35 + 10-20s = 27-37 seconds
+  ```
+
+**Cargo Pipeline Benchmarks**:
+- **fmt**: ~1s (trivial)
+- **check**: 5-12s (warm incremental builds)
+- **test build**: 6-10s (target compilation)
+- **test execution**: 6-15s (impacted tests only)
+- **Total Validation**: 18-38s
+
+**Overall Feasibility**: 60-90s target achievable with:
+- Workspace caching and incremental builds
+- Impacted test selection (vs full suite)
+- Parallel validation phases
+
+### **Beaconized Context Packing Architecture**
+
+**START/END Salience Engineering**:
+```
+==== BUG_SUMMARY ====
+Error: E0277 cannot be sent between threads
+Symptom: panic in spawn under load
+Target: src/runtime.rs::spawn
+
+==== REQUIRED_CONSTRAINTS ====
+Required: where F: Future + Send + 'static
+Current: where F: Future
+
+==== PRIMARY_CODE ====
+[function span + immediate deps]
+
+==== RECOMMENDED_PATTERN ====
+id: async_spawn_send
+success_rate: 0.94
+
+==== REQUIRED_CONSTRAINTS (RECAP) ====
+Required: where F: Future + Send + 'static
+```
+
+**Dual-Anchor Strategy**:
+- **Critical Duplication**: Error codes, one-sentence summary, required bounds, target signature
+- **Section Sentinels**: Explicit beacons for START/END attention zones
+- **Constraint Reinforcement**: Required constraints repeated at both START and END
+
+### **Workspace-Aware Retrieval System**
+
+**Feature-Conditioned Graph Traversal**:
+```datalog
+# 2-hop forward with feature filtering
+?[to_uid, edge_type] :=
+  *isg_edges { from_uid: $seed, to_uid, edge_type },
+  *isg_edges { from_uid: to_uid, to_uid: next_uid, edge_type: next_edge },
+  # Feature constraint enforcement
+  *isg_constraints {
+    uid: to_uid,
+    constraint_type: "feature",
+    constraint_data: $active_features
+  }
+
+# Impacted test selection
+?[test_uid] :=
+  *isg_edges { from_uid: test_uid, to_uid: dep, edge_type: "CALLS" },
+  test_interfaces { uid: test_uid, is_test: true },
+  changed(dep)
+```
+
+**Workspace Graph Integration**:
+- **L0 Workspace Nodes**: Crates, packages, features, test targets
+- **Edge Types**: WITHIN_CRATE, BETWEEN_CRATES, ENABLED_BY_FEATURE
+- **Feature Filtering**: Avoid false-context from disabled features
+- **Test Impact Analysis**: Reverse closure from changed UIDs to tests
+
+### **Calibrated Confidence Engineering**
+
+**Mathematical Confidence Model**:
+```
+p = σ(w₀ + w₁·coverage + w₂·agreement + w₃·consistency + w₄·static_precheck)
+```
+
+**Calibration Strategy**:
+- **Platt Scaling or Isotonic Regression**: Map component scores to calibrated probability
+- **Auto-Apply Threshold**: p ≥ 0.8 for automatic application
+- **User Confirmation**: p < 0.8 requires human review
+- **Semantic Consistency Check**: Verify pattern pre-conditions satisfied by diff
+
+**Semantic Consistency Validation**:
+- **Pattern Pre-conditions**: Formal type variable positions and required bounds
+- **Diff Verification**: Ensure changes actually add required constraints
+- **AST Predicate Matching**: Anti-pattern detection with structural validation
+
+### **Rust-Native Pattern Representation**
+
+**Structured Pattern Schema**:
+```json
+{
+  "id": "async_spawn_send",
+  "applies_to": {
+    "fn_name": "spawn",
+    "generic": "F",
+    "constraints_missing": ["Send", "'static"],
+    "where_clause_site": "fn"
+  },
+  "transform": {
+    "action": "add_bounds",
+    "on": "generic:F",
+    "bounds": ["Send", "'static"]
+  },
+  "examples": [
+    "pub fn spawn<F>(f: F) where F: Future + Send + 'static { ... }"
+  ],
+  "preconditions": [
+    "F: Future",
+    "spawn called across threads"
+  ],
+  "metrics": { "success_rate": 0.94 }
+}
+```
+
+**Pattern Matching Engine**:
+- **Formal Pre-conditions**: Type variable positions and bound requirements
+- **Anti-Pattern Matchers**: AST predicates for bad practice detection
+- **Example Code**: Placeholders with rewriter specifications
+- **Success Metrics**: Historical effectiveness tracking per pattern
+
+### **Multi-Crate Architecture Support**
+
+**Procedural Macro Handling**:
+- **Macro Expansion Tracking**: ISG nodes for generated code with hygiene preservation
+- **Macro Crate Integration**: Cross-crate edge generation for macro-expanded interfaces
+- **Generated Code Validation**: Special handling for derive and procedural macros
+
+**Cross-Crate Dependency Analysis**:
+- **Inter-Crate Edge Types**: BETWEEN_CRATES relationships with feature conditions
+- **Workspace Boundary Awareness**: Respect workspace member boundaries
+- **Feature Flag Integration**: Conditional edge activation based on active features
+
+**Generated Code ISG Integration**:
+- **Macro Expansion Nodes**: Virtual ISG nodes representing expanded code
+- **Hygiene-Aware Mapping**: Preserve macro hygiene information in ISG relationships
+- **Build Script Integration**: Include build.rs generated code in ISG analysis
+
+### **Optimized Validation Pipeline**
+
+**Build Acceleration Strategies**:
+- **Target Directory Pre-warming**: Per-crate and feature-set optimization
+- **Incremental Compilation**: cargo check --profile=dev with sccache integration
+- **Test Optimization**: cargo test --no-run for impact analysis, then selective execution
+
+**Error Routing and Canonicalization**:
+- **Error Code Extraction**: E-codes and trait bound diffs for prompt reinforcement
+- **Canonical Error Format**: Consistent error representation to avoid prompt drift
+- **Panic Detection**: Backtrace parsing with file:line → UID mapping
+
+**Smart Test Selection**:
+- **Impacted Test Graph**: Reverse traversal from changed nodes to dependent tests
+- **Test Prioritization**: Fast-failing tests first, comprehensive tests second
+- **Test Parallelization**: Parallel test execution with result aggregation
+
+### **Performance Optimization Matrix**
+
+| Component | Baseline | Optimized | Improvement | Implementation Effort |
+|-----------|----------|-----------|-------------|----------------------|
+| **Context Packing** | Linear | Beaconized | 35% attention accuracy | Low |
+| **Retrieval** | Naive | Feature-aware | 50% precision improvement | Medium |
+| **Validation** | Full suite | Selective | 60% time reduction | Low |
+| **Confidence** | Linear | Calibrated | 25% better decisions | Medium |
+| **Pattern Matching** | Keyword | Structured | 40% accuracy gain | High |
+
+### **Implementation Priority Queue**
+
+**Phase 1: Foundation (Days 1-3)**
+1. **Beaconized Context Packing**: Section sentinels and dual-anchor duplication
+2. **Feature-Aware Retrieval**: Workspace graph integration with feature filtering
+3. **Selective Test Selection**: Impact-based test routing
+
+**Phase 2: Intelligence (Days 4-6)**
+1. **Calibrated Confidence**: Mathematical model with Platt scaling
+2. **Structured Pattern DB**: Rust-native pattern representation
+3. **Semantic Consistency**: Pre-condition verification system
+
+**Phase 3: Optimization (Days 7-10)**
+1. **Build Pipeline Optimization**: sccache integration and incremental builds
+2. **Multi-Crate Support**: Cross-crate analysis and macro handling
+3. **Performance Tuning**: End-to-end optimization and bottleneck elimination
+
+### **Success Validation Framework**
+
+**Quantitative Metrics**:
+- **Time to Fix**: p50 ≤ 60s, p95 ≤ 90s
+- **First-Try Success**: ≥85% with calibrated confidence
+- **Pattern Coverage**: ≥70% for common Rust errors
+- **Validation Accuracy**: ≥95% PreFlight pass rate
+
+**Qualitative Outcomes**:
+- **User Trust**: Transparent reasoning with confidence scoring
+- **Developer Experience**: Minimal disruption to existing workflows
+- **Learning Capability**: Pattern effectiveness improvement over time
+- **Reliability**: Zero regressions on unrelated codebases
+
+---
+
+## Accuracy-First Architecture (P34 Optimization Strategy)
+
+### **Primary Focus: First-Try Correctness Over Speed**
+
+**Core Philosophy Shift**:
+- **Speed**: Secondary (3-10 minutes per fix acceptable)
+- **Accuracy**: Primary target (95-98% first-try success)
+- **Approach**: Pattern DB → Micro-PRD → ISG_future → Deep Validation → Apply Once → Learn
+
+**Why Accuracy First**: Optimize for "one-and-done" fixes with minimal regressions, even if it costs more time per run. Developer trust and reliability are more valuable than raw speed.
+
+### **Reprioritized KPI Framework**
+
+| Priority | Metric | Target | Rationale |
+|----------|--------|--------|-----------|
+| **Primary** | First-try success rate | ≥95% (compile + tests + validators) | Developer trust and reliability |
+| **Secondary** | Regression rate in CI | ≤1% post-merge | Production stability |
+| **Tertiary** | Idiomaticity score | ≥0.95 | Code quality and maintainability |
+| **Tertiary** | Diff minimality | ≥0.85 | Surgical, reviewable changes |
+| **Monitoring** | Latency | Monitored but not gated | Performance tracking without sacrificing accuracy |
+
+### **Enhanced Discovery Pipeline (Broader, Safer Coverage)**
+
+**Retrieval Optimization for Accuracy**:
+- **A2 Exact Retrieval**: Radius 3 hops (was 2), cap 50 nodes/hop with salience scoring
+- **A3 Vector Retrieval**: K=30 (was 15), bias by pattern hints and active features
+- **Workspace Awareness**: Complete cargo metadata integration with feature-aware edge filtering
+- **Symmetric Analysis**: Include callers and callees for target functions
+- **Type-Level Context**: Pull adjacent trait-bound and lifetime nodes
+
+**Feature-Conditioned Analysis**:
+```rust
+// Active feature vector management
+struct FeatureContext {
+    active_features: HashSet<String>,
+    ci_feature_union: Option<HashSet<String>>,
+    mode: FeatureMode // Active | ActiveAndCI
+}
+
+// Edge filtering by feature conditions
+fn filter_edges_by_features(edges: Vec<ISGEdge>, context: &FeatureContext) -> Vec<ISGEdge> {
+    edges.into_iter()
+        .filter(|edge| is_edge_enabled(edge, &context.active_features))
+        .collect()
+}
+```
+
+### **Multi-Crate Architecture Support**
+
+**Procedural Macro Integration**:
+- **Macro Expansion Tracking**: ISG nodes for generated code with hygiene preservation
+- **Span Mapping**: Map generated code back to original source via rust-analyzer spans
+- **Build Script Integration**: Include build.rs generated code in ISG analysis
+- **Generated Code Warnings**: Alert when patches target generated code
+
+**Cross-Crate Dependency Management**:
+```datalog
+// Cross-crate edge generation
+?[cross_crate_edge] :=
+  *isg_edges { from_uid: source_uid, to_uid: target_uid, edge_type: "BETWEEN_CRATES" },
+  *cargo_metadata { source_crate: source_crate, target_crate: target_crate },
+  *workspace_nodes { uid: source_uid, crate: source_crate },
+  *workspace_nodes { uid: target_uid, crate: target_crate }
+```
+
+**Workspace Graph Integration**:
+- **L0 Workspace Nodes**: Crates, packages, features, test targets
+- **Edge Types**: WITHIN_CRATE, BETWEEN_CRATES, ENABLED_BY_FEATURE
+- **Feature Filtering**: Respect active feature sets for current run
+- **Test Impact Analysis**: Reverse closure from changed UIDs to dependent tests
+
+### **Pattern-Enforced Validation Framework**
+
+**Structured Pattern Records with Pre/Post Conditions**:
+```json
+{
+  "id": "async_spawn_send",
+  "applies_to": {
+    "fn": "spawn",
+    "generic": "F",
+    "requires_present": ["F: Future"],
+    "requires_missing": ["F: Send", "'static"]
+  },
+  "transform": {
+    "action": "add_bounds",
+    "site": "fn_where_clause",
+    "target": "F",
+    "bounds": ["Send", "'static"]
+  },
+  "preconditions": [
+    "function signature analyzable",
+    "generic type F identifiable",
+    "no conflicting bounds present"
+  ],
+  "postconditions": [
+    "compiles without errors",
+    "calls_to_spawn_cross_thread_ok",
+    "no_unintended_Unpin_bound_added"
+  ],
+  "validation_checklist": [
+    "trait bounds added to correct generic",
+    "lifetime annotations preserved",
+    "public API compatibility maintained"
+  ],
+  "metrics": { "success_rate": 0.94 }
+}
+```
+
+**Pattern Verification Engine**:
+- **Pre-Condition Checking**: Verify pattern applicability before transformation
+- **Transform Validation**: Ensure changes match pattern specification exactly
+- **Post-Condition Verification**: Validate that all required outcomes are achieved
+- **Semantic Consistency**: Check that changes maintain logical coherence
+
+### **Deep Validation Matrix (Sequential, Abort-on-Fail)**
+
+**Core Validators (Always Run)**:
+1. **cargo fmt --check**: Code formatting consistency
+2. **cargo clippy -D warnings**: Lint compliance with deny warnings
+3. **cargo check**: Compilation validation with active features
+4. **Impacted Tests**: Selective test execution based on ISG analysis
+
+**Extended Validators (Optional, Accuracy-Max Mode)**:
+5. **Test Amplification**: Auto-generate property tests around changed APIs
+6. **Sanitizers**: Address/Thread sanitizers for targeted test subset
+7. **Miri Analysis**: cargo miri test for specific changed functions
+8. **Semver Checks**: API stability verification for library crates
+9. **Unsafe Surface**: cargo geiger for unsafe usage regression detection
+
+**Validation Configuration**:
+```toml
+[journey.bug_fixing]
+mode = "accuracy-first"
+features = "active-and-ci"
+enable_clippy = true
+enable_semver_checks = true
+enable_test_amplification = true
+enable_sanitizers = "auto"
+enable_miri = "targeted"
+```
+
+### **Multi-Candidate Generation and Selection**
+
+**Ensemble Approach**:
+- **Generate 2-3 Candidates**: Different pattern specializations at low temperature
+- **Self-Consistency Check**: Verify each candidate against pattern pre/post-conditions
+- **Lightweight Verifier**: Quick validation pass to identify champion candidate
+- **Confidence Calibration**: Mathematical model for final acceptance decision
+
+**Final Acceptance Formula**:
+```
+p_final = calibrate(0.30·coverage + 0.25·agreement + 0.25·consistency + 0.20·static_check)
+```
+
+**Apply Only If**: `p_final ≥ 0.90` AND all validation gates pass
+
+### **Comprehensive Acceptance Checklist**
+
+**Compilation Requirements**:
+- [ ] Compile passes on selected feature matrix
+- [ ] All impacted tests pass
+- [ ] Amplified tests pass (if enabled)
+- [ ] Clippy clean with -D warnings
+
+**Pattern Compliance**:
+- [ ] Pattern post-conditions satisfied
+- [ ] Bounds/lifetimes/traits on correct generics
+- [ ] No unintended public API break (or user-allowed)
+
+**Quality Standards**:
+- [ ] Diff minimality ≥ 0.85
+- [ ] Idiomaticity ≥ 0.95
+- [ ] Calibrated confidence ≥ 0.90
+
+### **Test Impact Analysis and Amplification**
+
+**Impacted Test Selection**:
+```datalog
+?[test_uid] :=
+  changed { uid: dep_uid },
+  *isg_edges { from_uid: test_uid, to_uid: dep_uid, edge_type: "CALLS" },
+  *isg_nodes { uid: test_uid, is_test: true }
+```
+
+**Test Amplification Strategy**:
+- **Property Test Generation**: Create tests around changed API boundaries
+- **Regression Protection**: Amplified tests prevent future regressions
+- **Targeted Focus**: Amplify only for critical code paths
+- **Performance Awareness**: Balance coverage gains with test execution time
+
+### **Mode Configuration System**
+
+**Three Operating Modes**:
+
+| Mode | Retrieval | Candidates | Validators | Time | Accuracy |
+|------|-----------|------------|------------|------|----------|
+| **Accuracy-First** | 3 hops, K=30 | 2–3 | Full suite + amplifiers | 3–10+ min | 95-98% |
+| **Balanced** | 2–3 hops, K=20 | 2 | Core validators | 90–180 s | 90-95% |
+| **Fast** | 2 hops, K=15 | 1 | Minimal validators | 60–90 s | 85-90% |
+
+**Configuration Management**:
+- **Per-Project Settings**: Repository-specific accuracy requirements
+- **Feature Union Modes**: Active vs CI feature union strategies
+- **Validator Toggles**: Enable/disable specific validation layers
+- **Time Budget Controls**: Automatic mode switching based on time constraints
+
+---
+
+## Adaptive Multi-Candidate Architecture (P34 Zero-Write Validation)
+
+### **Single vs Multiple Candidates Decision Framework**
+
+**Core Insight**: A single "current ISG → future ISG → code" transform works for many fixes, but multiple candidates address ambiguity in edit locus, feature conditioning, and trade-offs between semver safety vs minimal diff.
+
+**When Single Transform Succeeds**:
+- Clear pre/post-conditions with unambiguous edit locus
+- Local, monotonic edits without public API impact
+- Single valid solution space (e.g., add Send bounds to function where-clause)
+
+**When Multiple Candidates Needed**:
+- **Ambiguous Edit Locus**: Add Send bounds where? fn where-clause, impl block, trait method, or generic type
+- **Feature-Conditioned Code**: Different cfg(feature) branches require different edits
+- **Procedural Macro Handling**: Visible span vs real anchor differ (source vs post-expansion)
+- **Lifetime Strategy Options**: Extend lifetime vs move/clone vs restructure return type
+- **Executor Choice**: spawn vs spawn_local with Send constraints
+- **API Stability Trade-offs**: Two valid fixes - one breaks public API, other keeps internal
+
+### **Structured Candidate Enumeration**
+
+**Parameterized Candidate Space**:
+```rust
+enum Locus { FnWhere, ImplWhere, TraitBound }
+enum BoundSet { SendOnly, SendAndStatic }
+enum ExecutorStrategy { Spawn, SpawnLocal }
+enum LifetimeStrategy { Own, Clone, Extend }
+
+fn enumerate_candidates(ctx: &TransformContext) -> Vec<Candidate> {
+    let mut candidates = Vec::new();
+
+    for locus in [Locus::FnWhere, Locus::ImplWhere] {
+        for bounds in [BoundSet::SendOnly, BoundSet::SendAndStatic] {
+            if preconditions_hold(ctx, locus, bounds) {
+                candidates.push(apply_transform(ctx, locus, bounds));
+            }
+        }
+    }
+    candidates
+}
+```
+
+**Adaptive Minimal Ensemble Policy**:
+1. **Primary Deterministic**: Build FutureSpec from pattern pre/post-conditions
+2. **Validation Pipeline**: Run full validator matrix on primary candidate
+3. **Conditional Expansion**: If any gate fails or confidence near-threshold, enumerate up to 2 targeted alternates
+4. **Champion Selection**: Choose first candidate passing all gates with optimal score
+
+**Mathematical Selection Criteria**:
+```
+ĉ = argmax_{c ∈ C} s(c)  s.t.  V(c) = pass
+```
+- `V(c)`: Validators (compile, tests, clippy, semver, post-conditions) must pass
+- `s(c)`: Score combining minimality, idiomaticity, historical pattern success
+
+### **Zero-Write Validation Architecture**
+
+**Rust-Analyzer LSP Preflight (In-Memory)**:
+```rust
+// LSP-based validation without disk writes
+struct RustAnalyzerPreflight {
+    lsp_client: LspClient,
+    workspace_root: PathBuf,
+}
+
+impl RustAnalyzerPreflight {
+    fn validate_candidate(&mut self, candidate: &Candidate) -> ValidationResult {
+        // Send in-memory overlays via LSP
+        for (file_path, content) in candidate.edits() {
+            self.lsp_client.did_open(file_path, content);
+            self.lsp_client.did_change(file_path, content);
+        }
+
+        // Wait for diagnostics without repo writes
+        let diags = self.lsp_client.wait_for_diagnostics(Duration::from_secs(5));
+
+        // Filter for blocking errors
+        if diags.has_blocking_errors() {
+            ValidationResult::Blocked(diags)
+        } else {
+            ValidationResult::Passed(diags)
+        }
+    }
+}
+```
+
+**Shadow Workspace Validation (Ephemeral Overlay)**:
+```rust
+fn create_shadow_workspace(repo: &Path, candidate_id: &str, edits: &[(String, String)]) -> PathBuf {
+    let overlay = temp_dir().join("parseltongue").join(hash(repo)).join(candidate_id);
+
+    // Mirror repository with hardlinks/symlinks
+    mirror_repository(repo, &overlay);
+
+    // Materialize only edited files
+    for (rel_path, content) in edits {
+        let full_path = overlay.join(rel_path);
+        fs::create_dir_all(full_path.parent().unwrap())?;
+        fs::write(full_path, content)?;
+    }
+
+    overlay
+}
+
+fn validate_in_shadow(overlay: &Path, features: &[&str]) -> ValidationResult {
+    let mut cargo = Command::new("cargo")
+        .current_dir(overlay)
+        .env("CARGO_TARGET_DIR", "/tmp/parseltongue/target") // Shared cache
+        .arg("check")
+        .arg("--message-format=json")
+        .args(features.iter().flat_map(|f| ["--features", f]))
+        .output()?;
+
+    parse_cargo_output(&cargo.stdout)
+}
+```
+
+### **Integration with Existing Architecture**
+
+**Candidate Assembly in CozoDB**:
+```json
+{
+  "candidate_id": "blake3(diffset_hash)",
+  "future_code": {
+    "src/runtime.rs": "modified content with Send bounds",
+    "src/executor.rs": "unchanged content"
+  },
+  "metadata": {
+    "locus": "FnWhere",
+    "bounds": ["Send", "'static"],
+    "pattern_id": "async_spawn_send",
+    "confidence_estimate": 0.92
+  }
+}
+```
+
+**Validation Pipeline Integration**:
+1. **Discovery**: Pattern-guided discovery → Micro-PRD → ISG_future
+2. **Candidate Generation**: Enumerate 1-3 structured candidates from same FutureSpec
+3. **LSP Preflight**: rust-analyzer overlays for immediate type/trait validation
+4. **Shadow Validation**: Full cargo pipeline in ephemeral workspaces
+5. **Champion Selection**: First candidate passing all gates with optimal score
+6. **Real Repo Application**: Atomic git apply only for champion candidate
+
+### **Concurrency and Caching Strategy**
+
+**Parallel Candidate Processing**:
+```rust
+async fn validate_candidates_parallel(
+    candidates: Vec<Candidate>,
+    workspace_root: &Path
+) -> Vec<ValidatedCandidate> {
+    let mut tasks = Vec::new();
+
+    for candidate in candidates {
+        let root = workspace_root.to_path_buf();
+        tasks.push(tokio::spawn(async move {
+            // LSP preflight (fast)
+            let lsp_result = rust_analyzer_preflight(&candidate, &root).await;
+            if lsp_result.is_blocked() {
+                return ValidatedCandidate::Rejected(candidate.id, lsp_result);
+            }
+
+            // Shadow validation (thorough)
+            let overlay = create_shadow_workspace(&root, &candidate.id, &candidate.edits());
+            let shadow_result = validate_in_shadow(&overlay, &candidate.features);
+
+            ValidatedCandidate::Complete(candidate, lsp_result, shadow_result)
+        }));
+    }
+
+    futures::future::join_all(tasks).await
+}
+```
+
+**Cache Optimization**:
+- **Shared Target Directory**: `/tmp/parseltongue/target` for all candidates
+- **sccache Integration**: Reuse compiled dependencies across candidates
+- **Incremental Compilation**: Leverage cargo incremental compilation
+- **Feature Isolation**: Separate caches per feature combination if varying features
+
+### **Test Amplification Strategy**
+
+**Proptest Generation for Changed APIs**:
+```rust
+fn generate_amplified_tests(candidate: &Candidate) -> Vec<TestTemplate> {
+    match candidate.pattern_id {
+        "async_spawn_send" => vec![
+            TestTemplate::spawn_send_proptest(),
+            TestTemplate::concurrent_stress_test(),
+        ],
+        "lifetime_extend" => vec![
+            TestTemplate::borrow_lifetime_proptest(),
+            TestTemplate::ownership_transfer_test(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+#[cfg(test)]
+mod amplified {
+    use super::*;
+    use proptest::prelude::*;
+
+    proptest! {
+        #[test]
+        fn spawn_does_not_panic_for_send_futures(n in 1u32..1000) {
+            let fut = async move { n + 1 };
+            // Protected by Send + 'static requirement
+            spawn(fut);
+        }
+    }
+}
+```
+
+### **Implementation Priority**
+
+**Phase 1: Foundation (Week 1)**
+1. **LSP Preflight Integration**: In-memory rust-analyzer validation
+2. **Shadow Workspace Framework**: Ephemeral overlay creation
+3. **Basic Candidate Enumeration**: Structured parameter space exploration
+
+**Phase 2: Validation (Week 2)**
+1. **Full Validator Matrix**: Complete validation pipeline integration
+2. **Cache Optimization**: Shared target directories and sccache
+3. **Parallel Processing**: Concurrent candidate validation
+
+**Phase 3: Intelligence (Week 3)**
+1. **Adaptive Expansion Logic**: Smart candidate generation based on failure modes
+2. **Champion Selection Algorithm**: Optimal candidate scoring and selection
+3. **Guardrail Enhancement**: Rust-specific validation rules
+
+**Phase 4: Polish (Week 4)**
+1. **Performance Tuning**: Optimized caching and parallelization
+2. **Error Reporting**: Detailed validation failure diagnostics
+3. **User Experience**: Transparent candidate evaluation and selection

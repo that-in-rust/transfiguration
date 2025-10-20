@@ -16,12 +16,18 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
     - llama.cpp because Ollama does not allow parallelism
     - CozoDB because it is a graph database
     - We will be based on Claude Code as a plugin or skill or something because we want to focus on the core differentiation which is ISG & similar Aggregated Code Context which can ensure reliable bug solving with high accuracy
-    - CodeGraph is the single write surface for all code changes
+    - Core Data Model: Interface Signature Graph (ISG)
+        - Nodes: function signatures, impl blocks, trait items, types, public APIs, macro-expanded interfaces.
+        - Edges: CALLS, IMPLEMENTS, USES, DEPENDS, REQUIRES_BOUND, FEATURE_GATED_BY.
+        - Levels: ISGL1 (interface node keyed as filepath-filename-InterfaceName, 1 level below file/module), ISGL2/ISGL3 are constituents under ISGL1 used for understanding only.
+        - Store: CozoDB (Datalog + HNSW) with columnar payloads for fast filters and range scans.
+    - CodeGraph (single write surface)
         - indexed by ISGL1 key (filepath-filename-InterfaceName)
         - columns (minimal, opinionated):
             - Current_Code (canonical pre-edit slice),
             - Future_Code (candidate patch slice, ephemeral until approval),
             - Future_Action (None|Create|Edit|Delete),
+            - TDD_Classification (TEST_IMPLEMENTATION, CODE_IMPLEMENTATION)
             - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code),
             - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
         - Rule: All code-iteration writes happen only in CodeGraph. All other CozoDB tables (ISG nodes/edges, embeddings, pattern KB indices) are read-only context stores and never mutate code.
@@ -35,6 +41,32 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
             - for e.g. we can using sub-agents generically summarize all ISGL1 related code blobs to 1 liner summaries, and that will be significantly HQ code context and much lesser than the actual codebase
                 - a variation of this can be running small agents with context of the PRD
             - for e.g. we can try to get HIR or other Rust analyzer meta-data for all ISGL1 related code blobs and that will be significantly HQ code context and much lesser than the actual codebase
+- Local LLM Subagents Types
+    - A1 Seeder: error parsing → seeds + hints (no R1).
+    - A2 ExactRetriever: ISG Datalog 2-hop traversal with filters; cap 30 nodes/hop.
+    - A3 VectorRetriever
+    - A4 AntiPatternDetector
+    - A5 PatternRecognizer
+    - A6 ConstraintEnforcer
+    - R1 Reasoner
+    - Can be more
+- Validation Layer
+    - rust-analyzer overlay: didOpen ephemeral buffers → publishDiagnostics; fail on Error severity.
+    - cargo check --quiet on real workspace (no temp checkout); cap run ≤ 3s when hot.
+    - Selective tests (when present): detect nextest; else cargo test -q limited to impacted crates/tests via ISG blast radius; cap runtime; cache test binaries.
+    - Candidate buffer source: CodeGraph.Future_Code for the affected ISGL1 keys (never mutate other tables).
+    - Gate: No I/O writes until PreFlight passes and user approves.
+
+- On-Device Runtime
+    - llama.cpp + Metal for GGUF models; pinned CPU threads, tuned GPU layers for 2–7B.
+    - Tokio runtime for orchestration; bounded task queues; cooperative yields to keep UI responsive.
+    - Caching: ISG + HNSW persisted; warm caches on idle.
+- User Journy ideas
+    - Parallel retrieval: (a) ISG 2-hop CALLS/DEPENDS; (b) HNSW vector neighbors.
+    - Validate: anti-pattern detector, pattern recognizer, constraint checker.
+    - Build curated context (10–15K tokens), generate diff, compute confidence.
+    - PreFlight: rust-analyzer overlay + cargo check --quiet.
+
 
 - Appendix A: Local Model Matrix (indicative)
     - 22–50M encoder (Q4) — 50–150 MB.
