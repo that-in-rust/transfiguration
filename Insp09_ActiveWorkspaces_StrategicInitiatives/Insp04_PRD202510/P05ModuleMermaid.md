@@ -9,6 +9,62 @@ Each module is designed to be:
 - **Composable**: Can be combined for Parseltongue, Pensieve, or other products
 - **Rust-first**: Low jitter, fearless concurrency, pure Rust philosophy
 
+### Executive Summary (Reliability-first)
+- Guardrails: ISGL1 as stable IDs; CodeGraph-only writes; deterministic-first; LLM-late ≤3K tokens.
+- Safety gates: RA diagnostics overlay → cargo check --quiet → selective tests; rollback on fail.
+- SLOs: RA 0.6–1.2s; cargo 1.5–3.5s; tests 2–8s p95 (impacted set).
+- Scope: This P05 modules doc is read-only by design; only codegraph-write-surface mutates code.
+
+### CodeGraph Integration & Write Discipline
+- Read-only modules: cozo-kit, isg-store, vector-store, rust-isg, tree-sitter-multi, rag-core, chunk-engine, embed-pipeline, citation-kit, rata-ollama-tui, job-orchestrator, llm-router, ollama-kit.
+- Single writer: codegraph-write-surface receives Future_Code/Future_Action and manages apply/rollback.
+- Validation: preflight-safety-gate enforces RA overlay + cargo + selective tests before any apply.
+
+### Three-Word Tool Aliases (P25 crosswalk)
+- cozo-kit → cozo-db-adapter
+- isg-store → isg-graph-store
+- vector-store → vector-index-store
+- rust-isg → rust-isg-generator
+- tree-sitter-multi → multi-language-parser
+- ollama-kit → ollama-client-kit
+- llm-router → llm-provider-router
+- rag-core → rag-retrieval-core
+- chunk-engine → chunk-strategy-engine
+- embed-pipeline → embedding-batch-pipeline
+- citation-kit → citation-extractor-kit
+- rata-ollama-tui → tui-ollama-shell
+- job-orchestrator → async-job-orchestrator
+
+### Executable Test Hooks (TDD-first)
+- ISG determinism
+  ```bash path=null start=null
+  parse-to-isg ./src > isg.json && jq '. | length' isg.json
+  ```
+  ```json path=null start=null
+  {"nodes": ">= 1000", "deterministic": true}
+  ```
+- Summary coverage KPI
+  ```bash path=null start=null
+  interface-summary-generator --cozo cozo://isg --write summaries --report
+  ```
+  ```json path=null start=null
+  {"coverage": ">=0.95", "missing": []}
+  ```
+- Retrieval regression
+  ```bash path=null start=null
+  hybrid-retrieval-engine --cozo cozo://isg --seed "E0277" --k 50 --report
+  ```
+  ```json path=null start=null
+  {"precision@15": ">=0.85", "recall@15": ">=0.9"}
+  ```
+- Preflight SLOs
+  ```bash path=null start=null
+  preflight-safety-gate --candidate 1234 --tests impacted.json
+  ```
+  ```json path=null start=null
+  {"status":"pass","ra_ms": "<=1200","cargo_ms": "<=3500","tests_ms": "<=8000"}
+  ```
+
 ---
 
 ## Simulation 1: Core Infrastructure Libraries

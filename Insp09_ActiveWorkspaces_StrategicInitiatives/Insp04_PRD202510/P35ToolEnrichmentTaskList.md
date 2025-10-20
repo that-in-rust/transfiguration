@@ -116,5 +116,7 @@ Planned batches (~300 LOC each)
 Progress Tracking
 - [x] Batch 1: P02Deconstructionv01.md (0–300) — commit ee65697
 - [x] Batch 2: P04ClaudeMermaid01.md (~295) + P04ClaudeMermaid02.md (0–5) — local edits (not committed)
+- [x] Batch 3: P04ClaudeMermaid02.md (5–305) — local edits (not committed)
+- [x] Batch 4: P05ModuleMermaid.md (0–300) — local edits (not committed)
 - Use checkboxes per batch; record commit hashes and timestamps after each enrichment.
 - Keep CodeGraph-only write discipline across content edits (conceptual alignment in docs).

@@ -256,6 +256,140 @@ Three-Word Tool Aliases (reference)
 - Git integration → git-apply-rollback — present/apply diffs; rollback; signed commits; msg templating.
 - TUI app → offline-debugging-tui — panes for Needed, diff, diags, CodeGraph, metrics; offline-capable.
 
+- hook-schema-validator
+  - Purpose: Validate hook JSON schemas and versions for pre/post/session hooks.
+  - Inputs: hook schemas, sample payloads.
+  - Outputs: validation report with errors/warnings.
+  - Actions: load schema → validate payloads → report diffs and version mismatches.
+  - Variants: strict (fail on warn) vs permissive; schema bundle per plugin.
+  - Example CLI: hook-schema-validator --hooks hooks/*.json --samples samples/*.json
+  - Example Input (JSON): {"schema":"pretool.v1.json","sample":{"cmd":"grep","args":["foo"]}}
+  - Example Output (JSON): {"valid":true,"warnings":[],"errors":[]}
+
+- pretool-command-validator
+  - Purpose: Deterministic validation of tool invocations before execution.
+  - Inputs: command spec, policy rules, risk thresholds.
+  - Outputs: allow/deny + rationale; redactions if needed.
+  - Actions: pattern checks → policy match → redact secrets → emit decision.
+  - Variants: project-policy overlay; learning mode (log-only).
+  - Example CLI: pretool-command-validator --spec spec.json --policy policy.yaml
+  - Example Input (JSON): {"tool":"run_command","cmd":"git --no-pager diff"}
+  - Example Output (JSON): {"decision":"allow","redactions":[]}
+
+- posttool-response-processor
+  - Purpose: Normalize tool outputs; extract key metrics; redact PII; attach provenance.
+  - Inputs: raw tool outputs (stdout/stderr), parsers.
+  - Outputs: structured JSON with summaries and key fields.
+  - Actions: parse → summarize → redact → attach provenance hash.
+  - Variants: plugin-specific parsers; streaming vs batch.
+  - Example CLI: posttool-response-processor --in out.txt --parser grep
+  - Example Input (JSON): {"parser":"grep","fields":["file","line","match"]}
+  - Example Output (JSON): {"rows":17,"pii_redacted":0,"summary":"17 matches"}
+
+- sdk-compliance-validator
+  - Purpose: Verify plugin/SDK conformance (APIs, version bounds, lifecycle contracts).
+  - Inputs: plugin manifest, SDK version, conformance tests.
+  - Outputs: pass/fail with detailed report; suggestions.
+  - Actions: run conformance suite → compare manifests → check lifecycle hooks.
+  - Variants: quick vs full; TS-only vs Python-only.
+  - Example CLI: sdk-compliance-validator --plugin ./plugin --sdk ts@1.2.0
+  - Example Input (JSON): {"paths":{"manifest":"package.json"}}
+  - Example Output (JSON): {"status":"pass","failures":0}
+
+- session-store-inspector
+  - Purpose: Inspect SQLite session/context state; find bloat, stale rows, anomalies.
+  - Inputs: sqlite path; retention policy.
+  - Outputs: report with counts, top-k heavy sessions, cleanup suggestions.
+  - Actions: open DB → run queries → compute aggregates → emit report.
+  - Variants: dry-run cleanup planner; export CSV.
+  - Example CLI: session-store-inspector --db .claude/session.db --retention 14d
+  - Example Input (JSON): {"retention_days":14}
+  - Example Output (JSON): {"sessions":412,"stale":28,"recommend_cleanup":true}
+
+- cozo-db-adapter
+  - Purpose: Typed CozoDB adapter with migrations and query builders.
+  - Inputs: DB URL, migrations path.
+  - Outputs: connection pool, migration reports.
+  - Actions: connect → migrate → expose typed query API.
+  - Example CLI: cozo-db-adapter migrate --db cozo://./data --migrations ./migrations
+
+- isg-graph-store
+  - Purpose: Persist ISG with versioning and diff ops.
+  - Inputs: ISG JSON, version tags.
+  - Outputs: stored graph IDs, diff reports.
+  - Actions: upsert nodes/edges → compute diffs → tag versions.
+  - Example CLI: isg-graph-store upsert --in isg.json --tag v1
+
+- vector-index-store
+  - Purpose: Vector storage with ANN indices (HNSW, IVF).
+  - Inputs: vectors, params.
+  - Outputs: index artifact, stats.
+  - Actions: upsert vectors → (re)build ANN → emit metrics.
+  - Example CLI: vector-index-store build --dim 768 --backend hnsw
+
+- rust-isg-generator
+  - Purpose: Generate ISG from Rust using syn + RA enrichments.
+  - Inputs: repo path, include/exclude.
+  - Outputs: ISG JSON with L1/L2/L3 facets.
+  - Actions: parse crates → derive ISGL1 → attach facets.
+  - Example CLI: rust-isg-generator --repo . --out isg.json
+
+- multi-language-parser
+  - Purpose: Parse non-Rust sources with tree-sitter for structure extraction.
+  - Inputs: file globs, language set.
+  - Outputs: AST/structure JSON.
+  - Actions: detect language → parse → emit symbols and structure.
+  - Example CLI: multi-language-parser --in docs/**
+
+- ollama-client-kit
+  - Purpose: Ollama client for discovery, health, and model mgmt.
+  - Inputs: model name, limits.
+  - Outputs: status, model cache.
+  - Actions: probe server → pull models → run inference.
+  - Example CLI: ollama-client-kit pull qwen2.5:7b
+
+- llm-provider-router
+  - Purpose: Route prompts across providers with fallback/cost policies.
+  - Inputs: provider list, policy config.
+  - Outputs: selected backend, result.
+  - Actions: score providers → route call → record metrics.
+  - Example CLI: llm-provider-router run --policy policy.yaml
+
+- chunk-strategy-engine
+  - Purpose: Structure-aware chunking for code/docs.
+  - Inputs: files, strategy config.
+  - Outputs: chunks JSONL.
+  - Actions: analyze structure → split with overlap → emit chunks.
+  - Example CLI: chunk-strategy-engine --strategy semantic --overlap 80
+
+- embedding-batch-pipeline
+  - Purpose: Batch embed with caching and deduplication.
+  - Inputs: chunks, model.
+  - Outputs: vectors, cache stats.
+  - Actions: hash → cache lookup → embed misses → upsert vectors.
+  - Example CLI: embedding-batch-pipeline --in chunks.jsonl --model e5-small
+
+- citation-extractor-kit
+  - Purpose: Extract citations with exact quote spans and sources.
+  - Inputs: context, LLM output.
+  - Outputs: citation list with offsets.
+  - Actions: align quotes → map to sources → validate spans.
+  - Example CLI: citation-extractor-kit --in out.txt --sources sources.json
+
+- tui-ollama-shell
+  - Purpose: Ratatui-based TUI for local chat and pipeline triggers.
+  - Inputs: config file, model.
+  - Outputs: session logs and artifacts.
+  - Actions: start TUI → chat → trigger pipelines → export.
+  - Example CLI: tui-ollama-shell --config tui.toml
+
+- async-job-orchestrator
+  - Purpose: Resumable async pipelines with progress and backpressure.
+  - Inputs: DAG spec, tasks.
+  - Outputs: run manifest, metrics.
+  - Actions: schedule → execute → checkpoint → resume.
+  - Example CLI: async-job-orchestrator run pipeline.yaml
+
 Appendix A: Local Model Matrix (indicative)
 - A1: 22–50M encoder (Q4) — 50–150 MB.
 - A4: MiniLM 22M (Q4) — ~40–80 MB.

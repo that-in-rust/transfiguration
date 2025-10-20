@@ -291,6 +291,64 @@ This redesigned L3 diagram features:
 - **Flowing Data Persistence**: SQLite DB winds through Conversation → Context → Plugin → Hook State
 - **Natural Communication**: Clean organic connections between core communication layers
 
+### Executable Test Hooks and CI Checks
+
+- L1 ISG Consistency
+  - Pre: interface-graph-builder runs on repo
+  - Post: ISGL1 count stable across runs; drift ≤ 0.5%
+  - Example:
+  ```bash path=null start=null
+  interface-graph-builder --repo . --out cozo://isg
+  ```
+  - Expected output:
+  ```json path=null start=null
+  {"nodes":17230,"edges":94122,"drift":0.003}
+  ```
+- Summaries Coverage
+  - Pre: ISG_current loaded
+  - Post: summary_coverage ≥ 0.95; missing keys listed
+  - Example:
+  ```bash path=null start=null
+  interface-summary-generator --cozo cozo://isg --write summaries --report
+  ```
+  - Expected:
+  ```json path=null start=null
+  {"coverage":0.96,"missing":["src/lib.rs-foo-run","..."]}
+  ```
+- Retrieval Regression
+  - Pre: embedding indices exist; seed errors known
+  - Post: retrieval_precision@K ≥ 0.85 for gold seeds
+  - Example:
+  ```bash path=null start=null
+  hybrid-retrieval-engine --cozo cozo://isg --seed "E0277" --k 50 --report
+  ```
+  - Expected:
+  ```json path=null start=null
+  {"precision@15":0.88,"recall@15":0.92}
+  ```
+- Deterministic Patch Idempotence
+  - Pre: diagnostics + pattern selected
+  - Post: applying diff twice yields no changes second run
+  - Example:
+  ```bash path=null start=null
+  deterministic-patch-engine --pattern async_spawn_send --diag diag.json
+  ```
+  - Expected:
+  ```json path=null start=null
+  {"idempotent":true,"changes":1}
+  ```
+- Preflight SLOs
+  - Pre: candidate diff stored via codegraph-write-surface
+  - Post: preflight_p95 ≤ 3s; tests_p95 ≤ 8s; status pass/fail
+  - Example:
+  ```bash path=null start=null
+  preflight-safety-gate --candidate 1234 --tests impacted.json
+  ```
+  - Expected:
+  ```json path=null start=null
+  {"status":"pass","ra_ms":950,"cargo_ms":2100,"tests_ms":6400}
+  ```
+
 ## Architecture Improvement Summary
 
 ### Key Improvements Made:
