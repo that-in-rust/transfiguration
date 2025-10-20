@@ -475,6 +475,23 @@ HP-themed names (tool → name)
 
 —
 
+Three-Word Tool Aliases (reference)
+- ISG builder → interface-graph-builder — builds ISGL1 with L2/L3 constituents; Cozo + HNSW ready.
+- CodeGraph store → codegraph-write-surface — sole mutable store: Current/Future code, actions, flags, status.
+- Summarizer → interface-summary-generator — 1‑line L1 summaries; rule‑first, LLM‑late; provenance flags.
+- Embed/Index builder → embedding-index-builder — code/summary embeddings; HNSW build/update; stats.
+- Retrieval engine → hybrid-retrieval-engine — Datalog 2‑hop + vector KNN; L1>L2>L3 ranking; Needed shortlist.
+- Pattern/Anti‑pattern KB → pattern-knowledge-base — templates, examples, thresholds, success metrics.
+- Constraints/RA overlay → constraints-overlay-analyzer — didOpen buffers; diagnostics; required/current/missing bounds.
+- Context packer → context-pack-builder — Needed‑first strategic packing; ≤3K tokens; ordering policy.
+- Deterministic transforms → deterministic-patch-engine — rule‑backed diffs for bounds/lifetimes/cfg consolidation.
+- Reasoner adapter → reasoning-adapter-bridge — unified local (llama.cpp) and cloud model interface; confidence scoring.
+- Local orchestrator → local-orchestrator-daemon — multi‑model scheduler; resource caps; KV reuse; JSON‑RPC.
+- Preflight gate → preflight-safety-gate — RA overlay → cargo check → selective tests; structured report.
+- Diagnostics mapper → diagnostics-scope-mapper — map diagnostics to ISGL1 + CodeGraph rows; blast radius.
+- Git integration → git-apply-rollback — present/apply diffs; rollback; signed commits; msg templating.
+- TUI app → offline-debugging-tui — panes for Needed, diff, diags, CodeGraph, metrics; offline-capable.
+
 Appendix A: Local Model Matrix (indicative)
 - A1: 22–50M encoder (Q4) — 50–150 MB.
 - A4: MiniLM 22M (Q4) — ~40–80 MB.
