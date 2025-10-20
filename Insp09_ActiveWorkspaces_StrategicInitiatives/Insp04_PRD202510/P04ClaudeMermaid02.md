@@ -1,5 +1,9 @@
 # L1 Technical Architecture - Snake-Flow High-Level Design
 
+Executive Summary (Reliability-first)
+- Purpose: Present an organic, ELK-rendered flow of Claude Code surfaces mapped to P24’s reliability-first principles.
+- Guardrails: ISGL1 keys as stable IDs; CodeGraph-only writes; deterministic-first; LLM-late ≤3K tokens; safety gates (RA + cargo + selective tests). 
+
 ```mermaid
 ---
 config:

@@ -294,3 +294,46 @@ flowchart TD
 - **External Integrations**: MCP protocol, GitHub API, web search capabilities
 
 **📊 Final Assessment: Claude Code represents a mature, enterprise-grade AI development platform with sophisticated plugin architecture, comprehensive security framework, and extensive developer tooling - positioning it as a leading solution in the AI-assisted development space.**
+
+---
+
+## Reliability-First Alignment and ISG/CodeGraph Mapping (P24 coherence)
+
+- ISG Levels
+  - ISGL1: interface nodes (filepath-filename-InterfaceName) as the persistent key.
+  - ISGL2/ISGL3: constituents under L1 for understanding only; no direct writes.
+- CodeGraph Discipline
+  - codegraph-write-surface is the sole write surface (Current_Code, Future_Code, Future_Action, flags, status).
+  - All diffs flow: Reason/Rule → CodeGraph.Future_Code → preflight-safety-gate → flip to Current_Code.
+- Deterministic-First
+  - deterministic-patch-engine proposes bounds/lifetime/cfg templates before any LLM.
+  - reasoning-adapter-bridge invoked only if confidence < threshold; ≤3K tokens.
+- Safety Gates
+  - constraints-overlay-analyzer (didOpen buffers) + cargo check --quiet + selective-test-runner.
+  - SLOs: RA overlay 0.6–1.2s; cargo check 1.5–3.5s; tests 2–8s (impacted set).
+- Retrieval and Packing
+  - hybrid-retrieval-engine: Datalog two-hop + vector KNN; L1>L2>L3 rank; Needed shortlist ≤50.
+  - context-pack-builder: start/early/middle/end; summaries first; ≤3K tokens.
+- TDD Hooks (example)
+  - Check recall@15 ≥ 0.9 for summary vectors; FACR ≥ 97%; tokens_per_fix p95 ≤ 3K; rollback ≤ 1%.
+
+---
+
+## Tool Surface Mapping (from these diagrams)
+
+- interface-graph-builder → derive ISGL1 from agent files, commands, hooks.
+- interface-summary-generator → 1-liners for agents/commands to steer packing.
+- embedding-index-builder → vectors for summaries + code; HNSW indices.
+- hybrid-retrieval-engine → shortlist interfaces per error/task.
+- deterministic-patch-engine → rule diffs for known Rust fixes.
+- reasoning-adapter-bridge → local Qwen 3B/7B or cloud critic/planner.
+- preflight-safety-gate → RA overlay, cargo check, selective tests.
+- git-apply-rollback → apply/commit after pass; rollback otherwise.
+
+---
+
+## Minimal KPI Sheet (to monitor in CI)
+- FACR (first-apply correctness) ≥ 97%
+- tokens_per_fix p95 ≤ 3K; zero_llm_rate ≥ 30%
+- preflight_p95 ≤ 3s; selective_tests_p95 ≤ 8s
+- retrieval_precision@K ≥ 0.85; summary_coverage ≥ 95%
