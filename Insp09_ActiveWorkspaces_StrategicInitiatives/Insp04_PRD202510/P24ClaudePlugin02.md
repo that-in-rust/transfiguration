@@ -72,11 +72,21 @@ High-Level Design (HLD)
 Core Data Model: Interface Signature Graph (ISG)
 - Nodes: function signatures, impl blocks, trait items, types, public APIs, macro-expanded interfaces.
 - Edges: CALLS, IMPLEMENTS, USES, DEPENDS, REQUIRES_BOUND, FEATURE_GATED_BY.
-- Levels: ISGL1 (raw signature row per symbol), ISGL2 (aggregate per file/module), ISGL3 (aggregate per crate/workspace). Each node stores:
-  - Hash(fingerprint), path, span, crate, features, visibility
-  - Pattern flags, anti-pattern distances, idiomatic score
-  - Embedding vector ref, historical effectiveness stats
+- Levels: ISGL1 (interface node keyed as filepath-filename-InterfaceName, 1 level below file/module), ISGL2/ISGL3 are constituents under ISGL1 used for understanding only.
 - Store: CozoDB (Datalog + HNSW) with columnar payloads for fast filters and range scans.
+
+CodeGraph (single write surface)
+- Primary key: ISGL1 key (filepath-filename-InterfaceName).
+- Columns (minimal, opinionated):
+  - Current_Code (canonical pre-edit slice),
+  - Future_Code (candidate patch slice, ephemeral until approval),
+  - Future_Action (None|Create|Edit|Delete),
+  - current_fid (0/1: in current bug scope),
+  - future_fid (0/1: planned to change),
+  - candidate_diff_id, validation_status (Pending|RA_OK|Cargo_OK|Tests_OK|Failed),
+  - last_applied_commit, updated_at.
+- Rule: All code-iteration writes happen only in CodeGraph. All other CozoDB tables (ISG nodes/edges, embeddings, pattern KB indices) are read-only context stores and never mutate code.
+- Flow: PreFlight compiles Future_Code via RA overlay; on approval, flip Future→Current, clear future_* flags, persist commit id; embeddings refresh can be deferred.
 
 Local LLM Subagents
 - A1 ScopeSeeder: error parsing → seeds + hints (22–50M encoder model).
@@ -91,6 +101,7 @@ Validation Layer
 - rust-analyzer overlay: didOpen ephemeral buffers → publishDiagnostics; fail on Error severity.
 - cargo check --quiet on real workspace (no temp checkout); cap run ≤ 3s when hot.
 - Selective tests (when present): detect nextest; else cargo test -q limited to impacted crates/tests via ISG blast radius; cap runtime; cache test binaries.
+- Candidate buffer source: CodeGraph.Future_Code for the affected ISGL1 keys (never mutate other tables).
 - Gate: No I/O writes until PreFlight passes and user approves.
 
 On-Device Runtime
@@ -106,6 +117,7 @@ Key Interfaces (traits)
 - ISGRepository: upsert_nodes(), two_hop(seed, filters)->Vec<Node>, annotate(node, meta), stats().
 - PatternKB: nearest_patterns(vec_id, k), anti_distance(vec_id)->f32, example(pattern_id).
 - ConstraintValidator: required(span)->Bounds, current(span)->Bounds, missing()->BoundsDelta.
+- CodeGraphStore: get(isgl1_key)->CodeGraphRow, set_current(code), set_future(code, action), mark_current_fid(key, bit), mark_future_fid(key, bit), attach_candidate_diff(key, diff_id), set_validation_status(key, status), flip_future_to_current(key, commit_id), clear_future(key).
 - RAOverlayClient: open_buffers(diff)->SessionId, diagnostics(SessionId)->Vec<Diag>, close(SessionId).
 - CargoCheckRunner: check_quiet(paths)->CheckResult.
 - DiagnosticsMapper: map(Vec<Diag>)->Vec<ISGRef>.
@@ -118,6 +130,7 @@ Key Interfaces (traits)
 Data Structures
 - Node: {id, kind, crate, path, span, sig_hash, features, public, scores{idiomatic}, flags{anti[]}, vec_id}.
 - Edge: {src, dst, rel: CALLS|DEPENDS|IMPLEMENTS|USES|REQUIRES_BOUND|FEATURE_GATED_BY}.
+- CodeGraphRow: {key:isgl1, Current_Code, Future_Code, Future_Action, current_fid, future_fid, candidate_diff_id, validation_status, last_applied_commit, updated_at}.
 - Bounds: {traits[], lifetimes[], where_clauses[]}.
 - ContextBundle: {errors, anti_hits, patterns, constraints, code_slices, history}.
 
