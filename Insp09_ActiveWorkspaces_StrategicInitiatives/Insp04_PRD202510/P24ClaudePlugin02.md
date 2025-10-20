@@ -310,6 +310,33 @@ Guardrails (apply to all sims)
 - Metal tuning: Q4_K_M; threads≈physical cores; batch tuned to keep p95 ≤ 120 s.
 - KPIs: FACR ≥ 97%; tokens_per_fix p95 ≤ 3K; zero_llm_rate ≥ 30% on common Rust errors; escalation_rate (sim 3) ≤ 25%.
 
+Token Throughput Estimates (tokens/sec, Apple Silicon ≥16 GB, llama.cpp Q4_K_M)
+- Baselines (decode | prefill):
+  - Qwen2.5 7B: 30–55 tok/s | 600–1200 tok/s
+  - Qwen 3B: 60–110 tok/s | 1200–2200 tok/s
+  - 2–3B tiny implementors: 80–140 tok/s | 1500–2800 tok/s
+  - 270M: 220–450 tok/s
+  - 135M: 400–800 tok/s
+  - 22–50M encoders/mini decoders: 800–1500 tok/s
+- Parallel scaling: with 3–5 concurrent small models, per‑model decode typically drops 20–35%; effective aggregate ≈ 0.65–0.8 × sum(per‑model tps).
+- Codebase size note (≈5 MB, tokio‑scale): retrieval/RA costs are modest; LLM decode dominates generation time under the ≤3K‑token budget.
+
+Per‑scenario effective tps (local portion)
+1) Claude‑as‑Reasoner, locals as scouts
+   - Local aggregate (6–10 small models mixed 135M/270M/50M): ≈ 2.5k–6k tok/s effective; reasoner is cloud (tps not counted locally).
+2) Claude‑as‑Orchestrator, Qwen 7B as Reasoner
+   - Reasoner: 30–55 tok/s; scouts aggregate: 2–4k tok/s; end‑to‑end gated by 7B decode.
+3) Local‑first, Claude escalator on low confidence
+   - 3B path: 60–110 tok/s (reasoner); scouts: 2–3k tok/s. On escalate, cloud governs.
+4) Claude Spec Planner, Qwen 7B Implementor
+   - Implementor: 30–55 tok/s; scouts: 2–3k tok/s; planner is cloud.
+5) Claude Critic/Selector over parallel local candidates
+   - Implementors: 3–5 × (2–3B at 80–140 tok/s) ⇒ ≈ 160–490 tok/s effective after scaling; scouts add 1–2k tok/s; critic is cloud.
+
+Caveats
+- Ranges reflect typical M1/M2 Metal performance; M3/Ultra skew higher. Prefill is faster than decode; decode dominates latency.
+- Parallelism should be capped to avoid KV cache thrash; prefer 3–5 tiny implementors or a single 7B.
+
 —
 
 Risks & Mitigations
