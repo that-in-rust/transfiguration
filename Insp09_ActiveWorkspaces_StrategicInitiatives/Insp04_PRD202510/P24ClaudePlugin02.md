@@ -275,12 +275,38 @@ Claude Code + Local Subagents: Orchestration Simulations (Apple Silicon ≥16 GB
 - Pros: Highest reasoning quality; simple control plane; low local model memory.
 - Risks: Network dependency; must enforce token caps and timeouts.
 
+| Phase | Token/ops assumption | Time range |
+| --- | --- | --- |
+| Retrieval/Scouts (locals) | 6–10 small models in parallel | 4–8 s |
+| Pack/Context build | ≤3K tokens | 1–2 s |
+| Reasoner prefill (Claude cloud) | 1.5–3K tokens @ fast prefill | 2–5 s |
+| Reasoner decode (Claude cloud) | 200–400 tokens | 4–12 s |
+| Cloud roundtrip/queue | network variance | 3–10 s |
+| RA overlay | warm | 0.6–1.2 s |
+| cargo check --quiet | hot build | 1.5–3.5 s |
+| Selective tests | impacted crates only | 2–8 s |
+| Typical total | sum, no iterate | 35–60 s |
+| p95 total | with iterate/latency | 60–90 s |
+
 2) Claude-as-Orchestrator, Qwen 7B local as Reasoner
 - Setup: Claude schedules/monitors; Qwen2.5 7B Q4_K_M (Metal, ~5–6 GB) performs reasoning; local scouts (≤270M) run A1–A6; 8–12 parallel tasks.
 - Flow: Claude orchestrates → Qwen receives curated pack → emits diff + confidence → CodeGraph pipeline as above; Claude handles retries/escalations.
 - Perf: p95 70–100 s; RAM ~10–12 GB; tokens lower on cloud; robust with flaky nets.
 - Pros: Reduced cloud spend; fast local iteration; strong offline posture.
 - Risks: KV cache sizing; throttle parallelism to avoid memory spikes.
+
+| Phase | Token/ops assumption | Time range |
+| --- | --- | --- |
+| Retrieval/Scouts (locals) | 8–12 tasks | 4–8 s |
+| Pack/Context build | ≤3K tokens | 1–2 s |
+| Reasoner prefill (7B local) | 1.5–3K @ 600–1200 tok/s | 2.5–5 s |
+| Reasoner decode (7B local) | 200–400 @ 30–55 tok/s | 4–13 s |
+| Orchestrator overhead | scheduling/retries | 1–3 s |
+| RA overlay | warm | 0.6–1.2 s |
+| cargo check --quiet | hot build | 1.5–3.5 s |
+| Selective tests | impacted crates only | 2–8 s |
+| Typical total | sum, no iterate | 45–75 s |
+| p95 total | with iterate | 70–100 s |
 
 3) Local-first with Claude as last‑mile escalator
 - Setup: Qwen 3B/7B attempts first; locals run A1–A6; Claude invoked only if confidence < 0.75 or PreFlight fails.
@@ -289,6 +315,19 @@ Claude Code + Local Subagents: Orchestration Simulations (Apple Silicon ≥16 GB
 - Pros: Minimal tokens; cloud used only when necessary; reliable under tight budgets.
 - Risks: Escalation logic must prevent token thrash; crisp confidence gates.
 
+| Phase | Token/ops assumption | Time range |
+| --- | --- | --- |
+| Retrieval/Scouts (locals) | 6–10 tasks | 3–6 s |
+| Pack/Context build | ≤3K tokens | 1–2 s |
+| Reasoner prefill (3B local) | 1.5–3K @ 1200–2200 tok/s | 0.7–2.5 s |
+| Reasoner decode (3B local) | 200–400 @ 60–110 tok/s | 1.8–6.7 s |
+| RA overlay | warm | 0.6–1.2 s |
+| cargo check --quiet | hot build | 1.5–3.5 s |
+| Selective tests | impacted crates only | 2–8 s |
+| Typical total (no escalate) | sum | 30–55 s |
+| Escalation overhead | cloud call + redo | +10–25 s |
+| p95 total (with escalate) | worst path | 85–120 s |
+
 4) Claude as Spec Planner, Qwen as Implementor
 - Setup: Claude writes a terse executable spec (pattern + constraints + acceptance checks); Qwen 7B converts spec → diff; locals validate constraints.
 - Flow: Spec → diff → CodeGraph → PreFlight/tests; summaries head the pack; deterministic transforms preferred.
@@ -296,12 +335,36 @@ Claude Code + Local Subagents: Orchestration Simulations (Apple Silicon ≥16 GB
 - Pros: Separation of concerns; fewer hallucinations on multi‑file constraints.
 - Risks: Two‑hop latency; planner must be spec‑tight.
 
+| Phase | Token/ops assumption | Time range |
+| --- | --- | --- |
+| Retrieval/Scouts (locals) | 6–10 tasks | 4–8 s |
+| Pack/Spec build | ≤1.5K tokens to planner | 1–2 s |
+| Planner (Claude) decode | 150–300 tokens | 2–8 s |
+| Implementor prefill (7B local) | 1.5–3K | 2.5–5 s |
+| Implementor decode (7B local) | 200–400 | 4–13 s |
+| RA overlay | warm | 0.6–1.2 s |
+| cargo check --quiet | hot build | 1.5–3.5 s |
+| Selective tests | impacted crates only | 2–8 s |
+| Typical total | sum | 55–90 s |
+| p95 total | with iterate | 80–120 s |
+
 5) Claude as Critic/Selector over parallel local candidates
 - Setup: 3–5 parallel implementors (2–3B Q4 each, ≤1 GB per model incl. KV) generate candidate diffs; optional single 7B; Claude ranks/justifies.
 - Flow: Scouts build Needed shortlist → parallel candidate diffs (temps 0.2/0.5) → Claude ranks vs constraints → best → CodeGraph → PreFlight/tests.
 - Perf: p95 70–110 s; RAM ~12–14 GB with 3–4 tiny implementors; higher 1‑shot success.
 - Pros: Diversity without cloud token blowup; Claude only judges.
 - Risks: Parallel KV memory; strict timeouts/early stopping required.
+
+| Phase | Token/ops assumption | Time range |
+| --- | --- | --- |
+| Retrieval/Scouts (locals) | Needed shortlist | 4–7 s |
+| Parallel implementors (2–3B) | 3–5 candidates @ 80–140 tok/s each | 3–12 s |
+| Critic (Claude) decode | 100–250 tokens | 2–6 s |
+| RA overlay | warm | 0.6–1.2 s |
+| cargo check --quiet | hot build | 1.5–3.5 s |
+| Selective tests | impacted crates only | 2–8 s |
+| Typical total | sum | 45–80 s |
+| p95 total | with retries | 70–110 s |
 
 Guardrails (apply to all sims)
 - CodeGraph is the only write surface; other Cozo tables are read‑only context.
