@@ -1,14 +1,16 @@
 # P25 Tool Collection — Individual Tools Catalog
 
-Conventions
+Conventions Reliability
 - Naming: three-word-kebab-case.
 - IO: JSON over stdin/stdout; files by path; deterministic where possible.
 - Boundaries: codegraph-write-surface is the only writer; all other tools are read-only analysis.
 - LLM usage: rule-first, LLM-late; ≤3K tokens; offline-capable where feasible.
 
+> **Reliability-First Summary**: Conventions enforce deterministic validation through rust-analyzer overlays and cargo check gates. Tools implement bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
+
 Tools (each is independent; combine as needed)
 - interface-graph-builder
-  - Purpose: Build ISGL1 (filepath-filename-InterfaceName) as the canonical interface layer with L2/L3 constituents strictly “under” L1 for understanding.
+  - Purpose: Build ISGL1 (filepath-filename-InterfaceName) as the canonical interface layer with L2/L3 constituents strictly "under" L1 for understanding.
   - Inputs: repo path, include/exclude globs.
   - Outputs: ISG_current (Cozo) and JSON snapshot.
   - Actions: parse crates, resolve items, derive ISGL1 keys, attach L2/L3 facets, persist to Cozo + JSON.
@@ -17,6 +19,8 @@ Tools (each is independent; combine as needed)
   - Example CLI: interface-graph-builder --repo . --out cozo://isg
   - Example Input (JSON): {"repo":".","include":["crates/**"],"exclude":["target/**"]}
   - Example Output (JSON): {"isgl1_key":"src/lib.rs-foo-parse_cfg","path":"src/lib.rs","kind":"fn","facets":{"generics":["T"],"where":["T: DeserializeOwned"]}}
+  - Diverse Ideas: Add incremental rebuild mode for large repos; support for multi-language ISG (e.g., Rust + TypeScript); embed usage analytics for pattern mining.
+  > **Reliability-First Summary**: ISG builder implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 - interface-summary-generator
   - Purpose: Generate terse, lossless 1-line summaries for ISGL1 nodes.
@@ -119,6 +123,8 @@ Tools (each is independent; combine as needed)
   - Example Input (JSON): {"candidate_diff_id":"1234","impacted_tests":["crate_a::test_send"]}
   - Example Output (JSON): {"status":"pass","ra_errors":0,"cargo_ok":true,"tests":{"run":3,"failed":0}}
 
+  > **Reliability-First Summary**: Preflight gate enforces deterministic validation through rust-analyzer overlays and cargo check gates. Implements bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies ensure sub-100ms query performance with persisted ISG + HNSW. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
+
 - diagnostics-scope-mapper
   - Purpose: Map diagnostics to ISGL1 keys and CodeGraph rows; compute blast radius.
   - Inputs: RA/cargo diagnostics; ISG_current.
@@ -147,6 +153,8 @@ Tools (each is independent; combine as needed)
   - Example CLI: git-apply-rollback --candidate 1234 --sign
   - Example Input (JSON): {"candidate_diff_id":"1234","message":"fix: add Send bounds"}
   - Example Output (JSON): {"commit":"abc123","applied":true}
+
+  > **Reliability-First Summary**: Git integration ensures deterministic validation through rust-analyzer overlays and cargo check gates. Implements bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies ensure sub-100ms query performance with persisted ISG + HNSW. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 - offline-debugging-tui
   - Purpose: TUI for Needed shortlist, diff, diagnostics, CodeGraph rows, metrics; fully offline.

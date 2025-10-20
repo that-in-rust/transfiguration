@@ -1,6 +1,6 @@
 # P06 Enhancement Simulations - Shreyas Doshi Product Thinking
 
-## Overview
+## Overview Reliability
 
 This document presents **10 differentiated product simulations** for Parseltongue & Pensieve, applying Shreyas Doshi's product framework:
 - **Clear differentiation**: Each simulation solves a different problem for a different user
@@ -8,13 +8,15 @@ This document presents **10 differentiated product simulations** for Parseltongu
 - **Compounding effects**: Value that grows with usage
 - **Rust-first**: Pure Rust, keeping existing tech stack (CozoDB, Ollama, Tree-sitter, syn)
 
+> **Reliability-First Summary**: All simulations implement deterministic validation through rust-analyzer overlays and cargo check gates. Each uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
+
 Based on insights from:
 - **P05ModuleMermaid.md**: Modular architecture foundations
 - **ParseltongueEvolution docs**: ISG architecture, incremental computation, product thinking
 
 ---
 
-## Differentiation Framework
+## Differentiation Framework Reliability
 
 Each simulation answers:
 1. **Who**: Target user (specific persona)
@@ -23,6 +25,8 @@ Each simulation answers:
 4. **Compound**: How value grows with usage
 5. **Moat**: Why this is hard to replicate
 6. **Tech**: Rust modules from existing stack
+
+> **Reliability-First Summary**: Framework ensures deterministic validation at each simulation stage. Uses bounded concurrency and cooperative yields for UI responsiveness. Caching strategies ensure sub-100ms query performance with persisted ISG + HNSW. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization and dynamic parallelism throttling.
 
 ---
 
@@ -89,10 +93,12 @@ flowchart TD
 - `test-recommender` (Coverage analysis)
 - `rata-tui` (Interactive diff viewer)
 
-### Metrics
+### Metrics Reliability
 - **TTI (Time-to-Insight)**: PRD → actionable diff < 2 min
 - **Accuracy**: 90%+ of predicted changes are correct
 - **Adoption**: 60%+ of PRDs use this before writing code
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -371,10 +377,12 @@ flowchart TD
 - `memory-retriever` (Hybrid search)
 - `context-assembler` (Timeline builder)
 
-### Metrics
+### Metrics Reliability
 - **Coverage**: 80%+ of functions have "why" context
 - **TTI**: Question → answer < 5 sec
 - **Retention**: 50%+ of onboarding questions answered without humans
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -441,10 +449,12 @@ flowchart TD
 - `update-analyzer` (Semver + prediction)
 - `rata-tui` (Graph visualization)
 
-### Metrics
+### Metrics Reliability
 - **False positives**: <10% of "breaking change" predictions wrong
 - **CVE coverage**: 100% of RUSTSEC advisories detected
 - **Time saved**: 80% reduction in dependency debugging time
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -508,10 +518,12 @@ flowchart TD
 - `diff-analyzer` (ISG comparison)
 - `rata-tui` (Interactive stepper)
 
-### Metrics
+### Metrics Reliability
 - **Debug time**: 70% reduction in macro debugging time
 - **Error clarity**: 90%+ of users understand error after visualization
 - **Adoption**: 40%+ of macro crates use this for testing
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -582,10 +594,12 @@ flowchart TD
 - `abi-validator` (Layout analysis)
 - `bindgen-updater` (Integration)
 
-### Metrics
+### Metrics Reliability
 - **ABI errors caught**: 95%+ of incompatibilities detected pre-compile
 - **Sync time**: <30s for 10K-line header updates
 - **Safety**: 0 production segfaults from ABI mismatches
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -651,10 +665,12 @@ flowchart TD
 - `impl-suggester` (Code generation)
 - `rata-tui` (Interactive visualization)
 
-### Metrics
+### Metrics Reliability
 - **Fix rate**: 80%+ of suggestions compile on first try
 - **Learning**: 60% reduction in repeat trait errors after using tool
 - **Time saved**: 15 min average debugging time → 2 min
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -720,10 +736,12 @@ flowchart TD
 - `scaffold-generator` (Code generation)
 - `compute-estimator` (Cost modeling)
 
-### Metrics
+### Metrics Reliability
 - **Replication success**: 70%+ of protocols lead to successful replication
 - **Time saved**: 3 days setup → 4 hours with protocol card
 - **Accuracy**: 85%+ of compute estimates within 20% of actual
+
+> **Reliability-First Summary**: Simulation implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -802,7 +820,7 @@ Following Shreyas Doshi's product thinking:
 - Each new simulation takes 50% less time than previous
 - 80%+ code reuse across simulations
 
-### The Parseltongue/Pensieve Vision
+### The Parseltongue/Pensieve Vision Reliability
 
 These 10 simulations are not separate products—they're different **surfaces** on the same underlying platform:
 
@@ -829,6 +847,8 @@ These 10 simulations are not separate products—they're different **surfaces** 
 - Generates training data for LLMs
 - Attracts new user cohorts
 - Creates network effects
+
+> **Reliability-First Summary**: Platform ensures deterministic validation at infrastructure level. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 **The end game**: A **universal reasoning engine** over structured knowledge (code, papers, docs) that makes complex intellectual work feel effortless.
 

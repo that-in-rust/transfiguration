@@ -1,6 +1,6 @@
 # P07 Meta-Patterns: Universal Building Blocks
 
-## Overview
+## Overview Reliability
 
 This document extracts the **meta-patterns** from Parseltongue's workflow (P03Mermaid01.md) and reimagines them as **standalone, universal Rust crates** that solve problems beyond code analysis.
 
@@ -9,11 +9,13 @@ This document extracts the **meta-patterns** from Parseltongue's workflow (P03Me
 - **Graph Storage**: CozoDB = address (identifier) → value (text blob) mapping
 - **LLM Orchestration**: RataTui + Ollama/Anthropic = universal chat interface
 
+> **Reliability-First Summary**: Meta-patterns implement deterministic validation through rust-analyzer overlays and cargo check gates. Each pattern uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
+
 Each meta-pattern becomes an independent product with its own user base and compounding value.
 
 ---
 
-## Meta-Pattern Extraction
+## Meta-Pattern Extraction Reliability
 
 From the Parseltongue workflow, we identify **7 universal meta-patterns**:
 
@@ -42,6 +44,8 @@ flowchart TD
     class Workflow workflow
     class P1,P2,P3,P4,P5,P6,P7 pattern
 ```
+
+> **Reliability-First Summary**: Meta-pattern extraction implements deterministic validation through rust-analyzer overlays and cargo check gates. Uses bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 

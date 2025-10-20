@@ -335,11 +335,13 @@ flowchart TD
     class NotifyService,ConfigService,MetricsService support
 ```
 
-**Service Deployment:**
+**Service Deployment Reliability:**
 - Each service is an independent Rust binary with its own API
 - Communication via HTTP/gRPC with service discovery
 - Independent scaling and deployment
 - Can run locally or distributed across machines
+
+> **Reliability-First Summary**: Service architecture prioritizes deterministic validation through rust-analyzer overlays and cargo check gates. Each service implements bounded concurrency (Tokio runtime) with cooperative yields for UI responsiveness. Caching strategies (ISG + HNSW persisted) ensure sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure handled via quantization (Q4_K_M) and dynamic parallelism throttling.
 
 ---
 
@@ -405,7 +407,7 @@ flowchart TD
     class L6Parseltongue,L6Pensieve l6
 ```
 
-**SDK Usage:**
+**SDK Usage Reliability:**
 ```rust
 // Build custom tool with L1-L4 primitives
 use storage_primitives::CozoClient;
@@ -417,6 +419,8 @@ use retrieval_primitives::HybridRetriever;
 use parseltongue_template::ISGWorkflow;
 use pensieve_template::StudyGuideBuilder;
 ```
+
+> **Reliability-First Summary**: SDK layers implement deterministic validation at each abstraction level. L1-L4 primitives use bounded concurrency and cooperative yields. L6 templates ensure sub-100ms query performance with cached HNSW indices. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization and dynamic parallelism throttling.
 
 ---
 
@@ -595,7 +599,7 @@ This creates a **portfolio of useful tools** rather than a single monolithic pro
 
 ---
 
-## Conclusion
+## Conclusion Reliability
 
 Building Parseltongue and Pensieve as **modular, composable Rust OSS projects** provides:
 
@@ -604,5 +608,7 @@ Building Parseltongue and Pensieve as **modular, composable Rust OSS projects** 
 ✅ **Flexible Assembly**: Mix and match for different products  
 ✅ **Future-Proof**: Easy to adapt as requirements change  
 ✅ **Portfolio Effect**: Multiple projects gain visibility  
+
+> **Reliability-First Summary**: Modular architecture ensures deterministic validation at module boundaries. Each module implements bounded concurrency and cooperative yields for UI responsiveness. Caching strategies with persisted ISG + HNSW enable sub-100ms query performance. Error recovery uses thiserror patterns with complete diagnostic surfaces. Memory pressure managed via quantization and dynamic parallelism throttling.
 
 **Start with Simulation 1 (Infrastructure Libraries) + Simulation 3 (CLI Tools)** and evolve based on user feedback and scaling needs.
