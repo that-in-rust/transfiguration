@@ -266,6 +266,52 @@ Sprint 5: Polish
 
 —
 
+Claude Code + Local Subagents: Orchestration Simulations (Apple Silicon ≥16 GB)
+
+1) Claude-as-Reasoner, locals as light scouts
+- Setup: Claude Code serves as the sole reasoner; local scouts via llama.cpp (22–50M encoders, 135M/270M decoders, each ≤700 MB Q4) implement A1–A6 in parallel (6–10 workers).
+- Flow: Scouts create seeds/summaries/constraints → ContextPacker caps ≤3K tokens → Claude synthesizes minimal diff → CodeGraph.Future_Code → RA overlay → cargo check → selective tests → flip to Current_Code.
+- Perf: p95 60–90 s; RAM ~8–10 GB; tokens_per_fix p95 ≤ 3K.
+- Pros: Highest reasoning quality; simple control plane; low local model memory.
+- Risks: Network dependency; must enforce token caps and timeouts.
+
+2) Claude-as-Orchestrator, Qwen 7B local as Reasoner
+- Setup: Claude schedules/monitors; Qwen2.5 7B Q4_K_M (Metal, ~5–6 GB) performs reasoning; local scouts (≤270M) run A1–A6; 8–12 parallel tasks.
+- Flow: Claude orchestrates → Qwen receives curated pack → emits diff + confidence → CodeGraph pipeline as above; Claude handles retries/escalations.
+- Perf: p95 70–100 s; RAM ~10–12 GB; tokens lower on cloud; robust with flaky nets.
+- Pros: Reduced cloud spend; fast local iteration; strong offline posture.
+- Risks: KV cache sizing; throttle parallelism to avoid memory spikes.
+
+3) Local-first with Claude as last‑mile escalator
+- Setup: Qwen 3B/7B attempts first; locals run A1–A6; Claude invoked only if confidence < 0.75 or PreFlight fails.
+- Flow: Deterministic → Qwen → (if needed) Claude refines plan/context → CodeGraph → PreFlight/tests.
+- Perf: p95 55–85 s on local success; 85–120 s with escalation; RAM ~8–12 GB.
+- Pros: Minimal tokens; cloud used only when necessary; reliable under tight budgets.
+- Risks: Escalation logic must prevent token thrash; crisp confidence gates.
+
+4) Claude as Spec Planner, Qwen as Implementor
+- Setup: Claude writes a terse executable spec (pattern + constraints + acceptance checks); Qwen 7B converts spec → diff; locals validate constraints.
+- Flow: Spec → diff → CodeGraph → PreFlight/tests; summaries head the pack; deterministic transforms preferred.
+- Perf: p95 80–120 s; tokens split planner≤1.5K, implementor≤1.5K; RAM ~10–12 GB.
+- Pros: Separation of concerns; fewer hallucinations on multi‑file constraints.
+- Risks: Two‑hop latency; planner must be spec‑tight.
+
+5) Claude as Critic/Selector over parallel local candidates
+- Setup: 3–5 parallel implementors (2–3B Q4 each, ≤1 GB per model incl. KV) generate candidate diffs; optional single 7B; Claude ranks/justifies.
+- Flow: Scouts build Needed shortlist → parallel candidate diffs (temps 0.2/0.5) → Claude ranks vs constraints → best → CodeGraph → PreFlight/tests.
+- Perf: p95 70–110 s; RAM ~12–14 GB with 3–4 tiny implementors; higher 1‑shot success.
+- Pros: Diversity without cloud token blowup; Claude only judges.
+- Risks: Parallel KV memory; strict timeouts/early stopping required.
+
+Guardrails (apply to all sims)
+- CodeGraph is the only write surface; other Cozo tables are read‑only context.
+- Deterministic transforms first; LLM‑late; ≤3K tokens total; strict timeouts.
+- Safety gates: RA overlay → cargo check → selective tests; flip Future→Current only on pass + approval.
+- Metal tuning: Q4_K_M; threads≈physical cores; batch tuned to keep p95 ≤ 120 s.
+- KPIs: FACR ≥ 97%; tokens_per_fix p95 ≤ 3K; zero_llm_rate ≥ 30% on common Rust errors; escalation_rate (sim 3) ≤ 25%.
+
+—
+
 Risks & Mitigations
 - Macro/Build.rs complexity → Treat macro crates as first-class; cache expansions; surface amber guidance.
 - Feature combinatorics → ISG FEATURE_GATED_BY edges; per-profile caches.
