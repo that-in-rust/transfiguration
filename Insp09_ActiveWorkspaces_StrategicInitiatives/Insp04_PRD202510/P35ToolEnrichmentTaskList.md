@@ -114,5 +114,6 @@ Planned batches (~300 LOC each)
 71) P34DeepNotes.md (4800–5054)
 
 Progress Tracking
+- [x] Batch 1: P02Deconstructionv01.md (0–300) — commit ee65697
 - Use checkboxes per batch; record commit hashes and timestamps after each enrichment.
 - Keep CodeGraph-only write discipline across content edits (conceptual alignment in docs).
