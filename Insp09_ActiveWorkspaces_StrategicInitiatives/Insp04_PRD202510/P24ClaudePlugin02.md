@@ -507,3 +507,76 @@ Appendix C: Metrics Targets
 Bottom Line
 
 P24ClaudePlugin02 turns ISG + local subagents into a production-grade Rust debugging assistant: one-go reliable fixes with minimal tokens, offline-capable, safety-first, and continuously learning. We win by narrowing the search with ISG, specializing subagents, and validating before any write.
+
+—
+
+Grouping Strategies (with three-word tool names): Pros and Cons
+
+1) Constellation (all independent repos)
+- What: Every primitive ships as its own crate/CLI with JSON streaming between tools.
+- Tools in the wild: interface-graph-builder, interface-summary-generator, embedding-index-builder, hybrid-retrieval-engine, pattern-knowledge-base, constraints-overlay-analyzer, context-pack-builder, deterministic-patch-engine, reasoning-adapter-bridge, local-orchestrator-daemon, preflight-safety-gate, diagnostics-scope-mapper, git-apply-rollback, offline-debugging-tui, plus codegraph-write-surface.
+- Pros:
+  - Maximum modular adoption; vendors/projects can replace any piece independently.
+  - Parallel evolution and release cadences; encourages clean JSON contracts.
+  - Great for OSS ecosystems and research experimentation.
+- Cons:
+  - Integration friction and version skew; harder end-to-end QA.
+  - Process boundaries add latency; logging/metrics correlation is harder.
+- Guardrails:
+  - Versioned schemas and a compatibility matrix; end-to-end pipeline tests.
+  - A declarative DAG spec to compose tools predictably.
+
+2) Two‑Pillars + Orchestrator (read vs write split)
+- What: Analysis pillar (read-only) and Apply pillar (write-gated); orchestrator/LLM adapter separate.
+- Analysis: interface-graph-builder, interface-summary-generator, embedding-index-builder, hybrid-retrieval-engine, pattern-knowledge-base, diagnostics-scope-mapper.
+- Apply: codegraph-write-surface, preflight-safety-gate, constraints-overlay-analyzer, git-apply-rollback, deterministic-patch-engine.
+- Pros:
+  - Compliance-friendly: only Apply touches code; easy to lock down.
+  - CI-ready: run Analysis on PRs, Apply behind a guarded step.
+- Cons:
+  - Cross-pillar drift in shared types if unmanaged.
+  - Requires disciplined releases across pillars and orchestrator.
+- Guardrails:
+  - Single shared “contract” crate for ISGL1 keys, diagnostics, diffs.
+  - CodeGraph is the only write surface enforced in Apply pillar.
+
+3) Triptych Planes (graph, safety, intelligence)
+- What: Three independently versioned bundles with distinct SLOs.
+- Graph plane: interface-graph-builder, embedding-index-builder, hybrid-retrieval-engine.
+- Safety plane: codegraph-write-surface, preflight-safety-gate, constraints-overlay-analyzer, git-apply-rollback.
+- Intelligence plane: interface-summary-generator, context-pack-builder, deterministic-patch-engine, reasoning-adapter-bridge.
+- Pros:
+  - Clear performance budgets; fault isolation; easy backend swaps in Intelligence plane.
+  - Plane-specific CI benchmarks (Graph ≤100ms query p95; Safety ≤3s preflight p95; Intelligence ≤3K tokens).
+- Cons:
+  - More packaging than Two‑Pillars; needs composition docs.
+- Guardrails:
+  - Interfaces strictly via ISGL1 keys and ContextBundle; no hidden coupling.
+
+4) Fix‑Engine centric (fastest to product value)
+- What: fix-engine = interface-summary-generator + hybrid-retrieval-engine + pattern-knowledge-base + context-pack-builder + deterministic-patch-engine + reasoning-adapter-bridge behind one CLI; safety-core separate.
+- Safety-core: codegraph-write-surface + preflight-safety-gate + constraints-overlay-analyzer + git-apply-rollback.
+- Pros:
+  - Minimal install for end-to-end fixes; simple contract for IDE/CI consumers.
+  - Deterministic-first, LLM-late; same safety guarantees via safety-core.
+- Cons:
+  - Tighter internal coupling; slower independent evolution of subparts.
+- Guardrails:
+  - Trait-first internals; feature flags (local-only vs cloud-hybrid); strict token/latency gates.
+
+5) Monorepo Workspace (parseltongue workspace with feature flags)
+- What: Single cargo workspace hosting all crates; build subset CLIs via features: graph, safety, intelligence, orchestrator, tui.
+- Pros:
+  - Highest coherence and shared code; simplest release/QA.
+  - Easier large-scale refactors across crates.
+- Cons:
+  - Larger checkout/build; higher contribution barrier; risk of accidental coupling.
+- Guardrails:
+  - Enforce crate boundaries and public APIs; publish selected crates to crates.io to preserve external modularity.
+
+Decision heuristics
+- Enterprise/compliance-first: Two‑Pillars + Orchestrator.
+- OSS/ecosystem growth: Constellation.
+- Perf tuning and testability: Triptych Planes.
+- Ship value fastest: Fix‑Engine centric now, evolve to Two‑Pillars later.
+- Core-team coherence: Monorepo Workspace with strict crate boundaries.
