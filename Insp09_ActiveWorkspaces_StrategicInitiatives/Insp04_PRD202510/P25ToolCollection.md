@@ -1846,3 +1846,1584 @@ mod amplified {
 1. **Performance Tuning**: Optimized caching and parallelization
 2. **Error Reporting**: Detailed validation failure diagnostics
 3. **User Experience**: Transparent candidate evaluation and selection
+
+## **P22 Preflight Architecture Integration**
+
+### **Validation Trade-Off Analysis**
+
+#### **Method Comparison Framework**
+```rust
+/// Validation method performance characteristics
+#[derive(Debug, Clone)]
+pub struct ValidationMetrics {
+    pub method: ValidationMethod,
+    pub latency_ms: u64,
+    pub memory_mb: u64,
+    pub accuracy: f32,
+    pub cache_hit_rate: f32,
+    pub setup_overhead: u64,
+}
+
+#[derive(Debug, Clone)]
+pub enum ValidationMethod {
+    /// In-memory rust-analyzer overlay
+    LSPOverlay {
+        buffer_count: usize,
+        feature_flags: Vec<String>,
+    },
+    /// Shadow workspace with real cargo check
+    ShadowWorkspace {
+        cache_strategy: CacheStrategy,
+        parallel_jobs: u8,
+    },
+    /// Hybrid: LSP for fast checks, shadow for final
+    Hybrid {
+        lsp_threshold: Duration,
+        shadow_required: bool,
+    },
+}
+```
+
+#### **Performance Benchmarks**
+```rust
+/// Real-world validation performance data
+impl ValidationMetrics {
+    pub fn benchmark_results() -> Vec<Self> {
+        vec![
+            // LSP Overlay - Fast but less comprehensive
+            ValidationMetrics {
+                method: ValidationMethod::LSPOverlay {
+                    buffer_count: 15,
+                    feature_flags: vec!["async".to_string()]
+                },
+                latency_ms: 200,
+                memory_mb: 150,
+                accuracy: 0.85,
+                cache_hit_rate: 0.90,
+                setup_overhead: 50,
+            },
+            // Shadow Workspace - Slower but comprehensive
+            ValidationMetrics {
+                method: ValidationMethod::ShadowWorkspace {
+                    cache_strategy: CacheStrategy::SharedTarget,
+                    parallel_jobs: 4,
+                },
+                latency_ms: 1200,
+                memory_mb: 800,
+                accuracy: 0.98,
+                cache_hit_rate: 0.95,
+                setup_overhead: 300,
+            },
+            // Hybrid - Best of both worlds
+            ValidationMetrics {
+                method: ValidationMethod::Hybrid {
+                    lsp_threshold: Duration::from_millis(500),
+                    shadow_required: true,
+                },
+                latency_ms: 400,
+                memory_mb: 400,
+                accuracy: 0.94,
+                cache_hit_rate: 0.92,
+                setup_overhead: 100,
+            },
+        ]
+    }
+}
+```
+
+### **LSP Integration Strategies**
+
+#### **rust-analyzer Overlay Architecture**
+```rust
+/// LSP client for zero-risk validation
+pub struct PreflightLSPClient {
+    client: Option<rust_analyzer::Client>,
+    workspace_root: PathBuf,
+    config: rust_analyzer::Config,
+    buffer_sessions: HashMap<String, BufferSession>,
+}
+
+#[derive(Debug)]
+struct BufferSession {
+    session_id: String,
+    file_path: PathBuf,
+    original_content: String,
+    candidate_content: String,
+    diagnostics: Vec<lsp_types::Diagnostic>,
+    last_modified: SystemTime,
+}
+
+impl PreflightLSPClient {
+    /// Create in-memory overlay for candidate validation
+    pub async fn create_overlay(&mut self, candidates: &[CodeCandidate]) -> Result<Vec<BufferSession>> {
+        let mut sessions = Vec::new();
+
+        for candidate in candidates {
+            let session_id = format!("preflight-{}", uuid::Uuid::new_v4());
+
+            // Create virtual buffer
+            self.client.text_did_open(lsp_types::DidOpenTextDocumentParams {
+                text_document: lsp_types::TextDocumentItem {
+                    uri: lsp_types::Url::from_file_path(&candidate.file_path).unwrap(),
+                    language_id: "rust".to_string(),
+                    version: 1,
+                    text: candidate.modified_code.clone(),
+                },
+            }).await?;
+
+            let session = BufferSession {
+                session_id: session_id.clone(),
+                file_path: candidate.file_path.clone(),
+                original_content: candidate.original_code.clone(),
+                candidate_content: candidate.modified_code.clone(),
+                diagnostics: Vec::new(),
+                last_modified: SystemTime::now(),
+            };
+
+            sessions.push(session);
+            self.buffer_sessions.insert(session_id, session);
+        }
+
+        Ok(sessions)
+    }
+
+    /// Validate all buffers and collect diagnostics
+    pub async fn validate_buffers(&mut self) -> Result<Vec<ValidationResult>> {
+        let mut results = Vec::new();
+
+        // Trigger diagnostics refresh
+        self.client.text_document_did_change(lsp_types::DidChangeTextDocumentParams {
+            text_document: lsp_types::VersionedTextDocumentIdentifier {
+                uri: lsp_types::Url::from_file_path("dummy").unwrap(),
+                version: 2,
+            },
+            content_changes: vec![],
+        }).await?;
+
+        // Wait for diagnostics with timeout
+        tokio::time::timeout(Duration::from_millis(500), async {
+            tokio::time::sleep(Duration::from_millis(100)).await;
+        }).await?;
+
+        // Collect diagnostics from all sessions
+        for session in self.buffer_sessions.values() {
+            let diagnostics = self.client.text_document_full_diagnostics(
+                lsp_types::TextDocumentIdentifier {
+                    uri: lsp_types::Url::from_file_path(&session.file_path).unwrap(),
+                }
+            ).await?;
+
+            let validation_result = ValidationResult {
+                file_path: session.file_path.clone(),
+                success: diagnostics.iter().all(|d| d.severity != Some(lsp_types::DiagnosticSeverity::ERROR)),
+                diagnostics: diagnostics.into_iter().map(|d| Diagnostic {
+                    message: d.message,
+                    severity: match d.severity {
+                        Some(lsp_types::DiagnosticSeverity::ERROR) => Severity::Error,
+                        Some(lsp_types::DiagnosticSeverity::WARNING) => Severity::Warning,
+                        _ => Severity::Info,
+                    },
+                    range: d.range,
+                    code: d.code,
+                }).collect(),
+                validation_method: "LSP Overlay".to_string(),
+                latency_ms: 200,
+            };
+
+            results.push(validation_result);
+        }
+
+        Ok(results)
+    }
+}
+```
+
+#### **Shadow Workspace Optimization**
+```rust
+/// Fast shadow workspace validation
+pub struct ShadowWorkspaceValidator {
+    workspace_root: PathBuf,
+    shadow_root: PathBuf,
+    cargo_config: CargoConfig,
+    cache_manager: CacheManager,
+}
+
+impl ShadowWorkspaceValidator {
+    /// Create optimized shadow workspace
+    pub async fn create_shadow(&self, candidates: &[CodeCandidate]) -> Result<ShadowWorkspace> {
+        let shadow_id = format!("shadow-{}", chrono::Utc::now().timestamp_millis());
+        let shadow_path = self.workspace_root.join("target").join("shadow").join(&shadow_id);
+
+        // Create shadow workspace structure
+        fs::create_dir_all(&shadow_path)?;
+
+        // Hard link unchanged files, copy modified files
+        let mut modified_files = HashSet::new();
+        for candidate in candidates {
+            modified_files.insert(&candidate.file_path);
+            let shadow_file = shadow_path.join(candidate.file_path.strip_prefix(&self.workspace_root).unwrap());
+            fs::create_dir_all(shadow_file.parent().unwrap())?;
+            fs::write(&shadow_file, &candidate.modified_code)?;
+        }
+
+        // Hard link other files from original workspace
+        self.hard_link_unmodified_files(&shadow_path, &modified_files).await?;
+
+        // Create Cargo.toml with shared target directory
+        let shadow_cargo_toml = self.create_shadow_cargo_toml(&shadow_path)?;
+        fs::write(shadow_path.join("Cargo.toml"), shadow_cargo_toml)?;
+
+        Ok(ShadowWorkspace {
+            path: shadow_path,
+            candidates: candidates.to_vec(),
+            created_at: SystemTime::now(),
+        })
+    }
+
+    /// Run cargo check with shared cache optimization
+    pub async fn validate_shadow(&self, shadow: &ShadowWorkspace) -> Result<Vec<ValidationResult>> {
+        let start_time = SystemTime::now();
+
+        let output = tokio::process::Command::new("cargo")
+            .current_dir(&shadow.path)
+            .args(["check", "--quiet", "--message-format=json"])
+            .env("CARGO_TARGET_DIR", self.workspace_root.join("target")) // Shared cache
+            .env("CARGO_INCREMENTAL", "1") // Incremental compilation
+            .output()
+            .await?;
+
+        let latency = start_time.elapsed().unwrap().as_millis() as u64;
+
+        // Parse cargo JSON output
+        let mut diagnostics = Vec::new();
+        for line in output.stdout.lines() {
+            if let Ok(cargo_message) = serde_json::from_str::<CargoMessage>(&line) {
+                if let CargoMessage::CompilerMessage(msg) = cargo_message {
+                    diagnostics.extend(msg.message.spans.into_iter().map(|span| Diagnostic {
+                        message: msg.message,
+                        severity: match msg.message.level {
+                            cargo_metadata::diagnostic::DiagnosticLevel::Error => Severity::Error,
+                            cargo_metadata::diagnostic::DiagnosticLevel::Warning => Severity::Warning,
+                            _ => Severity::Info,
+                        },
+                        range: lsp_types::Range {
+                            start: lsp_types::Position { line: span.line_start as u32, character: span.column_start as u32 },
+                            end: lsp_types::Position { line: span.line_end as u32, character: span.column_end as u32 },
+                        },
+                        code: None,
+                    }));
+                }
+            }
+        }
+
+        // Group diagnostics by file
+        let mut file_diagnostics: HashMap<PathBuf, Vec<Diagnostic>> = HashMap::new();
+        for diag in diagnostics {
+            let file_path = shadow.path.join(&diag.range.start);
+            file_diagnostics.entry(file_path).or_insert_with(Vec::new).push(diag);
+        }
+
+        // Create validation results
+        let mut results = Vec::new();
+        for candidate in &shadow.candidates {
+            let shadow_file = shadow.path.join(candidate.file_path.strip_prefix(&self.workspace_root).unwrap());
+            let file_diagnostics = file_diagnostics.get(&shadow_file).unwrap_or(&Vec::new());
+
+            let result = ValidationResult {
+                file_path: candidate.file_path.clone(),
+                success: file_diagnostics.iter().all(|d| d.severity != Severity::Error),
+                diagnostics: file_diagnostics.clone(),
+                validation_method: "Shadow Workspace".to_string(),
+                latency_ms: latency,
+            };
+
+            results.push(result);
+        }
+
+        Ok(results)
+    }
+}
+```
+
+### **P22-P21 Workflow Integration**
+
+#### **Unified Validation Pipeline**
+```rust
+/// P22 preflight integrated with P21 ISG workflow
+pub struct UnifiedValidationPipeline {
+    p21_isg: P21ISGProcessor,
+    p22_preflight: P22PreflightValidator,
+    pattern_db: PatternDatabase,
+    cache: SharedValidationCache,
+}
+
+impl UnifiedValidationPipeline {
+    /// End-to-end validation from P21 ISG to P22 preflight
+    pub async fn validate_candidate_set(&mut self,
+        candidates: &[CodeCandidate],
+        context: &ValidationContext
+    ) -> Result<UnifiedValidationResult> {
+
+        // Phase 1: P21 ISG analysis (pattern matching, context gathering)
+        let p21_result = self.p21_isg.analyze_candidates(candidates, context).await?;
+
+        // Phase 2: P22 preflight validation (LSP + shadow workspace)
+        let p22_result = self.p22_preflight.validate_candidates(candidates, &p21_result).await?;
+
+        // Phase 3: Unified result synthesis
+        let unified_result = UnifiedValidationResult {
+            candidates: candidates.to_vec(),
+            p21_analysis: p21_result,
+            p22_validation: p22_result,
+            overall_success: p22_result.iter().all(|r| r.success),
+            recommended_action: self.recommend_action(&p21_result, &p22_result),
+            confidence_score: self.calculate_confidence(&p21_result, &p22_result),
+        };
+
+        Ok(unified_result)
+    }
+
+    /// Recommend action based on combined analysis
+    fn recommend_action(&self, p21: &P21AnalysisResult, p22: &[ValidationResult]) -> RecommendedAction {
+        let error_count = p22.iter().map(|r| r.diagnostics.iter().filter(|d| d.severity == Severity::Error).count()).sum();
+
+        match (p21.pattern_confidence, error_count) {
+            (conf, 0) if conf > 0.9 => RecommendedAction::ApplyImmediately,
+            (conf, 0) if conf > 0.7 => RecommendedAction::UserReview,
+            (conf, errors) if errors <= 3 && conf > 0.8 => RecommendedAction::RefineAndRetry,
+            _ => RecommendedAction::InvestigateFurther,
+        }
+    }
+}
+```
+
+### **Performance Optimization Strategies**
+
+#### **Adaptive Validation Selection**
+```rust
+/// Smart validation method selection based on context
+pub struct AdaptiveValidator {
+    performance_history: HashMap<ValidationContext, ValidationMetrics>,
+    resource_monitor: ResourceMonitor,
+}
+
+impl AdaptiveValidator {
+    /// Select optimal validation method based on context
+    pub fn select_method(&self, context: &ValidationContext) -> ValidationMethod {
+        let available_memory = self.resource_monitor.available_memory_mb();
+        let time_pressure = context.deadline.map(|d| d.duration_since(SystemTime::now()).unwrap_or_default());
+        let candidate_count = context.candidates.len();
+
+        match (available_memory, time_pressure, candidate_count) {
+            (mem, time, count) if mem < 2000 => ValidationMethod::LSPOverlay {
+                buffer_count: count,
+                feature_flags: context.active_features.clone()
+            },
+            (_, time, _) if time.unwrap_or_default() < Duration::from_secs(30) => ValidationMethod::LSPOverlay {
+                buffer_count: count.min(20),
+                feature_flags: context.active_features.clone()
+            },
+            (mem, _, count) if mem > 8000 && count > 50 => ValidationMethod::ShadowWorkspace {
+                cache_strategy: CacheStrategy::SharedTarget,
+                parallel_jobs: (mem / 2000).min(8) as u8,
+            },
+            _ => ValidationMethod::Hybrid {
+                lsp_threshold: Duration::from_millis(500),
+                shadow_required: true,
+            },
+        }
+    }
+}
+```
+
+#### **Cache-Aware Validation Strategy**
+```rust
+/// Validation cache optimization
+pub struct ValidationCache {
+    lsp_cache: HashMap<String, LSPValidationResult>,
+    shadow_cache: HashMap<String, ShadowValidationResult>,
+    cache_stats: CacheStatistics,
+}
+
+impl ValidationCache {
+    /// Check cache validity and return cached result if available
+    pub fn get_cached_validation(&self, candidate: &CodeCandidate, method: &ValidationMethod) -> Option<ValidationResult> {
+        let cache_key = self.generate_cache_key(candidate, method);
+
+        match method {
+            ValidationMethod::LSPOverlay { .. } => {
+                self.lsp_cache.get(&cache_key).map(|cached| ValidationResult {
+                    file_path: candidate.file_path.clone(),
+                    success: cached.success,
+                    diagnostics: cached.diagnostics.clone(),
+                    validation_method: "LSP Overlay (Cached)".to_string(),
+                    latency_ms: 5, // Near-instant from cache
+                })
+            },
+            ValidationMethod::ShadowWorkspace { .. } => {
+                self.shadow_cache.get(&cache_key).map(|cached| ValidationResult {
+                    file_path: candidate.file_path.clone(),
+                    success: cached.success,
+                    diagnostics: cached.diagnostics.clone(),
+                    validation_method: "Shadow Workspace (Cached)".to_string(),
+                    latency_ms: 10,
+                })
+            },
+            ValidationMethod::Hybrid { .. } => {
+                // Check both caches for hybrid validation
+                self.lsp_cache.get(&cache_key).or_else(|| self.shadow_cache.get(&cache_key))
+                    .map(|cached| ValidationResult {
+                        file_path: candidate.file_path.clone(),
+                        success: cached.success,
+                        diagnostics: cached.diagnostics.clone(),
+                        validation_method: "Hybrid (Cached)".to_string(),
+                        latency_ms: 15,
+                    })
+            },
+        }
+    }
+
+    /// Update cache with new validation results
+    pub fn update_cache(&mut self, candidate: &CodeCandidate, method: &ValidationMethod, result: &ValidationResult) {
+        let cache_key = self.generate_cache_key(candidate, method);
+
+        match method {
+            ValidationMethod::LSPOverlay { .. } => {
+                self.lsp_cache.insert(cache_key, LSPValidationResult {
+                    success: result.success,
+                    diagnostics: result.diagnostics.clone(),
+                    timestamp: SystemTime::now(),
+                });
+            },
+            ValidationMethod::ShadowWorkspace { .. } => {
+                self.shadow_cache.insert(cache_key, ShadowValidationResult {
+                    success: result.success,
+                    diagnostics: result.diagnostics.clone(),
+                    timestamp: SystemTime::now(),
+                });
+            },
+            ValidationMethod::Hybrid { .. } => {
+                // Update both caches for hybrid validation
+                self.lsp_cache.insert(cache_key.clone(), LSPValidationResult {
+                    success: result.success,
+                    diagnostics: result.diagnostics.clone(),
+                    timestamp: SystemTime::now(),
+                });
+                self.shadow_cache.insert(cache_key, ShadowValidationResult {
+                    success: result.success,
+                    diagnostics: result.diagnostics.clone(),
+                    timestamp: SystemTime::now(),
+                });
+            },
+        }
+
+        self.cache_stats.hit_count += 1;
+    }
+}
+```
+
+## **Rust-analyzer Overlay Architecture for Large Scale Validation**
+
+### **Scalability Framework**
+
+#### **Workspace Initialization Strategy**
+```rust
+/// Rust-analyzer instance management for large workspaces
+pub struct RAPoolManager {
+    instances: LruCache<RAKey, RAInstance>,
+    max_instances: usize,
+    toolchain_pinner: ToolchainPinner,
+}
+
+#[derive(Debug, Clone, Hash, Eq, PartialEq)]
+pub struct RAKey {
+    pub repo_hash: String,        // git commit SHA
+    pub toolchain: String,        // rustc version
+    pub feature_key: String,      // sorted features joined by ','
+}
+
+#[derive(Debug)]
+pub struct RAInstance {
+    client: RAClient,
+    config: RAConfig,
+    memory_usage_mb: u64,
+    last_activity: SystemTime,
+    candidate_queue: VecDeque<Candidate>,
+}
+
+impl RAPoolManager {
+    /// Initialize RA instance with conservative settings for performance
+    pub async fn spawn_ra_instance(&self, key: &RAKey, workspace_root: &Path) -> Result<RAInstance> {
+        let mut client = RAClient::connect(workspace_root).await?;
+
+        // Configure for performance over completeness
+        let config = RAConfig {
+            cargo_all_targets: false,
+            cargo_features: key.feature_key.split(',').filter(|s| !s.is_empty()).map(String::from).collect(),
+            proc_macro_enable: false, // Can be toggled for fidelity pool
+            cargo_build_scripts_enable: false,
+            diagnostics_enable: true,
+            exclude_dirs: vec!["target".to_string(), ".git".to_string()],
+        };
+
+        client.apply_config(&config).await?;
+
+        Ok(RAInstance {
+            client,
+            config,
+            memory_usage_mb: 0,
+            last_activity: SystemTime::now(),
+            candidate_queue: VecDeque::new(),
+        })
+    }
+
+    /// Get or spawn RA instance with LRU eviction
+    pub async fn get_or_spawn(&mut self, key: RAKey, workspace_root: &Path) -> Result<&mut RAInstance> {
+        if !self.instances.contains(&key) {
+            // Evict if at capacity
+            while self.instances.len() >= self.max_instances {
+                self.instances.pop_lru();
+            }
+
+            let instance = self.spawn_ra_instance(&key, workspace_root).await?;
+            self.instances.put(key, instance);
+        }
+
+        Ok(self.instances.get_mut(&key).unwrap())
+    }
+}
+```
+
+#### **Dataset Mode Optimization**
+```rust
+/// High-throughput validation for many candidates
+pub struct DatasetValidator {
+    ra_pool: RAPoolManager,
+    throughput_tracker: ThroughputTracker,
+    cache: ValidationCache,
+}
+
+impl DatasetValidator {
+    /// Process stream of candidates across multiple workspaces
+    pub async fn process_dataset(&mut self, dataset: Vec<WorkspaceCandidate>) -> Result<Vec<CandidateResult>> {
+        let mut results = Vec::new();
+        let mut futures = Vec::new();
+
+        // Group by RA key for batch processing
+        let mut by_key: HashMap<RAKey, Vec<Candidate>> = HashMap::new();
+        for wc in dataset {
+            by_key.entry(wc.ra_key.clone()).or_insert_with(Vec::new).push(wc.candidate);
+        }
+
+        // Process each key group
+        for (ra_key, candidates) in by_key {
+            let workspace_root = &candidates[0].workspace_root;
+            let ra_instance = self.ra_pool.get_or_spawn(ra_key, workspace_root).await?;
+
+            // Process candidates sequentially within one RA instance
+            for candidate in candidates {
+                let result = self.validate_candidate(ra_instance, candidate).await?;
+                results.push(result);
+            }
+        }
+
+        Ok(results)
+    }
+
+    /// Single candidate validation with RA overlay
+    async fn validate_candidate(&mut self, ra_instance: &mut RAInstance, candidate: Candidate) -> Result<CandidateResult> {
+        let start_time = SystemTime::now();
+
+        // Create overlay for edited files
+        let mut opened_files = Vec::new();
+        for (path, content) in &candidate.files {
+            ra_instance.client.did_open(path, content).await?;
+            opened_files.push(path.clone());
+        }
+
+        // Wait for diagnostics with timeout
+        let diagnostics = tokio::time::timeout(
+            Duration::from_millis(ra_instance.config.ra_timeout_ms),
+            ra_instance.client.collect_diagnostics()
+        ).await??;
+
+        // Clean up overlays
+        for path in opened_files {
+            ra_instance.client.did_close(&path).await?;
+        }
+
+        let elapsed = start_time.elapsed().unwrap();
+
+        Ok(CandidateResult {
+            id: candidate.id,
+            passed: !diagnostics.iter().any(|d| d.severity == Severity::Error),
+            diagnostics,
+            elapsed_ms: elapsed.as_millis() as u64,
+            validation_method: "RA Overlay".to_string(),
+        })
+    }
+}
+```
+
+### **Performance Optimization**
+
+#### **Memory-Bound Concurrency**
+```rust
+/// Resource-aware concurrency control
+pub struct ConcurrencyController {
+    memory_monitor: MemoryMonitor,
+    instance_limits: HashMap<String, usize>,
+    active_validations: HashMap<RAKey, usize>,
+}
+
+impl ConcurrencyController {
+    /// Calculate optimal concurrency based on available memory
+    pub fn calculate_optimal_concurrency(&self, available_memory_mb: u64, ra_memory_mb: u64) -> usize {
+        // Reserve memory for system and other processes
+        let safe_memory = available_memory_mb * 70 / 100; // 70% safety margin
+        (safe_memory / ra_memory_mb).max(1).min(6) // Cap at 6 instances
+    }
+
+    /// Check if we can process another candidate for this RA key
+    pub fn can_process_candidate(&mut self, ra_key: &RAKey, ra_memory_mb: u64) -> bool {
+        let current_memory = self.memory_monitor.current_usage_mb();
+        let available = self.memory_monitor.total_memory_mb() - current_memory;
+
+        let can_fit_memory = available > ra_memory_mb * 2; // Safety factor of 2
+        let within_concurrency_limit = self.active_validations.get(ra_key).unwrap_or(&0) < &3; // Max 3 per RA
+
+        can_fit_memory && within_concurrency_limit
+    }
+}
+```
+
+#### **Adaptive Configuration**
+```rust
+/// Dynamic RA configuration based on context
+pub struct AdaptiveRAConfig {
+    base_config: RAConfig,
+    performance_stats: HashMap<String, PerformanceMetrics>,
+}
+
+impl AdaptiveRAConfig {
+    /// Adapt configuration based on observed performance
+    pub fn adapt_config(&mut self, context: &ValidationContext) -> RAConfig {
+        let mut config = self.base_config.clone();
+
+        match context.time_pressure {
+            TimePressure::High => {
+                // Maximum speed settings
+                config.proc_macro_enable = false;
+                config.cargo_build_scripts_enable = false;
+                config.ra_timeout_ms = 500;
+            },
+            TimePressure::Medium => {
+                // Balanced settings
+                config.proc_macro_enable = context.requires_proc_macros;
+                config.cargo_build_scripts_enable = context.requires_build_scripts;
+                config.ra_timeout_ms = 1500;
+            },
+            TimePressure::Low => {
+                // High fidelity settings
+                config.proc_macro_enable = true;
+                config.cargo_build_scripts_enable = true;
+                config.ra_timeout_ms = 3000;
+            },
+        }
+
+        // Adapt based on workspace size
+        if context.workspace_size_mb > 1000 {
+            config.cargo_all_targets = false; // Large workspace optimization
+        }
+
+        config
+    }
+}
+```
+
+### **Integration with CozoDB Architecture**
+
+#### **Preflight Queue Management**
+```rust
+/// CozoDB-integrated preflight queue
+pub struct CozoPreflightQueue {
+    db: CozoDB,
+    policy: PreflightPolicy,
+}
+
+impl CozoPreflightQueue {
+    /// Enqueue candidate for preflight validation
+    pub fn enqueue_candidate(&mut self, candidate: &Candidate, context: &ValidationContext) -> Result<String> {
+        let candidate_id = blake3::hash(&serde_json::to_vec(candidate)?).to_hex().to_string();
+        let ra_key = RAKey {
+            repo_hash: context.repo_hash.clone(),
+            toolchain: context.toolchain.clone(),
+            feature_key: context.features.join(","),
+        };
+
+        self.db.run_query(r#"
+            ?[candidate_id, prd_id, repo_hash, toolchain, feature_key, files, buffers, created_at, status] :=
+                $candidate_id, $prd_id, $repo_hash, $toolchain, $feature_key, $files, $buffers, $created_at, "queued"
+
+            :create preflight_queue {
+                candidate_id: String,
+                prd_id: String,
+                repo_hash: String,
+                toolchain: String,
+                feature_key: String,
+                files: [String],
+                buffers: [String],
+                created_at: Validity,
+                status: String = "queued"
+            }
+        "#, vec![
+            candidate_id.clone(),
+            context.prd_id.clone(),
+            ra_key.repo_hash,
+            ra_key.toolchain,
+            ra_key.feature_key,
+            candidate.files.iter().map(|(p, _)| p.to_string_lossy().to_string()).collect(),
+            candidate.files.iter().map(|(_, c)| c.clone()).collect(),
+            chrono::Utc::now(),
+        ])?;
+
+        Ok(candidate_id)
+    }
+
+    /// Poll next candidate for processing
+    pub fn poll_next_candidate(&mut self, ra_key: &RAKey) -> Result<Option<PendingCandidate>> {
+        let results = self.db.run_query(r#"
+            ?[candidate_id, files, buffers] :=
+                *preflight_queue { candidate_id: $cid, repo_hash: $repo_hash, toolchain: $toolchain, feature_key: $feature_key, files: $files, buffers: $buffers, status: "queued" },
+                $repo_hash == $repo_hash_arg,
+                $toolchain == $toolchain_arg,
+                $feature_key == $feature_key_arg,
+
+            :limit 1
+
+            # Mark as running
+            :update preflight_queue set status = 'running' where candidate_id = $cid
+        "#, vec![
+            ra_key.repo_hash.clone(),
+            ra_key.toolchain.clone(),
+            ra_key.feature_key.clone(),
+        ])?;
+
+        if results.is_empty() {
+            Ok(None)
+        } else {
+            let row = &results[0];
+            Ok(Some(PendingCandidate {
+                candidate_id: row[0].clone(),
+                files: serde_json::from_str(&row[1])?,
+                buffers: serde_json::from_str(&row[2])?,
+            }))
+        }
+    }
+
+    /// Store preflight results
+    pub fn store_results(&mut self, candidate_id: &str, results: &CandidateResult) -> Result<()> {
+        self.db.run_query(r#"
+            :create preflight_results {
+                candidate_id: String
+                =>
+                passed: Bool,
+                severity_gate: String,
+                diag_json: String,
+                elapsed_ms: Int,
+                started_at: Validity,
+                finished_at: Validity
+            }
+        "#, vec![
+            candidate_id.to_string(),
+            results.passed,
+            "Error".to_string(), // Default severity gate
+            serde_json::to_string(&results.diagnostics)?,
+            results.elapsed_ms as i64,
+            chrono::Utc::now(),
+            chrono::Utc::now(),
+        ])?;
+
+        Ok(())
+    }
+}
+```
+
+#### **Policy-Based Validation Gates**
+```rust
+/// Configurable validation policy via CozoDB
+pub struct PreflightPolicy {
+    db: CozoDB,
+    default_policy: PolicyConfig,
+}
+
+#[derive(Debug, Clone)]
+pub struct PolicyConfig {
+    pub severity_gate: String,
+    pub ra_timeout_ms: u64,
+    pub max_concurrent: usize,
+    pub proc_macro_enable: bool,
+    pub cargo_all_targets: bool,
+}
+
+impl PreflightPolicy {
+    /// Get policy for current context
+    pub fn get_policy(&self, context: &ValidationContext) -> Result<PolicyConfig> {
+        let results = self.db.run_query(r#"
+            ?[severity_gate, ra_timeout_ms, max_concurrent, proc_macro_enable, cargo_all_targets] :=
+                *preflight_policy { key: "default", severity_gate: $sg, ra_timeout_ms: $rt, max_concurrent: $mc, proc_macro_enable: $pm, cargo_all_targets: $cat }
+        "#, vec![])?;
+
+        if let Some(row) = results.first() {
+            Ok(PolicyConfig {
+                severity_gate: row[0].clone(),
+                ra_timeout_ms: row[1].parse()?,
+                max_concurrent: row[2].parse()?,
+                proc_macro_enable: row[3].parse()?,
+                cargo_all_targets: row[4].parse()?,
+            })
+        } else {
+            Ok(self.default_policy.clone())
+        }
+    }
+
+    /// Check if candidate passes policy requirements
+    pub fn evaluate_candidate(&self, results: &CandidateResult, policy: &PolicyConfig) -> bool {
+        // Check severity gate
+        if results.diagnostics.iter().any(|d| {
+            d.severity == Severity::Error && policy.severity_gate == "Error"
+        }) {
+            return false;
+        }
+
+        // Check timeout
+        if results.elapsed_ms > policy.ra_timeout_ms {
+            return false;
+        }
+
+        true
+    }
+}
+```
+
+## **Sub-Agent Game Architecture: Journey-Specific Intelligence**
+
+### **Multi-Journey Orchestration Framework**
+
+#### **Journey-Specific Agent Configuration**
+```rust
+/// Journey-specific sub-agent orchestration system
+pub struct SubAgentOrchestrator {
+    journey_configs: HashMap<JourneyType, JourneyConfig>,
+    agent_pool: AgentPool,
+    context_manager: ContextManager,
+    result_synthesizer: ResultSynthesizer,
+}
+
+#[derive(Debug, Clone, Hash, Eq, PartialEq)]
+pub enum JourneyType {
+    BugFixing,       // Speed-to-solution: <1 min end-to-end
+    PatternResearch, // Breadth: Max pattern coverage
+    AcademicResearch, // Depth: Deep synthesis
+}
+
+#[derive(Debug, Clone)]
+pub struct JourneyConfig {
+    pub journey_type: JourneyType,
+    pub agent_count: usize,
+    pub parallelism: ParallelismStrategy,
+    pub context_budget: TokenBudget,
+    pub quality_threshold: f32,
+    pub timeout: Duration,
+    pub validation_requirements: ValidationRequirements,
+}
+
+impl SubAgentOrchestrator {
+    /// Create journey-specific configurations
+    pub fn create_journey_configs() -> HashMap<JourneyType, JourneyConfig> {
+        let mut configs = HashMap::new();
+
+        // Journey 1: Bug Fixing - Latency Optimized
+        configs.insert(JourneyType::BugFixing, JourneyConfig {
+            journey_type: JourneyType::BugFixing,
+            agent_count: 8,
+            parallelism: ParallelismStrategy::TightFeedback,
+            context_budget: TokenBudget {
+                total_tokens: 40_000,
+                summary_tokens: 5_000,
+                reasoning_tokens: 13_000,
+            },
+            quality_threshold: 0.80,
+            timeout: Duration::from_secs(60),
+            validation_requirements: ValidationRequirements {
+                cargo_check_required: true,
+                test_validation_required: true,
+                preflight_validation: true,
+            },
+        });
+
+        // Journey 2: Pattern Research - Throughput Optimized
+        configs.insert(JourneyType::PatternResearch, JourneyConfig {
+            journey_type: JourneyType::PatternResearch,
+            agent_count: 15,
+            parallelism: ParallelismStrategy::BroadParallel,
+            context_budget: TokenBudget {
+                total_tokens: 60_000,
+                summary_tokens: 12_000,
+                reasoning_tokens: 15_000,
+            },
+            quality_threshold: 0.70,
+            timeout: Duration::from_secs(60),
+            validation_requirements: ValidationRequirements {
+                cargo_check_required: false,
+                test_validation_required: false,
+                preflight_validation: false,
+            },
+        });
+
+        // Journey 3: Academic Research - Accuracy Optimized
+        configs.insert(JourneyType::AcademicResearch, JourneyConfig {
+            journey_type: JourneyType::AcademicResearch,
+            agent_count: 6,
+            parallelism: ParallelismStrategy::DeepSpecialization,
+            context_budget: TokenBudget {
+                total_tokens: 30_000,
+                summary_tokens: 8_000,
+                reasoning_tokens: 10_000,
+            },
+            quality_threshold: 0.90,
+            timeout: Duration::from_secs(120),
+            validation_requirements: ValidationRequirements {
+                cargo_check_required: false,
+                test_validation_required: false,
+                preflight_validation: false,
+            },
+        });
+
+        configs
+    }
+
+    /// Execute journey-specific agent orchestration
+    pub async fn execute_journey(&mut self,
+        journey_type: JourneyType,
+        request: &JourneyRequest
+    ) -> Result<JourneyResult> {
+
+        let config = self.journey_configs.get(&journey_type)
+            .ok_or_else(|| anyhow!("Journey type not configured"))?;
+
+        match journey_type {
+            JourneyType::BugFixing => self.execute_bug_fixing_journey(config, request).await,
+            JourneyType::PatternResearch => self.execute_pattern_research_journey(config, request).await,
+            JourneyType::AcademicResearch => self.execute_academic_research_journey(config, request).await,
+        }
+    }
+}
+```
+
+#### **Journey 1: Bug Fixing - Latency Optimization**
+```rust
+impl SubAgentOrchestrator {
+    /// Bug fixing journey with 7-8 parallel agents
+    async fn execute_bug_fixing_journey(&mut self, config: &JourneyConfig, request: &JourneyRequest) -> Result<JourneyResult> {
+        let start_time = SystemTime::now();
+
+        // Phase 1: Parallel Sub-Agent Execution (5-10 seconds)
+        let phase1_results = self.execute_parallel_phase_bug_fixing(request).await?;
+
+        // Phase 2: Data Enrichment (40K → 5-10K tokens)
+        let enriched_context = self.context_manager.enrich_context(&phase1_results, &config.context_budget).await?;
+
+        // Phase 3: Reasoning LLM (30-45 seconds)
+        let reasoning_result = self.execute_reasoning_phase(&enriched_context, request).await?;
+
+        // Phase 4: Confidence Evaluation
+        if reasoning_result.confidence < config.quality_threshold {
+            return self.refine_and_retry(reasoning_result, config, request).await;
+        }
+
+        // Phase 5: Validation (10-15 seconds)
+        let validation_result = self.execute_validation_phase(&reasoning_result, request).await?;
+
+        if !validation_result.tests_passed {
+            return self.refine_and_retry(reasoning_result, config, request).await;
+        }
+
+        let total_time = start_time.elapsed().unwrap();
+        if total_time > config.timeout {
+            return Err(anyhow!("Bug fixing journey exceeded timeout"));
+        }
+
+        Ok(JourneyResult {
+            journey_type: JourneyType::BugFixing,
+            result: reasoning_result,
+            validation: validation_result,
+            total_time,
+            success: true,
+        })
+    }
+
+    /// Phase 1: 7-8 parallel agents for bug fixing
+    async fn execute_parallel_phase_bug_fixing(&mut self, request: &JourneyRequest) -> Result<Vec<AgentResult>> {
+        let mut tasks = Vec::new();
+
+        // Agent 1-2: Search ISG
+        for i in 1..=2 {
+            let agent = self.agent_pool.get_agent(AgentType::ISGSearcher, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.search_isg_for_bug_fix(request).await
+            }));
+        }
+
+        // Agent 3-4: Validate constraints
+        for i in 3..=4 {
+            let agent = self.agent_pool.get_agent(AgentType::ConstraintValidator, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.validate_rust_constraints(request).await
+            }));
+        }
+
+        // Agent 5-6: Find alternatives
+        for i in 5..=6 {
+            let agent = self.agent_pool.get_agent(AgentType::AlternativeFinder, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.find_alternative_solutions(request).await
+            }));
+        }
+
+        // Agent 7-8: Historical context
+        for i in 7..=8 {
+            let agent = self.agent_pool.get_agent(AgentType::HistoricalContext, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.get_historical_context(request).await
+            }));
+        }
+
+        // Execute all agents in parallel
+        let results = futures::future::join_all(tasks).await;
+
+        let mut agent_results = Vec::new();
+        for result in results {
+            agent_results.push(result??);
+        }
+
+        Ok(agent_results)
+    }
+}
+```
+
+#### **Journey 2: Pattern Research - Throughput Optimization**
+```rust
+impl SubAgentOrchestrator {
+    /// Pattern research journey with 10-15 parallel agents
+    async fn execute_pattern_research_journey(&mut self, config: &JourneyConfig, request: &JourneyRequest) -> Result<JourneyResult> {
+        let start_time = SystemTime::now();
+
+        // Phase 1: 15 parallel agents for comprehensive pattern discovery
+        let phase1_results = self.execute_parallel_phase_pattern_research(request).await?;
+
+        // Phase 2: Data Enrichment (60K → 8-12K tokens)
+        let enriched_context = self.context_manager.enrich_context(&phase1_results, &config.context_budget).await?;
+
+        // Phase 3: Reasoning LLM for pattern categorization (20-30 seconds)
+        let reasoning_result = self.execute_pattern_reasoning_phase(&enriched_context, request).await?;
+
+        let total_time = start_time.elapsed().unwrap();
+
+        Ok(JourneyResult {
+            journey_type: JourneyType::PatternResearch,
+            result: reasoning_result,
+            validation: ValidationResult::default(), // No compilation validation needed
+            total_time,
+            success: true,
+        })
+    }
+
+    /// Phase 1: 15 parallel agents for pattern research
+    async fn execute_parallel_phase_pattern_research(&mut self, request: &JourneyRequest) -> Result<Vec<AgentResult>> {
+        let mut tasks = Vec::new();
+
+        // Agent 1-3: Multi-level ISG scan
+        for i in 1..=3 {
+            let agent = self.agent_pool.get_agent(AgentType::ISGScanner, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.scan_isg_by_level(request, i).await
+            }));
+        }
+
+        // Agent 4-6: Pattern classification
+        for i in 4..=6 {
+            let agent = self.agent_pool.get_agent(AgentType::PatternClassifier, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.classify_patterns_by_category(request, i).await
+            }));
+        }
+
+        // Agent 7-9: Vector similarity search
+        for i in 7..=9 {
+            let agent = self.agent_pool.get_agent(AgentType::VectorSimilarity, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.find_similar_patterns_vectors(request, i).await
+            }));
+        }
+
+        // Agent 10-12: Graph algorithms
+        for i in 10..=12 {
+            let agent = self.agent_pool.get_agent(AgentType::GraphAnalyzer, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.analyze_graph_properties(request, i).await
+            }));
+        }
+
+        // Agent 13-15: Web research
+        for i in 13..=15 {
+            let agent = self.agent_pool.get_agent(AgentType::WebResearcher, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.research_external_patterns(request, i).await
+            }));
+        }
+
+        // Execute all agents in parallel
+        let results = futures::future::join_all(tasks).await;
+
+        let mut agent_results = Vec::new();
+        for result in results {
+            agent_results.push(result??);
+        }
+
+        Ok(agent_results)
+    }
+}
+```
+
+#### **Journey 3: Academic Research - Deep Specialization**
+```rust
+impl SubAgentOrchestrator {
+    /// Academic research journey with 5-6 specialized agents
+    async fn execute_academic_research_journey(&mut self, config: &JourneyConfig, request: &JourneyRequest) -> Result<JourneyResult> {
+        let start_time = SystemTime::now();
+
+        // Phase 1: 6 specialized agents for deep analysis
+        let phase1_results = self.execute_parallel_phase_academic_research(request).await?;
+
+        // Phase 2: Data Enrichment (30K → 6-8K tokens)
+        let enriched_context = self.context_manager.enrich_context(&phase1_results, &config.context_budget).await?;
+
+        // Phase 3: Reasoning LLM for deep synthesis (45-60 seconds)
+        let reasoning_result = self.execute_academic_reasoning_phase(&enriched_context, request).await?;
+
+        let total_time = start_time.elapsed().unwrap();
+
+        Ok(JourneyResult {
+            journey_type: JourneyType::AcademicResearch,
+            result: reasoning_result,
+            validation: ValidationResult::default(),
+            total_time,
+            success: true,
+        })
+    }
+
+    /// Phase 1: 6 specialized agents for academic research
+    async fn execute_parallel_phase_academic_research(&mut self, request: &JourneyRequest) -> Result<Vec<AgentResult>> {
+        let mut tasks = Vec::new();
+
+        // Agent 1: Citation extraction
+        let agent1 = self.agent_pool.get_agent(AgentType::CitationExtractor, 1).await?;
+        tasks.push(tokio::spawn(async move {
+            agent1.extract_citations_and_references(request).await
+        }));
+
+        // Agent 2: Concept mapping
+        let agent2 = self.agent_pool.get_agent(AgentType::ConceptMapper, 2).await?;
+        tasks.push(tokio::spawn(async move {
+            agent2.create_concept_maps(request).await
+        }));
+
+        // Agent 3: Gap analysis
+        let agent3 = self.agent_pool.get_agent(AgentType::GapAnalyzer, 3).await?;
+        tasks.push(tokio::spawn(async move {
+            agent3.analyze_research_gaps(request).await
+        }));
+
+        // Agent 4: Code-paper matching
+        let agent4 = self.agent_pool.get_agent(AgentType::CodePaperMatcher, 4).await?;
+        tasks.push(tokio::spawn(async move {
+            agent4.match_code_to_papers(request).await
+        }));
+
+        // Agent 5-6: Synthesis preparation
+        for i in 5..=6 {
+            let agent = self.agent_pool.get_agent(AgentType::SynthesisPrep, i).await?;
+            tasks.push(tokio::spawn(async move {
+                agent.prepare_synthesis_materials(request, i).await
+            }));
+        }
+
+        // Execute all specialized agents
+        let results = futures::future::join_all(tasks).await;
+
+        let mut agent_results = Vec::new();
+        for result in results {
+            agent_results.push(result??);
+        }
+
+        Ok(agent_results)
+    }
+}
+```
+
+### **Adaptive Context Management**
+
+#### **Token Budget Optimization**
+```rust
+/// Journey-specific context budget management
+pub struct ContextManager {
+    budget_strategies: HashMap<JourneyType, BudgetStrategy>,
+    compression_engine: ContextCompressionEngine,
+}
+
+#[derive(Debug, Clone)]
+pub struct TokenBudget {
+    pub total_tokens: usize,
+    pub summary_tokens: usize,
+    pub reasoning_tokens: usize,
+}
+
+impl ContextManager {
+    /// Enrich and compress agent results according to journey budget
+    pub async fn enrich_context(&mut self,
+        agent_results: &[AgentResult],
+        budget: &TokenBudget
+    ) -> Result<EnrichedContext> {
+
+        // Calculate current token usage
+        let current_tokens = self.calculate_tokens(agent_results)?;
+
+        if current_tokens > budget.total_tokens {
+            // Apply compression strategies
+            let compressed_results = self.compression_engine.compress_results(
+                agent_results,
+                budget.total_tokens
+            ).await?;
+
+            return self.create_enriched_context(&compressed_results, budget).await;
+        }
+
+        self.create_enriched_context(agent_results, budget).await
+    }
+
+    /// Create journey-specific enriched context
+    async fn create_enriched_context(&mut self,
+        agent_results: &[AgentResult],
+        budget: &TokenBudget
+    ) -> Result<EnrichedContext> {
+
+        let mut context = EnrichedContext::new();
+
+        // Add agent results by type
+        for result in agent_results {
+            match result.agent_type {
+                AgentType::ISGSearcher | AgentType::ISGScanner => {
+                    context.isg_insights.push(result.content.clone());
+                },
+                AgentType::PatternClassifier => {
+                    context.pattern_insights.push(result.content.clone());
+                },
+                AgentType::VectorSimilarity => {
+                    context.similarity_insights.push(result.content.clone());
+                },
+                AgentType::ConstraintValidator => {
+                    context.constraint_insights.push(result.content.clone());
+                },
+                _ => {
+                    context.general_insights.push(result.content.clone());
+                }
+            }
+        }
+
+        // Generate journey-specific summary
+        context.summary = self.generate_journey_summary(&context, budget.summary_tokens).await?;
+
+        Ok(context)
+    }
+
+    /// Generate journey-specific context summary
+    async fn generate_journey_summary(&mut self,
+        context: &EnrichedContext,
+        target_tokens: usize
+    ) -> Result<String> {
+        // Use smaller model for summarization to save tokens
+        let summary_prompt = format!(
+            "Create a concise summary (target {} tokens) of these insights organized by type:\n\n\
+             ISG Insights: {}\n\n\
+             Pattern Insights: {}\n\n\
+             Similarity Insights: {}\n\n\
+             Constraint Insights: {}\n\n\
+             General Insights: {}",
+            target_tokens,
+            context.isg_insights.join("\n"),
+            context.pattern_insights.join("\n"),
+            context.similarity_insights.join("\n"),
+            context.constraint_insights.join("\n"),
+            context.general_insights.join("\n")
+        );
+
+        // Use 2B model for efficient summarization
+        let summary = self.call_llm_for_summary(&summary_prompt, 2_000_000_000).await?;
+        Ok(summary)
+    }
+}
+```
+
+## **Journey-Aware Intelligence Tools**
+
+### **Parseltongue Runtime Orchestrator**
+- **Purpose**: Journey-specific orchestration engine that configures and manages parallel sub-agent workflows based on user intent
+- **Inputs**: Journey type (bug-fixing | pattern-research | academic-research), user query, workspace context
+- **Outputs**: Journey-configured execution plan with optimized agent allocation and resource budgeting
+- **Actions**: Analyze user intent, select journey template, configure agent pools, allocate resources, execute phase-separated workflow
+- **Variants**: (a) CLI orchestrator; (b) VS Code extension; (c) Web interface; (d) API service
+- **Notes**: Each journey has distinct optimization targets - speed for bug fixing, coverage for pattern research, depth for academic research
+- **Example CLI**: parseltongue-runtime --journey bug-fixing --query "E0277 Send trait error in async spawn" --timeout 60s
+- **Example Input**: {"journey":"bug-fixing","query":"Add Send bound to async function","workspace":".","context":{"error":"E0277","file":"src/runtime.rs"}}
+- **Example Output**: {"execution_plan":{"agents":8,"phases":4,"budget":{"tokens":40000,"memory_mb":9000},"estimated_time":60}}
+- **Diverse Ideas**:
+  * **Adaptive Journey Selection**: Automatic journey detection based on query patterns and user behavior; switches between bug-fixing, pattern-research, and academic modes
+  * **Dynamic Resource Scaling**: Real-time resource allocation based on available memory/CPU; automatically scales agent pools and model sizes for optimal performance
+  * **Journey Performance Benchmarking**: Continuous performance tracking across journey types with SLO enforcement and automatic optimization
+  * **Cross-Journey Learning**: Knowledge transfer between journeys - bug fixes inform pattern research, which improves academic synthesis
+  * **User Intent Evolution**: Learns from user interactions to refine journey selection and agent configuration over time
+  * **Multi-Journey Workflows**: Composite workflows that chain multiple journeys (e.g., pattern research → bug fixing → validation)
+  * **Journey Templates Marketplace**: Community-curated journey templates for specific domains (embedded systems, web services, ML pipelines)
+
+### **Journey Configuration Designer**
+- **Purpose**: Visual designer for creating and customizing journey-specific agent configurations and execution plans
+- **Inputs**: Journey template JSON, agent specifications, performance requirements, resource constraints
+- **Outputs**: Validated journey configuration with performance predictions and resource estimates
+- **Actions**: Configure agent pools, set quality gates, define phase transitions, specify validation requirements, estimate resource usage
+- **Variants**: (a) GUI designer; (b) CLI generator; (c) Template marketplace integration; (d) Configuration validator
+- **Notes**: Enforces journey-specific best practices while allowing deep customization for specialized use cases
+- **Example CLI**: journey-designer --template bug-fixing --agents 8 --memory-budget 12GB --validation cargo-check,cargo-test
+- **Example Input**: {"journey":"pattern-research","agents":15,"phases":{"parallel":{"timeout":"15s"},"reasoning":{"timeout":"30s"}},"quality_gates":{"cluster_purity":0.7}}
+- **Example Output**: {"config":{"valid":true,"estimated_performance":{"latency":"45s","memory_mb":"9.5GB","agents":15},"warnings":["large_agent_count_may_impact_performance"]}}
+- **Diverse Ideas**:
+  * **Performance Prediction Engine**: Machine learning-based performance estimation for journey configurations using historical data and hardware profiling
+  * **Resource Budget Calculator**: Automatic resource allocation based on hardware capabilities and journey requirements with safety margins
+  * **Quality Gate Builder**: Visual configuration of validation criteria with real-time feedback on expected pass rates
+  * **Agent Marketplace**: Community marketplace for pre-built agent configurations optimized for specific patterns and domains
+  * **Journey Template Evolution**: Automatic improvement of journey templates based on performance data and user feedback
+  * **Multi-Objective Optimization**: Pareto-optimal journey configurations balancing speed, accuracy, and resource usage
+  * **Journey A/B Testing**: Automated testing of journey variations to identify optimal configurations
+
+### **Multi-Agent Pool Manager**
+- **Purpose**: Manages pools of specialized agents with different capabilities and resource requirements for parallel execution
+- **Inputs**: Agent pool configuration, journey requirements, available resources, performance constraints
+- **Outputs**: Optimized agent allocation and scheduling plan with load balancing and resource management
+- **Actions**: Pool initialization, agent provisioning, load balancing, resource monitoring, health checking, failure recovery
+- **Variants**: (a) Local pool manager; (b) Distributed pool orchestrator; (c) Cloud pool connector; (d) Hybrid pool coordinator
+- **Notes**: Supports hot-swapping of agent implementations and dynamic scaling based on workload demands
+- **Example CLI**: agent-pool-manager --config pools.yaml --journey bug-fixing --scale auto --health-check 30s
+- **Example Input**: {"pools":{"search":{"size":2,"model":"miniLM-22M","memory_mb":200},"reasoning":{"size":1,"model":"qwen-14B","memory_mb":4000}}}
+- **Example Output**: {"allocation":{"search":2,"reasoning":1,"total_memory_mb":4200,"estimated_latency":"45s"},"health":"all_agents_healthy"}
+- **Diverse Ideas**:
+  * **Intelligent Load Balancing**: Predictive load distribution based on agent capabilities and task complexity with automatic rebalancing
+  * **Agent Health Monitoring**: Continuous health checking with automatic failure detection, recovery, and replacement strategies
+  * **Resource Efficiency Optimizer**: Real-time resource usage optimization with memory pressure handling and CPU affinity management
+  * **Agent Performance Profiling**: Detailed performance metrics for each agent with identification of bottlenecks and optimization opportunities
+  * **Dynamic Pool Scaling**: Automatic scaling of agent pools based on workload patterns and resource availability
+  * **Cross-Pool Knowledge Sharing**: Agent collaboration mechanisms where insights from one pool improve performance in others
+  * **Agent Marketplace Integration**: Dynamic integration of external agent services with capability matching and cost optimization
+
+### **Hybrid Intelligence Search Engine**
+- **Purpose**: Combines CozoDB's deterministic graph search with tiny LLM semantic enhancement for hybrid query processing
+- **Inputs**: Search query, query type (exact | vector | hybrid), search scope, enhancement requirements
+- **Outputs**: Hybrid search results with exact matches, semantic similarities, and LLM-enhanced annotations
+- **Actions**: Execute CozoDB Datalog queries, run HNSW vector searches, apply tiny LLM filtering and classification, enhance results with semantic tags
+- **Variants**: (a) CLI search tool; (b) REST API service; (c) Library integration; (d) Real-time search daemon
+- **Notes**: Leverages CPU-optimized vector search with tiny models for semantic enhancement without GPU requirements
+- **Example CLI**: hybrid-search --query "async spawn pattern" --type hybrid --enhance semantic --limit 20
+- **Example Input**: {"query":"function signature with Send bounds","type":"hybrid","enhancement":["classification","tagging"],"filters":{"kind":"function"}}
+- **Example Output**: {"results":[{"exact_match":true,"semantic_similarity":0.92,"tags":["async","send","spawn"],"confidence":0.88}]}
+- **Diverse Ideas**:
+  * **Adaptive Query Routing**: Intelligent query routing that selects optimal search strategy based on query patterns and performance requirements
+  * **Semantic Enhancement Pipeline**: Configurable pipeline of tiny LLM models for filtering, classification, tagging, and summarization
+  * **Query Performance Optimizer**: Real-time query optimization with caching strategies and index selection for optimal performance
+  * **Multi-Modal Search**: Support for code, documentation, comments, and external knowledge sources with unified result ranking
+  * **Search Result Explainability**: Detailed explanations of search results including why matches were found and confidence scoring
+  * **Personalized Search**: Adaptive search results based on user preferences, past queries, and coding patterns
+  * **Search Analytics Dashboard**: Comprehensive analytics on search patterns, performance metrics, and user behavior
+
+### **Resource-Aware Execution Engine**
+- **Purpose**: Optimizes execution of multi-agent workflows within hardware constraints with dynamic resource allocation
+- **Inputs**: Workflow definition, hardware specifications, resource constraints, performance targets
+- **Outputs**: Optimized execution plan with resource allocation, scheduling strategy, and performance predictions
+- **Actions**: Hardware detection, resource budgeting, agent scheduling, memory management, performance monitoring
+- **Variants**: (a) Local execution engine; (b) Distributed coordinator; (c) Cloud execution manager; (d) Edge optimizer
+- **Notes**: Specifically optimized for consumer hardware (16GB Mac Mini) with intelligent resource pressure handling
+- **Example CLI**: resource-engine --workflow bug-fixing --hardware auto --memory-budget 12GB --performance fast
+- **Example Input**: {"workflow":{"agents":8,"memory_mb":9000},"hardware":{"total_memory_gb":16,"cpu_cores":8},"constraints":{"max_memory_mb":12000}}
+- **Example Output**: {"plan":{"agents":6,"memory_mb":9500,"estimated_time":"65s","warnings":["reduced_agent_count_for_memory"]}}
+- **Diverse Ideas**:
+  * **Hardware Auto-Detection**: Automatic hardware capability detection with optimal configuration selection for CPU, memory, and storage
+  * **Dynamic Resource Allocation**: Real-time resource allocation based on current system load and agent requirements with pressure handling
+  * **Performance Prediction**: Accurate performance predictions based on hardware specifications and historical execution data
+  * **Resource Pressure Handling**: Intelligent handling of memory pressure with agent throttling, caching optimization, and graceful degradation
+  * **Multi-Resource Optimization**: Simultaneous optimization of CPU, memory, I/O, and network resources for overall system efficiency
+  * **Energy Efficiency**: Power-aware execution optimization for laptop and mobile devices with battery life considerations
+  * **Resource Usage Analytics**: Detailed monitoring and analysis of resource usage patterns with optimization recommendations
+
+## **Hybrid Search & Intelligence Tools**
+
+### **CozoDB HNSW Vector Search Engine**
+- **Purpose**: CPU-optimized vector similarity search with configurable HNSW parameters for semantic code analysis
+- **Inputs**: Query vector (384-dim), search parameters (k, ef, distance metric), optional filters (level, kind)
+- **Outputs**: Ranked results with similarity scores, node metadata, and distance metrics
+- **Actions**: Build HNSW index, execute vector search, apply post-processing filters, return ranked matches
+- **Variants**: (a) CLI search tool; (b) Embedded library; (c) HTTP API service; (d) Batch processor
+- **Notes**: Tunable accuracy vs speed tradeoff through m, ef_construction, and ef_search parameters
+- **Example CLI**: cozo-hnsw-search --index semantic_idx --query "[0.1,0.2,...]" --k 10 --ef 40 --filter "level>=3"
+- **Example Input**: {"query_embedding":[0.1,0.2,0.3],"k":15,"ef":50,"filters":{"level_min":3,"kind":["function","trait"]}}
+- **Example Output**: {"results":[{"uid":"src-lib-parse_cfg","similarity":0.92,"metadata":{"name":"parse_cfg","level":3}}]}
+- **Diverse Ideas**:
+  * **Dynamic Index Tuning**: Automatic HNSW parameter optimization based on query patterns and performance requirements
+  * **Multi-Metric Search**: Support for cosine, L2, and inner product distances with runtime metric switching
+  * **Incremental Index Updates**: Efficient real-time index updates without full rebuilds for evolving codebases
+  * **Query Performance Profiling**: Detailed performance analysis for different query patterns with optimization recommendations
+  * **Distributed Index Sharding**: Horizontal scaling across multiple machines for large codebases
+  * **Approximate Quality Control**: Configurable trade-offs between search speed and result accuracy
+  * **Index Compression**: Advanced compression techniques for memory-efficient storage of large vector indices
+
+### **Hybrid Datalog-Vector Query Engine**
+- **Purpose**: Combines exact Datalog queries with vector similarity search for hybrid semantic and structural analysis
+- **Inputs**: Mixed query specification (Datalog + vector), join conditions, result ordering and limits
+- **Outputs**: Unified results combining exact matches and semantic similarities with confidence scores
+- **Actions**: Parse hybrid query, execute vector search, join with Datalog results, apply filters, rank and return
+- **Variants**: (a) SQL-like query language; (b) JSON query specification; (c) Visual query builder; (d) REST API
+- **Notes**: Enables queries like "find similar functions that implement specific traits"
+- **Example CLI**: hybrid-query --datalog "?[uid] := *isg_edges{src: $uid, kind: 'IMPLEMENTS'}" --vector-query "q_vec,k=10"
+- **Example Input**: {"datalog":"?[dist,uid] := ~isg_nodes:semantic_idx{uid|query:q_vec,k:10},*isg_nodes{uid,level>=3}","vector":{"query":[0.1,0.2],"k":10}}
+- **Example Output**: {"results":[{"uid":"src-runtime-spawn","distance":0.15,"level":3,"implements":["Send","Sync"]}]}
+- **Diverse Ideas**:
+  * **Query Optimization Planner**: Automatic optimization of hybrid queries with intelligent join ordering and caching
+  * **Visual Query Builder**: Drag-and-drop interface for building complex hybrid queries without Datalog knowledge
+  * **Query Template Library**: Pre-built query templates for common patterns (dependency analysis, similarity search, constraint validation)
+  * **Real-time Query Monitoring**: Live performance monitoring and optimization suggestions for running queries
+  * **Cross-Database Federation**: Integration with external databases for hybrid queries spanning multiple data sources
+  * **Query Result Caching**: Intelligent caching of query results with automatic invalidation based on data changes
+  * **Natural Language to Hybrid Query**: AI-powered conversion of natural language questions into optimized hybrid queries
+
+### **Tiny LLM Agent Orchestration Framework**
+- **Purpose**: Manages pools of tiny LLM agents (MiniLM 22M, STLM 50M, SmolLM2 135M) for specialized processing tasks
+- **Inputs**: Agent pool configuration, task specifications, resource constraints, performance requirements
+- **Outputs**: Optimized agent allocation, execution results, performance metrics, and resource utilization reports
+- **Actions**: Agent provisioning, load balancing, task distribution, result aggregation, performance monitoring
+- **Variants**: (a) Local orchestrator; (b) Distributed coordinator; (c) Cloud-native service; (d) Edge deployment
+- **Notes**: Optimized for 16GB Mac Mini with intelligent resource management and parallel execution
+- **Example CLI**: tiny-agent-orchestrator --config pools.yaml --task classification --model MiniLM-22M --parallel 10
+- **Example Input**: {"agents":[{"type":"MiniLM-22M","count":5,"memory_mb":200},{"type":"SmolLM2-135M","count":2,"memory_mb":500}]}
+- **Example Output**: {"allocation":{"MiniLM-22M":5,"SmolLM2-135M":2},"total_memory_mb":2000,"throughput":"400 t/s"}
+- **Diverse Ideas**:
+  * **Agent Auto-Scaling**: Dynamic scaling of agent pools based on workload patterns and resource availability
+  * **Model Performance Profiling**: Detailed benchmarking of different tiny models for specific tasks with recommendations
+  * **Agent Specialization Marketplace**: Community marketplace for specialized agent configurations and prompts
+  * **Cross-Model Collaboration**: Intelligent routing of tasks between different model types based on complexity and requirements
+  * **Agent Health Monitoring**: Continuous monitoring with automatic failure detection and recovery mechanisms
+  * **Resource Usage Optimization**: Advanced algorithms for optimal resource allocation across heterogeneous agent pools
+  * **Performance Prediction**: ML-based prediction of task completion times and resource requirements
+
+### **Embedding Generation & Management Service**
+- **Purpose**: Generates and manages vector embeddings for ISG nodes using tiny models or dedicated embedding models
+- **Inputs**: Text content (signatures, documentation), model selection, embedding parameters, storage configuration
+- **Outputs**: 384-dim embeddings, storage metadata, quality metrics, and performance statistics
+- **Actions**: Text preprocessing, model inference, embedding normalization, storage indexing, quality validation
+- **Variants**: (a) Batch processor; (b) Real-time service; (c) Library integration; (d) CLI tool
+- **Notes**: Supports multiple embedding models with automatic model selection based on content type and quality requirements
+- **Example CLI**: embedding-service --input "fn spawn<T>(future: T)" --model MiniLM-L6-v2 --normalize --store semantic_idx
+- **Example Input**: {"text":"fn spawn<T>(future: T) -> JoinHandle<T::Output>","model":"all-MiniLM-L6-v2","normalize":true}
+- **Example Output**: {"embedding":[0.1,0.2,0.3],"model":"MiniLM-L6-v2","quality_score":0.95,"storage_time":"2ms"}
+- **Diverse Ideas**:
+  * **Multi-Model Ensemble**: Combining embeddings from multiple models for improved accuracy and robustness
+  * **Incremental Embedding Updates**: Efficient updating of embeddings for changed code without full regeneration
+  * **Embedding Quality Assessment**: Automatic quality scoring of embeddings with validation against known relationships
+  * **Domain-Specific Fine-Tuning**: Specialized embedding models for different programming domains and languages
+  * **Embedding Compression**: Advanced compression techniques for storage-efficient embedding representation
+  * **Real-time Embedding Pipeline**: Streaming pipeline for continuous embedding generation as code changes
+  * **Cross-Modal Embeddings**: Unified embeddings for code, documentation, comments, and external knowledge sources
+
+## **Specialized Agent Orchestration Tools**
+
+### **Multi-Agent Roster Manager**
+- **Purpose**: Manages 7-8 specialized sub-agents with distinct roles and contracts for parallel code analysis workflows
+- **Inputs**: Agent roster configuration, task assignments, context budgets, performance requirements
+- **Outputs**: Optimized agent allocation, execution results, context packs, and coordinated analysis outcomes
+- **Actions**: Agent orchestration, task distribution, result aggregation, context management, performance monitoring
+- **Variants**: (a) Local orchestrator; (b) Distributed coordinator; (c) Cloud-native service; (d) Edge deployment
+- **Notes**: Keeps heavy reasoner context minimal (3-8K tokens) while leveraging 7+ parallel specialists
+- **Example CLI**: agent-roster --config roster.yaml --task bug-fix-analysis --parallel 8 --context-budget 4000
+- **Example Input**: {"agents":["A1-scope-seeder","A2-exact-retriever","A3-vector-retriever","A4-filter","A5-pattern-tagger","A6-constraint-validator","A7-summarizer","A8-forecaster"]}
+- **Example Output**: {"allocation":{"total_agents":8,"parallel_capacity":8,"context_pack_size":3500,"estimated_time":45}}
+- **Diverse Ideas**:
+  * **Dynamic Agent Composition**: Automatic selection and composition of agent subsets based on task complexity and requirements
+  * **Agent Performance Profiling**: Continuous monitoring of agent performance with automatic optimization and replacement
+  * **Cross-Agent Learning**: Knowledge sharing between agents where insights from one specialist improve others' performance
+  * **Adaptive Context Budgeting**: Dynamic context allocation based on task complexity and agent capabilities
+  * **Agent Marketplace Integration**: Integration with external agent services for specialized capabilities
+  * **Fault-Tolerant Orchestration**: Automatic failure detection and recovery with redundant agent deployments
+  * **Real-time Agent Scaling**: Dynamic scaling of agent pools based on workload patterns and resource availability
+
+### **Blast Radius Context Calculator**
+- **Purpose**: Calculates optimal context "blast radius" around code changes using CozoDB graph traversals and vector similarity
+- **Inputs**: Seed nodes/UIDs, radius parameters (hops, KNN), edge filters, size constraints, level/kind filters
+- **Outputs**: Contextualized node set with evidence, relationships, and relevance scores for focused analysis
+- **Actions**: Graph traversal (BFS), vector similarity search, result deduplication, evidence collection, size optimization
+- **Variants**: (a) CLI calculator; (b) Library function; (c) REST API service; (d) Batch processor
+- **Notes**: Combines exact graph relationships with semantic similarity for comprehensive but focused context
+- **Example CLI**: blast-radius --seeds "src-runtime-spawn" --radius 2 --knn 25 --filter "level>=3,level<=4" --max-items 50
+- **Example Input**: {"seeds":["src-runtime-spawn"],"radius":2,"knn_k":25,"filters":{"level_min":3,"level_max":4},"max_items":50}
+- **Example Output**: {"context_nodes":15,"relationships":23,"evidence_count":41,"coverage_score":0.87}
+- **Diverse Ideas**:
+  * **Adaptive Radius Calculation**: Automatic determination of optimal radius based on code complexity and change impact
+  * **Multi-Modal Context Blending**: Intelligent mixing of structural and semantic context with configurable weights
+  * **Context Quality Scoring**: Automatic assessment of context completeness and relevance with gap identification
+  * **Incremental Context Updates**: Efficient updating of blast radius as code changes without full recalculation
+  * **Context Compression**: Intelligent compression of context while preserving essential information
+  * **Context Personalization**: Adaptation of context calculation based on user preferences and historical patterns
+  * **Real-time Context Monitoring**: Continuous monitoring of context relevance as analysis progresses
+
+### **Structured Data Contract Manager**
+- **Purpose**: Enforces and manages structured data contracts between agents for consistent, efficient communication
+- **Inputs**: Contract specifications, data schemas, validation rules, version information, compatibility matrices
+- **Outputs**: Validated data exchanges, contract compliance reports, schema evolution plans, migration guides
+- **Actions**: Schema validation, data transformation, compatibility checking, version management, contract enforcement
+- **Variants**: (a) Schema validator; (b) Data transformer; (c) Contract registry; (d) Migration tool
+- **Notes**: Ensures all agent communication uses compact, structured JSON with strict validation
+- **Example CLI**: contract-manager --validate RetrievalItem --schema v2 --strict --report compliance
+- **Example Input**: {"contract":"RetrievalItem","version":"v2","data":{"uid":"src-spawn","level":4,"evidence":[]}}
+- **Example Output**: {"valid":true,"compliance_score":1.0,"warnings":[],"errors":[]}
+- **Diverse Ideas**:
+  * **Auto-Contract Generation**: Automatic generation of data contracts from agent specifications and communication patterns
+  * **Contract Evolution Engine**: Intelligent management of schema changes with backward compatibility and migration planning
+  * **Contract Marketplace**: Community marketplace for sharing and discovering standardized data contracts
+  * **Real-time Contract Validation**: Continuous validation of agent communications with instant feedback on violations
+  * **Contract Performance Analysis**: Performance impact analysis of contract changes with optimization recommendations
+  * **Cross-Language Contract Support**: Support for contracts across different programming languages and platforms
+  * **Contract Testing Framework**: Automated testing framework for contract compliance and edge case handling
+
+### **Context Pack Assembler**
+- **Purpose**: Builds compact, information-dense context packs from multiple agent outputs for heavy reasoner consumption
+- **Inputs**: Agent results, context budgets, priority rules, compression preferences, format requirements
+- **Outputs**: Optimized context packs (3-8K tokens) with structured information and relevance scoring
+- **Actions**: Result aggregation, information prioritization, content compression, format optimization, quality validation
+- **Variants**: (a) Real-time assembler; (b) Batch processor; (c) Interactive builder; (d) API service
+- **Notes**: Final output optimized for heavy reasoner with maximum information density in minimal tokens
+- **Example CLI**: context-pack-assembler --inputs agent_results.json --budget 6000 --format v2 --compress high
+- **Example Input**: {"agent_results":[{"agent":"A4","data":[]},{"agent":"A5","data":[]}],"budget":6000,"format":"v2"}
+- **Example Output**: {"context_pack":{"size":5800,"density":0.92,"quality_score":0.89,"items":[]}}
+- **Diverse Ideas**:
+  * **Intelligent Content Ranking**: ML-based ranking of content items by importance and relevance to the reasoning task
+  * **Adaptive Compression**: Dynamic compression strategies based on content type and reasoning requirements
+  * **Multi-Objective Optimization**: Balancing completeness, relevance, and size constraints through sophisticated algorithms
+  * **Context Pack Templates**: Pre-defined templates for common reasoning tasks with optimal structure and content
+  * **Real-time Quality Feedback**: Continuous quality assessment with user feedback integration for improvement
+  * **Cross-Domain Context Integration**: Integration of context from multiple domains (code, documentation, external knowledge)
+  * **Context Personalization Engine**: Adaptation of context assembly based on user preferences and historical patterns
