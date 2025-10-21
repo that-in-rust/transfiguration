@@ -8,15 +8,7 @@ graph TD
     C --> |System is M1+ & 16GB roadmap+| D[UI: Parseltongue will NOT work for you, press <WIP> to exit]
     C --> |local-llama-rust-orchestrator-elf is triggered| E[UI: Parseltongue will work in your system,type Y to trigger download of models which might take max 3 minutes at 5 MBPS]
     E --> | User presses Y or y or `*y*` or `*Y*`| F[UI: Parseltongue is downloading models, please have this butter beer while we have them ready for you]
-    F --- F1[Architecture & Background processes initiated]
-    subgraph horizontal["🪄 🪄"]
-        direction LR
-        F1 --- Install["Install Models<br>ELI5: Fetch recipes with sealed packaging"]
-        Install --- Verify["Verify Models<br>ELI5: Cook & plate 20 lines to verify edible"]
-        Verify --- Chat["Enable Chat<br>ELI5: Now place any order confidently"]
-        Install -.->|Parallel Option| Chat
-    end
-    Chat --- F3[UI: Parseltongue is ready to work]
+    F --- F1[Models Downloaded]
 
 ```
 
@@ -180,3 +172,20 @@ Search with <WIP>
 [^3]: https://github.com/instantlyeasy/claudeware
 [^4]: https://github.com/greggh/claude-code.nvim
 
+
+
+## Summary of A02NotesV1.md (Minto Pyramid Style)
+
+**Main Idea (Top of Pyramid)**: The Parseltongue plugin transforms Claude Code into a reliable local LLM-powered tool by integrating MCP for seamless distribution, enforcing strict system gating, and leveraging CozoDB for graph-based code analysis, ensuring efficient, safe, and extensible operations without disrupting core workflows.
+
+**Supporting Arguments (Middle Layer)**:
+- **System Gating and Compatibility**: Parseltongue first checks for M1+ chips and 16GB+ RAM to prevent poor performance, using a "host" (Parseltongue) for pre-flight checks before activating the "chef" (Dobby) for model operations, mirroring restaurant seating logic.
+- **Model Management and Verification**: Dobby downloads, verifies (with checksums and 20-line tests), and manages three quantized models (Qwen2.5 7B, Gemma 270M, SmolLM2 135M) in parallel, ensuring reliability through structured installation and streaming feedback.
+- **Graph-Based Code Analysis**: Uses CozoDB to ingest Rust codebases into Interface Signature Graphs (ISGs), enabling sub-agents to summarize and analyze code via graph traversal, with ingestion as a one-shot process followed by iterative hydration for updates.
+- **MCP Integration and Extensibility**: Distributes via bundled MCP servers for "plug-and-play" in Claude Code, exposing tools for system checks, model ops, and ISG queries, while supporting CLI/SDK modes for broader usage and community alignment.
+
+**Supporting Details (Bottom Layer)**:
+- **User Journey Flow**: Start with compatibility check; if passed, install models; verify with 20-line outputs; enable chat—branching on failure to avoid wasted resources.
+- **Architecture Decisions**: Separate concerns (Parseltongue for checks, Dobby for orchestration); use MCP for native Claude Code compatibility; employ CozoDB for efficient graph queries (100K+ QPS) over relational DBs.
+- **Technical Implementation**: Ingest code via `syn` parser into CozoDB relations (ISG as key, with code blocks and dependencies); run sub-agents as Rust binaries for LLM summarization; handle duplicates with unique IDs; support streaming for large codebases.
+- **Extensibility and Gaps**: Design for configurability (CLI args, config files); reference community patterns (e.g., Neovim integrations); note lack of official multi-model parallelism docs for llama.cpp, requiring custom concurrency design.
