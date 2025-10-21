@@ -97,6 +97,16 @@ Search with <WIP>
 - local-llama-rust-orchestrator-elf will prove that all 3 models are working by automatically triggering a default prompt of 20 lines of output and showing the 3 of them to the user in chat
 
 
+## Minimal User Journey in Mermaid
+
+``` mermaid
+graph TD
+    A[User Reads About Parseltongue our Claude-Code Plugin in Github Repo or somewhere else] -->|User Downloads Plugin| B(User Installs Plugin)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+```
+
 
 ### Components identified
 
