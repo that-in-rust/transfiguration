@@ -11,6 +11,11 @@
 
 # OSS Ideas for Rust Level 1
 
+## 01 Product Artifacts
+
+- A Rust-WASM Mermaid Tool
+
+
 # OSS Ideas for Rust Level 2
 
 # OSS Ideas for Rust Level 3
