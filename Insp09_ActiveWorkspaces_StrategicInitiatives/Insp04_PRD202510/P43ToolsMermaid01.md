@@ -58,7 +58,7 @@ flowchart TD
     subgraph Phase2[Phase 2: Data Persistence & Visualization]
         direction TB
 
-        subgraph DataLayer2[Data Layer Tools (Cont.)]
+        subgraph DataLayer2["Data Layer Tools (Cont.)"]
             VectorSearch[vector-similarity-search-engine<br/>High-performance vector<br/>similarity search]
             HybridSearch[hybrid-graph-vector-search<br/>Combine exact graph queries<br/>with vector similarity]
             BlastCalc[context-blast-radius-calc<br/>Calculate context blast<br/>radius around changes]
@@ -97,7 +97,7 @@ flowchart TD
     subgraph Phase4[Phase 4: ISG Future Planning]
         direction TB
 
-        subgraph AgentRuntime2[Agent Runtime Tools (Cont.)]
+        subgraph AgentRuntime2["Agent Runtime Tools (Cont.)"]
             SubAgent[sub-agent-orchestrator<br/>Orchestrate specialized<br/>sub-agents]
             ContextMgr[context-manager<br/>Manage context across<br/>tool operations]
         end
@@ -121,7 +121,7 @@ flowchart TD
             ShadowVal[shadow-workspace-validator<br/>Validate in isolated<br/>shadow workspace]
         end
 
-        subgraph AgentRuntime3[Agent Runtime Tools (Cont.)]
+        subgraph AgentRuntime3["Agent Runtime Tools (Cont.)"]
             ResourceMgr[resource-manager<br/>Manage system resources<br/>and allocation]
             ParallelExec[parallel-agent-executor<br/>Execute agents in<br/>parallel]
         end
@@ -135,12 +135,12 @@ flowchart TD
     subgraph Phase6[Phase 6: Database Updates & Validation]
         direction TB
 
-        subgraph Validation2[Validation Tools (Cont.)]
+        subgraph Validation2["Validation Tools (Cont.)"]
             CargoValidate[cargo-validation-gate<br/>Cargo-based validation<br/>with test execution]
             SafetyGate[safety-gate-validator<br/>Final safety validation<br/>before application]
         end
 
-        subgraph DataLayer3[Data Layer Tools (Final)]
+        subgraph DataLayer3["Data Layer Tools (Final)"]
             ISGQuery[interface-graph-query-exact<br/>Query ISG data with<br/>exact graph traversals]
         end
 
@@ -153,7 +153,7 @@ flowchart TD
     subgraph Phase7[Phase 7: Testing & Compilation]
         direction TB
 
-        subgraph Validation3[Validation Tools (Final)]
+        subgraph Validation3["Validation Tools (Final)"]
             TestRunner[test-runner-orchestrator<br/>Orchestrate test<br/>execution]
             DiffApply[safe-diff-applier<br/>Apply diffs safely<br/>with rollback]
         end
@@ -177,7 +177,7 @@ flowchart TD
             APIConnector[api-gateway-connector<br/>Connect to external<br/>API services]
         end
 
-        subgraph Configuration2[Configuration & Monitoring Tools (Cont.)]
+        subgraph Configuration2["Configuration & Monitoring Tools (Cont.)"]
             PerfProfile[perf-profile<br/>Profile tool performance<br/>and identify bottlenecks]
             HealthCheck[health-check<br/>System health monitoring<br/>for all tools]
         end
@@ -191,12 +191,12 @@ flowchart TD
     subgraph Phase9[Phase 9: ISG Recreation & Cleanup]
         direction TB
 
-        subgraph Utility2[Utility Tools (Cont.)]
+        subgraph Utility2["Utility Tools (Cont.)"]
             FileHash[file-hash<br/>Generate content hashes<br/>for files and directories]
             CacheManage[cache-manage<br/>Manage various caches<br/>across tools]
         end
 
-        subgraph Integration2[Integration Tools (Cont.)]
+        subgraph Integration2["Integration Tools (Cont.)"]
             ExportTool[export-data-pipeline<br/>Export data in various<br/>formats]
             WebhookMgr[webhook-event-manager<br/>Manage webhook events<br/>and notifications]
         end
