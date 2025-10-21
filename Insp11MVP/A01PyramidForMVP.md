@@ -1,16 +1,24 @@
 # User Journey 01 Minimal User Journey in Mermaid
 
-``` mermaid
+```mermaid
 graph TD
     A[User Reads About Parseltongue our Claude-Code Plugin in Github Repo or somewhere else] -->|User Downloads Plugin| B(User Installs Plugin)
     B --> |Parseltongue is triggered| B1(Parseltongue Analyzes System)
-    B1 --> |Wait time UI| C["Parseltongue in analyzing system compatibility, please wait in the headmaster's office"]
-    C --> |System is M1+ & 16GB RAM+| D["Parseltongue will NOT work for you, press esc to exit"]
-    C --> |local-llama-rust-orchestrator-elf is triggered| E[Parseltongue will work in your system]
+    B1 --> |Wait time UI| C[UI: Parseltongue in analyzing system compatibility, please wait in the headmaster's office]
+    C --> |System is M1+ & 16GB roadmap+| D[UI: Parseltongue will NOT work for you, press <WIP> to exit]
+    C --> |local-llama-rust-orchestrator-elf is triggered| E[UI: Parseltongue will work in your system,type Y to trigger download of models which might take max 3 minutes at 5 MBPS]
+    E --> | User presses Y or y or `*y*` or `*Y*`| F[UI: Parseltongue is downloading models, please have this butter beer while we have them ready for you]
+    F --- F1[Architecture & Background processes initiated]
+    subgraph horizontal["🪄 🪄"]
+        direction LR
+        F1 --- Install["Install Models<br>ELI5: Fetch recipes with sealed packaging"]
+        Install --- Verify["Verify Models<br>ELI5: Cook & plate 20 lines to verify edible"]
+        Verify --- Chat["Enable Chat<br>ELI5: Now place any order confidently"]
+        Install -.->|Parallel Option| Chat
+    end
+    Chat --- F3[UI: Parseltongue is ready to work]
 
-    style C fill:#e1f5fe,stroke:#01579b,stroke-width:2px
 ```
-
 
 
 
