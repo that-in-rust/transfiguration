@@ -1,3 +1,23 @@
+# User Journey 01 Minimal User Journey in Mermaid
+
+``` mermaid
+graph TD
+    A[User Reads About Parseltongue our Claude-Code Plugin in Github Repo or somewhere else] -->|User Downloads Plugin| B(User Installs Plugin)
+    B --> |Parseltongue is triggered| B1(Parseltongue Analyzes System)
+    B1 --> |Wait time UI| C["Parseltongue in analyzing system compatibility, please wait in the headmaster's office"]
+    C --> |System is M1+ & 16GB RAM+| D["Parseltongue will NOT work for you, press esc to exit"]
+    C --> |local-llama-rust-orchestrator-elf is triggered| E[Parseltongue will work in your system]
+
+    style C fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+```
+
+
+
+
+
+
+
+
 Scope for Parseltongue v1.0
 
 Use this as a filter for Rust Tools or Libraries you are ideating as part of building the Parseltongue plugin or skill or something for Claude Code
@@ -97,15 +117,6 @@ Search with <WIP>
 - local-llama-rust-orchestrator-elf will prove that all 3 models are working by automatically triggering a default prompt of 20 lines of output and showing the 3 of them to the user in chat
 
 
-## Minimal User Journey in Mermaid
-
-``` mermaid
-graph TD
-    A[User Reads About Parseltongue our Claude-Code Plugin in Github Repo or somewhere else] -->|User Downloads Plugin| B(User Installs Plugin)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-```
 
 
 ### Components identified
