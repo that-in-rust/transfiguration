@@ -1570,3 +1570,461 @@ Everything else goes to backlog.
 -  Formal Cozo views for common queries and analytics dashboards.
 
 This HLD/LLD keeps the system coherent under your constraints (llama.cpp, CozoDB, Claude Code plugin) while preserving the single-writer contract and enabling iterative expansion once MVP 1.0 lands.
+
+
+
+=======
+
+
+
+## Short answer
+-  Yes, CocoIndex can handle a streaming/incremental ingestion pipeline, but it’s heavier than what Parseltongue v1.0 needs.
+-  For v1.0 (reliability-first, single-process, Rust + embedded Cozo), I’d avoid it for code ingestion. Consider it later for hydration or multi-source document ingestion.
+
+## Fit vs. trade-offs
+
+| Criterion | CocoIndex | Parseltongue v1.0 need | Verdict |
+|---|---|---|---|
+| Incremental/streaming processing | Built-in dataflow + lineage + incremental recompute | Incremental file-based ingest desirable | Good fit |
+| Runtime footprint | Requires Postgres for incremental state; Python CLI + Rust core | Single-machine, minimal deps, embedded Cozo | Heavy for MVP |
+| Storage targets | Many connectors (vector DBs, files, etc.); Cozo not first-class | CozoDB as the core store (ISG + CodeGraph) | Needs custom sink |
+| Language alignment | Rust core (good), Python-first UX | Rust crates, CLI/daemon in Rust | Partial fit |
+| Code parsing semantics | Generic ETL; you’d write your Rust AST/source adapter anyway | syn + RA overlay + ISG schema | No built-in advantage |
+| Offline/local simplicity | Adds Postgres install/config | Prefer embedded, one-binary experience | Misaligned for MVP |
+
+## Where it fits well
+-  Hydration pipelines and multi-source context:
+    - PRDs, PDFs, wikis, Drive, S3, etc. into embeddings/knowledge graph.
+    - Keeping non-code context in sync incrementally with lineage.
+-  Later releases when you want ETL ergonomics and connectors, not just Rust code.
+
+## Where it conflicts for v1.0
+-  Extra dependency (Postgres) and a second orchestration layer complicates your “deterministic-first, single store (Cozo), single writer (CodeGraph)” model.
+-  You still need to implement the Rust code parser and ISG mapper; CocoIndex won’t replace syn/RA overlay work.
+-  Adds Python tooling into a Rust-first stack for the core path.
+
+## If you still want to try it (spike plan)
+-  Build a “source” adapter that:
+    - Watches the workspace (walkdir/notify).
+    - Parses Rust files with syn and yields ISGL1 records and basic edges.
+    - Emits normalized records with stable IDs (filepath-filename-InterfaceName + disambiguator).
+-  Build a “target” adapter (sink) for CozoDB:
+    - Upsert into isg_nodes, isg_edges, code_blobs; compute embeddings via your local encoder.
+    - Maintain hashes for change detection; only re-embed changed nodes.
+-  Use Postgres locally for CocoIndex’s incremental state (document install/auto-start).
+-  Success criteria: modify a file → only affected ISG nodes/edges re-computed; Cozo reflects changes; latency stays low on large workspaces.
+
+## Recommendation
+-  For v1.0 code ingestion: use the internal Rust path (walkdir + syn + Cozo + tokio) to keep the core tight, deterministic, and dependency-light.
+-  Revisit CocoIndex post-v1.0 for:
+    - Hydration of non-code artifacts (docs/PRDs/pdfs) into your context store.
+    - Advanced incremental pipelines where its lineage and connectors shine.
+
+
+
+
+## HLD: Parseltongue v1.0 (Claude Code Plugin/Skill)
+
+-  Product promise
+    - For large Rust codebases, produce single-pass, safe, minimal diffs that compile and pass tests before apply. Correctness is the KPI; speed is a byproduct.
+
+-  Core approach
+    - Deterministic-first pipeline with minimal/late LLM reasoning.
+    - Aggregate code context via Interface Signature Graph (ISG) + CodeGraph write-surface.
+    - Local llama.cpp subagents for retrieval/validation; Anthropic (via ANTHROPIC_KEY) for final reasoning when needed.
+    - Strict preflight gating via rust-analyzer (RA) overlay and tests; no writes until pass + user approval.
+
+-  Key components
+    - VS Code extension (Claude Code companion) + CLI bootstrap.
+    - Dobby: local-orchestrator-daemon (llama.cpp, Metal) with JSON-RPC, resource caps, KV reuse.
+    - Ingestor: streams Rust workspace to build ISG in CozoDB (Datalog + HNSW).
+    - CodeGraph: single write-surface with Future→Current flip on approval.
+    - RA Overlay microservice: LSP to rust-analyzer for diagnostics on ephemeral buffers.
+    - Subagents: A1/A2/A3 minimal set; R1 for final patch.
+    - Download/Model registry: ensure small/medium/large GGUF models; verify and test 20-line output.
+
+## Minimal User Journey (MVP)
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant V as VS Code (Claude Code)
+    participant P as Parseltongue Ext
+    participant D as Dobby (daemon)
+    participant I as Ingestor/ISG
+    participant R as RA Overlay
+    participant C as CozoDB/CodeGraph
+
+    U->>V: Reads repo, installs extension/CLI
+    U->>P: <WIP> command to start
+    P->>P: System check (M1+ and ≥16 GB)
+    alt Incompatible
+        P-->>U: UI: Not supported. Exit.
+    else Compatible
+        P->>D: Start/ensure daemon + model registry
+        D-->>U: UI: Need models. Confirm (Y/y/*Y*/ *y*)
+        U->>D: Y
+        D->>D: Download/verify models
+        D->>D: Run 20-line self-test per model
+        D-->>U: Show outputs (3 models OK)
+        P->>U: Choose workspace root
+        P->>I: Stream ingest → ISG nodes/edges + embeddings
+        I->>C: Persist ISG/embeddings
+        U->>P: Ask fix for failing build/test
+        P->>R: Get diagnostics (A1 seed)
+        P->>C: A2 Datalog traversal + A3 vector top-k
+        P->>D: R1 (Claude) minimal context → patch
+        P->>R: PreFlight overlay compile/test
+        R-->>P: No errors + tests pass
+        P-->>U: Show minimal diff + confidence; Apply?
+        U->>P: Approve
+        P->>C: Flip Future→Current in CodeGraph
+        P-->>U: Done
+    end
+```
+
+## Architecture (HLD)
+
+```mermaid
+graph LR
+    subgraph Editor Side
+        VSC[VS Code + Claude Code]
+        EXT[Parseltongue Extension]
+    end
+
+    subgraph Local Services
+        Dobby[(Dobby: llama.cpp Orchestrator)]
+        RA[RA Overlay LSP Client]
+        Cozo[(CozoDB)]
+    end
+
+    subgraph Libraries/Crates
+        Ingestor[Ingestor (syn/walkdir)]
+        ISG[ISG Model + Datalog]
+        CodeGraph[CodeGraph Write Surface]
+        Embedder[Local Encoder (MiniLM 22M / SmolLM2 135M)]
+        Metrics[Telemetry & Cache]
+    end
+
+    VSC --> EXT
+    EXT <---> Dobby
+    EXT <---> RA
+    EXT <---> Cozo
+    Ingestor --> ISG --> Cozo
+    CodeGraph --> Cozo
+    Embedder --> Cozo
+    Metrics --> Cozo
+
+    Dobby -->|JSON-RPC| EXT
+    RA -->|LSP| EXT
+```
+
+## Key decisions to simplify MVP (without losing effectiveness)
+
+-  Platform gating: Support macOS M1/M2/M3 with ≥16 GB only. Fail fast elsewhere.
+-  Reasoning model: Use Anthropic via ANTHROPIC_KEY only at the final step (R1). All earlier steps deterministic/subagent local.
+-  Models: Install Small (SmolLM2 135M Q4) + Medium (Gemma 270M Q4) by default. Make Large (Qwen2.5 7B Q4_K_M) optional/lazy.
+    - Rationale: 7B download at 5 Mbps will take hours, not minutes. Avoid blocking the first-run experience.
+-  Parsing: Use syn for ISGL1 extraction (top-level items) to avoid RA crate coupling. Use RA only for diagnostics and overlay compile.
+-  Single writer: Only CodeGraph mutates code. ISG/edges/embeddings remain read-only context stores.
+-  JSON-RPC, not HTTP: Simpler and faster IPC via Unix domain socket.
+
+## Claude Code integration options (practical)
+
+-  Recommended: VS Code extension that augments the Claude for VS Code workflow
+    - Adds commands: Parseltongue: Bootstrap, Parseltongue: Ingest, Parseltongue: Fix Current Error.
+    - Provides a chat tool that posts outputs back into the Claude panel.
+    - Communicates with Dobby and local services via Unix socket/localhost.
+-  CLI fallback: parseltongue bootstrap, parseltongue ingest, parseltongue fix.
+
+## Dobby: local-orchestrator-daemon (LLD)
+
+-  Responsibilities
+    - Manage llama.cpp model pool (load/unload), pinned threads, Metal GPU layers, KV cache reuse.
+    - Run multiple jobs in parallel (bounded), enforce RAM/GPU caps.
+    - Provide completion and embedding endpoints.
+    - Download/verify models; run 20-line self-test.
+
+-  Process model
+    - One daemon, multiple sessions. Each session binds to a specific model and KV cache.
+    - Schedulers: weighted fair queue; cap concurrent decoders by compute budget.
+
+-  Resource defaults (M1 16 GB)
+    - Threads: max(1, num_cpus - 2)
+    - Small/Medium models: n_gpu_layers = all
+    - 7B Q4_K_M: n_gpu_layers ≈ 35–40; ctx_len 4,096; batch 256–512 (auto-tuned)
+    - Memory guards: reject load if free RAM < safe threshold (e.g., 4 GB)
+
+-  JSON-RPC (over Unix socket /tmp/parseltongue.llm.sock)
+
+| Method | Params | Result |
+|---|---|---|
+| ping | {} | {ok: true} |
+| get_status | {} | {models: [...], sessions: [...], metrics: {...}} |
+| ensure_model | {name, url, sha256, path} | {status: "present"|"downloaded", bytes} |
+| load_model | {name, path, profile} | {session_id} |
+| unload_model | {session_id} | {ok} |
+| completion | {session_id, prompt, max_tokens, stop, temperature} | {text, usage} |
+| embed | {session_id, texts[]} | {vectors: float[][]} |
+| verify_default | {session_id} | {ok, lines: string[]} |
+
+-  Default verification prompt
+    - “Print exactly 20 lines, numbered 1 to 20, each like: Parseltongue model check: line X. No extra text.”
+    - Validate count and format; return lines to UI.
+
+-  Model registry (TOML)
+    - ~/.parseltongue/models/registry.toml
+    - Entries include name, url, size, sha256, quant, family, purpose (small/medium/large).
+
+-  Download manager
+    - Concurrent chunked downloads with resume; SHA-256 verification.
+    - Progress events to extension; rate estimation.
+
+## Ingestor + ISG (LLD)
+
+-  Scope (ISGL1)
+    - Top-level items per file: functions, structs, enums, traits, impl blocks, modules (1 level beneath file/module).
+    - Key: filepath-filename-InterfaceName (string), with disambiguator if necessary.
+
+-  Streaming ingestion
+    - Walk workspace with ignore/.gitignore support.
+    - Read file → syn::parse_file → collect ISGL1 nodes and their signature metadata.
+    - Extract edges:
+        - CALLS: conservatively via simple name resolution + optional regex heuristics; refined later with RA metadata during hydration.
+        - IMPLEMENTS/USES/DEPENDS: basic heuristics from item syntax (impl Trait for Type, use paths).
+    - Persist nodes/edges incrementally into CozoDB to avoid RAM blowup.
+
+-  CozoDB schema (relations)
+
+| Relation | Columns | Notes |
+|---|---|---|
+| isg_nodes | id, file_path, crate, module_path, kind, name, signature, vis, generics, isgl_level, span_start, span_end, hash | id = ISGL1 key |
+| isg_edges | src_id, dst_id, kind, weight | CALLS/IMPLEMENTS/USES/DEPENDS/... |
+| code_blobs | id, code, tdd_classification | Source slice for node |
+| embeddings | id, model, dim, vec | HNSW index on vec |
+| diagnostics | id, severity, code, message, ra_rev, ts | Latest RA diagnostics |
+| codegraph | id, current_code, future_code, future_action, tdd_classification, current_id, future_id | Single write-surface |
+
+-  Example Datalog snippets (Cozo)
+
+    - Two-hop exact traversal (A2):
+    ```
+    input id
+    ?(neighbor) <- isg_edges[src_id=id, dst_id=neighbor, kind in ["CALLS","DEPENDS"]]
+    ?(neighbor2) <- isg_edges[src_id=neighbor, dst_id=neighbor2, kind in ["CALLS","DEPENDS"]]
+    ```
+
+    - Vector top-k (A3):
+    ```
+    input query_vec, k=15
+    ?(id, dist) <- embeddings ANN(query_vec) k:k
+    ```
+
+-  Embeddings
+    - Start with MiniLM 22M Q4 or SmolLM2 135M as encoder; cache by code hash.
+    - HNSW index parameters tuned for recall vs latency.
+
+## CodeGraph and PreFlight (LLD)
+
+-  CodeGraph rules
+    - Only CodeGraph can mutate code (Future_Code). All other tables are read-only context.
+    - Approval flips Future→Current and clears future_* flags.
+    - TDD_Classification: TEST_IMPLEMENTATION or CODE_IMPLEMENTATION.
+
+-  PreFlight pipeline
+    - Create RA overlay buffer for Future_Code slice; open ephemeral document (didOpen).
+    - Collect publishDiagnostics; fail on any Error severity.
+    - Optional cargo test -q on focused crate or workspace with test filter inferred from diagnostics.
+    - Only if pass: present diff and confidence for user approval.
+
+-  Minimal diff generation
+    - R1 produces patch constrained by a template:
+        - Do not change public signature unless explicitly required.
+        - Keep edits minimal; target failing scope.
+    - Post-process with rustfmt; validate AST parse; re-run diagnostics.
+
+## Subagents (MVP)
+
+-  A1 Seeder (error parser)
+    - Input: RA diagnostics, cargo build/test stderr.
+    - Output: seed objects with file, span, error codes, messages.
+
+-  A2 ExactRetriever (Datalog 2-hop)
+    - Input: seed ids; filters on kind; cap 30 nodes/hop.
+    - Output: node set with priority.
+
+-  A3 VectorRetriever
+    - Input: seed code slice; output: top-k similar nodes via HNSW; de-dup with A2.
+
+-  R1 Reasoner (Claude via ANTHROPIC_KEY)
+    - Lean prompt with: seeds, top A2/A3 snippets (truncated), coding constraints, patch template.
+    - Output: minimal diff patch plus rationale and confidence factors.
+
+## UI Strings (aligning to your draft)
+
+-  Wait screen
+    - “Parseltongue is analyzing system compatibility, please wait in the headmaster’s office.”
+
+-  Incompatible
+    - “Parseltongue will NOT work for you on this machine. Press <WIP> to exit.”
+
+-  Compatible
+    - “Parseltongue will work on your system. Type Y to download models. This may take time depending on your bandwidth.”
+
+-  Downloading
+    - “Parseltongue is downloading models, please have this butter beer while we get them ready.”
+
+-  Ready
+    - “Parseltongue is ready to work.”
+
+Note on timing: At 5 Mbps, Large 7B Q4_K_M (~4.5–6.5 GB) can take hours. Recommend defaulting to Small + Medium for first-run; offer Large as optional later.
+
+## Repo layout (monorepo)
+
+```
+parseltongue/
+    crates/
+        dobby/                      # local-orchestrator-daemon (JSON-RPC, llama.cpp)
+        ingestor/                   # workspace walker + syn parser
+        isg_model/                  # Cozo schemas + Datalog helpers
+        codegraph/                  # write-surface + PreFlight flip
+        ra_overlay/                 # LSP client to rust-analyzer
+        embedder/                   # local encoder adapters
+        common/                     # config, logging, error types, metrics
+    apps/
+        vscode-extension/           # TS extension; Claude Code companion
+        cli/                        # `parseltongue` CLI wrapper
+    configs/
+        models.registry.toml        # default model registry
+    scripts/
+        bootstrap.sh                # install deps, start daemon
+    .parseltongue/
+        examples/                   # example workspaces/tests
+```
+
+## Example configs and commands
+
+-  Model registry (excerpt)
+
+```
+[[models]]
+    name = "smollm2-135m-q4"
+    url = "https://.../smollm2-135m-q4.gguf"
+    sha256 = "<sha>"
+    size_bytes = 420000000
+    kind = "small"
+    family = "smollm2"
+    purpose = "embed,tool"
+
+[[models]]
+    name = "gemma-270m-q4"
+    url = "https://.../gemma-270m-q4.gguf"
+    sha256 = "<sha>"
+    size_bytes = 700000000
+    kind = "medium"
+    family = "gemma"
+
+[[models]]
+    name = "qwen2.5-7b-q4_k_m"
+    url = "https://.../qwen2.5-7b-q4_k_m.gguf"
+    sha256 = "<sha>"
+    size_bytes = 5200000000
+    kind = "large"
+    family = "qwen"
+```
+
+-  CLI quickstart
+
+```
+parseltongue bootstrap
+parseltongue ingest --workspace /path/to/repo
+parseltongue fix --error current
+```
+
+## System check (snippet)
+
+```rust
+use sysinfo::{System, CpuExt, SystemExt};
+
+fn check_compat() -> Result<(), String> {
+    let mut sys = System::new_all();
+    sys.refresh_all();
+
+    let total_mem_gb = sys.total_memory() as f64 / (1024.0 * 1024.0);
+    let cpu_brand = sys.cpus().get(0).map(|c| c.brand().to_string()).unwrap_or_default();
+
+    let is_apple_silicon = cfg!(target_arch = "aarch64") && cpu_brand.contains("Apple");
+    if !is_apple_silicon || total_mem_gb < 16.0 {
+        return Err("Requires Apple Silicon (M1+) and ≥16 GB RAM".into());
+    }
+    Ok(())
+}
+```
+
+## RA overlay PreFlight (flow)
+
+-  For each candidate patch:
+    - Create ephemeral buffer with Future_Code; send didOpen to RA.
+    - Await diagnostics; if any Error, reject and ask R1 for revised minimal patch.
+    - If no errors, run cargo test -q (scoped to affected crate if possible).
+    - If pass, surface diff, rationale, and confidence. On approval, flip in CodeGraph.
+
+## Acceptance criteria (MVP)
+
+-  Bootstrap
+    - Detect platform and gate.
+    - Download and verify Small + Medium models on user confirmation; self-test outputs show exactly 20 lines per model.
+
+-  Orchestrator
+    - JSON-RPC server stable; can load/unload models; run completion; provide embeddings.
+
+-  Ingestion
+    - ISGL1 nodes extracted across a typical Rust workspace; persisted in CozoDB; embeddings built with cache.
+
+-  Retrieval
+    - A1 from RA + cargo; A2 Datalog 2-hop with caps; A3 vector top-k; merged unique set.
+
+-  Patch flow
+    - R1 produces a minimal diff; PreFlight passes diagnostics; optional tests pass; user can apply; CodeGraph flips.
+
+-  Metrics
+    - Log token-per-fix, compile-first-pass rate, cache hits, retrieval latency.
+
+## Risks and mitigations
+
+-  7B download time at 5 Mbps
+    - Mitigation: Default Small + Medium; make 7B optional. Offer offline copy or LAN cache later.
+
+-  RA crate coupling/instability
+    - Mitigation: Use LSP externally for diagnostics; stick to syn for ISGL1 parsing.
+
+-  Memory pressure with multiple models
+    - Mitigation: Dynamic GPU layer downshift and exclusive 7B; unload idle sessions.
+
+-  Large codebases ingestion time
+    - Mitigation: Streaming ingestion, parallel file parsing, debounce embeddings, persist incrementally.
+
+## Backlog (post v1.0)
+
+-  Hydration with RA HIR metadata for accurate CALLS/USES edges.
+-  AntiPatternDetector/PatternRecognizer/ConstraintEnforcer.
+-  Test selection heuristics; flaky test handling.
+-  Editable confidence thresholds and guardrails.
+-  Multi-platform support (Linux/AMD/NVIDIA).
+-  Persistent KV cache snapshots across sessions.
+-  Fine-tuned local encoder and distilled retrievers.
+
+## What you get in v1.0
+
+-  A working minimal user journey (install → check → models → verify → ingest → fix).
+-  Robust orchestration with llama.cpp + Metal.
+-  Deterministic-first pipeline with strict PreFlight gating.
+-  ISG + CodeGraph data backbone in CozoDB.
+-  Claude-backed minimal diffs with tight, low-token prompts.
+
+If you want, I can turn this into:
+-  A tracked task board with work items and estimates.
+-  Concrete JSON-RPC schema files and TypeScript client stubs for the extension.
+-  A minimal “hello workspace” fixture to validate ingestion/retrieval/patch end-to-end.
+
+

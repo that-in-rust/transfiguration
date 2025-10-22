@@ -36,9 +36,33 @@ Search with <WIP>
 - local-llama-rust-orchestrator-elf is a wrapper around https://github.com/ray-project/ray 
     - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
         - StarCoder2 3B
-    - local-llama-rust-orchestrator-elf will identify current free RAM & suggest number of subagents that can be activated based on 90% of free RAM based on StarCoder2 3B
-
-
+    - local-llama-rust-orchestrator-elf will identify current free RAM will spin up max 5 sub agents
+    - Questions <WIP>
+        - Will https://github.com/ray-project/ray be capable of running 5 agents parallely in M1+ & 16GB roadmap+ without us having to depend on llama.cpp from scratch rust implementation
+        - what will be the format of the command line tool local-llama-rust-orchestrator-elf
+    - Assume that local-llama-rust-orchestrator-elf is able to show that it is working
+- Ask the user if we are currently in the relevant Rust Repo
+    - if no then ask them to share absolute path of git repo and cd there
+    - if yes
+        - Tell user that code indexing has begun and will take 10 minutes
+            - For the github repo
+                - trigger the tool interface-graph-builder
+                    - tool 01: rust-ISG-streamer
+                        - tool will read code based mother git repo where it located, using either (syn or treesitter or rust-analyzer)
+                        - tool will choose granularity of chunks
+                        - tool will output aggregated-primarykey + code-chunk as 2 different text values
+                    - tool 02: ingest-chunks-to-CodeGraph
+                        - tool02 create CodeGraph (single write surface)
+                            - indexed by ISGL1 key (filepath-filename-InterfaceName)
+                            - columns (minimal, opinionated):
+                                - ISGL1 primary key (receives the output of tool 01 - aggregated-primarykey)
+                                - Current_Code (receives the output of tool 01 - code-chunk, can be empty if upsert of new ISGL1 + other fields happen)
+                                - Future_Code (by default empty, edited by action of reasoning LLM),
+                                - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete),
+                                - TDD_Classification (whether the ISGL1 is TEST_IMPLEMENTATION, CODE_IMPLEMENTATION)
+                                - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code),
+                                - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
+                    - 
 
 
 
@@ -120,6 +144,18 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
 
 
 # A97 Components Long Notes
+
+
+- interface-summary-generator
+  - Purpose: Generate terse, lossless 1-line summaries for ISGL1 nodes.
+  - Inputs: ISG_current.
+  - Outputs: summaries table with provenance (rule_based | llm_assisted).
+  - Actions: extract signature verbs/nouns → generate ≤120 char summaries; backfill with LLM if rule-based fails.
+  - Variants: (a) rule-only heuristics; (b) LLM backfill under budget.
+  - Notes: Summaries are hints, never authority; used to reduce tokens.
+  - Example CLI: interface-summary-generator --cozo cozo://isg --write summaries
+  - Example Input (JSON): {"isgl1_keys":["src/lib.rs-foo-parse_cfg"]}
+  - Example Output (JSON): {"isgl1_key":"src/lib.rs-foo-parse_cfg","summary":"parse TOML to Cfg; returns Result<Cfg,E>","provenance":"rule_based"}
 
 
 ### **local-orchestrator-daemon** ✓ **MVP ESSENTIAL**
