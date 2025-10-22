@@ -110,14 +110,10 @@ Search with <WIP>
 - Parseltongue should analyze the system
     - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
     - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
-- local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models
-    - Large Model List: Qwen2.5 7B (Q4_K_M)
-    - Medium Model List: Gemma 270M (Q4) — ~600–800 MB
-    - Small Model List: SmolLM2 135M (Q4) — ~300–500 MB.
-- local-llama-rust-orchestrator-elf will prove that all 3 models are working by automatically triggering a default prompt of 20 lines of output and showing the 3 of them to the user in chat
-
-
-
+- local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
+    - StarCoder2 3B
+- local-llama-rust-orchestrator-elf will identify current free RAM & suggest number of subagents that can be activated based on 90% of free RAM based on StarCoder2 3B
+- 
 
 ### Components identified
 
@@ -132,6 +128,16 @@ Search with <WIP>
 - **Example CLI**: local-orchestrator-daemon serve --socket /tmp/llm.sock
 - **MVP Implementation**: llama.cpp integration, model pool management, JSON-RPC interface, resource capping
 
+# A98 Model Selection
+
+| Model    | Class | Parameters   | Est. Size (Q4) | Single Agent Speed (t/s on M1) | Parallel Agents (on 9GB RAM) | Total Indexing Throughput | Code Summary Quality (300 lines) |
+|----------|-------|--------------|----------------|--------------------------------|------------------------------|---------------------------|------------------------------|
+| SmolLM2  | Small | 135 Million  | ~0.5 GB       | ~300 t/s                       | ~14 Agents                  | >4000 t/s                 | Unusable (1/100)             |
+| Gemma     | Medium| 270 Million  | ~0.8 GB       | ~140 t/s                       | ~9 Agents                   | >1200 t/s                 | Poor (20/100)                |
+| Gemma 2B  | Intermediate| 2 Billion| ~1.2 GB       | ~120 t/s                       | 5 Agents                    | ~600 t/s                  | Moderate (65/100)            |
+| StarCoder2 3B| Intermediate| 3 Billion| ~1.8 GB       | ~100 t/s                       | 3 Agents                    | ~300 t/s                  | Very Good (80/100)          |
+| 🥇 Phi-3-mini| Intermediate| 3.8 Billion| ~2.2 GB       | ~70 t/s                        | 3 Agents                    | ~210 t/s                  | Exceptional (95/100)         |
+| Qwen2.5 7B | Large| 7 Billion    | ~4.5 GB       | ~20 t/s                        | 1 Agent                     | ~20 t/s                   | Exceptional (95/100)         |
 
 
 
