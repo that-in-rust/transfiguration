@@ -86,23 +86,24 @@ Search with <WIP>
                 - tool 3: code-simulation-sorcerer is triggered
                     - tool 3 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data)
                     - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
-                        - Step 01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
-                            - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
-                            - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
-                            - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
-                        - Step 02: Based on test-interface-changes + base-context-area, create edit delete non-test interfaces; call these rows non-test-interface-changes
-                            - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
-                            - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
-                            - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
-                        - Step 03: Based on test-interface-changes + non-test-interface-changes + base-context-area, update future_code for test-interface-changes
-                            - update future_code for non-test-interface-changes
-                        - Step 04: 
+                        - Step A: ISG level simulations
+                            - Step A01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
+                                - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
+                                - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
+                                - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
+                            - Step 02: Based on test-interface-changes + base-context-area, create edit delete non-test interfaces; call these rows non-test-interface-changes
+                                - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
+                                - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
+                                - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
+                        - Step B: Code Simulation
+                            - Step B01: Based on test-interface-changes + non-test-interface-changes + base-context-area update future_code for both test-interface-changes and non-test-interface-changes rows; call these changes code_changes
+                            - Step B02: Follow rubber duck debugging to re-reason test-interface-changes + non-test-interface-changes + base-context-area + code_changes
+                                - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
+                                - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
+                                - if the LLM feels confident of the changes, we trigger rust-preflight-code-simulator tool
 
 
 
-                - now reflect these ISG_future changes in the CozoDB database in ISG_current_ind, ISG_future_ind, Future_Code and Future_Action columns
-                - now use the rubber duck debugging menthod to look at ISG_current + PRD + ISG_future + those rows in CozoDB database which have Future_Code and Future_Action columns as not null
-                - if the LLM thinks that we need to refine the solutioning further, make changes to ISG_future and repeat the process
                 - if the LLM thinks that we need to refine the PRD further then go back to previous step
                 - if finally the LLM feels very confident of the changes, we reflect the changes in the CozoDB database in the codebase
                 - now we run all the tests and compile the codebase
