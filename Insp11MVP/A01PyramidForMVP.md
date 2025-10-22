@@ -19,51 +19,74 @@ graph TD
 
 What decisions can we take which will significantly simply dev without reducing the effectiveness a lot
 
-- Parseltongue will be a Claude Code Plugin
-    - How do Plugins get integrated
 
 
 ## Minimal User Journey with reasonable differentiation
 
 Search with <WIP>
 
-- User reads about your plugin in github repo
-- User downloads the plugin
-- User <WIP> so that parseltongue can be triggered
-- Parseltongue should analyze the system
-    - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
-    - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
-- local-llama-rust-orchestrator-elf is a wrapper around https://github.com/ray-project/ray 
-    - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
-        - StarCoder2 3B
-    - local-llama-rust-orchestrator-elf will identify current free RAM will spin up max 5 sub agents
-    - Questions <WIP>
-        - Will https://github.com/ray-project/ray be capable of running 5 agents parallely in M1+ & 16GB roadmap+ without us having to depend on llama.cpp from scratch rust implementation
-        - what will be the format of the command line tool local-llama-rust-orchestrator-elf
-    - Assume that local-llama-rust-orchestrator-elf is able to show that it is working
-- Ask the user if we are currently in the relevant Rust Repo
-    - if no then ask them to share absolute path of git repo and cd there
-    - if yes
-        - Tell user that code indexing has begun and will take 10 minutes
-            - For the github repo
-                - trigger the tool interface-graph-builder
-                    - tool 01: rust-ISG-streamer
-                        - tool will read code based mother git repo where it located, using either (syn or treesitter or rust-analyzer)
-                        - tool will choose granularity of chunks
-                        - tool will output aggregated-primarykey + code-chunk as 2 different text values
-                    - tool 02: ingest-chunks-to-CodeGraph
-                        - tool02 create CodeGraph (single write surface)
-                            - indexed by ISGL1 key (filepath-filename-InterfaceName)
-                            - columns (minimal, opinionated):
-                                - ISGL1 primary key (receives the output of tool 01 - aggregated-primarykey)
-                                - Current_Code (receives the output of tool 01 - code-chunk, can be empty if upsert of new ISGL1 + other fields happen)
-                                - Future_Code (by default empty, edited by action of reasoning LLM),
-                                - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete),
-                                - TDD_Classification (whether the ISGL1 is TEST_IMPLEMENTATION, CODE_IMPLEMENTATION)
-                                - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code),
-                                - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
-                    - 
 
+- ANTHROPIC_KEY will be the orchestrator and reasoning LLM
+- Executive Summary
+    - User Segment: Developers on large Rust codebases ONLY
+    - Reliability-First Principle:
+        - Optimize for accurate 1-go fixes that feel trustworthy and increase user efficacy.
+        - Prefer CPU-bound static analysis (rust-analyzer overlays, ISG traversals) and small, local, free subagents.
+        - Keep the reasoning LLM as lean and late as possible; minimize context/tokens; use deterministic transforms whenever feasible.
+    - Shreyas Doshi (product framing): Prioritize first-apply correctness over speed. Design for clarity, safety, and explicit confidence gating. Time is a secondary outcome.
+    - Jeff Dean (systems framing): Make correctness the fast path. Push work to deterministic, cacheable computations (ISG, RA, HNSW). Parallelize retrieval/validation; minimize token movement; measure token-per-fix and cache hit rates.
+    - User Promise: “When I hit a Rust bug, the system produces a single-pass, safe, minimal diff that compiles and (when present) passes tests before applying. Speed is a byproduct; correctness is the KPI.”
+- User Journey v0.7
+    - User reads about your plugin in github repo - it is a plugin for Claude Code
+    - User downloads the plugin
+    - User <WIP> so that parseltongue can be triggered
+    - Parseltongue should analyze the system
+        - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
+        - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
+    - local-llama-rust-orchestrator-elf is a wrapper around https://github.com/ray-project/ray 
+        - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
+            - StarCoder2 3B
+        - local-llama-rust-orchestrator-elf will identify current free RAM will spin up max 5 sub agents
+    - Ask the user if we are currently in the relevant Rust Repo
+        - if no then ask them to share absolute path of git repo and cd there
+        - if yes
+            - Tell user that code indexing has begun and will take 10 minutes
+                - For the github repo
+                    - trigger the tool interface-graph-builder
+                        - tool 01: ISG-code-chunk-streamer
+                            - tool will read code based mother git repo where it located, using tree sitter
+                            - tool will choose granularity of chunks
+                            - optional: tool will call lsp (rust-analyzer) for meta-data about code-chunk-raw
+                            - tool will output aggregated-primarykey + code-chunk-raw + lsp-meta-data 
+                        - tool 02: ingest-chunks-to-CodeGraph
+                            - tool02 create CodeGraph (single write surface)
+                                - indexed by ISGL1 key (filepath-filename-InterfaceName)
+                                - columns (minimal, opinionated):
+                                    - ISGL1 primary key (receives the output of tool 01 - aggregated-primarykey)
+                                    - Current_Code (receives the output of tool 01 - code-chunk, can be empty if upsert of new ISGL1 + other fields happen)
+                                    - Future_Code (by default empty, edited by action of reasoning LLM),
+                                    - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete),
+                                    - TDD_Classification (whether the ISGL1 is TEST_IMPLEMENTATION, CODE_IMPLEMENTATION)
+                                    - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code)
+                                    - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
+                                    - lsp_meta_data (receives the output of tool 01 - lsp-meta-data)
+
+
+## A02.1 Questions that need clarification
+
+- local-llama-rust-orchestrator-elf
+    - Will https://github.com/ray-project/ray be capable of running 5 agents parallely in M1+ & 16GB roadmap+ without us having to depend on llama.cpp from scratch rust implementation
+    - what will be the format of the command line tool local-llama-rust-orchestrator-elf
+    - Assume that local-llama-rust-orchestrator-elf is able to show that it is working
+
+- unclassified
+    - Parseltongue will be a Claude Code Plugin
+        - How do Plugins get integrated
+
+- broader notes
+    -  Use the native Rust path for v1.0:
+        - tree-sitter-rust (tolerant) → syn (exact when possible) → RA LSP overlay (hydration) → Cozo upserts keyed by ISG id.
+        - This gives you error tolerance, interface-bound storage, and the richness of rust-analyzer, with minimal moving parts.
 
 
 
