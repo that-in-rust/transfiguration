@@ -84,27 +84,22 @@ Search with <WIP>
                         - Functionality wise
                     - After 2 iterations the reasoning-llm will accept the micro-PRD
                 - tool 3: code-simulation-sorcerer is triggered
-                    - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on (micro-PRD
-                        + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data)
+                    - tool 3 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data)
+                    - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
                         - Step 01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
                             - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
                             - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
                             - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
-                        - Step 02: Based on test-interface-changes + micro-PRD + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data, create edit delete non-test interfaces; call these rows non-test-interface-changes
+                        - Step 02: Based on test-interface-changes + base-context-area, create edit delete non-test interfaces; call these rows non-test-interface-changes
                             - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
                             - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
                             - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
-                        - Step 03: Based on test-interface-changes + non-test-interface-changes + micro-PRD + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data
-                            - update future_code for test-interface-changes
+                        - Step 03: Based on test-interface-changes + non-test-interface-changes + base-context-area, update future_code for test-interface-changes
                             - update future_code for non-test-interface-changes
+                        - Step 04: 
 
 
 
-
-            - No
-                - if ISG_future is possible then lets have base value of ISG_current as a default value and then change it according to what you think is the correct logic
-                    - what test-interfaces will be deleted, edited, created
-                    - what non-test-interfaces will be deleted, edited, created
                 - now reflect these ISG_future changes in the CozoDB database in ISG_current_ind, ISG_future_ind, Future_Code and Future_Action columns
                 - now use the rubber duck debugging menthod to look at ISG_current + PRD + ISG_future + those rows in CozoDB database which have Future_Code and Future_Action columns as not null
                 - if the LLM thinks that we need to refine the solutioning further, make changes to ISG_future and repeat the process
