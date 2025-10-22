@@ -13,16 +13,43 @@ graph TD
 ```
 
 
+# A02 Pyramid of tasks
+
+## Decisions to reduce options
+
+What decisions can we take which will significantly simply dev without reducing the effectiveness a lot
+
+- Parseltongue will be a Claude Code Plugin
+    - How do Plugins get integrated
+
+
+## Minimal User Journey with reasonable differentiation
+
+Search with <WIP>
+
+- User reads about your plugin in github repo
+- User downloads the plugin
+- User <WIP> so that parseltongue can be triggered
+- Parseltongue should analyze the system
+    - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
+    - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
+- local-llama-rust-orchestrator-elf is a wrapper around https://github.com/ray-project/ray 
+    - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
+        - StarCoder2 3B
+    - local-llama-rust-orchestrator-elf will identify current free RAM & suggest number of subagents that can be activated based on 90% of free RAM based on StarCoder2 3B
 
 
 
 
+
+
+
+# A03 Initial Scope
 
 Scope for Parseltongue v1.0
 
 Use this as a filter for Rust Tools or Libraries you are ideating as part of building the Parseltongue plugin or skill or something for Claude Code
 
-# A01 Initial Scope
 
 - ANTHROPIC_KEY will be the orchestrator and reasoning LLM
 - Executive Summary
@@ -90,34 +117,12 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
 
 
 
-# A02 Pyramid of tasks
-
-## Decisions to reduce options
-
-What decisions can we take which will significantly simply dev without reducing the effectiveness a lot
-
-- Parseltongue will be a Claude Code Plugin
-    - How do Plugins get integrated
 
 
-## Minimal User Journey with reasonable differentiation
+# A97 Components Long Notes
 
-Search with <WIP>
 
-- User reads about your plugin in github repo
-- User downloads the plugin
-- User <WIP> so that parseltongue can be triggered
-- Parseltongue should analyze the system
-    - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
-    - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
-- local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
-    - StarCoder2 3B
-- local-llama-rust-orchestrator-elf will identify current free RAM & suggest number of subagents that can be activated based on 90% of free RAM based on StarCoder2 3B
-- 
-
-### Components identified
-
-#### **local-orchestrator-daemon** ✓ **MVP ESSENTIAL**
+### **local-orchestrator-daemon** ✓ **MVP ESSENTIAL**
 - **Purpose**: Run multiple llama.cpp models in parallel under strict RAM/GPU caps; JSON-RPC
 - **MVP Relevance**: Core subagent orchestration for A1-A6 local models with parallelism (not Ollama)
 - **Inputs**: job graph; model registry
