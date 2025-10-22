@@ -506,3 +506,254 @@ If you want, I can turn these interfaces into:
 -   A task board mapping each subsystem to milestones and test cases.
 
 
+
+## CozoDB blueprint for Parseltongue v1.0
+
+-   Role
+    - CozoDB is the system of record for all code intelligence: ISG nodes/edges, exact code slices, embeddings, diagnostics, and the CodeGraph write-surface.
+    - Single-writer rule: Only CodeGraph mutates code; all other relations are read-only context stores.
+
+-   ELI5
+    - Think of Cozo as a clean filing cabinet. We file “what exists,” “who talks to whom,” “the exact text,” and “how similar things are.” We only keep “future edits” in a special tray (CodeGraph) until the supervisor signs off.
+
+## Data model HLD
+
+```mermaid
+graph TD
+    ISG_NODES[isg_nodes\n(ISGL1)]
+    ISG_EDGES[isg_edges\n(CALLS/IMPLEMENTS/USES/...)]
+    CODE_BLOBS[code_blobs\n(exact slices)]
+    EMB[embeddings\n(HNSW)]
+    DIAG[diagnostics]
+    CG[codegraph\n(single write surface)]
+
+    ISG_NODES -->|id| CODE_BLOBS
+    ISG_NODES -->|id| EMB
+    ISG_NODES -->|id| DIAG
+    ISG_NODES -->|id| CG
+    ISG_NODES -->|src_id/dst_id| ISG_EDGES
+```
+
+-   Entity summary
+    - isg_nodes: One row per interface at ISGL1 granularity (filepath-filename-InterfaceName).
+    - isg_edges: Directed relations like CALLS, IMPLEMENTS, USES, DEPENDS, FEATURE_GATED_BY.
+    - code_blobs: Canonical, exact code slice for each interface node (recovered if file is broken).
+    - embeddings: Vector representations for retrieval (HNSW index).
+    - diagnostics: Latest analyzer diagnostics at node granularity.
+    - codegraph: Current and proposed future code, flags, and actions for controlled edits.
+
+-   ELI5
+    - Nodes = chapter headings. Edges = references between chapters. Blobs = the exact paragraph of each chapter. Embeddings = how similar chapters feel. Diagnostics = sticky notes with issues. CodeGraph = a safe draft tray.
+
+## Relations (LLD)
+
+| Relation | Columns |
+|---|---|
+| isg_nodes | id (ISGL1 key), file_path, crate, module_path, kind, name, signature_ts, signature_syn, ra_signature, isgl_level, parse_error_count, confidence, span_start, span_end, hash, ra_hydrated_ts, schema_rev |
+| isg_edges | src_id, dst_id, kind (CALLS|IMPLEMENTS|USES|DEPENDS|FEATURE_GATED_BY), weight, provenance ("heuristic"|"ra"), ts |
+| code_blobs | id, code, tdd_classification ("TEST_IMPLEMENTATION"|"CODE_IMPLEMENTATION"), recovered (bool), ts |
+| embeddings | id, model, dim, vec, ef_search, m_build, ts |
+| diagnostics | id, severity, code, message, range, analyzer_rev, ts |
+| codegraph | id, current_code, future_code, future_action ("None"|"Create"|"Edit"|"Delete"), tdd_classification, current_id (0/1), future_id (0/1), preflight_state ("none"|"failed"|"passed"), ts |
+
+-   Keys and indices (recommended)
+    - Primary keys
+        - isg_nodes.id
+        - code_blobs.id
+        - embeddings.id (composite key: id+model if multi-encoder)
+        - codegraph.id
+    - Secondary indices
+        - isg_nodes: by file_path, by kind, by crate+module_path
+        - isg_edges: by src_id, by dst_id, by kind
+        - diagnostics: by id, by severity
+        - embeddings: HNSW index on vec per model
+    - Integrity hints
+        - Enforce uniqueness of (file_path, name, kind, isgl_level, disambiguator) via deterministic id composition.
+
+-   ELI5
+    - We label every drawer clearly and add shortcuts to find things by file, kind, or relationships. For fast “find similar,” we keep a special map (HNSW).
+
+## Write rules and invariants
+
+-   Single-writer invariant
+    - Only codegraph.future_* fields represent proposed code edits; everything else is immutable facts about the current codebase.
+-   Flip rule
+    - Approval flips future_* into current_* atomically and clears future_* flags.
+-   Confidence and provenance
+    - confidence on nodes drops if parsing was error-tolerant; edges mark provenance as "ra" (analyzer) or "heuristic".
+-   Idempotency
+    - Nodes and edges are upserted with stable ids and hashes to avoid duplicates and rework (embeddings recompute only on hash change).
+-   ELI5
+    - Drafts live in the “future” tray until approved; flipping moves them into the “current” drawer in one swift motion.
+
+## Named “database interfaces” (Datalog API contracts)
+
+Note: These are interface signatures, not code. Treat them as callable queries/transactions with clear inputs/outputs/side-effects.
+
+-   Ingestion and hydration
+    - ingest_file_batch
+        - Inputs: file_path, crate, module_path, isgl1_nodes[], code_slices[], parse_stats, now_ts
+        - Effects: upsert isg_nodes, code_blobs; set confidence based on parse_error_count; refresh hashes; record ra_hydrated_ts when hydration arrives
+        - Returns: {upserted_nodes, changed_hashes}
+        - ELI5: File changed? Replace its index cards and exact paragraphs.
+
+    - replace_edges_for_file
+        - Inputs: file_path, edges[] (src_id, dst_id, kind, provenance), now_ts
+        - Effects: delete edges whose src_id belongs to file_path; insert new edges; cap fanout limits if configured
+        - Returns: {deleted, inserted}
+        - ELI5: Erase stale “who calls whom” lines for that file and redraw them.
+
+    - upsert_diagnostics
+        - Inputs: id, diagnostics[], analyzer_rev, now_ts
+        - Effects: replace latest diagnostics for node id
+        - Returns: {count}
+        - ELI5: Stick the newest warning notes on the right cards.
+
+    - upsert_embedding_if_hash_changed
+        - Inputs: id, model, dim, vec, node_hash, hnsw_params, now_ts
+        - Pre: compare stored hash; skip if unchanged
+        - Effects: insert/replace vector; update HNSW
+        - Returns: {updated: true|false}
+        - ELI5: Only recompute the “similarity map” if the paragraph actually changed.
+
+-   Retrieval (A2/A3)
+    - isg_two_hop
+        - Inputs: seed_ids[], kinds_filter[], hop_limit=2, cap_per_hop=30
+        - Outputs: {nodes[], edges[]} around seeds respecting caps
+        - ELI5: Walk two steps in the graph near the problem, but don’t wander too far.
+
+    - ann_top_k
+        - Inputs: id or query_text, k, model
+        - Outputs: {neighbors: [{id, dist}]}
+        - ELI5: Find the most look-alike paragraphs.
+
+    - merge_rank_context
+        - Inputs: seed_ids[], graph_nodes[], ann_neighbors[], confidence_floor
+        - Outputs: {ranked_ids[], rationale_map}
+        - ELI5: Combine the nearby places and the look-alikes, then keep the trustworthy ones.
+
+-   CodeGraph (single write surface)
+    - codegraph_upsert_current
+        - Inputs: id, current_code, tdd_classification
+        - Effects: set current_code; current_id=1
+        - Returns: {ok}
+        - ELI5: File today’s official paragraph.
+
+    - codegraph_propose_future
+        - Inputs: id, future_code, future_action ("Create"|"Edit"|"Delete")
+        - Effects: set future_code, future_action; future_id=1; preflight_state="none"
+        - Returns: {ok}
+        - ELI5: Place a draft edit into the tray.
+
+    - codegraph_mark_preflight
+        - Inputs: id, preflight_state ("passed"|"failed")
+        - Effects: update preflight_state
+        - Returns: {ok}
+        - ELI5: Stamp the draft as pass or fail after checks.
+
+    - codegraph_approve_flip
+        - Inputs: ids[], approver, now_ts
+        - Pre: all ids must have preflight_state="passed"
+        - Effects: move future_code→current_code; set future_* empty; set current_id=1; future_id=0
+        - Returns: {flipped_count}
+        - ELI5: Promote drafts to the official drawer, in one shot.
+
+    - codegraph_reject_clear
+        - Inputs: ids[], reason
+        - Effects: clear future_*; preflight_state="none"
+        - Returns: {cleared_count}
+        - ELI5: Toss bad drafts.
+
+-   Search and utilities
+    - list_nodes_by_file
+        - Inputs: file_path
+        - Outputs: ids[]
+    - get_node_summary
+        - Inputs: id
+        - Outputs: {name, kind, signatures, confidence, tdd_classification}
+    - recent_diagnostics
+        - Inputs: id, limit
+        - Outputs: diagnostics[]
+    - explain_connectivity
+        - Inputs: src_id, dst_id, max_hops=3
+        - Outputs: path candidates
+        - ELI5: Show a plausible route from one chapter to another.
+
+## Transactions and consistency
+
+-   Batch per file
+    - ingest_file_batch + replace_edges_for_file + upsert_embedding_if_hash_changed should run as one transaction to keep ISG and edges aligned.
+-   Patch workflow
+    - codegraph_propose_future → PreFlight checks (external) → codegraph_mark_preflight → codegraph_approve_flip in a tight transaction.
+-   Time-travel (optional)
+    - Enable snapshots on isg_nodes, isg_edges, code_blobs, and codegraph to compare historic vs current; useful for debugging fix regressions.
+-   ELI5
+    - We write changes in small, safe batches, so cards and strings never contradict each other.
+
+## Performance and indexing guidance
+
+-   HNSW embeddings
+    - One HNSW index per model. Keep dim small (e.g., 256–768). Choose M and efConstruction for your accuracy/latency budget.
+-   Filtering first, ANN next
+    - Filter by crate/kind/test vs code before vector search to reduce candidates.
+-   Caps
+    - Apply fanout caps in A2 and top-k caps in A3 to bound prompt assembly and latency.
+-   Hashing
+    - Compute node-level hash on the exact code slice to gate embeddings and avoid redundant writes.
+-   Partitioning
+    - Add crate/module_path fields and query primarily within a crate for large monorepos.
+
+## Confidence and provenance policy
+
+-   confidence
+    - Derived from parse_error_count, presence of signature_syn, availability of ra_signature/symbols.
+-   Use in retrieval
+    - Drop or down-rank nodes below confidence_floor during A2/A3 merge.
+-   provenance
+    - Mark edges as "ra" when built from definitions; "heuristic" otherwise. Prefer "ra" in ranking.
+
+## Integration points (HLD to LLD mapping)
+
+-   Ingestion pipeline
+    - tree-sitter tolerant → syn exact → RA overlay (symbols/defs/diagnostics) → ingest_file_batch + replace_edges_for_file + upsert_diagnostics + upsert_embedding_if_hash_changed.
+
+-   Fix pipeline
+    - A1 seeds from diagnostics → A2 isg_two_hop → A3 ann_top_k → merge_rank_context → R1 propose → codegraph_propose_future → PreFlight external → codegraph_mark_preflight → codegraph_approve_flip.
+
+-   ELI5
+    - Read, understand, index; then for a fix, gather nearby facts and similar pieces, suggest a tiny change, and only commit after double-checking.
+
+## Operational concerns
+
+-   Storage location
+    - Project-local Cozo store under .parseltongue/ by default; support global cache for embeddings.
+-   Backups
+    - Snapshot relations before mass refactors (especially codegraph).
+-   Migrations
+    - schema_rev column on isg_nodes; write migration jobs as read-transform-write passes with reversible tags.
+-   Observability
+    - Track: ingestion latency, two-hop latency, ANN latency, token-per-fix, compile-first-pass rate, HNSW recall checks.
+
+## Acceptance checklist (Cozo-specific)
+
+-   Can ingest a large Rust workspace and answer:
+    - Count of ISGL1 nodes by kind and by crate.
+    - Two-hop neighborhood sizes capped correctly.
+    - ANN search returns reasonable neighbors; re-embedding happens only on hash change.
+-   CodeGraph flips are atomic and leave no orphan future_* fields.
+-   Diagnostics reflect latest RA overlay outputs for targeted nodes.
+
+## Quick ELI5 recap
+
+-   Cozo is our smart filing cabinet. We:
+    - File each interface with its exact paragraph.
+    - Draw lines showing who calls whom.
+    - Keep a “similarity map” for quick lookups.
+    - Stick warnings on the right cards.
+    - Store draft edits in a separate tray and only file them after the test stamp.
+
+If you want, I can turn these interface signatures into:
+-   Concrete Datalog query specs (names, inputs/outputs, constraints),
+-   Index configuration notes for HNSW and common filters,
+-   A migration plan with schema_rev transitions and snapshot practices.
+

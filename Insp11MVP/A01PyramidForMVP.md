@@ -21,7 +21,7 @@ What decisions can we take which will significantly simply dev without reducing 
 
 
 
-## Minimal User Journey with reasonable differentiation
+## Minimal User Journey with reasonable differentiation for v0.7
 
 Search with <WIP>
 
@@ -52,25 +52,70 @@ Search with <WIP>
         - if yes
             - Tell user that code indexing has begun and will take 10 minutes
                 - For the github repo
-                    - trigger the tool interface-graph-builder
+                    - trigger the tool interface-graph-builder which is composed of 2 tools
                         - tool 01: ISG-code-chunk-streamer
                             - tool will read code based mother git repo where it located, using tree sitter
                             - tool will choose granularity of chunks
                             - optional: tool will call lsp (rust-analyzer) for meta-data about code-chunk-raw
-                            - tool will output aggregated-primarykey + code-chunk-raw + lsp-meta-data 
+                            - tool will output aggregated-primarykey + code-chunk-raw + tree-sitter-signature + TDD_classification +lsp-meta-data (optional)
                         - tool 02: ingest-chunks-to-CodeGraph
                             - tool02 create CodeGraph (single write surface)
                                 - indexed by ISGL1 key (filepath-filename-InterfaceName)
                                 - columns (minimal, opinionated):
-                                    - ISGL1 primary key (receives the output of tool 01 - aggregated-primarykey)
-                                    - Current_Code (receives the output of tool 01 - code-chunk, can be empty if upsert of new ISGL1 + other fields happen)
-                                    - Future_Code (by default empty, edited by action of reasoning LLM),
-                                    - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete),
-                                    - TDD_Classification (whether the ISGL1 is TEST_IMPLEMENTATION, CODE_IMPLEMENTATION)
-                                    - current_id (0/1: 0 meaning NOT in current code, 1 meaning in current code)
-                                    - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
-                                    - lsp_meta_data (receives the output of tool 01 - lsp-meta-data)
+                                    - receieved columns from tool 01
+                                        - ISGL1 primary key (receives the output of tool 01 - aggregated-primarykey)
+                                        - Current_Code (receives the output of tool 01 - code-chunk, can be empty if upsert of new ISGL1 + other fields happen)
+                                        - interface_signature (receives the output of tool 01 - tree-sitter-signature, optional)                                        
+                                        - TDD_Classification (whether the ISGL1 is TEST_IMPLEMENTATION, CODE_IMPLEMENTATION received from tool 01)
+                                        - current_id (1 by default at time of ingestion)
+                                        - lsp_meta_data (receives the output of tool 01 - lsp-meta-data)
+                                    - empty columns
+                                        - Future_Code (by default empty, edited by action of reasoning LLM)
+                                        - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete)
+                                        - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
+                    - All code is now indexed at level of ISGL1 and placed in CodeGraph Table
+                - Tell user that code indexing is completed and basic anaytics of the CodeGraph table is shared
+                - User is now asked to describe their micro-PRD
+                - User describes the micro-PRD in text form
+                    - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data ; we will ignore the Current_Code because it will unnecessary bloat the context
+                    - The reasoning-llm will analyze then suggest changes to the micro-PRD to make it clearer in terms of what changes does the user want
+                        - Tests wise
+                        - Behavior wise
+                        - Functionality wise
+                    - After 2 iterations the reasoning-llm will accept the micro-PRD
+                - tool 3: code-simulation-sorcerer is triggered
+                    - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on (micro-PRD
+                        + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data)
+                        - Step 01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
+                            - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
+                            - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
+                            - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
+                        - Step 02: Based on test-interface-changes + micro-PRD + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data, create edit delete non-test interfaces; call these rows non-test-interface-changes
+                            - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
+                            - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
+                            - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
+                        - Step 03: Based on test-interface-changes + non-test-interface-changes + micro-PRD + LSGL1 + interface_signature + TDD_Classification + lsp_meta_data
+                            - update future_code for test-interface-changes
+                            - update future_code for non-test-interface-changes
 
+
+
+
+            - No
+                - if ISG_future is possible then lets have base value of ISG_current as a default value and then change it according to what you think is the correct logic
+                    - what test-interfaces will be deleted, edited, created
+                    - what non-test-interfaces will be deleted, edited, created
+                - now reflect these ISG_future changes in the CozoDB database in ISG_current_ind, ISG_future_ind, Future_Code and Future_Action columns
+                - now use the rubber duck debugging menthod to look at ISG_current + PRD + ISG_future + those rows in CozoDB database which have Future_Code and Future_Action columns as not null
+                - if the LLM thinks that we need to refine the solutioning further, make changes to ISG_future and repeat the process
+                - if the LLM thinks that we need to refine the PRD further then go back to previous step
+                - if finally the LLM feels very confident of the changes, we reflect the changes in the CozoDB database in the codebase
+                - now we run all the tests and compile the codebase
+                - if the tests fail then we go back to previous step
+                - if the tests pass then we show the visualization of changes in ISG to the user + results of compilation + tests + request behavorial confirmation
+                - if user gives go ahead then we
+                    - make a commit with list of changes
+                    - recreate ISG_current from ISG_future; update the CozoDB database according to the current codebase from scratch
 
 ## A02.1 Questions that need clarification
 
