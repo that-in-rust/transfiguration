@@ -100,18 +100,24 @@ Search with <WIP>
                             - Step B02: Follow rubber duck debugging to re-reason test-interface-changes + non-test-interface-changes + base-context-area + code_changes
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
-                                - if the LLM feels confident of the changes, we trigger rust-preflight-code-simulator tool
+                                - if the LLM feels confident of the changes, we move to next step
+                        - Step C : rust-preflight-code-simulator tool triggered
+                                - if the rust-preflight-code-simulator tool fails then we go back to previous steps A01 onwards
+                                - if the rust-preflight-code-simulator tool passes then we move to next step
+                        - Step D: run final-code-changes tool
+                            - Step D01 write the changes to code files
+                            - Step D02 run cargo build
+                            - Step D03 run cargo test
+                            - Step D04: if cargo build fails then go back to previous steps A01 onwards
+                            - Step D05: if cargo test fails then go back to previous steps A01 onwards
+                            - Step D06: if cargo build and cargo test pass then we move to next step
+            - Ask user if he is satisfied with how the code is working if yes trigger - clean-slate-protocol tool
+                - clean-slate-protocol makes a commit with list of changes
+                - clean-slate-protocol resets the CodeGraph and updates all rows in CozoDB database
 
 
 
-                - if the LLM thinks that we need to refine the PRD further then go back to previous step
-                - if finally the LLM feels very confident of the changes, we reflect the changes in the CozoDB database in the codebase
-                - now we run all the tests and compile the codebase
-                - if the tests fail then we go back to previous step
-                - if the tests pass then we show the visualization of changes in ISG to the user + results of compilation + tests + request behavorial confirmation
-                - if user gives go ahead then we
-                    - make a commit with list of changes
-                    - recreate ISG_current from ISG_future; update the CozoDB database according to the current codebase from scratch
+
 
 ## A02.1 Questions that need clarification
 
