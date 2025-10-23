@@ -77,8 +77,8 @@ Search with <WIP>
                 - Tell user that code indexing is completed and basic anaytics of the CodeGraph table is shared
                 - User is now asked to describe their micro-PRD
                 - In the background trigger interface-summary-generator
-                    - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM_summary
-                    - assuming 5 x 100 tokens per second for a 5MB codebase it might take 
+                    - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM-summary
+                    - assuming 5 x100 tokens for 1250000 tokens it will take 4 minutes to generate this column
                 - User describes the micro-PRD in text form
                     - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data ; we will ignore the Current_Code because it will unnecessary bloat the context
                     - The reasoning-llm will analyze then suggest changes to the micro-PRD to make it clearer in terms of what changes does the user want
@@ -87,7 +87,7 @@ Search with <WIP>
                         - Functionality wise
                     - After 2 iterations the reasoning-llm will accept the micro-PRD
                 - tool 3: code-simulation-sorcerer is triggered
-                    - tool 3 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data)
+                    - tool 3 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary [if available])
                     - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
                         - Step A: ISG level simulations
                             - Step A01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
