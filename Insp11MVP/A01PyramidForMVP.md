@@ -115,19 +115,20 @@ Search with <WIP>
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
                                 - if the LLM feels confident of the changes, we move to next step
-                        - Step C : rust-preflight-code-simulator tool triggered
+                        - Step C : tool05 : rust-preflight-code-simulator tool triggered for Rust use cases rust-analyzer overlay
                                 - if the rust-preflight-code-simulator tool fails then we go back to previous steps A01 onwards
                                 - if the rust-preflight-code-simulator tool passes then we move to next step
-                        - Step D: run final-code-changes tool
+                        - Step D: run tool06: final-code-changes tool
                             - Step D01 write the changes to code files
                             - Step D02 run cargo build
                             - Step D03 run cargo test
                             - Step D04: if cargo build fails then go back to previous steps A01 onwards
                             - Step D05: if cargo test fails then go back to previous steps A01 onwards
                             - Step D06: if cargo build and cargo test pass then we move to next step
-            - Ask user if he is satisfied with how the code is working if yes trigger - clean-slate-protocol tool
-                - clean-slate-protocol makes a commit with list of changes
-                - clean-slate-protocol resets the CodeGraph and updates all rows in CozoDB database
+            - Ask user if he is satisfied with how the code is working 
+                - if yes trigger tool07: clean-slate-protocol tool
+                    - clean-slate-protocol makes a commit with list of changes
+                    - clean-slate-protocol resets the CodeGraph and updates all rows in CozoDB database
 
 
 
