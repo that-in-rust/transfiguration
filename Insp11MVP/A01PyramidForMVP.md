@@ -139,19 +139,14 @@ Search with <WIP>
 
 ## A02.1 Questions that need clarification
 
-- local-llama-rust-orchestrator-elf
-    - Will https://github.com/ray-project/ray be capable of running 5 agents parallely in M1+ & 16GB roadmap+ without us having to depend on llama.cpp from scratch rust implementation
+Priority Order of exploration
+- How do Claude Code plugins work - SSR
+    - build a small plugin with small Rust hello-world CLI and test it
+- local-llama-rust-orchestrator-elf - AB
+    - Will https://github.com/ray-project/ray be capable of running max 10 agents parallely in M1+ & 16GB roadmap+ without us having to depend on llama.cpp from scratch rust implementation
     - what will be the format of the command line tool local-llama-rust-orchestrator-elf
     - Assume that local-llama-rust-orchestrator-elf is able to show that it is working
 
-- unclassified
-    - Parseltongue will be a Claude Code Plugin
-        - How do Plugins get integrated
-
-- broader notes
-    -  Use the native Rust path for v1.0:
-        - tree-sitter-rust (tolerant) → syn (exact when possible) → RA LSP overlay (hydration) → Cozo upserts keyed by ISG id.
-        - This gives you error tolerance, interface-bound storage, and the richness of rust-analyzer, with minimal moving parts.
 
 
 ## A02.2 Advanced ideas
