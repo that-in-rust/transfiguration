@@ -757,3 +757,87 @@ If you want, I can turn these interface signatures into:
 -   Index configuration notes for HNSW and common filters,
 -   A migration plan with schema_rev transitions and snapshot practices.
 
+=========
+
+
+## Executive fit (what matters most)
+
+-  Reliability-first and rule-first, LLM-late: prefer rust-analyzer overlays, deterministic transforms, Cozo HNSW, minimal token budgets.
+-  Single write surface via CodeGraph; zero I/O to repo until PreFlight passes.
+-  Local subagents on 16 GB M1+; orchestrator via ANTHROPIC_KEY (Claude Code plugin), with tiny local models for parallel CPU-bound compute.
+
+## Journey-to-tool mapping
+
+| Stage | Purpose | Recommended tools | Variants and why |
+|:---|:---|:---|:---|
+| 0. Hardware gate + installer (Dobby) | Verify M1+ 16 GB+, prepare local models, cap concurrency | resource-aware-execution-engine; concurrency-controller; gguf-model-loader-manager; local-orchestrator-daemon | Use llama.cpp backend; detect RAM → set model plan (max 5 subagents); if insisting on Ray, wrap local-orchestrator-daemon via JSON-RPC from Dobby; auto-downshift quantization (Q4_K_M) on pressure |
+| 1. Claude Code plugin bootstrap | Plugin registration, bridge calls to local tools, health | claude-code-plugin-framework; claude-code-bridge-server; claude-code-plugin-manager; health-check | Bridge Claude ↔ local endpoints; add health/metrics for trust; expose commands like /rust:debug-bug, /rust:validate-fix |
+| 2. Repo context confirmation | Are we in the right repo? Path sanity and readiness | file-hash (for repo fingerprinting); cozo-db-adapter (bootstrap) | Optional: session-store-inspector to keep plugin state lean |
+| 3. ISG build (10 min indexing) | Build ISGL1; chunking; persist to Cozo; add summaries | interface-graph-builder ✓; chunk-strategy-engine (ISG-code-chunk-streamer analog); interface-summary-generator; cozo-db-adapter | Use rust-analyzer LSP overlays variant for semantic enrichment; tree-sitter-based chunking; minimal 1-line summaries (rule-first) |
+| 4. Embeddings + HNSW | Vector index for hybrid retrieval | embedding-index-builder; cozo-hnsw-vector-search | MiniLM-L6-v2 embeddings 384-d; Cozo HNSW to keep everything CPU + local |
+| 5. Workspace/feature awareness | Respect cargo features, multi-crate | workspace-aware-retrieval-system | Feature-conditioned graph traversal; use cargo metadata filters |
+| 6. Hybrid retrieval shortlist | Deterministic 2-hop + vector KNN | hybrid-retrieval-engine; hybrid-datalog-vector-query; blast-radius-context-calculator | Graph-first with vector backfill; cap ≤50 nodes; exact two-hop per P40; blast radius for impacted tests |
+| 7. Micro-PRD refinement (2 turns) | Clarify tests/behavior/functionality without bloating context | prd-refine-assistant; prd-consistency-checker; context-pack-builder; beaconized-context-packer; reasoning-adapter-bridge (ANTHROPIC_KEY) | Keep context ≤3K tokens; START/END beacons to avoid lost-in-middle; ANTHROPIC_KEY as reasoner for PRD clarity only |
+| 8. ISG-level simulations A01/A02 | Plan Create/Edit/Delete rows for tests then non-tests | isg-future-planner; isg-transformation-orchestrator; pattern-knowledge-base | Represent additions as future_ind=1 with empty Future_Code; record Future_Action in CodeGraph |
+| 9. Code simulation (Future_Code) | Fill Future_Code safely; iterate if not confident | deterministic-patch-engine; structured-pattern-matcher; pattern-aware-debugging-engine; codegraph-write-surface | Rule-first templates (bounds/lifetimes/cfg); write only to CodeGraph.Future_Code/Action; never touch disk |
+| 10. Constraints preflight (zero-write) | LSP overlays on candidate buffers | constraints-overlay-analyzer; preflight-lsp-client | In-memory RA didOpen buffers; compute missing/required bounds; fast fail without writes |
+| 11. Compile/test safety gate | cargo check + selective tests; go back on fail | preflight-safety-gate; selective-test-runner; feature-aware-validation-pipeline; diagnostics-scope-mapper | Use impacted tests via ISG closure; sccache/incremental builds; map failures back to ISGL1 for explainability |
+| 12. Champion selection + confidence | Calibrate confidence; gate auto-apply | calibrated-confidence-engine; adaptive-confidence-calibrator; validation-cache-optimizer | Confidence gating for apply; cache validations to keep iterations snappy |
+| 13. Final apply to repo | Write minimal diff; commit; rollback safe | git-apply-rollback | Atomic apply with commit signing; auto-rollback on failure |
+| 14. Clean slate + DB reset | Reset CodeGraph, record audit | codegraph-write-surface (flip Future→Current); cozo-preflight-queue (drain); success-metrics-framework | Commit summary; reset Future_* fields; update metrics |
+
+## Critical variants and configuration notes
+
+-  rust-analyzer overlays first: constraints-overlay-analyzer and preflight-lsp-client before any disk writes; prefer Hybrid validation (LSP fast + Shadow when needed).
+-  CozoDB everywhere: interface-graph-builder + cozo-db-adapter for ISG/CodeGraph; cozo-hnsw-vector-search for vectors; hybrid-datalog-vector-query to join exact+semantic.
+-  Context budgets: context-pack-builder + beaconized-context-packer keep ≤3K tokens for PRD/reasoning; the heavy current code is excluded by design.
+-  Local subagents: local-orchestrator-daemon plus multi-agent-pool-manager/concurrency-controller; cap at 5 subagents based on RAM; keep tiny models for analysis and leave heavy reasoning to ANTHROPIC_KEY.
+-  Deterministic transforms first: deterministic-patch-engine with structured-pattern-matcher to generate minimal, template-backed diffs for lifetimes/bounds/cfg.
+-  Confidence gating: calibrated-confidence-engine/adaptive-confidence-calibrator decide when to auto-apply vs request user confirmation.
+
+## Gaps and how to cover them
+
+-  Dobby (ray wrapper): Use local-orchestrator-daemon as the core; expose a thin Dobby CLI/daemon that schedules jobs to JSON-RPC llama.cpp workers. If Ray is non-negotiable, Dobby can proxy to Ray while still calling the same tools as child processes.
+-  ISG-code-chunk-streamer + ingest-chunks-to-CodeGraph: Combine chunk-strategy-engine + interface-graph-builder + codegraph-write-surface for identical effect.
+-  rust-preflight-code-simulator: Covered by constraints-overlay-analyzer + preflight-lsp-client + preflight-safety-gate; add shadow-workspace-validator if you need a full cargo pipeline in isolation.
+-  Code-simulation-sorcerer: Realized by isg-future-planner + deterministic-patch-engine + codegraph-write-surface loop plus confidence gating.
+
+## Minimal accuracy-first MVP stack (highest ROI)
+
+-  Data/Index: cozo-db-adapter; interface-graph-builder (RA overlays variant); interface-summary-generator; embedding-index-builder; cozo-hnsw-vector-search.
+-  Retrieval: workspace-aware-retrieval-system; hybrid-retrieval-engine; blast-radius-context-calculator.
+-  PRD + Context: prd-refine-assistant; prd-consistency-checker; context-pack-builder; beaconized-context-packer.
+-  Transforms: structured-pattern-matcher; deterministic-patch-engine; pattern-knowledge-base.
+-  Validation: constraints-overlay-analyzer; preflight-lsp-client; preflight-safety-gate; selective-test-runner; diagnostics-scope-mapper.
+-  Orchestration & Safety: reasoning-adapter-bridge (ANTHROPIC_KEY); local-orchestrator-daemon; calibrated-confidence-engine; git-apply-rollback.
+-  Plugin: claude-code-plugin-framework; claude-code-bridge-server.
+
+## Suggested execution skeleton (end-to-end)
+
+    # 0) Hardware + local orchestrator
+    resource-engine --hardware auto --memory-budget 12GB
+    local-orchestrator-daemon serve --socket /tmp/llm.sock
+
+    # 1) ISG + embeddings
+    interface-graph-builder --repo . --out cozo://isg
+    interface-summary-generator --cozo cozo://isg --write summaries
+    embedding-index-builder --cozo cozo://isg --source summaries --dim 384
+
+    # 2) PRD loop
+    prd-refine-assistant --in micro_prd.md --cozo cozo://isg
+    prd-consistency-checker --in prd-normalized.json
+
+    # 3) Plan + simulate in CodeGraph
+    isg-future-planner --prd prd-normalized.json --cozo cozo://isg
+    deterministic-patch-engine --pattern <id> --diag diags.json | codegraph-write-surface set-future -f -
+
+    # 4) PreFlight + selective tests
+    preflight-lsp-client --buffers 15 --features "<active>"
+    preflight-safety-gate --candidate <id> --tests impacted.json
+
+    # 5) Apply if confident
+    calibrated-confidence --threshold 0.90 --semantic-validation
+    git-apply-rollback --candidate <id> --sign
+
+This stack mirrors your v0.7 journey while keeping correctness the fast path (RA overlays, deterministic templates, Cozo queries) and the reasoning LLM lean and late.
+

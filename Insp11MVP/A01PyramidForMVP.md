@@ -76,6 +76,9 @@ Search with <WIP>
                     - All code is now indexed at level of ISGL1 and placed in CodeGraph Table
                 - Tell user that code indexing is completed and basic anaytics of the CodeGraph table is shared
                 - User is now asked to describe their micro-PRD
+                - In the background trigger interface-summary-generator
+                    - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM_summary
+                    - assuming 5 x 100 tokens per second for a 5MB codebase it might take 
                 - User describes the micro-PRD in text form
                     - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data ; we will ignore the Current_Code because it will unnecessary bloat the context
                     - The reasoning-llm will analyze then suggest changes to the micro-PRD to make it clearer in terms of what changes does the user want
@@ -249,6 +252,74 @@ Use this as a filter for Rust Tools or Libraries you are ideating as part of bui
 | StarCoder2 3B| Intermediate| 3 Billion| ~1.8 GB       | ~100 t/s                       | 3 Agents                    | ~300 t/s                  | Very Good (80/100)          |
 | 🥇 Phi-3-mini| Intermediate| 3.8 Billion| ~2.2 GB       | ~70 t/s                        | 3 Agents                    | ~210 t/s                  | Exceptional (95/100)         |
 | Qwen2.5 7B | Large| 7 Billion    | ~4.5 GB       | ~20 t/s                        | 1 Agent                     | ~20 t/s                   | Exceptional (95/100)         |
+
+
+
+
+Here are updated, practical estimates separating input and generation token speeds, and translating them into throughput for a “300 LOC in → 1 LOC out” task.
+
+| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Code Summary Quality (300 lines) |
+|---|---|---|---|---|---|---|---|---|---|
+| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | ~0.296 | ~4.15 | Unusable (1/100) |
+| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | ~0.139 | ~1.25 | Poor (20/100) |
+| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | Moderate (65/100) |
+| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | ~0.099 | ~0.297 | Very Good (80/100) |
+| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | ~0.069 | ~0.208 | Exceptional (95/100) |
+| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | ~0.0165 | ~0.0165 | Exceptional (95/100) |
+
+Assumptions and method:
+-  Single Agent Speed was treated as decode (generation) tokens/sec on Apple M1 with Q4 quantization.
+-  Prefill (input) speed estimated at 3× decode for small/intermediate models; 2.5× for 7B on M1.
+-  Tokenization for code: assume ~10 tokens per line.
+    - Input size per task: 300 lines × 10 tokens ≈ 3,000 tokens
+    - Output size per task: 1 line × 10 tokens ≈ 10 tokens
+-  Per-agent task rate is computed as:
+\[ \text{tasks/s} = \frac{1}{\frac{3000}{\text{input t/s}} + \frac{10}{\text{generation t/s}}} \]
+-  Total tasks/s scales linearly by the “Parallel Agents” count.
+
+If you prefer a different tokens-per-line assumption (e.g., 6 or 12), I can recompute the table accordingly.
+
+
+
+Here you go — added the “Time for 1.25M LOC (Parallel)” column.
+
+| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Time for 1.25M LOC (Parallel) | Code Summary Quality (300 lines) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | ~0.296 | ~4.15 | ~00:16:44 | Unusable (1/100) |
+| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | ~0.139 | ~1.25 | ~00:55:33 | Poor (20/100) |
+| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | Moderate (65/100) |
+| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | ~0.099 | ~0.297 | ~03:53:50 | Very Good (80/100) |
+| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | ~0.069 | ~0.208 | ~05:33:52 | Exceptional (95/100) |
+| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | ~0.0165 | ~0.0165 | ~70:08:45 (≈2.92 days) | Exceptional (95/100) |
+
+Notes:
+-  Assumes ~10 tokens per line of code.
+-  Tasks needed \(N \approx \frac{1{,}250{,}000}{300} = 4{,}166.67\).
+-  Time is computed as \[ \text{time (s)} = \frac{N}{\text{Total Tasks/s (Parallel)}} \].
+-  Times are approximate and based on the estimated throughputs shown.
+
+
+
+Here’s what each column means, in plain terms:
+
+| Column | ELI5 meaning |
+|---|---|
+| Model | The AI’s name (like the model’s brand/model number). |
+| Class | Size category of the model (small, medium, large). Bigger can be smarter but usually slower. |
+| Parameters | How many “knobs” the AI has learned. More knobs = can know more patterns, but needs more compute. |
+| Est. Size (Q4) | How much memory the model uses when compressed to 4-bit (“Q4”). Smaller size = easier to fit more copies. |
+| Input t/s (prefill, est.) | How fast the AI can read your text, measured in tokens per second. Think: reading speed. |
+| Generation t/s (decode) | How fast the AI can write its answer, in tokens per second. Think: writing speed. |
+| Parallel Agents (on 9GB RAM) | How many copies of the model you can run at the same time on a machine with ~9 GB of RAM. More copies = more total work done in parallel. |
+| Tasks/s per Agent (300→1 LOC) | For a task defined as “read 300 lines of code and write 1 line,” how many such tasks one single copy can finish each second. |
+| Total Tasks/s (Parallel) | The combined tasks per second when you run all those parallel copies together. |
+| Time for 1.25M LOC (Parallel) | If you have 1,250,000 lines of code to process (in 300-line chunks), how long it’ll take using all parallel copies. |
+| Code Summary Quality (300 lines) | A rough score of how good the model’s 1‑line summary is when given 300 lines of code (higher = better). |
+
+Quick notes:
+-  A “token” is a small chunk of text (a word piece). Code lines often break into about 8–12 tokens; we assumed roughly 10.
+-  The “task” here is: read 300 lines of code and produce a 1‑line summary. Total speed depends on how fast the model reads (input t/s), writes (generation t/s), and how many copies run in parallel.
+
 
 
 
