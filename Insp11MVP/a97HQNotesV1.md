@@ -841,3 +841,64 @@ If you want, I can turn these interface signatures into:
 
 This stack mirrors your v0.7 journey while keeping correctness the fast path (RA overlays, deterministic templates, Cozo queries) and the reasoning LLM lean and late.
 
+=========
+
+
+
+Here you go — expanded with additional models between SmolLM2 and StarCoder2‑3B.
+
+| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Time for 1.25M LOC (Parallel) | Code Summary Quality (300 lines) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | ~0.296 | ~4.15 | ~00:16:44 | Unusable (1/100) |
+| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | ~0.139 | ~1.25 | ~00:55:33 | Poor (20/100) |
+| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | Moderate (65/100) |
+| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | ~0.099 | ~0.297 | ~03:53:50 | Very Good (80/100) |
+| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | ~0.069 | ~0.208 | ~05:33:52 | Exceptional (95/100) |
+| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | ~0.0165 | ~0.0165 | ~70:08:45 (≈2.92 days) | Exceptional (95/100) |
+| Qwen2.5‑Coder 0.5B | Small | 0.5 Billion | ~0.3 GB | ~660 | ~220 | 22 | ~0.218 | ~4.79 | ~00:14:29 | Fair (40/100) |
+| OLMo 1B | Small | 1 Billion | ~0.6 GB | ~540 | ~180 | 12 | ~0.178 | ~2.14 | ~00:32:29 | Fair (45/100) |
+| OpenELM 1.1B | Small | 1.1 Billion | ~0.7 GB | ~510 | ~170 | 11 | ~0.168 | ~1.85 | ~00:37:31 | Fair (45/100) |
+| Qwen2.5‑Coder 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~450 | ~150 | 8 | ~0.149 | ~1.19 | ~00:58:25 | Good (60/100) |
+| RWKV 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~480 | ~160 | 8 | ~0.159 | ~1.27 | ~00:54:46 | Fair–Good (50/100) |
+| MiniCPM 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | Moderate (65/100) |
+
+Sources
+-  Qwen2.5‑Coder family (sizes incl. 0.5B, 1.5B, 3B, 7B, 14B, 32B); series overview and benchmarks [^1]
+-  Qwen2.5‑Coder announcement (sizes, long context, focus on coding) [^2]
+-  OLMo 1B, OpenELM 1.1B/3B, RWKV 1.5B/3B listed among open LLMs (licenses, availability) [Source](https://github.com/eugeneyan/open-llms)
+-  MiniCPM family (1B–4B) overview as small, efficient models [Source](https://www.datacamp.com/blog/top-small-language-models)
+
+Notes
+-  Throughput and quality figures are estimated using the same method as your previous table (10 tokens/line; tasks/s = 1 / (3000/input t/s + 10/generation t/s); total scales by parallel agents). Model sizes and availability are based on the sources above.
+
+[^1]: https://qwenlm.github.io/blog/qwen2.5-coder-family/
+[^2]: https://qwenlm.github.io/blog/qwen2.5-coder/
+[^3]: https://ollama.com/dagbs/qwen2.5-coder-1.5b-instruct-abliterated:q5_k_m
+[^4]: https://www.aimodels.fyi/models/huggingFace/qwen2.5-coder-1.5b-instruct-qwen
+
+
+
+
+
+Added two columns for token-only workloads: “Time for 1.25M Input Tokens (Parallel)” and “Time for 1.25M Generated Tokens (Parallel)”.
+
+| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Time for 1.25M LOC (Parallel) | Time for 1.25M Input Tokens (Parallel) | Time for 1.25M Generated Tokens (Parallel) | Code Summary Quality (300 lines) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | ~0.296 | ~4.15 | ~00:16:44 | ~00:01:39 | ~00:04:58 | Unusable (1/100) |
+| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | ~0.139 | ~1.25 | ~00:55:33 | ~00:05:30 | ~00:16:32 | Poor (20/100) |
+| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | ~00:11:34 | ~00:34:43 | Moderate (65/100) |
+| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | ~0.099 | ~0.297 | ~03:53:50 | ~00:23:09 | ~01:09:27 | Very Good (80/100) |
+| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | ~0.069 | ~0.208 | ~05:33:52 | ~00:33:04 | ~01:39:12 | Exceptional (95/100) |
+| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | ~0.0165 | ~0.0165 | ~70:08:45 (≈2.92 days) | ~06:56:40 | ~17:21:40 | Exceptional (95/100) |
+| Qwen2.5‑Coder 0.5B | Small | 0.5 Billion | ~0.3 GB | ~660 | ~220 | 22 | ~0.218 | ~4.79 | ~00:14:29 | ~00:01:26 | ~00:04:18 | Fair (40/100) |
+| OLMo 1B | Small | 1 Billion | ~0.6 GB | ~540 | ~180 | 12 | ~0.178 | ~2.14 | ~00:32:29 | ~00:03:13 | ~00:09:39 | Fair (45/100) |
+| OpenELM 1.1B | Small | 1.1 Billion | ~0.7 GB | ~510 | ~170 | 11 | ~0.168 | ~1.85 | ~00:37:31 | ~00:03:43 | ~00:11:08 | Fair (45/100) |
+| Qwen2.5‑Coder 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~450 | ~150 | 8 | ~0.149 | ~1.19 | ~00:58:25 | ~00:05:47 | ~00:17:22 | Good (60/100) |
+| RWKV 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~480 | ~160 | 8 | ~0.159 | ~1.27 | ~00:54:46 | ~00:05:26 | ~00:16:17 | Fair–Good (50/100) |
+| MiniCPM 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | ~00:11:34 | ~00:34:43 | Moderate (65/100) |
+
+Assumptions
+-  Parallel throughput = per‑agent t/s × number of agents.
+-  Input tokens and generated tokens are counted separately; times shown assume continuously processing 1,250,000 tokens of each type, respectively.
+-  Same hardware and quantization assumptions as earlier (Apple M1, Q4).
+

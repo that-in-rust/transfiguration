@@ -43,9 +43,9 @@ Search with <WIP>
     - Parseltongue should analyze the system
         - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
         - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
-    - local-llama-rust-orchestrator-elf is a wrapper around https://github.com/ray-project/ray 
+    - local-llama-rust-orchestrator-elf is a wrapper around ray https://github.com/ray-project/ray 
         - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
-            - StarCoder2 3B
+            - Qwen2.5‑Coder 1.5B
         - local-llama-rust-orchestrator-elf will identify current free RAM will spin up max 5 sub agents
     - Ask the user if we are currently in the relevant Rust Repo
         - if no then ask them to share absolute path of git repo and cd there
@@ -73,22 +73,22 @@ Search with <WIP>
                                         - Future_Code (by default empty, edited by action of reasoning LLM)
                                         - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete)
                                         - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
+                        - tool 03: interface-summary-generator
+                            - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM-summary
+                            - assuming Qwen2.5‑Coder 1.5B x 8 agents =  450x8 = 3600 tokens for 1250000 tokens it will take 6 minutes to generate this column
                     - All code is now indexed at level of ISGL1 and placed in CodeGraph Table
                 - Tell user that code indexing is completed and basic anaytics of the CodeGraph table is shared
                 - User is now asked to describe their micro-PRD
-                - In the background trigger interface-summary-generator
-                    - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM-summary
-                    - assuming 5 x100 tokens for 1250000 tokens it will take 4 minutes to generate this column
                 - User describes the micro-PRD in text form
-                    - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data ; we will ignore the Current_Code because it will unnecessary bloat the context
+                    - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary ; we will ignore the Current_Code because it will unnecessary bloat the context
                     - The reasoning-llm will analyze then suggest changes to the micro-PRD to make it clearer in terms of what changes does the user want
                         - Tests wise
                         - Behavior wise
                         - Functionality wise
                     - After 2 iterations the reasoning-llm will accept the micro-PRD
-                - tool 3: code-simulation-sorcerer is triggered
-                    - tool 3 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary [if available])
-                    - tool 3 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
+                - tool 4: code-simulation-sorcerer is triggered
+                    - tool 4 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary)
+                    - tool 4 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
                         - Step A: ISG level simulations
                             - Step A01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
                                 - addition Interfaces : new LSGL1 rows which will be current_ind = 0 & future_ind = 1 & Current_Code = empty & Future_Code=empty & Future_Action=Create
@@ -281,16 +281,34 @@ If you prefer a different tokens-per-line assumption (e.g., 6 or 12), I can reco
 
 
 
-Here you go — added the “Time for 1.25M LOC (Parallel)” column.
 
-| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Time for 1.25M LOC (Parallel) | Code Summary Quality (300 lines) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | ~0.296 | ~4.15 | ~00:16:44 | Unusable (1/100) |
-| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | ~0.139 | ~1.25 | ~00:55:33 | Poor (20/100) |
-| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | ~0.119 | ~0.595 | ~01:56:43 | Moderate (65/100) |
-| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | ~0.099 | ~0.297 | ~03:53:50 | Very Good (80/100) |
-| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | ~0.069 | ~0.208 | ~05:33:52 | Exceptional (95/100) |
-| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | ~0.0165 | ~0.0165 | ~70:08:45 (≈2.92 days) | Exceptional (95/100) |
+
+Here you go — added “Total t/s (Parallel, Input|Gen)” so it’s easy to see overall throughput from all agents running together.
+
+| Model | Class | Parameters | Est. Size (Q4) | Input t/s (prefill, est.) | Generation t/s (decode) | Parallel Agents (on 9GB RAM) | Total t/s (Parallel, Input|Gen) | Tasks/s per Agent (300→1 LOC) | Total Tasks/s (Parallel) | Time for 1.25M LOC (Parallel) | Time for 1.25M Input Tokens (Parallel) | Time for 1.25M Generated Tokens (Parallel) | Code Summary Quality (300 lines) |
+|-------|-------|-------------|---------------|----------------------------|---------------------------|------------------------------|------------------------------|------------------------------|------------------------------|------------------------------|------------------------------|------------------------------|------------------------------|------------------------------|
+| SmolLM2 | Small | 135 Million | ~0.5 GB | ~900 | ~300 | ~14 | 12,600 | 4,200 | ~0.296 | ~4.15 | ~00:16:44 | ~00:01:39 | ~00:04:58 | Unusable (1/100) |
+| Gemma | Medium | 270 Million | ~0.8 GB | ~420 | ~140 | ~9 | 3,780 | 1,260 | ~0.139 | ~1.25 | ~00:55:33 | ~00:05:30 | ~00:16:32 | Poor (20/100) |
+| Gemma 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | 1,800 | 600 | ~0.119 | ~0.595 | ~01:56:43 | ~00:11:34 | ~00:34:43 | Moderate (65/100) |
+| StarCoder2 3B | Intermediate | 3 Billion | ~1.8 GB | ~300 | ~100 | 3 | 900 | 300 | ~0.099 | ~0.297 | ~03:53:50 | ~00:23:09 | ~01:09:27 | Very Good (80/100) |
+| 🥇 Phi-3-mini | Intermediate | 3.8 Billion | ~2.2 GB | ~210 | ~70 | 3 | 630 | 210 | ~0.069 | ~0.208 | ~05:33:52 | ~00:33:04 | ~01:39:12 | Exceptional (95/100) |
+| Qwen2.5 7B | Large | 7 Billion | ~4.5 GB | ~50 | ~20 | 1 | 50 | 20 | ~0.0165 | ~0.0165 | ~70:08:45 (≈2.92 days) | ~06:56:40 | ~17:21:40 | Exceptional (95/100) |
+| Qwen2.5‑Coder 0.5B | Small | 0.5 Billion | ~0.3 GB | ~660 | ~220 | 22 | 14,520 | 4,840 | ~0.218 | ~4.79 | ~00:14:29 | ~00:01:26 | ~00:04:18 | Fair (40/100) |
+| OLMo 1B | Small | 1 Billion | ~0.6 GB | ~540 | ~180 | 12 | 6,480 | 2,160 | ~0.178 | ~2.14 | ~00:32:29 | ~00:03:13 | ~00:09:39 | Fair (45/100) |
+| OpenELM 1.1B | Small | 1.1 Billion | ~0.7 GB | ~510 | ~170 | 11 | 5,610 | 1,870 | ~0.168 | ~1.85 | ~00:37:31 | ~00:05:47 | ~00:11:08 | Fair (45/100) |
+| Qwen2.5‑Coder 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~450 | ~150 | 8 | 3,600 | 1,200 | ~0.149 | ~1.19 | ~00:58:25 | ~00:05:26 | ~00:17:22 | Good (60/100) |
+| RWKV 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~480 | ~160 | 8 | 3,840 | 1,280 | ~0.159 | ~1.27 | ~00:54:46 | ~00:05:26 | ~00:16:17 | Fair–Good (50/100) |
+| MiniCPM 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | 1,800 | 600 | ~0.119 | ~0.595 | ~01:56:43 | ~00:11:34 | ~00:34:43 | Moderate (65/100) |
+
+• Method: Total t/s (Parallel, Input|Gen) = (Input t/s × Agents) | (Generation t/s × Agents). Public sources confirm model families/sizes, but do not provide consistent M1/Q4 tokens‑per‑second; totals are computed from the previously stated estimates. [Source](https://qwenlm.github.io/blog/qwen2.5-coder-family/) [Source](https://qwenlm.github.io/blog/qwen2.5-coder/) [Source](https://github.com/eugeneyan/open-llms) [Source](https://www.datacamp.com/blog/top-small-language-models)
+
+[^1]: https://huggingface.co/posts/smangrul/776409626801382
+[^2]: https://huggingface.co/bigcode/starcoder/discussions/83
+[^3]: https://github.com/ggml-org/llama.cpp/discussions/5617
+[^4]: https://github.com/marella/ctransformers/issues/5
+
+
+
 
 Notes:
 -  Assumes ~10 tokens per line of code.
