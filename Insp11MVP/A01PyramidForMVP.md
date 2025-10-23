@@ -110,7 +110,7 @@ Search with <WIP>
                                 - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
                                 - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
                         - Step B: Code Simulation
-                            - Step B01: Based on filter (Future_Action != None)=>(all fields of Code_Graph includign current code) + base-context-area , update future_code for all the rows that are changing; call these changes code_changes
+                            - Step B01: Based on filter(Future_Action != None)=>(all fields of Code_Graph including current code) + base-context-area , update future_code for all the rows that are changing; call these changes code_changes
                             - Step B02: Follow rubber duck debugging to re-reason test-interface-changes + non-test-interface-changes + base-context-area + code_changes (read both current_code and future_code for these rows)
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
