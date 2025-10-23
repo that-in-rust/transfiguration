@@ -98,7 +98,7 @@ Search with <WIP>
                     - After 2 iterations the reasoning-llm will accept the micro-PRD
                     - Ask the reasoning LLM to reset the context because likely it will overflow and micro-PRD final needs to be isolated
                 - tool 4: code-simulation-sorcerer is triggered
-                    - tool 4 creates a base-context-area which is micro-PRD + filter(current_ind=1)>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary)
+                    - tool 4 creates a base-context-area which is micro-PRD + filter(Code_Graph with current_ind=1)=>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary)
                     - tool 4 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
                         - Step A: ISG level simulations
                             - Step A01: Create Edit Delete Test Interface Rows ; call these changes test-interface-changes
@@ -110,8 +110,8 @@ Search with <WIP>
                                 - deletion Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 0 & Future_Code=empty & Future_Action=Delete
                                 - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
                         - Step B: Code Simulation
-                            - Step B01: Based on test-interface-changes + non-test-interface-changes + base-context-area update future_code for both test-interface-changes and non-test-interface-changes rows; call these changes code_changes
-                            - Step B02: Follow rubber duck debugging to re-reason test-interface-changes + non-test-interface-changes + base-context-area + code_changes
+                            - Step B01: Based on filter (Future_Action != None)=>(all fields of Code_Graph includign current code) + base-context-area , update future_code for all the rows that are changing; call these changes code_changes
+                            - Step B02: Follow rubber duck debugging to re-reason test-interface-changes + non-test-interface-changes + base-context-area + code_changes (read both current_code and future_code for these rows)
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
                                 - if the LLM feels confident of the changes, we move to next step
@@ -150,7 +150,11 @@ Search with <WIP>
         - This gives you error tolerance, interface-bound storage, and the richness of rust-analyzer, with minimal moving parts.
 
 
+## A02.2 Advanced ideas
 
+- Reducing reasoning-LLM context load
+    - Using contextual summaries using sub-agents for input to reasoning-llm
+    - Using CPU-Aggregated-Context of Child-Interfaces for getting clarification on ISGL1 nodes
 
 
 
