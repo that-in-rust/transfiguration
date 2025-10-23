@@ -1,0 +1,32 @@
+[package]
+name = "onnx_proof_of_concept"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ort = { version = "2.0.0-rc.9", features = ["download-binaries"] }
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+futures = "0.3"
+rand = "0.8"
+
+[[bin]]
+name = "onnx_proof_of_concept"
+path = "src/main.rs"
+
+[[bin]]
+name = "real_onnx_test"
+path = "src/real_onnx_test.rs"
+
+[[bin]]
+name = "tokio_performance_test"
+path = "src/tokio_performance_test.rs"
+
+[[bin]]
+name = "real_onnx_inference"
+path = "src/real_onnx_inference.rs"
+
+[[bin]]
+name = "simple_real_onnx"
+path = "src/simple_real_onnx.rs"
