@@ -5,7 +5,7 @@ IDIOMATIC RUST PATTERNS
 0Z. CURATION PLAN, TASK LIST, AND PROGRESS
 --------------------------------
 Plan
-- Intake source in 500-line chunks from `Insp06RustNotes/RustIdioms_trun_rust_idiom_large.txt`
+- Intake source in 2000-line chunks from `Insp06RustNotes/RustIdioms_trun_rust_idiom_large.txt`
 - For each chunk: extract high-signal idioms; for each idiom add: When, Context, Anti-patterns, Micro-example, References
 - Update progress log with LOC metrics and chunk range; keep changes additive and non-destructive
 
@@ -118,6 +118,35 @@ Tasks
 - [ ] Process chunk 105 (lines 52001–52171)
 - [ ] Quality pass and deduplicate across sections
 
+Tasks (2000-line mode)
+- [x] Process chunk 1–2000 (completed via 4×500)
+- [x] Process chunk 2001–4000
+- [x] Process chunk 4001–6000
+- [ ] Process chunk 6001–8000
+- [ ] Process chunk 8001–10000
+- [ ] Process chunk 10001–12000
+- [ ] Process chunk 12001–14000
+- [ ] Process chunk 14001–16000
+- [ ] Process chunk 16001–18000
+- [ ] Process chunk 18001–20000
+- [ ] Process chunk 20001–22000
+- [ ] Process chunk 22001–24000
+- [ ] Process chunk 24001–26000
+- [ ] Process chunk 26001–28000
+- [ ] Process chunk 28001–30000
+- [ ] Process chunk 30001–32000
+- [ ] Process chunk 32001–34000
+- [ ] Process chunk 34001–36000
+- [ ] Process chunk 36001–38000
+- [ ] Process chunk 38001–40000
+- [ ] Process chunk 40001–42000
+- [ ] Process chunk 42001–44000
+- [ ] Process chunk 44001–46000
+- [ ] Process chunk 46001–48000
+- [ ] Process chunk 48001–50000
+- [ ] Process chunk 50001–52000
+- [ ] Process chunk 52001–52171
+
 Measurement methodology
 - Source LOC processed = sum of chunk sizes processed so far
 - Target LOC total and delta computed after each update versus prior revision baseline
@@ -130,6 +159,9 @@ Progress Log
 | 2 | 501–1000 | 12 | 974 | 244 | QA/tooling + web/service idioms (clippy, fmt, MSRV, doctest, trybuild, proptest, fuzz, coverage, audit, tracing, secrecy, SQLx) | 2025-10-23 |
 | 3 | 1001–1500 | 6 | 1055 | 81 | Diagnostics/cancellation/loom/result ergonomics/rustfmt config | 2025-10-23 |
 | 4 | 1501–2000 | 7 | 1109 | 54 | Error libs matrix, FFI unwind safety, iter/IntoIterator, closures bounds, DoubleEnded/Fused, FromIterator | 2025-10-23 |
+| 5 | 2001–4000 | 12 | 1213 | 104 | Containers/iteration deep dive, closure capture, raw identifiers, trait upcasting, coherence | 2025-10-23 |
+| 6 | 4001–6000 | 11 | 1269 | 56 | Cancel safety, panic profiles, capacity planning, BinaryHeap, SmallVec, HashMap/IndexMap, patterns/FFI | 2025-10-23 |
+| 7 | 6001–8000 | 10 | 1321 | 52 | Keywords/editions, HRTBs, GATs, object safety, never type, nullable pointer FFI, IndexMap, heap, async poll | 2025-10-23 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -503,6 +535,186 @@ A.37 FromIterator and Collect Patterns
 - Use when: constructing collections from iterators; offer `FromIterator` for custom containers.
 - Context: `collect::<Vec<_>>()` for materialization; `FromIterator` for explicit types; streaming transforms with minimal allocations.
 - Avoid/Anti-pattern: collecting when a lazy pipeline suffices; turbofish misuse obscuring types.
+
+A.38 Vec vs VecDeque vs LinkedList
+- Use when: choosing a sequence container.
+- Context: default to `Vec` for most cases; `VecDeque` for efficient queue/deque semantics; avoid `LinkedList` unless specific O(1) splice patterns dominate and cache effects are acceptable.
+- Avoid/Anti-pattern: using `LinkedList` for general workloads; premature `VecDeque` when simple front-removals can be amortized differently.
+
+A.39 HashMap vs BTreeMap
+- Use when: key-value storage; choose `HashMap` for average-case O(1), `BTreeMap` for ordering and predictable iteration.
+- Context: determinism requirements, range queries, memory locality; consider worst-case hash DoS and feature `hashbrown`/fxhash only with care in non-adversarial contexts.
+- Avoid/Anti-pattern: relying on hash iteration order; using BTreeMap for hot random-access without ordering needs.
+
+A.40 Implement IntoIterator for Owned and Borrowed
+- Use when: custom collections should work with `for` over owned and borrowed forms.
+- Context: implement `IntoIterator` for `T` and for `&T`/`&mut T` to support all use-sites.
+- Avoid/Anti-pattern: only implementing owned iteration, breaking `for &item in &collection` ergonomics.
+
+```rust path=null start=null
+#[derive(Debug)]
+struct MyCollection(Vec<i32>);
+impl IntoIterator for MyCollection {
+  type Item = i32;
+  type IntoIter = std::vec::IntoIter<i32>;
+  fn into_iter(self) -> Self::IntoIter { self.0.into_iter() }
+}
+impl<'a> IntoIterator for &'a MyCollection {
+  type Item = &'a i32;
+  type IntoIter = std::slice::Iter<'a, i32>;
+  fn into_iter(self) -> Self::IntoIter { self.0.iter() }
+}
+```
+
+A.41 Return impl Iterator from APIs
+- Use when: expose lazy pipelines without committing to concrete adaptor types.
+- Context: stable, efficient APIs that can be optimized by the compiler; document when evaluation occurs.
+- Avoid/Anti-pattern: returning concrete iterator types in public APIs; boxing iterators on hot paths.
+
+A.42 Fused Iteration and Reversal
+- Use when: consumers may call `next()` after exhaustion; add `.fuse()` to guarantee repeated-None semantics.
+- Context: use `.rev()` when `DoubleEndedIterator` is available; implement `next_back` correctly for custom iterators.
+- Avoid/Anti-pattern: assuming fusion without `.fuse()`; mixing forward/backward iteration state incorrectly.
+
+A.43 Closure Capture and move in Concurrency
+- Use when: spawning threads/tasks; prefer `move` closures; ensure captured values are `Send + 'static` where required.
+- Context: choose `Fn`/`FnMut`/`FnOnce` bounds precisely; prefer immutable captures for `Fn` when possible.
+- Avoid/Anti-pattern: capturing non-`Send` across thread boundaries; overusing `Arc<Mutex<_>>` when channels suffice.
+
+A.44 Arrays, Slices, and IntoIterator Nuances
+- Use when: writing generic iteration; prefer `&[T]` bounds and `iter()` for clarity; be aware of array `IntoIterator` semantics on modern Rust.
+- Context: avoid surprises from `into_iter()` moving owned arrays; use `iter_mut()` for in-place transforms.
+- Avoid/Anti-pattern: ambiguous `IntoIterator` bounds that hinder inference; relying on edition-specific behavior.
+
+A.45 Raw Identifiers to Bridge Editions
+- Use when: identifiers conflict with keywords across editions (`r#try`, `r#match`).
+- Context: interop with older crates or generated code.
+- Avoid/Anti-pattern: renaming public symbols that must stay stable for interop without using raw identifiers.
+
+A.46 Trait Object Upcasting (dyn upcast)
+- Use when: upcast `dyn SubTrait` to `dyn SuperTrait` where stable; simplifies API layering without custom `as_super` shims.
+- Context: prefer static dispatch in hot loops; use trait objects for dynamic plugin points.
+- Avoid/Anti-pattern: constructing invalid vtables in unsafe; leaking raw trait-object pointers.
+
+A.47 Coherence and Orphan Rule Hygiene
+- Use when: designing trait extension points; ensure either the trait or the self type is local.
+- Context: provide extension traits for foreign types; avoid overlapping impls.
+- Avoid/Anti-pattern: blanket impls that would conflict downstream; violating E0117/E0210 orphan rules.
+
+A.48 Specialization Status and min_specialization
+- Use when: constrained cases in std or internal crates; avoid in general libraries until fully stabilized.
+- Context: prefer explicit trait design over specialization; document semantics if used under feature flags.
+- Avoid/Anti-pattern: relying on unsound specialization behavior in public crates.
+
+A.49 Fn/FnMut/FnOnce Bound Selection Patterns
+- Use when: picking callable trait bounds; mirror call semantics (read-only, mutable, consuming).
+- Context: function pointers implement all three; prefer `Fn` for concurrency-friendly code.
+- Avoid/Anti-pattern: over-constraining to `Fn` when mutation is required; capturing by move accidentally when borrowing suffices.
+
+A.50 Iterator Contracts: size_hint and ExactSizeIterator
+- Use when: consumers can benefit from pre-allocation or exact length.
+- Context: implement `ExactSizeIterator` only when length is truly exact; expose meaningful `size_hint`.
+- Avoid/Anti-pattern: relying on `size_hint` correctness in unsafe code; claiming `ExactSizeIterator` without invariants.
+
+A.51 Panic Strategy per Profile
+- Use when: balancing diagnostics (unwind) vs size/perf (abort) per binary profile.
+- Context: `panic = 'abort'` for release CLIs; `unwind` for tests/debug; be explicit in `Cargo.toml`.
+- Avoid/Anti-pattern: panics crossing FFI; assuming platform supports unwinding.
+
+A.52 Cancel-Safe select! Patterns
+- Use when: designing async multiplexing; ensure losing branches don’t own partial state.
+- Context: encapsulate state in owner types (channels/buffers); use borrowed futures in `select!` arms.
+- Avoid/Anti-pattern: storing partial buffers inside futures that may be dropped.
+
+A.53 Collection Capacity Planning
+- Use when: heavy pushes known; prefer `with_capacity` and amortized growth.
+- Context: understand doubling strategies; avoid frequent reallocations in tight loops.
+- Avoid/Anti-pattern: per-push reallocations; ignoring memory locality vs LinkedList.
+
+A.54 BinaryHeap and Priority Queues
+- Use when: need top-k, scheduling, or priority work queues.
+- Context: `BinaryHeap` from Vec in O(n); beware ascending push pathological cases.
+- Avoid/Anti-pattern: using `BTreeMap` to emulate a heap for max operations.
+
+A.55 SSO and SmallVec Trade-offs
+- Use when: small fixed upper bound per hot path; reduce heap traffic.
+- Context: prefer `SmallVec<[T; N]>` with profiling; watch for spill costs.
+- Avoid/Anti-pattern: assuming SSO always wins; ignoring spill hotspots like `spilled()`.
+
+A.56 HashMap Implementation and Load Factors
+- Use when: tuning map performance; understand SwissTable/hashbrown behavior.
+- Context: expected O(1) with SIMD probing; tune hasher (aHash) only in non-adversarial contexts.
+- Avoid/Anti-pattern: custom hashers in hostile inputs; mutating keys in-place.
+
+A.57 IndexMap for Stable Insertion Order
+- Use when: deterministic iteration order is required.
+- Context: iteration over dense storage; removal semantics affecting order.
+- Avoid/Anti-pattern: assuming order preservation after removals without `shift_remove`.
+
+A.58 Pattern Matching: Guards and Ergonomics (2024)
+- Use when: refine matches with guards; be explicit under Rust 2024 ergonomics.
+- Context: avoid relying on implicit ref/mut; use `cargo fix --edition` for migrations.
+- Avoid/Anti-pattern: ambiguous patterns relying on old match ergonomics.
+
+A.59 FFI Layout and repr Choices
+- Use when: interop and ABI stability required; choose `repr(C)`/`repr(transparent)` appropriately.
+- Context: `Option<non-null>` for nullable pointer optimizations across FFI.
+- Avoid/Anti-pattern: assuming Rust default layout across FFI; mixing unwinding across FFI.
+
+A.60 Error Layering Revisited: ? and Context
+- Use when: propagate errors ergonomically.
+- Context: favor `?` and combinators; attach context at boundaries.
+- Avoid/Anti-pattern: deep nested matches; panicking for recoverable errors.
+
+A.61 HRTBs for Callback APIs (for<'a>)
+- Use when: generic callbacks borrow data with any lifetime.
+- Context: `for<'a> Fn(&'a T) -> U` in trait bounds; avoid leaking concrete lifetimes.
+- Avoid/Anti-pattern: requiring 'static unnecessarily; encoding lifetimes as type params when HRTB suffices.
+
+A.62 GATs for Streaming and Lending Patterns
+- Use when: associated types depend on lifetimes (e.g., iterator yielding borrowed data).
+- Context: use GATs to model lending iterators or parser cursors.
+- Avoid/Anti-pattern: forcing owned allocations because associated outputs can’t borrow.
+
+A.63 Dyn Compatibility and Object Safety
+- Use when: designing traits for dynamic dispatch.
+- Context: avoid methods using `Self` in returns or generics; ensure receivers are object-safe (`&self`, `&mut self`, `Box<Self>`, etc.).
+- Avoid/Anti-pattern: non-dyn-compatible APIs in public traits; surprise `impl Trait` in returns.
+
+A.64 Never Type (!) and Diverging APIs
+- Use when: functions that never return (process abort, loop forever) or exhaustive matches.
+- Context: use `!` for type-level modeling; improves control-flow typing.
+- Avoid/Anti-pattern: encoding never-return via panics in library code without documenting.
+
+A.65 Raw Identifiers and Edition Interop
+- Use when: cross-edition compatibility requires using keywords as identifiers.
+- Context: prefer `r#ident` to avoid breaking API surfaces.
+- Avoid/Anti-pattern: renaming public items and causing churn when `r#` solves it.
+
+A.66 Trait Bounds via where for Readability
+- Use when: long bounds clutter signatures; prefer `where` for clarity.
+- Context: move complex bounds off the main signature.
+- Avoid/Anti-pattern: unreadable nested bounds inline.
+
+A.67 Nullable Pointer Optimization in FFI
+- Use when: model nullable pointers using `Option<NonNull<T>>` or `Option<extern "C" fn()>`.
+- Context: leverage guaranteed representation for `Option<non-null>`.
+- Avoid/Anti-pattern: using magic sentinel integers; UB with invalid values.
+
+A.68 Deterministic APIs with IndexMap
+- Use when: stable iteration order matters (caches, diffs, tests).
+- Context: choose `IndexMap` for dense iteration; document order semantics.
+- Avoid/Anti-pattern: relying on HashMap’s nondeterministic order.
+
+A.69 BinaryHeap Top-k and Scheduling
+- Use when: maintain rolling top-k or priority scheduling.
+- Context: build from Vec in O(n); pop/push O(log n).
+- Avoid/Anti-pattern: full sort when only top-k required.
+
+A.70 Async Polling Semantics and Waker
+- Use when: building executors or custom futures.
+- Context: respect `Poll::Pending` contract; wake with `Waker` when progress possible.
+- Avoid/Anti-pattern: busy-loop polling; waking without state change.
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
