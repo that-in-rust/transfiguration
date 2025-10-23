@@ -14,7 +14,7 @@ Tasks
 - [x] Process chunk 1 (lines 1–500)
 - [x] Process chunk 2 (lines 501–1000)
 - [x] Process chunk 3 (lines 1001–1500)
-- [ ] Process chunk 4 (lines 1501–2000)
+- [x] Process chunk 4 (lines 1501–2000)
 - [ ] Process chunk 5 (lines 2001–2500)
 - [ ] Process chunk 6 (lines 2501–3000)
 - [ ] Process chunk 7 (lines 3001–3500)
@@ -129,6 +129,7 @@ Progress Log
 | 1 | 1–500 | 12 | 730 | 122 | Initial curated set from foundations, ownership, error handling, async | 2025-10-23 |
 | 2 | 501–1000 | 12 | 974 | 244 | QA/tooling + web/service idioms (clippy, fmt, MSRV, doctest, trybuild, proptest, fuzz, coverage, audit, tracing, secrecy, SQLx) | 2025-10-23 |
 | 3 | 1001–1500 | 6 | 1055 | 81 | Diagnostics/cancellation/loom/result ergonomics/rustfmt config | 2025-10-23 |
+| 4 | 1501–2000 | 7 | 1109 | 54 | Error libs matrix, FFI unwind safety, iter/IntoIterator, closures bounds, DoubleEnded/Fused, FromIterator | 2025-10-23 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -449,6 +450,59 @@ edition = "2024"
 max_width = 100
 group_imports = "StdExternalCrate"
 ```
+
+A.31 Library Error Design: thiserror vs snafu vs eyre/anyhow
+- Use when: choosing error modeling for libraries vs applications.
+- Context: libraries prefer typed enums (`thiserror`) or context-rich enums (`snafu`) when callsites need structured handling; binaries can use `anyhow`/`eyre` for ergonomic aggregation.
+- Avoid/Anti-pattern: returning `anyhow::Error` from library public APIs; losing source error context.
+
+```rust path=null start=null
+#[derive(thiserror::Error, Debug)]
+pub enum ParseError {
+  #[error("invalid header: {0}")]
+  InvalidHeader(String),
+  #[error(transparent)]
+  Io(#[from] std::io::Error),
+}
+```
+
+A.32 FFI Unwind Safety and extern "C-unwind"
+- Use when: calling into or being called from C/C++/other languages where exceptions/longjmp may cross boundaries.
+- Context: mark Rust FFI with `extern "C"`; never let Rust panics cross FFI; catch with `std::panic::catch_unwind` and convert to error codes. Consider `extern "C-unwind"` where appropriate.
+- Avoid/Anti-pattern: unwinding across FFI without explicit contracts; relying on UB-prone longjmp behavior.
+
+```rust path=null start=null
+#[no_mangle]
+pub extern "C" fn api_do(ptr: *const u8, len: usize) -> i32 {
+  let res = std::panic::catch_unwind(|| unsafe { do_work(std::slice::from_raw_parts(ptr, len)) });
+  match res { Ok(Ok(())) => 0, Ok(Err(_e)) => -2, Err(_panic) => -1 }
+}
+```
+
+A.33 IntoIterator/iter/iter_mut Semantics
+- Use when: designing APIs that accept collections generically or implementing iteration for your types.
+- Context: prefer bounds like `impl<T: IntoIterator<Item = X>>` for flexibility; use `iter()/iter_mut()` when you need borrow semantics; implement `IntoIterator` for owned iteration of custom collections.
+- Avoid/Anti-pattern: surprising ownership moves via `into_iter()` on owned containers when a borrow suffices; ambiguous trait bounds hurting inference.
+
+A.34 Iterator Laziness and Adapter vs Consumer Separation
+- Use when: building pipelines; compose with adapters (`map/filter/take`) and drive with consumers (`collect/sum/for_each`).
+- Context: prefer iterator combinators over manual loops for clarity and fusion; be mindful of allocation in `collect`.
+- Avoid/Anti-pattern: building intermediate `Vec`s unnecessarily; relying on side-effects in adapters.
+
+A.35 Choosing Fn/FnMut/FnOnce Bounds
+- Use when: accepting closures; pick the narrowest bound that fits call semantics.
+- Context: `Fn` for repeated read-only calls (often Send/Sync friendly); `FnMut` when mutation is required; `FnOnce` when the closure may consume captures.
+- Avoid/Anti-pattern: overconstraining to `Fn` when `FnOnce` is needed; accidentally requiring `mut` when not needed.
+
+A.36 DoubleEndedIterator and FusedIterator
+- Use when: bi-directional traversal and predictable exhaustion semantics matter.
+- Context: implement `DoubleEndedIterator` when reverse iteration is natural; use `.fuse()` or rely on `FusedIterator` for repeated-None guarantees.
+- Avoid/Anti-pattern: assuming fused behavior without `.fuse()`; incorrectly implementing `next_back` semantics.
+
+A.37 FromIterator and Collect Patterns
+- Use when: constructing collections from iterators; offer `FromIterator` for custom containers.
+- Context: `collect::<Vec<_>>()` for materialization; `FromIterator` for explicit types; streaming transforms with minimal allocations.
+- Avoid/Anti-pattern: collecting when a lazy pipeline suffices; turbofish misuse obscuring types.
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
