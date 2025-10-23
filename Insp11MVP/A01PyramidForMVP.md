@@ -111,6 +111,8 @@ Search with <WIP>
                                 - edit Interfaces : old LSGL1 rows which will be current_ind = 1 & future_ind = 1 & Future_Action=Edit
                         - Step B: Code Simulation
                             - Step B01: Based on filter(Future_Action != None)=>(all fields of Code_Graph including current code) + base-context-area , update future_code for all the rows that are changing
+                                - the reasoning-LLM can use hopping or blast-radius kind of actions on Code_Graph to fetch all informations for rows where (Future_Action = None) ; meaning for rows which are not changing current_code should not bloat the reasoning-LLM context
+                                    - hopping or blast-radius actions can be CLI options but preferably since our LLM is smart enough they need not be
                             - Step B02: Follow rubber duck debugging to re-reason filter(Future_Action != None)=>(all fields of Code_Graph including current code) + base-context-area
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
