@@ -98,6 +98,7 @@ Search with <WIP>
                     - After 2 iterations the reasoning-llm will accept the micro-PRD
                     - Ask the reasoning LLM to reset the context because likely it will overflow and micro-PRD final needs to be isolated
                 - tool 4: code-simulation-sorcerer is triggered
+                    - use TDD_idiomatic_rust_steering_doc for all code-simulation-sorcerer while reasoning through code
                     - tool 4 creates a base-context-area which is micro-PRD + filter(Code_Graph with current_ind=1)=>(LSGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary)
                     - tool 4 asks the reasoning-llm to suggest the following to the Code-Graph based on base-context-area
                         - Step A: ISG level simulations
@@ -112,7 +113,7 @@ Search with <WIP>
                         - Step B: Code Simulation
                             - Step B01: Based on filter(Future_Action != None)=>(all fields of Code_Graph including current code) + base-context-area , update future_code for all the rows that are changing
                                 - the reasoning-LLM can use hopping or blast-radius kind of actions on Code_Graph to fetch all informations for rows where (Future_Action = None) ; meaning for rows which are not changing current_code should not bloat the reasoning-LLM context
-                                    - hopping or blast-radius actions can be CLI options but preferably since our LLM is smart enough they need not be
+                                    - hopping or blast-radius actions can be CLI options but preferably since our LLM is smart enough they need not be, and we can define them precisely in our supporting MD files
                             - Step B02: Follow rubber duck debugging to re-reason filter(Future_Action != None)=>(all fields of Code_Graph including current code) + base-context-area
                                 - if the LLM thinks that we need to refine the solutioning further, repeat Steps A01 A02 and then basis them repeat Steps B01
                                 - if the LLM doesn't feel confident of the changes, it should speak to the user to get additional context or web help sharing their current understanding in an MD file
@@ -158,6 +159,7 @@ Search with <WIP>
 - Reducing reasoning-LLM context load
     - Using contextual summaries using sub-agents for input to reasoning-llm
     - Using CPU-Aggregated-Context of Child-Interfaces for getting clarification on ISGL1 nodes
+
 
 
 
