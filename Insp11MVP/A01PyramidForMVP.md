@@ -81,6 +81,17 @@ Search with <WIP>
                 - User is now asked to describe their micro-PRD
                 - User describes the micro-PRD in text form
                     - The reasoning-llm in our case the default LLM via ANTHROPIC_KEY analyzes the micro-PRD in context of ISGL1 + interface_signature + TDD_Classification + lsp_meta_data + LLM_summary ; we will ignore the Current_Code because it will unnecessary bloat the context
+                        - Rough calculation of context in the reasoning-LLM = 1250000 tokens at 300 lines
+                            - avg interface size is 1000 to 3000 nodes
+                            - 3000 nodes x 3 tokens for ISGL1 = 10000 tokens
+                            - 3000 nodes x 7 tokens for interface_signature = 21000 tokens
+                            - 3000 nodes x 1 tokens for TDD_Classification = 3000 tokens
+                            - 3000 nodes x 15 tokens for lsp_meta_data = 45000 tokens
+                            - 3000 nodes x 15 tokens for LLM_summary = 45000 tokens
+                        - Total = 120k tokens
+                        - And micro-PRD = 5k tokens + 3 iterations = 20k tokens
+                        - Under 150k tokens 
+
                     - The reasoning-llm will analyze then suggest changes to the micro-PRD to make it clearer in terms of what changes does the user want
                         - Tests wise
                         - Behavior wise
