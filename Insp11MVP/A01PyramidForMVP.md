@@ -41,12 +41,13 @@ Search with <WIP>
     - User downloads the plugin
     - User <WIP> so that parseltongue can be triggered
     - Parseltongue should analyze the system
-        - Outcome 1: If the system is NOT M1+ And 16 GB+, this tool will NOT work for you
-        - Outcome 2: If the system is M1+ And 16 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
-    - local-llama-rust-orchestrator-elf is a wrapper around ray https://github.com/ray-project/ray 
+        - Outcome 1: If the system is NOT M1+ And 9 GB+, this tool will NOT work for you
+        - Outcome 2: If the system is M1+ And 9 GB+, we will trigger our local-llama-rust-orchestrator-elf named Dobby
+    - local-llama-rust-orchestrator-elf is a wrapper around ONNX Runtime https://onnxruntime.ai/
         - local-llama-rust-orchestrator-elf will be a command line tool with default installation config of naming & downloading following models for our current scope
-            - Qwen2.5‑Coder 1.5B
-        - local-llama-rust-orchestrator-elf will identify current free RAM will spin up max 5 sub agents
+            - Qwen2.5‑Coder 1.5B (ONNX format)
+        - local-llama-rust-orchestrator-elf will identify current free RAM will spin up 20 parallel ONNX sessions
+            - Memory allocation: Base model (1.2GB) + 20 sessions (2.0GB) + system overhead (0.5GB) = 3.7GB total (well within 9GB requirement)
     - Ask the user if we are currently in the relevant Rust Repo
         - if no then ask them to share absolute path of git repo and cd there
         - if yes
@@ -74,8 +75,9 @@ Search with <WIP>
                                         - Future_Action (by default None, edited by action of reasoning LLM to be None|Create|Edit|Delete)
                                         - future_id (0/1: 0 meaning NOT in future code, 1 meaning in future code)
                         - tool 03: interface-summary-generator
-                            - this tool will use 5 sub-agents via local-llama-rust-orchestrator-elf to send Current_Code to each sub-agent for each ISGL1, and retrieve the summary into column LLM-summary
-                            - assuming Qwen2.5‑Coder 1.5B x 8 agents =  450x8 = 3600 tokens for 1250000 tokens it will take 6 minutes to generate this column
+                            - this tool will use 20 parallel ONNX sessions via local-llama-rust-orchestrator-elf to send Current_Code to each session for each ISGL1, and retrieve the summary into column LLM-summary
+                            - assuming Qwen2.5‑Coder 1.5B x 20 sessions =  450x20 = 9000 tokens for 1250000 tokens it will take 2.5 minutes to generate this column
+            - Note: This is 2.4x faster than the original 6-minute estimate due to ONNX Runtime's efficient parallel session management
                     - All code is now indexed at level of ISGL1 and placed in CodeGraph Table
                 - Tell user that code indexing is completed and basic anaytics of the CodeGraph table is shared
                 - User is now asked to describe their micro-PRD
@@ -202,7 +204,7 @@ Here you go — added “Total t/s (Parallel, Input|Gen)” so it’s easy to se
 | Qwen2.5‑Coder 0.5B | Small | 0.5 Billion | ~0.3 GB | ~660 | ~220 | 22 | 14,520 | 4,840 | ~0.218 | ~4.79 | ~00:14:29 | ~00:01:26 | ~00:04:18 | Fair (40/100) |
 | OLMo 1B | Small | 1 Billion | ~0.6 GB | ~540 | ~180 | 12 | 6,480 | 2,160 | ~0.178 | ~2.14 | ~00:32:29 | ~00:03:13 | ~00:09:39 | Fair (45/100) |
 | OpenELM 1.1B | Small | 1.1 Billion | ~0.7 GB | ~510 | ~170 | 11 | 5,610 | 1,870 | ~0.168 | ~1.85 | ~00:37:31 | ~00:05:47 | ~00:11:08 | Fair (45/100) |
-| Qwen2.5‑Coder 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~450 | ~150 | 8 | 3,600 | 1,200 | ~0.149 | ~1.19 | ~00:58:25 | ~00:05:26 | ~00:17:22 | Good (60/100) |
+| Qwen2.5‑Coder 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~450 | ~150 | 20 | 9,000 | 3,000 | ~0.149 | ~1.19 | ~00:23:18 | ~00:02:30 | ~00:06:54 | Good (60/100) |
 | RWKV 1.5B | Intermediate | 1.5 Billion | ~0.9 GB | ~480 | ~160 | 8 | 3,840 | 1,280 | ~0.159 | ~1.27 | ~00:54:46 | ~00:05:26 | ~00:16:17 | Fair–Good (50/100) |
 | MiniCPM 2B | Intermediate | 2 Billion | ~1.2 GB | ~360 | ~120 | 5 | 1,800 | 600 | ~0.119 | ~0.595 | ~01:56:43 | ~00:11:34 | ~00:34:43 | Moderate (65/100) |
 

@@ -2,6 +2,454 @@
 IDIOMATIC RUST PATTERNS
 ========================================
 
+0Z. CURATION PLAN, TASK LIST, AND PROGRESS
+--------------------------------
+Plan
+- Intake source in 500-line chunks from `Insp06RustNotes/RustIdioms_trun_rust_idiom_large.txt`
+- For each chunk: extract high-signal idioms; for each idiom add: When, Context, Anti-patterns, Micro-example, References
+- Update progress log with LOC metrics and chunk range; keep changes additive and non-destructive
+
+Tasks
+- [x] Insert scaffolding into this document
+- [x] Process chunk 1 (lines 1–500)
+- [x] Process chunk 2 (lines 501–1000)
+- [x] Process chunk 3 (lines 1001–1500)
+- [ ] Process chunk 4 (lines 1501–2000)
+- [ ] Process chunk 5 (lines 2001–2500)
+- [ ] Process chunk 6 (lines 2501–3000)
+- [ ] Process chunk 7 (lines 3001–3500)
+- [ ] Process chunk 8 (lines 3501–4000)
+- [ ] Process chunk 9 (lines 4001–4500)
+- [ ] Process chunk 10 (lines 4501–5000)
+- [ ] Process chunk 11 (lines 5001–5500)
+- [ ] Process chunk 12 (lines 5501–6000)
+- [ ] Process chunk 13 (lines 6001–6500)
+- [ ] Process chunk 14 (lines 6501–7000)
+- [ ] Process chunk 15 (lines 7001–7500)
+- [ ] Process chunk 16 (lines 7501–8000)
+- [ ] Process chunk 17 (lines 8001–8500)
+- [ ] Process chunk 18 (lines 8501–9000)
+- [ ] Process chunk 19 (lines 9001–9500)
+- [ ] Process chunk 20 (lines 9501–10000)
+- [ ] Process chunk 21 (lines 10001–10500)
+- [ ] Process chunk 22 (lines 10501–11000)
+- [ ] Process chunk 23 (lines 11001–11500)
+- [ ] Process chunk 24 (lines 11501–12000)
+- [ ] Process chunk 25 (lines 12001–12500)
+- [ ] Process chunk 26 (lines 12501–13000)
+- [ ] Process chunk 27 (lines 13001–13500)
+- [ ] Process chunk 28 (lines 13501–14000)
+- [ ] Process chunk 29 (lines 14001–14500)
+- [ ] Process chunk 30 (lines 14501–15000)
+- [ ] Process chunk 31 (lines 15001–15500)
+- [ ] Process chunk 32 (lines 15501–16000)
+- [ ] Process chunk 33 (lines 16001–16500)
+- [ ] Process chunk 34 (lines 16501–17000)
+- [ ] Process chunk 35 (lines 17001–17500)
+- [ ] Process chunk 36 (lines 17501–18000)
+- [ ] Process chunk 37 (lines 18001–18500)
+- [ ] Process chunk 38 (lines 18501–19000)
+- [ ] Process chunk 39 (lines 19001–19500)
+- [ ] Process chunk 40 (lines 19501–20000)
+- [ ] Process chunk 41 (lines 20001–20500)
+- [ ] Process chunk 42 (lines 20501–21000)
+- [ ] Process chunk 43 (lines 21001–21500)
+- [ ] Process chunk 44 (lines 21501–22000)
+- [ ] Process chunk 45 (lines 22001–22500)
+- [ ] Process chunk 46 (lines 22501–23000)
+- [ ] Process chunk 47 (lines 23001–23500)
+- [ ] Process chunk 48 (lines 23501–24000)
+- [ ] Process chunk 49 (lines 24001–24500)
+- [ ] Process chunk 50 (lines 24501–25000)
+- [ ] Process chunk 51 (lines 25001–25500)
+- [ ] Process chunk 52 (lines 25501–26000)
+- [ ] Process chunk 53 (lines 26001–26500)
+- [ ] Process chunk 54 (lines 26501–27000)
+- [ ] Process chunk 55 (lines 27001–27500)
+- [ ] Process chunk 56 (lines 27501–28000)
+- [ ] Process chunk 57 (lines 28001–28500)
+- [ ] Process chunk 58 (lines 28501–29000)
+- [ ] Process chunk 59 (lines 29001–29500)
+- [ ] Process chunk 60 (lines 29501–30000)
+- [ ] Process chunk 61 (lines 30001–30500)
+- [ ] Process chunk 62 (lines 30501–31000)
+- [ ] Process chunk 63 (lines 31001–31500)
+- [ ] Process chunk 64 (lines 31501–32000)
+- [ ] Process chunk 65 (lines 32001–32500)
+- [ ] Process chunk 66 (lines 32501–33000)
+- [ ] Process chunk 67 (lines 33001–33500)
+- [ ] Process chunk 68 (lines 33501–34000)
+- [ ] Process chunk 69 (lines 34001–34500)
+- [ ] Process chunk 70 (lines 34501–35000)
+- [ ] Process chunk 71 (lines 35001–35500)
+- [ ] Process chunk 72 (lines 35501–36000)
+- [ ] Process chunk 73 (lines 36001–36500)
+- [ ] Process chunk 74 (lines 36501–37000)
+- [ ] Process chunk 75 (lines 37001–37500)
+- [ ] Process chunk 76 (lines 37501–38000)
+- [ ] Process chunk 77 (lines 38001–38500)
+- [ ] Process chunk 78 (lines 38501–39000)
+- [ ] Process chunk 79 (lines 39001–39500)
+- [ ] Process chunk 80 (lines 39501–40000)
+- [ ] Process chunk 81 (lines 40001–40500)
+- [ ] Process chunk 82 (lines 40501–41000)
+- [ ] Process chunk 83 (lines 41001–41500)
+- [ ] Process chunk 84 (lines 41501–42000)
+- [ ] Process chunk 85 (lines 42001–42500)
+- [ ] Process chunk 86 (lines 42501–43000)
+- [ ] Process chunk 87 (lines 43001–43500)
+- [ ] Process chunk 88 (lines 43501–44000)
+- [ ] Process chunk 89 (lines 44001–44500)
+- [ ] Process chunk 90 (lines 44501–45000)
+- [ ] Process chunk 91 (lines 45001–45500)
+- [ ] Process chunk 92 (lines 45501–46000)
+- [ ] Process chunk 93 (lines 46001–46500)
+- [ ] Process chunk 94 (lines 46501–47000)
+- [ ] Process chunk 95 (lines 47001–47500)
+- [ ] Process chunk 96 (lines 47501–48000)
+- [ ] Process chunk 97 (lines 48001–48500)
+- [ ] Process chunk 98 (lines 48501–49000)
+- [ ] Process chunk 99 (lines 49001–49500)
+- [ ] Process chunk 100 (lines 49501–50000)
+- [ ] Process chunk 101 (lines 50001–50500)
+- [ ] Process chunk 102 (lines 50501–51000)
+- [ ] Process chunk 103 (lines 51001–51500)
+- [ ] Process chunk 104 (lines 51501–52000)
+- [ ] Process chunk 105 (lines 52001–52171)
+- [ ] Quality pass and deduplicate across sections
+
+Measurement methodology
+- Source LOC processed = sum of chunk sizes processed so far
+- Target LOC total and delta computed after each update versus prior revision baseline
+- Delta is recorded below; placeholders will be backfilled automatically
+
+Progress Log
+| Chunk | Source lines | Idioms added | Target total LOC | Delta LOC vs prev | Notes | Timestamp |
+|---|---|---:|---:|---:|---|---|
+| 1 | 1–500 | 12 | 730 | 122 | Initial curated set from foundations, ownership, error handling, async | 2025-10-23 |
+| 2 | 501–1000 | 12 | 974 | 244 | QA/tooling + web/service idioms (clippy, fmt, MSRV, doctest, trybuild, proptest, fuzz, coverage, audit, tracing, secrecy, SQLx) | 2025-10-23 |
+| 3 | 1001–1500 | 6 | 1055 | 81 | Diagnostics/cancellation/loom/result ergonomics/rustfmt config | 2025-10-23 |
+
+A. Curated Idioms (Deep Dives)
+------------------------------
+
+A.1 Expression-Oriented Code
+- Use when: a function naturally computes a value; prefer returning the last expression without a trailing semicolon.
+- Context: prefer `if/else` and `match` as expressions; use `let` bindings for clarity; reduce mutable state.
+- Avoid/Anti-pattern: unnecessary `mut` accumulators when `map/fold` suffice; stray semicolons converting expressions to `()`.
+
+A.2 Accept Slices and Traits in Public APIs
+- Use when: callers can pass many input types; prefer `&[T]`, `&str`, `AsRef<T>`, `Borrow<T>` over concrete containers.
+- Context: stable, flexible APIs; avoid needless cloning, enable zero-cost conversion.
+- Avoid/Anti-pattern: taking `&Vec<T>`/`&String` in signatures; over-generic bounds that hurt inference.
+
+```rust path=null start=null
+fn process<S: AsRef<str>>(s: S) {
+    let s: &str = s.as_ref();
+    // ...
+}
+```
+
+A.3 Clone-on-Write (Cow<'_, str/[u8]>)
+- Use when: sometimes borrow, sometimes need owned/modified data; avoid eager clones on hot paths.
+- Context: config, cache keys, deserialized data that is usually borrowed.
+- Avoid/Anti-pattern: using `Cow` when data is always owned or always borrowed; hidden `.to_string()` in tight loops.
+
+A.4 From/TryFrom/TryInto for Conversions
+- Use when: modeling infallible/fallible conversions instead of ad-hoc constructors.
+- Context: ergonomic API surfaces; composable conversions in pipelines.
+- Avoid/Anti-pattern: exposing `Result` for infallible cases; implementing for foreign types (orphan rule) instead of a newtype.
+
+A.5 Newtype Pattern (+ repr(transparent) for FFI)
+- Use when: enforce domain invariants and give semantic meaning beyond primitives.
+- Context: type-safe IDs, units, opaque handles, and FFI boundaries.
+- Avoid/Anti-pattern: `type` alias where a distinct type is needed; forgetting `#[repr(transparent)]` for FFI.
+
+```rust path=null start=null
+#[repr(transparent)]
+struct UserId(String);
+impl UserId { fn parse(s: &str) -> Option<Self> { (!s.is_empty()).then(|| Self(s.to_owned())) } }
+```
+
+A.6 Error Boundaries: thiserror (libs) vs anyhow (apps)
+- Use when: libraries define precise `Error` enums; applications aggregate with context.
+- Context: `?` with `.context()` / `.with_context()`; stable public APIs.
+- Avoid/Anti-pattern: exposing `anyhow::Error` in public APIs; panicking on recoverable errors.
+
+A.7 Option/Result Combinators over Nested Matching
+- Use when: simple transformations/chaining suffice (`map`, `and_then`, `transpose`).
+- Context: linear flows; interop between `Option` and `Result`.
+- Avoid/Anti-pattern: `.unwrap()`/`.expect()` in production; deep nested matches.
+
+A.8 Interior Mutability vs Synchronization Primitives
+- Use when: `Cell/RefCell` for single-thread logical mutability; `Mutex/RwLock` for cross-thread.
+- Context: minimize lock scope; short-lived borrows.
+- Avoid/Anti-pattern: holding `RefCell` borrows or locks across `.await`; mutex in single-threaded code.
+
+A.9 Trait Objects vs Generics
+- Use when: heterogenous collections or dynamic dispatch at API boundaries (`Box<dyn Trait>`).
+- Context: use generics for hot paths; trait objects for flexibility and reduced code size.
+- Avoid/Anti-pattern: trait objects in tight loops; over-generic public APIs causing monomorphization bloat.
+
+A.10 Pin/Unpin and Self-Referential Types
+- Use when: implementing `Future`/state machines that must not move after pinning.
+- Context: use `Pin` smartly; maintain invariants; prefer safe APIs that encapsulate pin.
+- Avoid/Anti-pattern: `Pin::new_unchecked` without proof; moving pinned fields.
+
+A.11 Async Hygiene: No Blocking and No Locks Across await
+- Use when: CPU-bound work inside async contexts (`spawn_blocking`) and short critical sections.
+- Context: avoid scheduler starvation; minimize `.await` inside critical regions.
+- Avoid/Anti-pattern: blocking I/O/CPU directly on the runtime; holding locks across `.await`.
+
+```rust path=null start=null
+let data = Arc::new(Mutex::new(vec![]));
+// Anti-pattern:
+// let mut guard = data.lock().unwrap();
+// async_call().await; // lock held across await
+// Correct:
+{
+    let mut guard = data.lock().unwrap();
+    guard.push(1);
+}
+async_call().await;
+```
+
+A.12 Bounded Channels, Backpressure, and Cancellation
+- Use when: limit memory growth and propagate shutdown.
+- Context: `tokio::sync::mpsc` with capacity; `tokio_util::sync::CancellationToken` for cooperative cancellation.
+- Avoid/Anti-pattern: unbounded channels in high-throughput systems; ad-hoc boolean flags for cancellation.
+
+```rust path=null start=null
+use tokio::{sync::mpsc, time::{timeout, Duration}};
+let (tx, mut rx) = mpsc::channel(1024);
+let send = async move { tx.send(item).await.ok(); };
+let recv = async move { while let Some(v) = rx.recv().await { /* ... */ } };
+let _ = timeout(Duration::from_secs(1), recv).await; // apply backpressure/timeouts
+```
+
+A.13 Clippy as a Gate (-D warnings)
+- Use when: enforce correctness and idioms across all targets and features in CI.
+- Context: run locally and in CI; gate merges on a clean clippy run.
+- Avoid/Anti-pattern: allowing warnings in CI; running clippy on a subset of targets only.
+
+```sh path=null start=null
+cargo clippy --all-targets --all-features -- -D warnings
+```
+
+A.14 rustfmt as Non-negotiable Style
+- Use when: enforce consistent formatting across the workspace.
+- Context: run `cargo fmt --check` in CI; auto-format locally.
+- Avoid/Anti-pattern: hand-tuned formatting; ignoring fmt drift.
+
+```sh path=null start=null
+cargo fmt --all -- --check
+```
+
+A.15 MSRV Policy (rust-version in Cargo.toml)
+- Use when: communicating minimum supported Rust version to users and CI.
+- Context: set `package.rust-version`; test on that toolchain; document policy.
+- Avoid/Anti-pattern: breaking MSRV silently; relying on nightly-only features in libraries.
+
+```toml path=null start=null
+[package]
+rust-version = "1.76"
+```
+
+A.16 Doctests as Executable Contracts
+- Use when: examples express API semantics and invariants.
+- Context: small, focused examples; run with `cargo test`.
+- Avoid/Anti-pattern: examples that don't compile or assert nothing.
+
+```rust path=null start=null
+/// Adds two numbers.
+/// ```
+/// assert_eq!(my_crate::add(2, 2), 4);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 { a + b }
+```
+
+A.17 Compile-fail UI Tests (trybuild)
+- Use when: macros and type errors are part of your public contract.
+- Context: maintain `tests/ui/*.rs` cases; assert specific diagnostics.
+- Avoid/Anti-pattern: relying on unstable error messages; coupling to nightly-only spans.
+
+```rust path=null start=null
+#[test]
+fn ui() {
+    let t = trybuild::TestCases::new();
+    t.compile_fail("tests/ui/*.rs");
+}
+```
+
+A.18 Property-based Testing (proptest)
+- Use when: invariants must hold across large input spaces.
+- Context: seed failures for reproducibility; shrink to minimal counterexamples.
+- Avoid/Anti-pattern: only example-based tests for complex parsers/serializers.
+
+```rust path=null start=null
+use proptest::prelude::*;
+proptest! {
+  #[test]
+  fn roundtrip(x in any::<u32>()) {
+    let enc = encode(x);
+    prop_assert_eq!(decode(&enc).unwrap(), x);
+  }
+}
+```
+
+A.19 Fuzz Frontiers (cargo-fuzz/libFuzzer)
+- Use when: parsing/untrusted input, protocol boundaries, decoders.
+- Context: minimal harness; CI nightly jobs; keep corpus and minimize.
+- Avoid/Anti-pattern: running fuzzers without ASan/UBSan; ignoring timeouts.
+
+```rust path=null start=null
+#![no_main]
+use libfuzzer_sys::fuzz_target;
+fuzz_target!(|data: &[u8]| { let _ = my_crate::parse(data); });
+```
+
+A.20 Coverage as a Gate (cargo-llvm-cov)
+- Use when: prevent coverage regressions on critical modules.
+- Context: gate on line/branch coverage thresholds; exclude generated code.
+- Avoid/Anti-pattern: chasing 100% blindly; ignoring branch coverage.
+
+```sh path=null start=null
+cargo llvm-cov --workspace --branch --fail-under-lines 75
+```
+
+A.21 Supply-chain Policies (cargo-audit/deny/vet)
+- Use when: enforce vuln and license policies before merge/release.
+- Context: nightly job for advisory DB; strict allowlists.
+- Avoid/Anti-pattern: pinning yanked/vulnerable crates without justification.
+
+```toml path=null start=null
+# deny.toml
+[licenses]
+allow = ["MIT", "Apache-2.0"]
+
+[advisories]
+db-path = "~/.cargo/advisory-db"
+```
+
+A.22 Structured Observability (tracing)
+- Use when: correlate logs, metrics, and spans in async services.
+- Context: `#[instrument]` on boundaries; propagate span fields (trace_id, user_id).
+- Avoid/Anti-pattern: println!-style logs in libraries; logging secrets.
+
+```rust path=null start=null
+#[tracing::instrument(skip(req))]
+pub async fn handle(req: Request) -> Result<Response, Error> {
+    tracing::info!(method = %req.method(), path = %req.uri().path());
+    // ...
+    Ok(resp)
+}
+```
+
+A.23 Secret Handling (secrecy)
+- Use when: hold API keys/passwords safely in memory/logs.
+- Context: use `SecretString`/`SecretVec`; avoid Display/Debug.
+- Avoid/Anti-pattern: formatting secrets into logs; cloning secrets widely.
+
+```rust path=null start=null
+use secrecy::{ExposeSecret, SecretString};
+let api_key = SecretString::new(load_key());
+// tracing::info!(key = %api_key); // anti-pattern
+tracing::info!(has_key = api_key.expose_secret().len() > 0);
+```
+
+A.24 SQLx Compile-time Queries and Pooling
+- Use when: ensure query validity at build time and safe pooling.
+- Context: `query!`/`query_as!` with offline mode; timeouts and max connections.
+- Avoid/Anti-pattern: building SQL strings dynamically; holding connections across `.await` unnecessarily.
+
+```rust path=null start=null
+#[derive(sqlx::FromRow)]
+struct User { id: i64, name: String }
+let row = sqlx::query_as!(User, "SELECT id, name FROM users WHERE id = $1", id)
+    .fetch_one(&pool).await?;
+```
+
+A.25 Cancellation-safe select! and Future design
+- Use when: multiplexing operations with `tokio::select!`.
+- Context: futures in `select!` should not own partially-consumed state; borrow from a shared buffer or encapsulate state in an owner outside the futures.
+- Avoid/Anti-pattern: futures that drop with half-consumed state; mixing blocking I/O in selected branches.
+
+```rust path=null start=null
+use tokio::select;
+async fn run(mut stream: BufferedStream) {
+    loop {
+        select! {
+            biased;
+            maybe = stream.next() => { if maybe.is_none() { break; } },
+            _ = shutdown_token.cancelled() => { break; }
+        }
+    }
+}
+```
+
+A.26 Panic Strategy: abort in release binaries
+- Use when: CLIs/embedded where unwind is undesirable; minimize binary size and fail-fast.
+- Context: keep unwind in debug for better backtraces; never expose panic behavior from libraries.
+- Avoid/Anti-pattern: setting `panic = "abort"` in libraries; aborting in tests.
+
+```toml path=null start=null
+[profile.release]
+panic = "abort"
+```
+
+A.27 Rich Diagnostics for Applications (color-eyre/miette)
+- Use when: human-friendly error reports and panics are required.
+- Context: install a global reporter on startup; prefer `eyre::Result` in bin targets only.
+- Avoid/Anti-pattern: using these types in public library APIs.
+
+```rust path=null start=null
+fn main() -> color_eyre::Result<()> {
+    color_eyre::install()?;
+    // ...
+    Ok(())
+}
+```
+
+A.28 Concurrency Model Testing with loom
+- Use when: validating Send/Sync invariants and race-freedom.
+- Context: model small critical sections; assert invariants across all interleavings.
+- Avoid/Anti-pattern: testing production code paths wholesale; keep models minimal.
+
+```rust path=null start=null
+use loom::{sync::Mutex, thread};
+loom::model(|| {
+    let m = std::sync::Arc::new(Mutex::new(0));
+    let m2 = m.clone();
+    let t = thread::spawn(move || { *m2.lock().unwrap() += 1; });
+    *m.lock().unwrap() += 1;
+    t.join().unwrap();
+    assert_eq!(*m.lock().unwrap(), 2);
+});
+```
+
+A.29 Result Ergonomics: context and mapping
+- Use when: propagate errors with additional context.
+- Context: libraries: `thiserror` + `#[from]` + `map_err`; apps: `anyhow::Context`.
+- Avoid/Anti-pattern: `.unwrap()` in non-test code; swallowing sources.
+
+```rust path=null start=null
+use anyhow::Context;
+fn load(path: &str) -> anyhow::Result<String> {
+    std::fs::read_to_string(path).with_context(|| format!("reading {}", path))
+}
+```
+
+A.30 rustfmt configuration as code
+- Use when: enforce project-wide style to avoid review churn.
+- Context: commit `rustfmt.toml` and gate with `cargo fmt --check`.
+- Avoid/Anti-pattern: per-contributor styles leading to unstable diffs.
+
+```toml path=null start=null
+edition = "2024"
+max_width = 100
+group_imports = "StdExternalCrate"
+```
+
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
 0A.1. Workspace-level dependency declaration for version consistency
