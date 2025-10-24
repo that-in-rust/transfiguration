@@ -9,129 +9,20 @@ Plan
 - For each chunk: extract high-signal idioms; for each idiom add: When, Context, Anti-patterns, Micro-example, References
 - Update progress log with LOC metrics and chunk range; keep changes additive and non-destructive
 
-Tasks
-- [x] Insert scaffolding into this document
-- [x] Process chunk 1 (lines 1–500)
-- [x] Process chunk 2 (lines 501–1000)
-- [x] Process chunk 3 (lines 1001–1500)
-- [x] Process chunk 4 (lines 1501–2000)
-- [ ] Process chunk 5 (lines 2001–2500)
-- [ ] Process chunk 6 (lines 2501–3000)
-- [ ] Process chunk 7 (lines 3001–3500)
-- [ ] Process chunk 8 (lines 3501–4000)
-- [ ] Process chunk 9 (lines 4001–4500)
-- [ ] Process chunk 10 (lines 4501–5000)
-- [ ] Process chunk 11 (lines 5001–5500)
-- [ ] Process chunk 12 (lines 5501–6000)
-- [ ] Process chunk 13 (lines 6001–6500)
-- [ ] Process chunk 14 (lines 6501–7000)
-- [ ] Process chunk 15 (lines 7001–7500)
-- [ ] Process chunk 16 (lines 7501–8000)
-- [ ] Process chunk 17 (lines 8001–8500)
-- [ ] Process chunk 18 (lines 8501–9000)
-- [ ] Process chunk 19 (lines 9001–9500)
-- [ ] Process chunk 20 (lines 9501–10000)
-- [ ] Process chunk 21 (lines 10001–10500)
-- [ ] Process chunk 22 (lines 10501–11000)
-- [ ] Process chunk 23 (lines 11001–11500)
-- [ ] Process chunk 24 (lines 11501–12000)
-- [ ] Process chunk 25 (lines 12001–12500)
-- [ ] Process chunk 26 (lines 12501–13000)
-- [ ] Process chunk 27 (lines 13001–13500)
-- [ ] Process chunk 28 (lines 13501–14000)
-- [ ] Process chunk 29 (lines 14001–14500)
-- [ ] Process chunk 30 (lines 14501–15000)
-- [ ] Process chunk 31 (lines 15001–15500)
-- [ ] Process chunk 32 (lines 15501–16000)
-- [ ] Process chunk 33 (lines 16001–16500)
-- [ ] Process chunk 34 (lines 16501–17000)
-- [ ] Process chunk 35 (lines 17001–17500)
-- [ ] Process chunk 36 (lines 17501–18000)
-- [ ] Process chunk 37 (lines 18001–18500)
-- [ ] Process chunk 38 (lines 18501–19000)
-- [ ] Process chunk 39 (lines 19001–19500)
-- [ ] Process chunk 40 (lines 19501–20000)
-- [ ] Process chunk 41 (lines 20001–20500)
-- [ ] Process chunk 42 (lines 20501–21000)
-- [ ] Process chunk 43 (lines 21001–21500)
-- [ ] Process chunk 44 (lines 21501–22000)
-- [ ] Process chunk 45 (lines 22001–22500)
-- [ ] Process chunk 46 (lines 22501–23000)
-- [ ] Process chunk 47 (lines 23001–23500)
-- [ ] Process chunk 48 (lines 23501–24000)
-- [ ] Process chunk 49 (lines 24001–24500)
-- [ ] Process chunk 50 (lines 24501–25000)
-- [ ] Process chunk 51 (lines 25001–25500)
-- [ ] Process chunk 52 (lines 25501–26000)
-- [ ] Process chunk 53 (lines 26001–26500)
-- [ ] Process chunk 54 (lines 26501–27000)
-- [ ] Process chunk 55 (lines 27001–27500)
-- [ ] Process chunk 56 (lines 27501–28000)
-- [ ] Process chunk 57 (lines 28001–28500)
-- [ ] Process chunk 58 (lines 28501–29000)
-- [ ] Process chunk 59 (lines 29001–29500)
-- [ ] Process chunk 60 (lines 29501–30000)
-- [ ] Process chunk 61 (lines 30001–30500)
-- [ ] Process chunk 62 (lines 30501–31000)
-- [ ] Process chunk 63 (lines 31001–31500)
-- [ ] Process chunk 64 (lines 31501–32000)
-- [ ] Process chunk 65 (lines 32001–32500)
-- [ ] Process chunk 66 (lines 32501–33000)
-- [ ] Process chunk 67 (lines 33001–33500)
-- [ ] Process chunk 68 (lines 33501–34000)
-- [ ] Process chunk 69 (lines 34001–34500)
-- [ ] Process chunk 70 (lines 34501–35000)
-- [ ] Process chunk 71 (lines 35001–35500)
-- [ ] Process chunk 72 (lines 35501–36000)
-- [ ] Process chunk 73 (lines 36001–36500)
-- [ ] Process chunk 74 (lines 36501–37000)
-- [ ] Process chunk 75 (lines 37001–37500)
-- [ ] Process chunk 76 (lines 37501–38000)
-- [ ] Process chunk 77 (lines 38001–38500)
-- [ ] Process chunk 78 (lines 38501–39000)
-- [ ] Process chunk 79 (lines 39001–39500)
-- [ ] Process chunk 80 (lines 39501–40000)
-- [ ] Process chunk 81 (lines 40001–40500)
-- [ ] Process chunk 82 (lines 40501–41000)
-- [ ] Process chunk 83 (lines 41001–41500)
-- [ ] Process chunk 84 (lines 41501–42000)
-- [ ] Process chunk 85 (lines 42001–42500)
-- [ ] Process chunk 86 (lines 42501–43000)
-- [ ] Process chunk 87 (lines 43001–43500)
-- [ ] Process chunk 88 (lines 43501–44000)
-- [ ] Process chunk 89 (lines 44001–44500)
-- [ ] Process chunk 90 (lines 44501–45000)
-- [ ] Process chunk 91 (lines 45001–45500)
-- [ ] Process chunk 92 (lines 45501–46000)
-- [ ] Process chunk 93 (lines 46001–46500)
-- [ ] Process chunk 94 (lines 46501–47000)
-- [ ] Process chunk 95 (lines 47001–47500)
-- [ ] Process chunk 96 (lines 47501–48000)
-- [ ] Process chunk 97 (lines 48001–48500)
-- [ ] Process chunk 98 (lines 48501–49000)
-- [ ] Process chunk 99 (lines 49001–49500)
-- [ ] Process chunk 100 (lines 49501–50000)
-- [ ] Process chunk 101 (lines 50001–50500)
-- [ ] Process chunk 102 (lines 50501–51000)
-- [ ] Process chunk 103 (lines 51001–51500)
-- [ ] Process chunk 104 (lines 51501–52000)
-- [ ] Process chunk 105 (lines 52001–52171)
-- [ ] Quality pass and deduplicate across sections
-
 Tasks (2000-line mode)
 - [x] Process chunk 1–2000 (completed via 4×500)
 - [x] Process chunk 2001–4000
 - [x] Process chunk 4001–6000
-- [ ] Process chunk 6001–8000
-- [ ] Process chunk 8001–10000
-- [ ] Process chunk 10001–12000
-- [ ] Process chunk 12001–14000
-- [ ] Process chunk 14001–16000
-- [ ] Process chunk 16001–18000
-- [ ] Process chunk 18001–20000
-- [ ] Process chunk 20001–22000
-- [ ] Process chunk 22001–24000
-- [ ] Process chunk 24001–26000
+- [x] Process chunk 6001–8000
+- [x] Process chunk 8001–10000
+- [x] Process chunk 10001–12000
+- [x] Process chunk 12001–14000
+- [x] Process chunk 14001–16000
+- [x] Process chunk 16001–18000
+- [x] Process chunk 18001–20000
+- [x] Process chunk 20001–22000
+- [x] Process chunk 22001–24000
+- [x] Process chunk 24001–26000
 - [ ] Process chunk 26001–28000
 - [ ] Process chunk 28001–30000
 - [ ] Process chunk 30001–32000
@@ -147,6 +38,61 @@ Tasks (2000-line mode)
 - [ ] Process chunk 50001–52000
 - [ ] Process chunk 52001–52171
 
+Other RustIdiom*.md Task Summary
+
+Source: Insp06RustNotes/RustIdioms_trun_rust_idiom_4.json (10,372 LOC)
+- [x] Process chunk 1–2000
+- [x] Process chunk 2001–4000
+- [x] Process chunk 4001–6000
+- [x] Process chunk 6001–8000
+- [x] Process chunk 8001–10000
+- [x] Process chunk 10001–10372
+- [x] Quality pass for this source
+
+Source: Insp06RustNotes/RustIdioms_trun_rust_idiom_3.json (9,512 LOC)
+- [ ] Process chunk 1–2000
+- [ ] Process chunk 2001–4000
+- [ ] Process chunk 4001–6000
+- [ ] Process chunk 6001–8000
+- [ ] Process chunk 8001–9512
+- [ ] Quality pass for this source
+
+Source: Insp06RustNotes/RustIdioms_trun_rust_idiom_1.json (13,448 LOC)
+- [ ] Process chunk 1–2000
+- [ ] Process chunk 2001–4000
+- [ ] Process chunk 4001–6000
+- [ ] Process chunk 6001–8000
+- [ ] Process chunk 8001–10000
+- [ ] Process chunk 10001–12000
+- [ ] Process chunk 12001–13448
+- [ ] Quality pass for this source
+
+Source: Insp06RustNotes/RustIdioms_trun_rust_idiom_main.txt (28,991 LOC)
+- [ ] Process chunk 1–2000
+- [ ] Process chunk 2001–4000
+- [ ] Process chunk 4001–6000
+- [ ] Process chunk 6001–8000
+- [ ] Process chunk 8001–10000
+- [ ] Process chunk 10001–12000
+- [ ] Process chunk 12001–14000
+- [ ] Process chunk 14001–16000
+- [ ] Process chunk 16001–18000
+- [ ] Process chunk 18001–20000
+- [ ] Process chunk 20001–22000
+- [ ] Process chunk 22001–24000
+- [ ] Process chunk 24001–26000
+- [ ] Process chunk 26001–28000
+- [ ] Process chunk 28001–28991
+- [ ] Quality pass for this source
+
+Source: Insp06RustNotes/RustIdioms_trun_rust_idiom_new.json (9,263 LOC)
+- [ ] Process chunk 1–2000
+- [ ] Process chunk 2001–4000
+- [ ] Process chunk 4001–6000
+- [ ] Process chunk 6001–8000
+- [ ] Process chunk 8001–9263
+- [ ] Quality pass for this source
+
 Measurement methodology
 - Source LOC processed = sum of chunk sizes processed so far
 - Target LOC total and delta computed after each update versus prior revision baseline
@@ -161,7 +107,16 @@ Progress Log
 | 4 | 1501–2000 | 7 | 1109 | 54 | Error libs matrix, FFI unwind safety, iter/IntoIterator, closures bounds, DoubleEnded/Fused, FromIterator | 2025-10-23 |
 | 5 | 2001–4000 | 12 | 1213 | 104 | Containers/iteration deep dive, closure capture, raw identifiers, trait upcasting, coherence | 2025-10-23 |
 | 6 | 4001–6000 | 11 | 1269 | 56 | Cancel safety, panic profiles, capacity planning, BinaryHeap, SmallVec, HashMap/IndexMap, patterns/FFI | 2025-10-23 |
-| 7 | 6001–8000 | 10 | 1321 | 52 | Keywords/editions, HRTBs, GATs, object safety, never type, nullable pointer FFI, IndexMap, heap, async poll | 2025-10-23 |
+|| 7 | 6001–8000 | 10 | 1321 | 52 | Keywords/editions, HRTBs, GATs, object safety, never type, nullable pointer FFI, IndexMap, heap, async poll | 2025-10-23 |
+|| 8 | 8001–10000 | 8 | 1434 | 113 | Snapshot tests, bitvec, evmap, bounded channels/timeouts, runtime choices, structured concurrency, macro hygiene, build.rs codegen | 2025-10-24 |
+|| 9 | 10001–12000 | 8 | 1519 | 85 | Object-safe trait design, async-in-traits patterns, two-phase borrows, aliasing models, MaybeUninit, pin projection, dropck, safety docs | 2025-10-24 |
+|| 10 | 12001–14000 | 8 | 1560 | 41 | Lifetime elision/object lifetimes, E0502 hygiene, dyn vtable invariants, OBRM, std prelude, niche optimizations, pattern ergonomics | 2025-10-24 |
+|| 11 | 14001–16000 | 8 | 1601 | 41 | Macro flavors, tokens/spans/hygiene, syn+quote pipeline, macro erroring, macro_rules repetition, build.rs include!, macro formatting, macro security | 2025-10-24 |
+|| 12 | 16001–18000 | 8 | 1642 | 41 | Borrow-friendly API design, two-phase patterns, aliasing invariants, CLI exit codes, API guidelines (naming/features/sealed), CI gates, dispatch trade-offs, cloning discipline | 2025-10-24 |
+|| 13 | 18001–20000 | 3 | 1685 | 43 | io_uring runtimes (monoio/tokio-uring), parking_lot locks, no_std panic handlers | 2025-10-24 |
+||| 14 | 20001–22000 | 5 | 1727 | 42 | dyn upcasting (1.86), atomic ordering + loom, crossbeam-epoch/AtomicCell, monomorphization bloat management, proc-macro diagnostics | 2025-10-24 |
+|||| 15 | 22001–24000 | 5 | 1792 | 65 | polars lazy/streaming, moka vs cached, sqlx-cli offline, postcard no_std, rayon | 2025-10-24 |
+|||| 16 | 24001–26000 | 5 | 1859 | 67 | scoped threads, crossbeam select!, sync_channel rendezvous, OnceLock/LazyLock, fine-grained visibility/no_implicit_prelude | 2025-10-24 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -715,6 +670,590 @@ A.70 Async Polling Semantics and Waker
 - Use when: building executors or custom futures.
 - Context: respect `Poll::Pending` contract; wake with `Waker` when progress possible.
 - Avoid/Anti-pattern: busy-loop polling; waking without state change.
+
+A.71 Snapshot Testing with expect-test
+- Use when: you want robust, readable golden tests that update intentionally.
+- Context: `expect-test` stores expected output inline and updates via a flag; great for parsers, formatters, analyzers.
+- Avoid/Anti-pattern: brittle string asserts scattered across tests; manual golden files without tooling.
+
+```rust path=null start=null
+use expect_test::expect;
+
+fn render(x: &[u8]) -> String { format!("{:?}", x) }
+
+#[test]
+fn snapshot() {
+    let got = render(&[1,2,3]);
+    expect![["[1, 2, 3]"]].assert_eq(&got);
+    // Run with `EXPECT=overwrite` to update.
+}
+```
+
+A.72 Bit-level Collections with bitvec
+- Use when: pack booleans/bitfields tightly or model protocol layouts.
+- Context: choose order (`Msb0`/`Lsb0`) and store type (`u8/u32`); supports slicing and iteration.
+- Avoid/Anti-pattern: `Vec<bool>` or ad-hoc bit-twiddling without clear layout semantics.
+
+```rust path=null start=null
+use bitvec::prelude::*;
+let mut bits: BitVec<u8, Msb0> = bitvec![0; 16];
+bits.set(3, true);
+assert!(bits[3]);
+```
+
+A.73 Read-Optimized Concurrent Maps (evmap)
+- Use when: reads dominate and must be lock-free; eventual consistency is acceptable.
+- Context: writers update a handle and `refresh()` to publish; readers see snapshots without locking.
+- Avoid/Anti-pattern: `Mutex<HashMap>` on hot read paths; assuming linearizability.
+
+```rust path=null start=null
+let (read, mut write) = evmap::new();
+write.insert("k", 1);
+write.refresh();
+assert_eq!(read.get_and("k", |v| v.iter().copied().collect::<Vec<_>>()), Some(vec![1]));
+```
+
+A.74 Backpressure with Bounded/Rendezvous Channels
+- Use when: producers must slow when consumers lag; avoid unbounded memory growth.
+- Context: `crossbeam_channel::bounded` or `flume::bounded`; use timeouts/deadlines.
+- Avoid/Anti-pattern: unbounded queues in high-throughput services.
+
+```rust path=null start=null
+let (tx, rx) = flume::bounded::<u32>(1024);
+// send with timeout
+if tx.send_timeout(42, std::time::Duration::from_millis(50)).is_err() {
+    // apply backpressure strategy
+}
+```
+
+A.75 Choosing an Async Runtime (tokio/smol/glommio)
+- Use when: selecting the execution model for async I/O.
+- Context: tokio for general-purpose, ecosystem-rich; smol for lightweight single-threaded simplicity; glommio for io_uring and sharded executors.
+- Avoid/Anti-pattern: mixing runtimes in one process without clear isolation.
+
+A.76 Structured Concurrency via Task Scopes
+- Use when: spawned tasks must complete before scope exit and errors must be contained.
+- Context: prefer `tokio::task::scope` (or `task_scope` crate) to avoid detached tasks and leaks.
+- Avoid/Anti-pattern: fire-and-forget tasks that outlive owners; manual join bookkeeping.
+
+```rust path=null start=null
+use tokio::task;
+async fn parent() {
+    task::scope(|s| async move {
+        let h1 = s.spawn(async { /* child */ });
+        let h2 = s.spawn(async { /* child */ });
+        let _ = (h1.await, h2.await);
+    }).await;
+}
+```
+
+A.77 Macro Hygiene with $crate and Absolute Paths
+- Use when: writing `macro_rules!` or proc-macros that refer to crate items robustly.
+- Context: use `$crate::path` or `::std::...` to avoid name resolution surprises; prefer `proc_macro_error` for diagnostics.
+- Avoid/Anti-pattern: relying on local imports inside expansions; unstable identifiers that clash.
+
+```rust path=null start=null
+#[macro_export]
+macro_rules! myvec {
+    ($($x:expr),* $(,)?) => {{
+        let mut v = ::std::vec::Vec::new();
+        $(v.push($x);)*
+        v
+    }};
+}
+```
+
+A.78 Build Script Codegen and include!(OUT_DIR)
+- Use when: generate bindings or code at build time (e.g., bindgen, version info).
+- Context: write artifacts under `OUT_DIR` and `include!` them; declare `cargo::rerun-if-changed` inputs.
+- Avoid/Anti-pattern: writing outside `OUT_DIR`; non-deterministic generation that breaks reproducibility.
+
+```rust path=null start=null
+// build.rs
+use std::{env, fs, path::PathBuf};
+fn main() {
+    let out: PathBuf = env::var_os("OUT_DIR").unwrap().into();
+    fs::write(out.join("generated.rs"), "pub const V: &str = \"1.0\";").unwrap();
+    println!("cargo::rerun-if-changed=build.rs");
+}
+```
+
+```rust path=null start=null
+// lib.rs
+include!(concat!(env!("OUT_DIR"), "/generated.rs"));
+```
+
+A.79 Trait Objects: Dispatchable vs Non-Dispatchable Methods
+- Use when: designing traits for dynamic dispatch while keeping rich APIs.
+- Context: object safety requires dispatchable receivers (`&self`, `&mut self`, `Box<Self>`, `Rc<Self>`, `Arc<Self>`, `Pin<P>`). Mark helpers `where Self: Sized` to keep them off trait objects.
+- Avoid/Anti-pattern: generics on methods, `Self` in returns, `impl Trait` returns on object-safe traits.
+
+```rust path=null start=null
+trait DynOk {
+  fn do_it(&self);
+  // not on dyn objects; callable only on concrete types
+  fn into_inner(self) where Self: Sized; 
+}
+```
+
+A.80 Async in Traits: AFIT vs async-trait
+- Use when: declaring async behavior in traits.
+- Context: prefer stable `async fn` in traits for static dispatch; for dynamic dispatch, return `Pin<Box<dyn Future<Output = T> + Send>>` or use `async-trait` with the boxing cost; be explicit about `Send` bounds.
+- Avoid/Anti-pattern: assuming async trait methods are dyn-compatible; mixing boxed and inlined futures silently.
+
+```rust path=null start=null
+use core::future::Future;
+trait Fetch {
+  async fn get(&self, k: &str) -> Vec<u8>; // static dispatch
+}
+// dynamic dispatch alternative
+trait FetchDyn {
+  fn get(&self, k: &str) -> Pin<Box<dyn Future<Output = Vec<u8>> + Send + '_>>;
+}
+```
+
+A.81 Two-Phase Borrowing Awareness (Nested &mut calls)
+- Use when: APIs perform nested calls like `vec.push(vec.len())`.
+- Context: a mutable borrow can be reserved then activated; ensure intermediate shared borrows die before activation; avoid keeping references alive across the activation point.
+- Avoid/Anti-pattern: relying on UB-y patterns that assume immediate uniqueness.
+
+```rust path=null start=null
+let mut v = vec![1];
+// OK: len() borrow ends before push activates the &mut
+v.push(v.len());
+```
+
+A.82 Unsafe Aliasing Models: Stacked vs Tree Borrows (mental model)
+- Use when: writing unsafe/FFI code involving raw pointers/reborrows.
+- Context: `&mut` implies uniqueness; reads/writes via unrelated pointers can invalidate references; prefer setting up raw pointers before writes; use Miri to validate.
+- Avoid/Anti-pattern: aliasing writes through raw pointers while shared refs exist.
+
+A.83 MaybeUninit Correctness
+- Use when: manual initialization for performance or FFI.
+- Context: never create refs to uninitialized memory; write with `ptr::write`, call `assume_init` only after full init; consider `MaybeUninit<[T; N]>` for uninit arrays.
+- Avoid/Anti-pattern: `assume_init_mut` followed by reads before initialization.
+
+```rust path=null start=null
+use std::{mem::MaybeUninit, ptr};
+let mut buf: MaybeUninit<[u8; 4]> = MaybeUninit::uninit();
+let p = buf.as_mut_ptr() as *mut u8;
+unsafe { ptr::write(p, 1); ptr::write(p.add(1), 2); ptr::write(p.add(2), 3); ptr::write(p.add(3), 4); }
+let arr = unsafe { buf.assume_init() };
+```
+
+A.84 Pin Projection and pin-project-lite
+- Use when: types need pinned self with pinned fields.
+- Context: use `pin-project-lite` (or `pin-project`) to safely project pinned fields; keep invariants when implementing `Future::poll`.
+- Avoid/Anti-pattern: manual `Pin::new_unchecked` field projection without proof.
+
+```rust path=null start=null
+use pin_project_lite::pin_project;
+pin_project! {
+  struct Task { #[pin] fut: impl Future<Output = ()> }
+}
+```
+
+A.85 Drop Check and Generic Drop Soundness
+- Use when: implementing `Drop` for generic types.
+- Context: ensure generic params outlive `self` on drop; avoid holding references into shorter-lived data in structs with `Drop`.
+- Avoid/Anti-pattern: hidden self-referential borrows that make `dropck` unsound.
+
+A.86 SAFETY Documentation and Miri in CI
+- Use when: authoring `unsafe`.
+- Context: document invariants with `// SAFETY:`; run `cargo +nightly miri test` in CI for UB detection; prefer smallest unsafe blocks, encapsulated behind safe APIs.
+- Avoid/Anti-pattern: sprawling `unsafe` with no justification; unsound public `unsafe fn` contracts.
+
+A.87 Structured Concurrency with JoinSet
+- Use when: run and manage many tasks that must end with the parent.
+- Context: `tokio::task::JoinSet` owns children; dropping it cancels outstanding tasks; loop `join_next().await` to drain.
+- Avoid/Anti-pattern: detached tasks leaking beyond scope.
+
+```rust path=null start=null
+use tokio::task::JoinSet;
+let mut set = JoinSet::new();
+for i in 0..10 { set.spawn(async move { i }); }
+while let Some(res) = set.join_next().await { let _ = res?; }
+```
+
+A.88 Feature Flags Must Be Additive
+- Use when: designing Cargo features.
+- Context: avoid mutually-exclusive features; document effects; use `dep:` to decouple names; guard with `#[cfg(feature = "foo")]`.
+- Avoid/Anti-pattern: feature combos that break due to removal/incompatibility.
+
+```toml path=null start=null
+[features]
+serde = ["dep:serde"]
+fast = []
+```
+
+A.89 Doctest Contracts: Errors/Panics/Safety Sections
+- Use when: documenting public APIs.
+- Context: include `# Errors`, `# Panics`, `# Safety` where applicable; ensure examples compile and assert behavior.
+- Avoid/Anti-pattern: undocumented panics or unsafe preconditions.
+
+```rust path=null start=null
+/// Parses input.
+/// # Errors
+/// Returns Err if input is invalid.
+pub fn parse(_s: &str) -> Result<(), Error> { Ok(()) }
+```
+
+A.90 Fallible Iterator Pipelines (try_collect/try_fold)
+- Use when: error-aware transforms.
+- Context: `Iterator<Item = Result<T,E>>` -> `Result<Vec<T>,E>` via `collect`; use `try_fold`/`try_for_each` to short-circuit on first error.
+- Avoid/Anti-pattern: manual unwraps inside maps.
+
+```rust path=null start=null
+let items: Vec<Result<u32, &'static str>> = vec![Ok(1), Ok(2)];
+let ok: Result<Vec<_>, _> = items.into_iter().collect();
+```
+
+A.91 Unsafe Encapsulation with Minimal Surface + Miri
+- Use when: providing safe wrappers over unsafe code/FFI.
+- Context: make unsafe internals private; add `// SAFETY:` comments; validate with Miri/sanitizers.
+- Avoid/Anti-pattern: exposing raw pointers directly in public APIs.
+
+A.92 API Prelude Re-exports
+- Use when: improve ergonomics for frequent traits/types.
+- Context: expose `prelude` with `pub use` of common items; keep internal modules private.
+- Avoid/Anti-pattern: deep import paths for essential traits.
+
+```rust path=null start=null
+pub mod prelude { pub use crate::{MyTrait, KeyType}; }
+```
+
+A.93 Lifetime Elision Rules in Public APIs
+- Use when: writing function signatures with references.
+- Context: rely on elision for simple cases; add explicit lifetimes when outputs cannot be inferred or when multiple inputs exist; avoid returning references detached from inputs.
+- Avoid/Anti-pattern: ambiguous signatures like `fn frob(s: &str, t: &str) -> &str` without lifetimes.
+
+A.94 Trait Object Lifetimes and Default Bounds
+- Use when: using `dyn Trait` references.
+- Context: understand default object lifetime bound; specify `&'a dyn Trait` when needed; avoid accidental `'static` in trait objects.
+- Avoid/Anti-pattern: assuming trait object lifetimes are inferred as desired without annotation.
+
+A.95 Borrow Conflict Hygiene (E0502)
+- Use when: mixing shared and mutable borrows.
+- Context: shorten borrows with inner scopes; create temporaries so shared borrows end before `&mut` activation; split struct borrows when needed.
+- Avoid/Anti-pattern: long-lived shared borrows that overlap upcoming `&mut` operations.
+
+A.96 Dyn Vtable Invariants and Raw Trait Objects
+- Use when: interfacing with `dyn Trait` and raw pointers.
+- Context: never fabricate vtables; avoid leaking raw trait-object pointers; prefer safe coercions and upcasting where available.
+- Avoid/Anti-pattern: constructing invalid fat pointers or transmuting between unrelated `dyn` types.
+
+A.97 OBRM (RAII) Resource Guards
+- Use when: acquiring OS/file/lock resources.
+- Context: acquire in constructor; release in `Drop`; keep guards short-lived; model ownership explicitly.
+- Avoid/Anti-pattern: manual free/close without RAII; sharing guards beyond necessary scope.
+
+A.98 Language/Std Prelude Awareness
+- Use when: relying on items in scope by default.
+- Context: know what the language/std prelude brings; avoid shadowing common items; re-export crate preludes judiciously.
+- Avoid/Anti-pattern: redundant `use` of prelude items; conflicting names hiding standard traits.
+
+A.99 Niche Optimization with NonZero and Option
+- Use when: optimize enum sizes.
+- Context: use `NonZero*` and `Option<NonZero*>` or `Option<NonNull<T>>` to keep size equal to primitive/pointer; document layouts only when required.
+- Avoid/Anti-pattern: sentinel integers in FFI or home-grown nullable encodings when the type system provides niches.
+
+A.100 Match and Pattern Ergonomics
+- Use when: matching references; prefer clear bindings.
+- Context: be explicit with `ref`/`ref mut` as needed; beware edition changes; keep patterns readable over overly clever ergonomics.
+- Avoid/Anti-pattern: relying on implicit ref patterns that obscure mutability and ownership.
+
+A.101 Choosing Macro Flavors (derive/attribute/function-like)
+- Use when: determining macro type for a task.
+- Context: prefer derive for generating impls from type structure; attribute macros to transform or wrap items; function-like for DSLs/codegen where call-site granularity is desired.
+- Avoid/Anti-pattern: using proc-macros when macro_rules! suffices; heavy proc-macro logic that can be done in build.rs.
+
+A.102 TokenStreams, Spans, and Hygiene Discipline
+- Use when: building procedural macros.
+- Context: operate on TokenStreams; attach meaningful Spans to preserve error locations; use absolute paths (`::std::...`) to avoid name resolution surprises; unique internal names.
+- Avoid/Anti-pattern: leaking local imports into expansions; panicking instead of emitting compile_error!.
+
+A.103 syn + quote + proc-macro2 Pipeline
+- Use when: parsing and generating Rust in proc-macros.
+- Context: parse with syn, construct tokens with quote!, and target proc-macro2 to test outside proc-macro crates; keep AST transforms minimal and predictable.
+- Avoid/Anti-pattern: manual string concatenation to build code; relying on unstable compiler internals.
+
+A.104 Robust Macro Error Reporting
+- Use when: signaling misuse or invalid input.
+- Context: prefer `compile_error!` with helpful messages; attach Spans to the exact offending tokens; avoid `panic!` which surfaces as opaque errors.
+- Avoid/Anti-pattern: cryptic errors without spans; swallowing errors and generating broken code.
+
+A.105 macro_rules! Repetition and Fragment Specs
+- Use when: writing declarative macros.
+- Context: use `$( ... )*`/`+` with separators; select correct fragment spec (`expr`, `ty`, `path`, `ident`, `tt`); keep matchers simple and layered.
+- Avoid/Anti-pattern: over-greedy matchers; ambiguous patterns that require deep backtracking.
+
+A.106 Build Scripts: OUT_DIR + include!
+- Use when: compile-time codegen/bindings.
+- Context: write artifacts to `OUT_DIR`, print `cargo::rerun-if-changed=...` for inputs, and include with `include!(concat!(env!("OUT_DIR"), "/file.rs"))`.
+- Avoid/Anti-pattern: writing outside `OUT_DIR`; missing rerun hints causing unnecessary or missing rebuilds.
+
+A.107 Formatting and Macros
+- Use when: large macro bodies or DSLs impact formatting.
+- Context: configure rustfmt options (format_macro_bodies/matchers, skip lists) judiciously; prefer readable macro expansions and tests.
+- Avoid/Anti-pattern: disabling all formatting; relying on formatting-sensitive macro bodies.
+
+A.108 Macro Security and Performance
+- Use when: designing macro-heavy APIs.
+- Context: be mindful that proc-macros run at compile time with filesystem access; constrain surface area; document costs; avoid quadratic token growth.
+- Avoid/Anti-pattern: hidden heavy codegen surprising users; reading arbitrary files without rerun guards.
+
+A.109 Borrow-Checker-Friendly API Design
+- Use when: exposing methods that mix reads and writes.
+- Context: structure code so shared borrows end before `&mut` activation; create temporaries; use smaller scopes to avoid E0502 conflicts.
+- Avoid/Anti-pattern: long-lived shared borrows overlapping imminent mutable operations.
+
+A.110 Two-Phase Borrow Patterns in Public APIs
+- Use when: methods take `&mut self` and perform nested calls.
+- Context: ensure intermediate borrows do not escape to callers; document expectations; avoid relying on subtle two-phase details across crate boundaries.
+- Avoid/Anti-pattern: exposing APIs that require specific compiler lowering to be sound.
+
+A.111 Unsafe Aliasing Invariants for `&`/`&mut`
+- Use when: writing unsafe code around pointers and references.
+- Context: `&mut` implies uniqueness; `&` implies immutability (outside `UnsafeCell`); set up raw pointers before writes; validate with Miri.
+- Avoid/Anti-pattern: writing through raw pointers while shared refs are live.
+
+A.112 CLI Exit Codes and Termination
+- Use when: designing CLIs that must signal failure.
+- Context: use `Result<(), E>` return from `main` (Termination), `std::process::ExitCode`, or `std::process::exit`; print helpful errors.
+- Avoid/Anti-pattern: panicking for expected user errors; inconsistent nonzero codes.
+
+A.113 API Guidelines: Naming, Features, and Sealed Traits
+- Use when: stabilizing public APIs.
+- Context: follow C-CASE conventions; make features additive (no `no-foo`), avoid `use-`/`with-` prefixes; use sealed traits to control external impls.
+- Avoid/Anti-pattern: breaking SemVer via trait changes; mutually exclusive features.
+
+A.114 CI Quality Gates: fmt, clippy, doctests, coverage
+- Use when: enforcing quality in CI.
+- Context: `cargo fmt --check`, `cargo clippy -D warnings`, run doctests, use `nextest` and `llvm-cov`/`grcov`; add `cargo-deny` and SemVer checks.
+- Avoid/Anti-pattern: allowing warnings; untested examples; unaudited dependencies.
+
+A.115 Dynamic vs Static Dispatch Trade-offs
+- Use when: choosing generics vs `dyn Trait`.
+- Context: prefer generics on hot paths; use trait objects for heterogenous collections or plugin boundaries; document `Send/Sync` as needed.
+- Avoid/Anti-pattern: premature boxing/dynamic dispatch; monomorphization bloat from excessive generics.
+
+A.116 Avoid Unnecessary Cloning; Prefer Borrowing and Shared Ownership Wisely
+- Use when: eliminating needless allocations.
+- Context: borrow where possible; choose `Rc/Arc` when multiple owners are required; avoid “clone to satisfy the borrow checker”.
+- Avoid/Anti-pattern: cloning large structures gratuitously; using `Arc` uniformly instead of designing ownership.
+
+A.117 Fast Synchronization with parking_lot
+- Use when: you need smaller, faster locks than std on contended paths.
+- Context: `parking_lot::{Mutex,RwLock,Condvar,Once}` offer compact types, fast uncontended paths, adaptive spinning, and optional deadlock detection; semantics differ slightly (e.g., poisoning behavior) from std.
+- Avoid/Anti-pattern: mixing `std::sync` and `parking_lot` guards; assuming identical poisoning/fairness semantics; using on platforms where std primitives are required by dependencies.
+
+```rust path=null start=null
+use parking_lot::{Mutex, RwLock};
+static DATA: Mutex<Vec<u8>> = Mutex::new(Vec::new());
+let mut g = DATA.lock();
+g.push(1);
+```
+
+A.118 io_uring-backed Runtimes (monoio/tokio-uring)
+- Use when: Linux (>=5.11) high-throughput, I/O-bound servers benefit from kernel async I/O.
+- Context: `monoio` favors thread-per-core and non-`Send` tasks; `tokio-uring` integrates with Tokio-backed resources; benchmark on your workload and gate behind features.
+- Avoid/Anti-pattern: mixing runtimes without isolation; assuming portability to non-Linux; using when epoll/kqueue suffices.
+
+```rust path=null start=null
+// monoio example
+ofn main() -> monoio::Result<()> {
+    monoio::RuntimeBuilder::new().enable_timer().build()?.block_on(async move {
+        // use monoio::net for io_uring-backed sockets/files
+        Ok(())
+    })
+}
+```
+
+A.119 no_std Panic Handling
+- Use when: building embedded/`no_std` binaries where unwind behavior is undefined.
+- Context: define a single `#[panic_handler]` to choose reset/log/LED-blink, etc.; do not unwind; keep handler minimal and non-allocating.
+- Avoid/Anti-pattern: relying on default panic in `no_std`; performing blocking I/O without watchdog considerations.
+
+```rust path=null start=null
+#![no_std]
+use core::panic::PanicInfo;
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    // signal fault, then halt
+    loop {}
+}
+```
+
+A.120 Native dyn Upcasting (Rust 1.86+)
+- Use when: a trait has a supertrait and you need `&dyn Sub` -> `&dyn Super` (also works for Box/Arc/raw pointers).
+- Context: prefer built-in upcasting over custom `as_super()` shims; remove redundant helper methods; never fabricate raw trait-object pointers or vtables—Miri flags invalid metadata.
+- Avoid/Anti-pattern: manual transmute/coercions for upcasting; leaking raw trait-object pointers.
+
+```rust path=null start=null
+trait Super {}
+trait Sub: Super {}
+fn take_super(x: &dyn Sub) -> &dyn Super { x }
+```
+
+A.121 Atomic Ordering Hygiene + Loom
+- Use when: writing lock-free code with atomics; verify interleavings deterministically.
+- Context: default to Acquire/Release for hand-over-hand patterns; use Relaxed only with proven invariants; fences sparingly; model with `loom::model` to explore schedules (note Loom treats SeqCst ops as AcqRel, but `fence(SeqCst)` is supported).
+- Avoid/Anti-pattern: SeqCst everywhere; assuming a particular schedule; non-determinism in loom tests.
+
+```rust path=null start=null
+use loom::{sync::{Arc, atomic::{AtomicUsize, Ordering::*}}, thread};
+loom::model(|| {
+  let n = Arc::new(AtomicUsize::new(0));
+  let a = n.clone(); thread::spawn(move || { let cur = a.load(Acquire); a.store(cur+1, Release); });
+  let b = n.clone(); thread::spawn(move || { let cur = b.load(Acquire); b.store(cur+1, Release); });
+});
+```
+
+A.122 Lock-free Building Blocks (crossbeam-epoch, AtomicCell)
+- Use when: implementing concurrent data structures without locks.
+- Context: use epoch-based reclamation (`crossbeam-epoch`) to defer frees safely; `AtomicCell<T: Copy>` for simple shared mutable slots; document hazards and MSRV.
+- Avoid/Anti-pattern: manual hazard-pointer schemes; ad-hoc reclamation; mixing GC domains.
+
+A.123 Managing Monomorphization Bloat
+- Use when: generics inflate compile times or binary size.
+- Context: prefer generics on hot paths; use `dyn Trait` at API boundaries and for rarely-used code paths; consider feature flags to switch dispatch; measure impact.
+- Avoid/Anti-pattern: blanket generics across public APIs without need; premature boxing in inner loops.
+
+A.124 Procedural Macro Diagnostics (proc-macro-error)
+- Use when: writing proc-macros that must report errors precisely.
+- Context: prefer `proc_macro_error` to emit span-rich diagnostics; avoid `panic!`; combine with `syn`/`quote` pipeline.
+- Avoid/Anti-pattern: cryptic panics; missing spans; swallowing multiple errors.
+
+A.125 DataFrames with Polars (lazy + streaming)
+- Use when: columnar analytics over large datasets.
+- Context: prefer `polars-lazy` for query planning and parallel execution; use streaming/out-of-core where memory-bound; tune via documented env vars only when needed.
+- Avoid/Anti-pattern: eager DataFrame ops on huge tables; relying on env knobs instead of fixing query plans.
+
+```rust path=null start=null
+use polars::prelude::*;
+let df = df!("a" => &[1,2,3], "b" => &[4,5,6])?;
+let out = df.lazy()
+    .groupby([col("a")])
+    .agg([col("b").sum()])
+    .collect()?;
+```
+
+A.126 Caching: moka (concurrent) vs cached (memoization)
+- Use when: reduce recomputation or expensive I/O.
+- Context: `moka::Cache` for concurrent TTL/LRU caches; `cached` macros for function-level memoization; bound size/TTL and observe memory use.
+- Avoid/Anti-pattern: unbounded caches; caching non-deterministic results; stale reads without TTL.
+
+```rust path=null start=null
+use moka::sync::Cache;
+let cache = Cache::builder().max_capacity(10_000).build();
+cache.insert("k", 1);
+if let Some(v) = cache.get("k") { /* ... */ }
+```
+
+```rust path=null start=null
+#[cached::cached(size=128)]
+fn fib(n: u64) -> u64 { /* ... */ n }
+```
+
+A.127 SQLx CLI and Offline Mode
+- Use when: manage migrations and build offline `query!`.
+- Context: use `sqlx migrate add/run`; set `DATABASE_URL` for CLI; enable offline preparation in CI to avoid DB at build time.
+- Avoid/Anti-pattern: ad-hoc SQL without migrations; building with online macros in hermetic CI.
+
+```sh path=null start=null
+sqlx migrate add init
+sqlx migrate run --database-url=${DATABASE_URL}
+```
+
+A.128 postcard for no_std serialization
+- Use when: serde in embedded/no_std contexts.
+- Context: prefer fixed buffers with `to_slice`/`from_bytes`; avoid heap where possible; validate sizes.
+- Avoid/Anti-pattern: allocating in tight ISR paths; trusting unverified input.
+
+```rust path=null start=null
+#![no_std]
+use postcard::{to_slice, from_bytes};
+let mut buf = [0u8; 64];
+let written: &mut [u8] = to_slice(&my_struct, &mut buf)?;
+let round: My = from_bytes(written)?;
+```
+
+A.129 Rayon for CPU data parallelism
+- Use when: CPU-bound loops over large collections.
+- Context: replace hot sequential loops with `into_par_iter()`; keep work items independent/pure; measure speedups.
+- Avoid/Anti-pattern: parallelizing tiny tasks; holding locks inside parallel iterators.
+
+```rust path=null start=null
+use rayon::prelude::*;
+let sum: i64 = (0..1_000_000i64).into_par_iter().sum();
+```
+
+A.130 Scoped Threads for Non-'static Borrows
+- Use when: you need threads to temporarily borrow data without `'static` lifetimes.
+- Context: use `std::thread::scope` to spawn threads that borrow from the parent; all threads must finish before the scope exits.
+- Avoid/Anti-pattern: forcing `Arc<Mutex<_>>` solely to satisfy `'static` when simple borrowing suffices; leaking threads beyond scope.
+
+```rust path=null start=null
+use std::thread;
+let mut v = vec![1, 2, 3];
+thread::scope(|s| {
+    s.spawn(|| { /* read-only borrow is fine */ });
+    s.spawn(|| { /* can borrow &mut v in disjoint regions via interior logic */ });
+    s.spawn(|| println!("len = {}", v.len()));
+}); // all threads joined here; v is still valid
+```
+
+A.131 MPMC with crossbeam-channel and select!
+- Use when: need fast multi-producer multi-consumer channels and multiplexing across events.
+- Context: choose `bounded` for backpressure or `unbounded` for buffering; use `select!` to await on multiple receivers/timeouts; handle disconnection.
+- Avoid/Anti-pattern: relying on `std::sync::mpsc` for complex concurrent topologies; unbounded channels in high-throughput pipelines without limits.
+
+```rust path=null start=null
+use crossbeam_channel::{bounded, select, tick};
+let (tx, rx) = bounded::<u32>(1024);
+let ticker = tick(std::time::Duration::from_millis(10));
+loop {
+    select! {
+        recv(rx) -> msg => if let Ok(x) = msg { /* handle */ } else { break },
+        recv(ticker) -> _ => { /* periodic work */ },
+        default(Duration::from_millis(1)) => { /* do other work */ }
+    }
+}
+```
+
+A.132 Rendezvous Backpressure with sync_channel
+- Use when: producer must block until consumer receives (rendezvous) or when a small bounded buffer is required.
+- Context: `std::sync::mpsc::sync_channel(0)` for strict rendezvous; use small capacities to throttle producers.
+- Avoid/Anti-pattern: large unbounded queues that hide overload; busy-waiting when blocking semantics are desired.
+
+```rust path=null start=null
+use std::sync::mpsc;
+let (tx, rx) = mpsc::sync_channel::<String>(0); // rendezvous
+std::thread::spawn(move || { tx.send("hello".into()).ok(); });
+let msg = rx.recv().unwrap();
+```
+
+A.133 One-time Initialization: OnceLock, LazyLock, and once_cell
+- Use when: initialize globals or expensive state exactly once without races.
+- Context: prefer `std::sync::OnceLock`/`LazyLock` on stable; `once_cell` for older MSRV or extra APIs; expose getters returning `&'static T`.
+- Avoid/Anti-pattern: `lazy_static!` when `OnceLock`/`LazyLock` suffices; re-initializing via interior mutability.
+
+```rust path=null start=null
+use std::sync::OnceLock;
+static CONFIG: OnceLock<String> = OnceLock::new();
+fn config() -> &'static str { CONFIG.get_or_init(|| "default".to_string()) }
+```
+
+A.134 Fine-grained Visibility and Prelude Control
+- Use when: structuring large libraries with clear internal boundaries or avoiding implicit imports.
+- Context: use `pub(crate)`, `pub(super)`, and `pub(in path)` to scope items precisely; apply `#![no_implicit_prelude]` in modules that require explicit paths (e.g., macro internals).
+- Avoid/Anti-pattern: defaulting to `pub` broadly; relying on implicit preludes in macros leading to hygiene issues.
+
+```rust path=null start=null
+pub mod outer { 
+    pub(in crate::outer) fn only_outer() {}
+}
+```
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
