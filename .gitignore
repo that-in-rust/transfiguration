@@ -246,49 +246,51 @@ docker-compose.override.yml
 .docker/
 
 # =============================================================================
-# 13. PROJECT SPECIFIC - tempPOC DIRECTORY
+# 13. PROJECT SPECIFIC - A03Artifacts DIRECTORY
 # =============================================================================
-# tempPOC build artifacts
-tempPOC/target/
-tempPOC/Cargo.lock
+# A03Artifacts contains large model files and build outputs
+A03Artifacts/
+!A03Artifacts/*.md
+!A03Artifacts/*.txt
 
-# tempPOC model files (exclude all large models)
-tempPOC/*.onnx
-tempPOC/*.safetensors
-tempPOC/*.bin
-tempPOC/*.pt
-tempPOC/*.pth
-tempPOC/*.zip
-tempPOC/*.tar.gz
+# A02OSSToolsPOC build artifacts
+A02OSSToolsPOC/*/target/
+A02OSSToolsPOC/*/Cargo.lock
 
-# tempPOC model directories
-tempPOC/models/
-tempPOC/full_tokio_run/models/
-!tempPOC/models/*.rs
-!tempPOC/models/*.md
-!tempPOC/full_tokio_run/models/*.rs
-!tempPOC/full_tokio_run/models/*.md
-!tempPOC/full_tokio_run/models/*.txt
+# A02OSSToolsPOC model files (exclude all large models)
+A02OSSToolsPOC/*/*.onnx
+A02OSSToolsPOC/*/*.safetensors
+A02OSSToolsPOC/*/*.bin
+A02OSSToolsPOC/*/*.pt
+A02OSSToolsPOC/*/*.pth
+A02OSSToolsPOC/*/*.zip
+A02OSSToolsPOC/*/*.tar.gz
 
-# tempPOC build outputs
-tempPOC/outputs/
-tempPOC/chunks/
-tempPOC/cache/
-tempPOC/target/
+# A02OSSToolsPOC model directories
+A02OSSToolsPOC/*/models/
+!A02OSSToolsPOC/*/models/*.rs
+!A02OSSToolsPOC/*/models/*.md
+!A02OSSToolsPOC/*/models/*.txt
 
-# tempPOC logs and temp files
-tempPOC/*.log
-tempPOC/tmp/
-tempPOC/temp/
+# A02OSSToolsPOC build outputs
+A02OSSToolsPOC/*/outputs/
+A02OSSToolsPOC/*/chunks/
+A02OSSToolsPOC/*/cache/
+A02OSSToolsPOC/*/target/
 
-# tempPOC test outputs
-tempPOC/tests/output/
-tempPOC/coverage/
+# A02OSSToolsPOC logs and temp files
+A02OSSToolsPOC/*/*.log
+A02OSSToolsPOC/*/tmp/
+A02OSSToolsPOC/*/temp/
 
-# tempPOC editor files
-tempPOC/.vscode/
-tempPOC/.idea/
-tempPOC/*.sublime-workspace
+# A02OSSToolsPOC test outputs
+A02OSSToolsPOC/*/tests/output/
+A02OSSToolsPOC/*/coverage/
+
+# A02OSSToolsPOC editor files
+A02OSSToolsPOC/*/.vscode/
+A02OSSToolsPOC/*/.idea/
+A02OSSToolsPOC/*/*.sublime-workspace
 
 # =============================================================================
 # 14. ARCHIVED DIRECTORIES (never commit these)

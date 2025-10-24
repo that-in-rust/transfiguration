@@ -1,0 +1,17 @@
+[workspace]
+members = [
+    "A02OSSToolsPOC/dobby-subagent-code-summarizer"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Amul <amul@example.com>"]
+description = "Transfiguration - OSS Tools for AI-powered code analysis"
+
+[workspace.dependencies]
+# Shared dependencies can be defined here
+tokio = { version = "1.35", features = ["full"] }
+anyhow = "1.0"
+thiserror = "1.0"
