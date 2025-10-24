@@ -201,4 +201,14 @@ Insp04_DownloadAnalysis/*
 # Cloned repositories for analysis (completely excluded)
 parseltongue/
 zed/
+
+# Large analysis directories (archived in zzArchive202510)
 Insp04_DownloadAnalysis/
+Insp09_ActiveWorkspaces_StrategicInitiatives/
+Insp10ParselTongue and Pensieve Design/
+Insp11MVP/
+deconstructor/
+downloads-for-analysis/
+
+# Keep only active working project
+!tempPOC/full_tokio_run/
