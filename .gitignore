@@ -97,28 +97,59 @@ jspm_packages/
 # FuseBox cache
 .fusebox/
 
-# tempPOC directory specific ignores
+# tempPOC directory specific rules
+# ================================
+
+# Rust build artifacts
 tempPOC/target/
 tempPOC/Cargo.lock
 
-# Model files
+# Model files and weights
 tempPOC/*.onnx
 tempPOC/*.bin
+tempPOC/*.pt
+tempPOC/*.pth
 tempPOC/*.zip
+tempPOC/*.tar.gz
 
+# Model directories (except Rust source files)
 tempPOC/models/
 !tempPOC/models/*.rs
 
-# Build and output directories
+# Build outputs and caches
 tempPOC/outputs/
 tempPOC/chunks/
+tempPOC/.cargo/
 
-# Keep source code but ignore large files
+# Keep source code structure but ignore large files
 tempPOC/src/**/*.rs
 !tempPOC/src/
 
-# Test outputs
+# Test outputs and coverage
 tempPOC/tests/output/
+tempPOC/coverage/
+
+# Editor and IDE specific files
+tempPOC/.vscode/
+tempPOC/.idea/
+tempPOC/*.sublime-workspace
+
+# Logs and temporary files
+tempPOC/*.log
+tempPOC/tmp/
+
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter notebooks
+*.ipynb_checkpoints
+
+# Environment files
+.env
+.env.*
+!.env.example
 
 # OS generated files
 .DS_Store
