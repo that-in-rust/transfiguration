@@ -76,3 +76,13 @@ impl From<ort::Error> for ProcessingError {
         ProcessingError::OrtError(err.to_string())
     }
 }
+
+/// Convert from our new InferenceError to existing ProcessingError
+impl From<crate::t5_inference_contract::InferenceError> for ProcessingError {
+    fn from(err: crate::t5_inference_contract::InferenceError) -> Self {
+        ProcessingError::InferenceFailed {
+            chunk_id: 0, // Will be overridden if provided
+            message: format!("Inference error: {}", err),
+        }
+    }
+}
