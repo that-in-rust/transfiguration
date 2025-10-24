@@ -23,11 +23,11 @@ Tasks (2000-line mode)
 - [x] Process chunk 20001–22000
 - [x] Process chunk 22001–24000
 - [x] Process chunk 24001–26000
-- [ ] Process chunk 26001–28000
-- [ ] Process chunk 28001–30000
-- [ ] Process chunk 30001–32000
-- [ ] Process chunk 32001–34000
-- [ ] Process chunk 34001–36000
+- [x] Process chunk 26001–28000
+- [x] Process chunk 28001–30000
+- [x] Process chunk 30001–32000
+- [x] Process chunk 32001–34000
+- [x] Process chunk 34001–36000
 - [ ] Process chunk 36001–38000
 - [ ] Process chunk 38001–40000
 - [ ] Process chunk 40001–42000
@@ -116,7 +116,12 @@ Progress Log
 || 13 | 18001–20000 | 3 | 1685 | 43 | io_uring runtimes (monoio/tokio-uring), parking_lot locks, no_std panic handlers | 2025-10-24 |
 ||| 14 | 20001–22000 | 5 | 1727 | 42 | dyn upcasting (1.86), atomic ordering + loom, crossbeam-epoch/AtomicCell, monomorphization bloat management, proc-macro diagnostics | 2025-10-24 |
 |||| 15 | 22001–24000 | 5 | 1792 | 65 | polars lazy/streaming, moka vs cached, sqlx-cli offline, postcard no_std, rayon | 2025-10-24 |
-|||| 16 | 24001–26000 | 5 | 1859 | 67 | scoped threads, crossbeam select!, sync_channel rendezvous, OnceLock/LazyLock, fine-grained visibility/no_implicit_prelude | 2025-10-24 |
+||||| 16 | 24001–26000 | 5 | 1859 | 67 | scoped threads, crossbeam select!, sync_channel rendezvous, OnceLock/LazyLock, fine-grained visibility/no_implicit_prelude | 2025-10-24 |
+||||| 17 | 26001–28000 | 5 | 1925 | 66 | miette diagnostics, thread naming + join, fn pointer params, FromIterator explicit, atomics + fences | 2025-10-24 |
+||||| 18 | 28001–30000 | 5 | 1990 | 65 | repr(C)/transparent/enum reprs, #[non_exhaustive], 2024 pattern ergonomics, FFI nullability+C-unwind, collections/capacity choices | 2025-10-24 |
+||||| 19 | 30001–32000 | 5 | 2055 | 65 | diesel migrations+type-safe queries, build.rs rerun-if/link/cfg, -sys + links, rustup toolchain pinning, cargo workspace/config | 2025-10-24 |
+||||| 20 | 32001–34000 | 5 | 2106 | 51 | proc-macro discipline, global allocator choice, LTO/PGO/inlining, cargo-llvm-cov coverage, fuzzing + property tests | 2025-10-24 |
+||||| 21 | 34001–36000 | 5 | 2137 | 31 | specialization caution, coherence/orphan rules, repr align/packed, enum repr/discriminant, associated types | 2025-10-24 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -1254,6 +1259,279 @@ pub mod outer {
     pub(in crate::outer) fn only_outer() {}
 }
 ```
+
+A.135 Source-annotated Diagnostics with miette
+- Use when: you need rich, span-labeled error reports for end users or CLI tools.
+- Context: derive `Diagnostic` on your error types, attach `#[source_code]` and `#[label]`/`#[related]` to emit snippets; keep this in binaries, not libraries.
+- Avoid/Anti-pattern: using `miette` types in public library APIs; emitting unlabeled, context-free errors.
+
+```rust path=null start=null
+use miette::{Diagnostic, Result, SourceSpan};
+use thiserror::Error;
+
+#[derive(Debug, Error, Diagnostic)]
+#[error("parse error")]
+struct ParseErr {
+  #[source_code]
+  src: String,
+  #[label("here")] span: SourceSpan,
+}
+
+fn parse(_s: &str) -> Result<()> { Err(ParseErr { src: "x+y".into(), span: (2..3).into() }.into()) }
+```
+
+A.136 Thread Naming and Join Discipline
+- Use when: spawning OS threads that must be tracked and debuggable.
+- Context: prefer capturing `JoinHandle` and calling `join()`; use `thread::Builder::name` for observability; avoid truly detached threads.
+- Avoid/Anti-pattern: spawning and forgetting threads; relying on process exit to clean up work.
+
+```rust path=null start=null
+use std::thread;
+let h = thread::Builder::new().name("worker-1".into()).spawn(|| { /* work */ })?;
+let res = h.join();
+```
+
+A.137 Prefer fn Pointers When No Capture Is Needed
+- Use when: an API accepts a callable that never needs to capture environment.
+- Context: taking a parameter of type `fn(T) -> U` is simpler and avoids extra monomorphizations; callers can pass function items or non-capturing closures.
+- Avoid/Anti-pattern: generic `F: Fn(T) -> U` when you only need a function pointer; overusing generics inflates compile times and binary size.
+
+```rust path=null start=null
+fn apply<T,U>(x: T, f: fn(T) -> U) -> U { f(x) }
+fn double(n: i32) -> i32 { n*2 }
+let y = apply(21, double);
+```
+
+A.138 FromIterator for Explicit Collection Construction
+- Use when: you want to avoid turbofish on `collect` and make target type explicit.
+- Context: call `FromIterator::from_iter(iter)` directly, especially in generic contexts; implement `FromIterator` for your types.
+- Avoid/Anti-pattern: opaque `collect::<Vec<_>>()` in codebases that prefer explicit constructors.
+
+```rust path=null start=null
+use std::iter::FromIterator;
+let it = [1,2,3].into_iter().map(|x| x * 2);
+let v = Vec::<i32>::from_iter(it);
+```
+
+A.139 Atomics and Fences: Don’t Order Non-atomics
+- Use when: building low-level synchronization like spinlocks.
+- Context: use Acquire/Release on atomics; `fence(SeqCst)` only orders other atomic ops and does not make plain memory accesses visible across threads.
+- Avoid/Anti-pattern: relying on fences to synchronize non-atomic loads/stores; mixing non-atomic shared mutability across threads.
+
+```rust path=null start=null
+use std::sync::atomic::{AtomicBool, Ordering, fence};
+static LOCK: AtomicBool = AtomicBool::new(false);
+fn lock() { while LOCK.swap(true, Ordering::Acquire) {} }
+fn unlock() { fence(Ordering::Release); LOCK.store(false, Ordering::Release); }
+```
+
+A.140 Representation Choices: repr(C), repr(transparent), and enum reprs
+- Use when: FFI or layout-dependent code requires a stable ABI.
+- Context: use `#[repr(C)]` for FFI structs/enums; `#[repr(transparent)]` for newtype wrappers crossing FFI; for enums, use primitive reprs like `#[repr(u8)]` only when required and safe; default `repr(Rust)` is best for optimization.
+- Avoid/Anti-pattern: assuming default enum discriminant layout; reading discriminants of non-`repr` enums; casual use of `repr(packed)` creating unaligned references.
+
+```rust path=null start=null
+#[repr(C)]
+struct CTimeSpec { tv_sec: i64, tv_nsec: i64 }
+#[repr(transparent)]
+struct Fd(i32);
+#[repr(u8)]
+enum Kind { A, B(u32) }
+```
+
+A.141 Stabilizing Public APIs with #[non_exhaustive]
+- Use when: you plan to add fields/variants later without breaking SemVer.
+- Context: mark exported structs/enums or enum variants `#[non_exhaustive]`; external code must use `..` in patterns and cannot construct directly.
+- Avoid/Anti-pattern: exposing exhaustively-matchable enums in public APIs that will grow.
+
+```rust path=null start=null
+#[non_exhaustive]
+pub enum Error { Io(std::io::Error), Parse }
+
+fn handle(e: Error) {
+    match e { Error::Io(_)| Error::Parse | _ => {} }
+}
+```
+
+A.142 Rust 2024 Pattern Ergonomics: Prefer Fully Explicit Patterns
+- Use when: migrating to 2024 or writing clear matches.
+- Context: avoid redundant `ref`/`ref mut`; `mut` on bindings requires fully explicit patterns; use `cargo fix --edition` to rewrite.
+- Avoid/Anti-pattern: relying on implicit reference binding modes that change under 2024 rules.
+
+```rust path=null start=null
+// Before (implicit, may lint under 2024)
+match &opt { Some(x) => {/*...*/}, _ => {} }
+// After (explicit)
+match opt.as_ref() { Some(x) => {/*...*/}, None => {} }
+```
+
+A.143 FFI Nullability and Unwinding Contracts
+- Use when: modeling nullable pointers and crossing language boundaries.
+- Context: prefer `Option<NonNull<T>>` or `Option<extern "C" fn()>` over sentinel integers; mark FFI with `extern "C"`; use `extern "C-unwind"` when exceptions/panics may cross; keep `unsafe` at the boundary and wrap with safe APIs.
+- Avoid/Anti-pattern: null `&T`/`&mut T`; unwinding across FFI without `-unwind` ABI.
+
+```rust path=null start=null
+use core::ptr::NonNull;
+#[no_mangle]
+pub extern "C" fn api(cb: Option<extern "C" fn(i32)>) -> i32 { if let Some(f) = cb { f(1); } 0 }
+// Nullable pointer field
+type MaybeBuf = Option<NonNull<u8>>;
+```
+
+A.144 Choosing Collections and Planning Capacity
+- Use when: selecting data structures and avoiding accidental slow paths.
+- Context: default to `Vec`; use `VecDeque` for queue/deque ends; avoid `LinkedList` for general use; build heaps with `BinaryHeap::from(Vec)`; `HashMap` uses SwissTable (hashbrown) with expected O(1); use `IndexMap` for stable order; preallocate with `with_capacity`.
+- Avoid/Anti-pattern: modifying keys inside `HashMap`; pushing ascending into `BinaryHeap` repeatedly; relying on unbounded growth without `reserve`.
+
+```rust path=null start=null
+let mut v = Vec::with_capacity(1024);
+use indexmap::IndexMap; let mut im = IndexMap::new();
+use std::collections::BinaryHeap; let h = BinaryHeap::from(vec![3,1,4]);
+```
+
+A.145 Diesel: Migrations and Type-safe Queries
+- Use when: you need compile-time checked SQL and schema migrations.
+- Context: use `diesel_cli` for migrations; derive/query DSL ensures type safety; keep schema.rs generated in sync; prefer explicit connections/pools.
+- Avoid/Anti-pattern: ad-hoc SQL strings without migrations; ignoring compile-time errors by falling back to runtime stringly queries.
+
+```rust path=null start=null
+// diesel setup
+// cargo install diesel_cli
+// diesel migration generate create_users
+#[derive(Queryable)]
+struct User { id: i32, name: String }
+```
+
+A.146 Build Scripts: OUT_DIR, rerun-if-*, and Link Directives
+- Use when: binding native libs or generating code.
+- Context: write outputs to `OUT_DIR`; narrow rebuilds with `cargo::rerun-if-changed`/`cargo::rerun-if-env-changed`; link with `cargo::rustc-link-lib`/`-search`; gate custom cfgs with `cargo::rustc-check-cfg`.
+- Avoid/Anti-pattern: touching files outside `OUT_DIR`; re-running on every build due to missing rerun hints.
+
+```rust path=null start=null
+// build.rs
+println!("cargo::rerun-if-changed=wrapper.h");
+println!("cargo::rustc-link-lib=static=foo");
+println!("cargo::rustc-check-cfg=cfg(has_foo)");
+```
+
+A.147 The -sys Crate Pattern and links
+- Use when: exposing FFI for a native library with a safe wrapper.
+- Context: name the low-level crate `foo-sys`, set `package.links = "foo"`, emit link metadata; high-level crate depends on `foo-sys` and exposes safe APIs.
+- Avoid/Anti-pattern: mixing safe wrapper and raw FFI in one crate; duplicating `links` across multiple crates.
+
+```toml path=null start=null
+# Cargo.toml
+[package]
+links = "foo"
+
+[build-dependencies]
+cc = "*"
+```
+
+A.148 Pin Toolchains per Project (rustup)
+- Use when: ensuring reproducible builds across environments.
+- Context: add `rust-toolchain.toml` with `channel = "stable"` or a pinned version/date; use overrides for local custom toolchains; document MSRV.
+- Avoid/Anti-pattern: relying on developer-global toolchains; unspecified editions.
+
+```toml path=null start=null
+# rust-toolchain.toml
+[toolchain]
+channel = "1.80.1"
+components = ["rustfmt", "clippy"]
+```
+
+A.149 Cargo Workspaces and Config Layering
+- Use when: managing multi-crate repos and CI builds.
+- Context: define a workspace root for shared `Cargo.lock`/`target`; use `.cargo/config.toml` for aliases (`cargo c = check`), profiles, offline mode; run `cargo check --workspace`.
+- Avoid/Anti-pattern: per-crate divergent profiles/locks; networked builds without `--offline` in hermetic CI.
+
+```toml path=null start=null
+# .cargo/config.toml
+[alias]
+c = "check --workspace"
+[net]
+offline = true
+```
+
+A.150 Procedural Macro Discipline: Hygiene, Spans, Diagnostics
+- Use when: writing proc-macros (derive/attribute/function-like).
+- Context: use absolute paths (e.g., `::std::...`), generate unique identifiers, attach precise `Span`s; prefer `compile_error!` or `proc-macro-error` over panic; mark crate `[lib]
+proc-macro = true`.
+- Avoid/Anti-pattern: assuming hygiene; leaking local imports; panicking with opaque messages.
+
+```toml path=null start=null
+[lib]
+proc-macro = true
+```
+
+A.151 Choosing a Global Allocator (jemalloc/mimalloc)
+- Use when: allocator behavior is a bottleneck; benchmark-driven.
+- Context: set `#[global_allocator]` to `tikv_jemallocator::Jemalloc` or `mimalloc::MiMalloc`; measure throughput, latency, and RSS; consider security modes.
+- Avoid/Anti-pattern: assuming universal wins; ignoring memory footprint/regressions.
+
+```rust path=null start=null
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+```
+
+A.152 Build-time Optimizations: LTO, PGO, and Inlining
+- Use when: squeezing runtime performance for hot binaries.
+- Context: enable ThinLTO or Fat LTO in release; use cargo-pgo for profile-guided optimization; annotate tiny hot wrappers with `#[inline]` judiciously.
+- Avoid/Anti-pattern: blanket `inline(always)`; enabling FatLTO without measuring compile-time/size trade-offs.
+
+```toml path=null start=null
+[profile.release]
+lto = "thin"
+codegen-units = 1
+```
+
+A.153 Coverage with cargo-llvm-cov (CI + local)
+- Use when: track line/branch coverage and gate regressions.
+- Context: run `cargo llvm-cov --workspace` locally; in CI, emit lcov/codecov JSON and upload; ignore generated/build dirs via `--ignore-filename-regex`.
+- Avoid/Anti-pattern: mixing tools without consistent flags; relying on flaky nightly-only options unless required.
+
+```sh path=null start=null
+cargo llvm-cov --all-features --workspace --branch --fail-under-lines 75
+```
+
+A.154 Fuzzing and Property Testing Together
+- Use when: hardening parsers/decoders and complex invariants.
+- Context: add `cargo-fuzz` targets for libFuzzer; use `proptest` or `quickcheck` for properties; seed RNG/env for determinism in CI; minimize failing inputs.
+- Avoid/Anti-pattern: running fuzzers without sanitizers; ignoring corpus minimization.
+
+```sh path=null start=null
+cargo fuzz init && cargo fuzz add parse && cargo fuzz run parse
+```
+
+A.155 Specialization: Avoid in Public APIs
+- Use when: you control all crates and understand soundness limits.
+- Context: prefer explicit trait design over specialization; if you must, use `min_specialization` behind feature flags for internal crates only; document invariants.
+- Avoid/Anti-pattern: relying on full specialization in libraries; overlapping impls that risk unsoundness.
+
+A.156 Coherence and Orphan Rules in Practice
+- Use when: designing extension traits and impls across crates.
+- Context: either the trait or the self type must be local; use newtype wrappers to implement foreign traits for foreign types; avoid overlapping impls; consider sealed traits.
+- Avoid/Anti-pattern: blanket impls that could overlap downstream; violating E0117/E0210.
+
+A.157 repr modifiers: align and packed
+- Use when: aligning data for cache lines or external protocols; packing only when absolutely necessary.
+- Context: `#[repr(align(N))]` to raise alignment; `#[repr(packed(n))]` strips padding but causes unaligned fields—access via raw pointers only; never mix with assumptions of alignment.
+- Avoid/Anti-pattern: taking references to packed fields; combining `align` and `packed`.
+
+```rust path=null start=null
+#[repr(align(64))]
+struct CacheLine([u8; 64]);
+```
+
+A.158 Enum Discriminants and repr(u8)
+- Use when: FFI or stable wire formats require fixed discriminant size.
+- Context: `#[repr(u8)]` for field-less or C-like enums; safe discriminant inspection via `mem::discriminant`; do not read discriminants for `repr(Rust)` enums.
+- Avoid/Anti-pattern: mixing `repr(Rust)` assumptions with raw reads; over-constraining repr without need.
+
+A.159 Associated Types for Clearer Traits
+- Use when: trait outputs are tied to the implementor and improve readability.
+- Context: prefer `type Output;` over extra generic parameters when appropriate; combine with where-clauses for clarity; consider GATs when lifetimes depend on methods.
+- Avoid/Anti-pattern: proliferating type params where associated types fit better.
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
