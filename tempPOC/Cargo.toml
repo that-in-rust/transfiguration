@@ -2,63 +2,18 @@
 name = "tempPOC"
 version = "0.1.0"
 edition = "2021"
-description = "Parallel ONNX LLM inference for Tokio code summarization"
+description = "Real ONNX LLM inference for Tokio code summarization"
 
 [dependencies]
 # ONNX Runtime for ML inference
-ort = { version = "2.0.0-rc.4", features = ["cuda", "tensorrt"] }
-ndarray = "0.15"
-tokenizers = "0.19"
-
-# Async runtime and parallel processing
-tokio = { version = "1.38", features = ["full"] }
-tokio-util = "0.7"
-
-# Error handling and structured results
-thiserror = "1.0"
-anyhow = "1.0"
-
-# Serialization and data structures
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+ort = "2.0.0-rc.4"
 
 # Utilities
-uuid = { version = "1.10", features = ["v4", "serde"] }
-tracing = "0.1"
-tracing-subscriber = "0.3"
-
-[dev-dependencies]
-criterion = { version = "0.5", features = ["html_reports"] }
-proptest = "1.5"
-tokio-test = "0.4"
+anyhow = "1.0"
 
 [[bin]]
-name = "chunk_generator"
-path = "src/chunk_generator.rs"
-
-[[bin]]
-name = "process_chunks"
-path = "src/main.rs"
-
-[[bin]]
-name = "simple_parallel"
-path = "src/simple_parallel.rs"
-
-[[bin]]
-name = "working_parallel"
-path = "src/working_parallel.rs"
-
-[[bin]]
-name = "parallel_demo"
-path = "src/parallel_demo.rs"
-
-[[bin]]
-name = "complete_onnx_provider"
-path = "src/complete_onnx_provider.rs"
-
-[[bin]]
-name = "main_real_onnx"
-path = "src/main_real_onnx.rs"
+name = "main"
+path = "main.rs"
 
 [[bin]]
 name = "simple_summarizer"

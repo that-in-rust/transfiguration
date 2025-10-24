@@ -29,9 +29,9 @@ Tasks (2000-line mode)
 - [x] Process chunk 32001–34000
 - [x] Process chunk 34001–36000
 - [x] Process chunk 36001–38000
-- [ ] Process chunk 38001–40000
-- [ ] Process chunk 40001–42000
-- [ ] Process chunk 42001–44000
+- [x] Process chunk 38001–40000
+- [x] Process chunk 40001–42000
+- [x] Process chunk 42001–44000
 - [ ] Process chunk 44001–46000
 - [ ] Process chunk 46001–48000
 - [ ] Process chunk 48001–50000
@@ -122,7 +122,9 @@ Progress Log
 ||||| 19 | 30001–32000 | 5 | 2055 | 65 | diesel migrations+type-safe queries, build.rs rerun-if/link/cfg, -sys + links, rustup toolchain pinning, cargo workspace/config | 2025-10-24 |
 ||||| 20 | 32001–34000 | 5 | 2106 | 51 | proc-macro discipline, global allocator choice, LTO/PGO/inlining, cargo-llvm-cov coverage, fuzzing + property tests | 2025-10-24 |
 ||||| 21 | 34001–36000 | 5 | 2137 | 31 | specialization caution, coherence/orphan rules, repr align/packed, enum repr/discriminant, associated types | 2025-10-24 |
-||||| 22 | 36001–38000 | 5 | 2174 | 37 | Arrow+DataFusion analytics, layered config (config/dotenvy/envy), KV selection (RocksDB/Sled/LMDB), messaging (NATS/Kafka/Pulsar), no_std embedded patterns | 2025-10-24 |
+|||||| 22 | 36001–38000 | 5 | 2174 | 37 | Arrow+DataFusion analytics, layered config (config/dotenvy/envy), KV selection (RocksDB/Sled/LMDB), messaging (NATS/Kafka/Pulsar), no_std embedded patterns | 2025-10-24 |
+||||||| 23 | 38001–40000 | 5 | 2254 | 80 | JetStream at-least-once; rdkafka producers/consumers; deadpool-redis pooling; OpenSearch/Elasticsearch clients; rmp-serde MessagePack | 2025-10-24 |
+||||||| 24 | 40001–42000 | 5 | 2320 | 66 | refutable/irrefutable patterns; ZST/unit markers; DST/wide pointer FFI; uninhabited types; '_' vs '..' rest patterns | 2025-10-24 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -1569,6 +1571,208 @@ A.164 no_std Embedded Patterns: RTIC, embedded-hal, Panic, Debugging
 - Use when: Cortex-M/embedded development.
 - Context: `#![no_std]`, provide `#[panic_handler]`; use `embedded-hal` traits and platform HALs; structure apps with RTIC; debug/flash with probe-rs; beware global alloc (linked_list_allocator) if using `alloc`.
 - Avoid/Anti-pattern: unwinding panics in no_std; blocking busy-waits without timers; tight coupling to a single MCU.
+
+A.165 NATS JetStream At-least-once Messaging
+- Use when: you need durable streams, retention, and at-least-once delivery on NATS.
+- Context: create streams, use durable consumers with explicit acks; size ack wait/timeouts; apply backpressure; idempotent handlers (dedupe keys/ids).
+- Avoid/Anti-pattern: forgetting to ack; assuming exactly-once; unbounded pull batches; ignoring durable consumer state.
+
+```rust path=null start=null
+// sync nats crate example (JetStream)
+let nc = nats::connect("nats://127.0.0.1:4222")?;
+let js = nats::jetstream::new(nc);
+js.add_stream(nats::jetstream::StreamConfig {
+    name: "events".into(), subjects: vec!["events.*".into()], ..Default::default()
+})?;
+let mut sub = js.subscribe("events.foo")?; // durable can be configured via consumer APIs
+js.publish("events.foo", "hello")?;
+if let Some(msg) = sub.next() { msg.ack()?; }
+```
+
+A.166 Kafka Clients with rdkafka: Producers, Consumers, Commits
+- Use when: you need Kafka’s partitions, consumer groups, and backpressure.
+- Context: prefer `StreamConsumer` to integrate with async; use `FutureProducer` for backpressure-aware sends; choose manual/auto commit explicitly.
+- Avoid/Anti-pattern: ignoring rebalance events; synchronous commits on hot path; assuming exactly-once without idempotent/transactional config.
+
+```rust path=null start=null
+use rdkafka::{ClientConfig, consumer::{CommitMode, StreamConsumer}, message::BorrowedMessage};
+use futures::StreamExt;
+let consumer: StreamConsumer = ClientConfig::new()
+  .set("group.id", "g1").set("bootstrap.servers", "localhost:9092")
+  .create()?;
+consumer.subscribe(&["input"])?;
+let mut stream = consumer.stream();
+while let Some(Ok(m)) = stream.next().await {
+    handle(&m.payload().unwrap_or(&[]));
+    consumer.commit_message(&m, CommitMode::Async)?;
+}
+```
+
+A.167 Redis Connection Pooling with deadpool-redis
+- Use when: many tasks share Redis connections under async.
+- Context: create a pool, get short-lived connections, configure timeouts/max size; prefer commands via `redis::cmd` and release promptly.
+- Avoid/Anti-pattern: holding connections across long `.await` chains; unbounded pools; blocking operations with pooled conns.
+
+```rust path=null start=null
+use deadpool_redis::{Config, Runtime};
+use redis::AsyncCommands;
+let cfg = Config::from_url("redis://127.0.0.1/");
+let pool = cfg.create_pool(Some(Runtime::Tokio1))?;
+let mut conn = pool.get().await?;
+conn.set::<_, _, ()>("k", "v").await?;
+let v: String = conn.get("k").await?;
+```
+
+A.168 Search Clients: OpenSearch/Elasticsearch in Rust
+- Use when: indexing/searching documents from Rust services.
+- Context: use official clients (`opensearch`, `elasticsearch`) with typed request builders; prefer `serde_json::json!`/typed structs; handle 429/backoff.
+- Avoid/Anti-pattern: string-concatenated JSON; ignoring HTTP errors/timeouts; bulk without chunking.
+
+```rust path=null start=null
+use opensearch::{OpenSearch, http::transport::Transport};
+use serde_json::json;
+let transport = Transport::single_node("http://localhost:9200")?;
+let client = OpenSearch::new(transport);
+let resp = client.index(opensearch::IndexParts::IndexId("logs", "1"))
+  .body(json!({"msg":"hello","ts":123}))
+  .send().await?;
+```
+
+A.169 Compact Binary with rmp-serde (MessagePack)
+- Use when: compact, fast serialization with Serde is needed.
+- Context: prefer `rmp-serde` encode/decode; cap message sizes; validate inputs; consider schema/version fields.
+- Avoid/Anti-pattern: assuming map key order; unbounded nested structures; deserializing to untrusted types.
+
+```rust path=null start=null
+use rmp_serde::{encode::to_vec_named, decode::from_slice};
+#[derive(serde::Serialize, serde::Deserialize)]
+struct Event { id: u64, msg: String }
+let bytes = to_vec_named(&Event { id: 1, msg: "hi".into() })?;
+let evt: Event = from_slice(&bytes)?;
+```
+
+A.170 Refutable vs Irrefutable Patterns: match, if let, while let
+- Use when: choosing control flow to destructure values safely and clearly.
+- Context: use `match` for exhaustive handling; `if let` for refutable single-branch matches; `while let` for iterator-like loops; prefer irrefutable patterns in `let` bindings.
+- Avoid/Anti-pattern: using `if let` where multiple cases need handling; non-exhaustive `match` on public enums without `_`/`..` or `#[non_exhaustive]` awareness.
+
+```rust path=null start=null
+// if let: handle one case
+if let Some(x) = maybe { use_x(x); }
+
+// while let: drain until pattern fails
+while let Some(item) = iter.next() { process(item); }
+
+// match: exhaustive handling
+match res {
+    Ok(v) => use_v(v),
+    Err(e) => handle(e),
+}
+```
+
+A.171 Zero-Sized Types (ZST) and Unit () for Markers and States
+- Use when: encode type-level information without runtime cost.
+- Context: define marker structs/enums with no fields; use `PhantomData<T>` to express ownership/variance; rely on ZST size 0, align 1 (unit) semantics.
+- Avoid/Anti-pattern: storing ZSTs in large collections expecting memory usage; depending on layout of ZST-containing structs beyond guarantees.
+
+```rust path=null start=null
+use core::marker::PhantomData;
+struct ReadOnly;
+struct Buffer<T, Mode> { data: Vec<T>, _mode: PhantomData<Mode> }
+let _buf: Buffer<u8, ReadOnly> = Buffer { data: vec![], _mode: PhantomData };
+```
+
+A.172 DST and Wide Pointers: slices, str, and dyn Trait (FFI-safe forms)
+- Use when: handling dynamically sized types and trait objects.
+- Context: `&[T]`, `&str`, and `&dyn Trait` are wide pointers (ptr+len or ptr+vtable); never expose them directly over FFI—use `(ptr,len)` or concrete reprs.
+- Avoid/Anti-pattern: `extern "C" fn foo(s: &str)`; passing `&dyn Trait` across FFI; assuming layout of fat pointers.
+
+```rust path=null start=null
+#[repr(C)]
+pub struct SliceU8 { ptr: *const u8, len: usize }
+#[no_mangle]
+pub extern "C" fn take_bytes(s: SliceU8) { /* safe FFI shape for &[u8] */ }
+```
+
+A.173 Uninhabited Types: empty enums and never type
+- Use when: model impossible states or functions that never return.
+- Context: `!` is the canonical uninhabited type; empty enums can model uninhabited generics (e.g., `Result<T, Void>`); convert `Result<T, Void>` -> `T` safely.
+- Avoid/Anti-pattern: constructing values of empty enums; exposing uninhabited types in FFI.
+
+```rust path=null start=null
+enum Void {}
+fn into_ok<T>(r: Result<T, Void>) -> T { match r { Ok(v) => v, Err(e) => match e {} } }
+```
+
+A.174 Wildcard '_' vs Rest '..' Patterns (forward-compat)
+- Use when: destructuring while ignoring fields and preserving forward compatibility.
+- Context: use `_` for a single field; `..` to ignore the rest (especially with `#[non_exhaustive]` structs/enums); pair with explicit bindings you need.
+- Avoid/Anti-pattern: listing all fields in public patterns that may change; relying on private fields without `..`.
+
+```rust path=null start=null
+struct S { a: u32, b: u32, c: u32 }
+let s = S { a: 1, b: 2, c: 3 };
+let S { a, .. } = s; // ignore b, c
+let S { b: _, c, .. } = s; // ignore b explicitly, bind c
+```
+
+A.175 RTT + defmt Logging for Embedded Debugging
+- Use when: need low-overhead logging over SWD/JTAG without UART.
+- Context: use `defmt` with `probe-rs` RTT; add `panic-probe` for panic reporting; keep logs concise; strip in release if needed.
+- Avoid/Anti-pattern: semihosting in production; blocking prints in interrupts; verbose logs in time-critical paths.
+
+```rust path=null start=null
+// Cargo.toml (bins)
+// defmt = "*", rtt-target = "*", panic-probe = { version = "*", features = ["print-defmt"] }
+#[defmt::panic_handler]
+fn panic() -> ! { panic_probe::hard_fault() }
+#[defmt::timestamp]
+fn ts() -> u64 { 0 }
+```
+
+A.176 Flash/Debug Cycle with probe-rs and cargo-flash
+- Use when: flashing and running firmware quickly without vendor IDEs.
+- Context: prefer `cargo-flash` for one-step build+flash; use `probe-rs run` for RTT logs; select chip via `--chip`.
+- Avoid/Anti-pattern: manual openocd+gdb for simple workflows; relying on unstable scripts.
+
+```sh path=null start=null
+cargo flash --chip STM32F401RETx --release --example blinky
+probe-rs run --chip STM32F401RETx target/thumbv7em-none-eabihf/release/app
+```
+
+A.177 Cross-compiling to Cortex-M (thumbv7em-none-eabihf)
+- Use when: building no_std firmware for ARM Cortex-M4F/M7F.
+- Context: `rustup target add thumbv7em-none-eabihf`; set target in `.cargo/config.toml`; ensure linker script `memory.x`; use `cortex-m-rt`/`rtic`/`embassy` as needed.
+- Avoid/Anti-pattern: building without specifying target; missing `memory.x` causing link errors; unwinding panics on bare metal.
+
+```toml path=null start=null
+# .cargo/config.toml
+[build]
+target = "thumbv7em-none-eabihf"
+```
+
+A.178 Async Embedded with Embassy Executor
+- Use when: cooperative async on MCUs with timers/interrupts.
+- Context: use `embassy-executor` with `#[embassy_executor::main]`; never block; use embassy time drivers; integrate interrupts via `#[interrupt]`/`Spawner`.
+- Avoid/Anti-pattern: blocking delays inside async tasks; mixing multiple executors without care.
+
+```rust path=null start=null
+#[embassy_executor::main]
+async fn main(spawner: embassy_executor::Spawner) {
+    // spawn tasks, use embassy_time::Timer
+}
+```
+
+A.179 Linker Scripts and Memory Layout (memory.x)
+- Use when: placing code/data in specific regions and defining stacks/ISRs.
+- Context: provide `memory.x` and reference it via `linker = "flip-link"` or build script; define FLASH/RAM, stack, and vector table; use `#[link_section]` sparingly.
+- Avoid/Anti-pattern: relying on default layouts; hardcoding addresses in code; missing sections leading to undefined behavior.
+
+```ld path=null start=null
+/* memory.x */
+MEMORY { FLASH : ORIGIN = 0x08000000, LENGTH = 512K; RAM : ORIGIN = 0x20000000, LENGTH = 128K }
+PROVIDE(_stack_start = ORIGIN(RAM) + LENGTH(RAM));
+```
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
