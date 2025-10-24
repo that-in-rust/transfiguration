@@ -32,7 +32,7 @@ Tasks (2000-line mode)
 - [x] Process chunk 38001–40000
 - [x] Process chunk 40001–42000
 - [x] Process chunk 42001–44000
-- [ ] Process chunk 44001–46000
+- [x] Process chunk 44001–46000
 - [ ] Process chunk 46001–48000
 - [ ] Process chunk 48001–50000
 - [ ] Process chunk 50001–52000
@@ -124,7 +124,9 @@ Progress Log
 ||||| 21 | 34001–36000 | 5 | 2137 | 31 | specialization caution, coherence/orphan rules, repr align/packed, enum repr/discriminant, associated types | 2025-10-24 |
 |||||| 22 | 36001–38000 | 5 | 2174 | 37 | Arrow+DataFusion analytics, layered config (config/dotenvy/envy), KV selection (RocksDB/Sled/LMDB), messaging (NATS/Kafka/Pulsar), no_std embedded patterns | 2025-10-24 |
 ||||||| 23 | 38001–40000 | 5 | 2254 | 80 | JetStream at-least-once; rdkafka producers/consumers; deadpool-redis pooling; OpenSearch/Elasticsearch clients; rmp-serde MessagePack | 2025-10-24 |
-||||||| 24 | 40001–42000 | 5 | 2320 | 66 | refutable/irrefutable patterns; ZST/unit markers; DST/wide pointer FFI; uninhabited types; '_' vs '..' rest patterns | 2025-10-24 |
+|||||||| 24 | 40001–42000 | 5 | 2320 | 66 | refutable/irrefutable patterns; ZST/unit markers; DST/wide pointer FFI; uninhabited types; '_' vs '..' rest patterns | 2025-10-24 |
+||||||||| 25 | 42001–44000 | 5 | 2379 | 59 | defmt+RTT logging; probe-rs/cargo-flash cycle; Cortex-M cross-compile (thumbv7em-none-eabihif); Embassy async; linker scripts/memory.x | 2025-10-24 |
+||||||||| 26 | 44001–46000 | 5 | 2450 | 71 | work-stealing (crossbeam-deque); epoch-based reclamation (crossbeam-epoch); unsafe Send/Sync rules; loom deterministic tests; channel choices (std/crossbeam/flume) | 2025-10-24 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -1772,6 +1774,76 @@ A.179 Linker Scripts and Memory Layout (memory.x)
 /* memory.x */
 MEMORY { FLASH : ORIGIN = 0x08000000, LENGTH = 512K; RAM : ORIGIN = 0x20000000, LENGTH = 128K }
 PROVIDE(_stack_start = ORIGIN(RAM) + LENGTH(RAM));
+```
+
+A.180 Work-stealing Schedulers with crossbeam-deque
+- Use when: distributing tasks across threads with minimal contention.
+- Context: use a global Injector and per-thread Worker queues (LIFO for cache locality); idle threads steal from others’ tails via Stealer; batch stealing reduces contention.
+- Avoid/Anti-pattern: single global queue bottlenecks; pushing all tasks to injector under load; heavy locking around queues.
+
+```rust path=null start=null
+use crossbeam_deque::{Injector, Worker, Stealer, Steal};
+let injector = Injector::new();
+let workers: Vec<_> = (0..num_cpus::get()).map(|_| Worker::new_lifo()).collect();
+let stealers: Vec<Stealer<_>> = workers.iter().map(|w| w.stealer()).collect();
+// spawn workers: pop local, else steal batch from injector or others
+```
+
+A.181 Epoch-based Reclamation (crossbeam-epoch) Pin/Collect Pattern
+- Use when: building lock-free structures that remove nodes safely.
+- Context: pin the epoch when accessing shared pointers; retire removed nodes to be reclaimed when no thread holds a pin; prefer default Collector unless you need custom domains.
+- Avoid/Anti-pattern: freeing memory without retire; accessing pointers outside a pin; mixing GC domains.
+
+```rust path=null start=null
+use crossbeam_epoch as epoch;
+let guard = epoch::pin();
+let shared: epoch::Atomic<usize> = epoch::Atomic::null();
+let ptr = shared.load(epoch::Acquire, &guard);
+// ... remove node ...
+unsafe { guard.defer_destroy(ptr) };
+```
+
+A.182 Unsafe Send/Sync: Design and Manual impl Rules
+- Use when: declaring a type safe to send/share across threads beyond compiler inference.
+- Context: Only `unsafe impl Send/Sync for T {}` when you can prove thread-safety invariants (no non-thread-safe interior mutability; raw pointers protected by atomics/locks; lifetimes not leaked). Prefer composing Send/Sync fields.
+- Avoid/Anti-pattern: blanket unsafe impls; using `Cell/RefCell` across threads; ignoring drop ordering and aliasing.
+
+```rust path=null start=null
+unsafe impl<T: Send> Send for MyType<T> {}
+unsafe impl<T: Sync> Sync for MyType<T> {}
+// Justify invariants in docs: why concurrent access is safe.
+```
+
+A.183 Deterministic Concurrency Testing with loom
+- Use when: verifying lock-free invariants and ordering under all interleavings.
+- Context: model with loom types (Arc, Atomic*); keep tests fully deterministic; note SeqCst ops are treated as AcqRel (use fence(SeqCst) if needed); cap state space.
+- Avoid/Anti-pattern: randomness/timers/I/O in loom tests; relying on OS scheduler; ignoring false positives from SeqCst downgrades.
+
+```rust path=null start=null
+loom::model(|| {
+    use loom::{sync::{Arc, atomic::{AtomicUsize, Ordering::*}}, thread};
+    let n = Arc::new(AtomicUsize::new(0));
+    let a = n.clone(); let b = n.clone();
+    let t1 = thread::spawn(move || { let cur = a.load(Acquire); a.store(cur+1, Release); });
+    let t2 = thread::spawn(move || { let cur = b.load(Acquire); b.store(cur+1, Release); });
+    t1.join().unwrap(); t2.join().unwrap();
+    assert_eq!(n.load(Relaxed), 2);
+});
+```
+
+A.184 Channel Choices: std::mpsc vs crossbeam-channel vs flume
+- Use when: choosing message-passing primitives for threads.
+- Context: std::mpsc is baseline (MPSC, simple); crossbeam-channel adds MPMC, select!, performance; flume offers MPMC with async support, deadlines, rendezvous, and Selector.
+- Avoid/Anti-pattern: unbounded queues in high-throughput paths; blocking sends without timeouts; mixing channel ecosystems without need.
+
+```rust path=null start=null
+// flume rendezvous + select-like API
+let (tx1, rx1) = flume::bounded::<u32>(0); // rendezvous
+let (tx2, rx2) = flume::bounded::<u32>(1024);
+flume::Selector::new()
+    .recv(&rx1, |v| println!("r1: {}", v))
+    .recv(&rx2, |v| println!("r2: {}", v))
+    .wait();
 ```
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT

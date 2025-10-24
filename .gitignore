@@ -97,8 +97,37 @@ jspm_packages/
 # FuseBox cache
 .fusebox/
 
-# tempPOC directory
-tempPOC/
+# tempPOC directory specific ignores
+tempPOC/target/
+tempPOC/Cargo.lock
+
+# Model files
+tempPOC/*.onnx
+tempPOC/*.bin
+tempPOC/*.zip
+
+tempPOC/models/
+!tempPOC/models/*.rs
+
+# Build and output directories
+tempPOC/outputs/
+tempPOC/chunks/
+
+# Keep source code but ignore large files
+tempPOC/src/**/*.rs
+!tempPOC/src/
+
+# Test outputs
+tempPOC/tests/output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # DynamoDB Local files
 .dynamodb/
@@ -142,4 +171,3 @@ Insp04_DownloadAnalysis/*
 parseltongue/
 zed/
 Insp04_DownloadAnalysis/
-tempPOC/
