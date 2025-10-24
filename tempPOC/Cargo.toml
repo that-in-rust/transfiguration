@@ -60,6 +60,10 @@ path = "src/complete_onnx_provider.rs"
 name = "main_real_onnx"
 path = "src/main_real_onnx.rs"
 
+[[bin]]
+name = "simple_summarizer"
+path = "simple_summarizer.rs"
+
 # [[bench]]
 # name = "parallel_processing"
 # harness = false

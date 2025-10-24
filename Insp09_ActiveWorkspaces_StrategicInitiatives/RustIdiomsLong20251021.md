@@ -28,7 +28,7 @@ Tasks (2000-line mode)
 - [x] Process chunk 30001–32000
 - [x] Process chunk 32001–34000
 - [x] Process chunk 34001–36000
-- [ ] Process chunk 36001–38000
+- [x] Process chunk 36001–38000
 - [ ] Process chunk 38001–40000
 - [ ] Process chunk 40001–42000
 - [ ] Process chunk 42001–44000
@@ -122,6 +122,7 @@ Progress Log
 ||||| 19 | 30001–32000 | 5 | 2055 | 65 | diesel migrations+type-safe queries, build.rs rerun-if/link/cfg, -sys + links, rustup toolchain pinning, cargo workspace/config | 2025-10-24 |
 ||||| 20 | 32001–34000 | 5 | 2106 | 51 | proc-macro discipline, global allocator choice, LTO/PGO/inlining, cargo-llvm-cov coverage, fuzzing + property tests | 2025-10-24 |
 ||||| 21 | 34001–36000 | 5 | 2137 | 31 | specialization caution, coherence/orphan rules, repr align/packed, enum repr/discriminant, associated types | 2025-10-24 |
+||||| 22 | 36001–38000 | 5 | 2174 | 37 | Arrow+DataFusion analytics, layered config (config/dotenvy/envy), KV selection (RocksDB/Sled/LMDB), messaging (NATS/Kafka/Pulsar), no_std embedded patterns | 2025-10-24 |
 
 A. Curated Idioms (Deep Dives)
 ------------------------------
@@ -1532,6 +1533,42 @@ A.159 Associated Types for Clearer Traits
 - Use when: trait outputs are tied to the implementor and improve readability.
 - Context: prefer `type Output;` over extra generic parameters when appropriate; combine with where-clauses for clarity; consider GATs when lifetimes depend on methods.
 - Avoid/Anti-pattern: proliferating type params where associated types fit better.
+
+A.160 Arrow + DataFusion for In-memory Analytics
+- Use when: you need a Rust-native, columnar analytics engine with SQL on Arrow memory.
+- Context: use Arrow arrays/RecordBatches; build queries with DataFusion SQL or logical plans; leverage vectorized execution and zero-copy between processes.
+- Avoid/Anti-pattern: row-based ad-hoc processing for large analytics; converting Arrow to row structs prematurely.
+
+A.161 Layered Config: config + dotenvy + envy (serde)
+- Use when: applications need hierarchical configuration from files, env, and defaults.
+- Context: define defaults, merge files (TOML/YAML/JSON), load .env with dotenvy in dev, override with env vars via envy into typed structs; document precedence.
+- Avoid/Anti-pattern: hand-parsing env; scattering config reads without a central builder.
+
+```rust path=null start=null
+#[derive(serde::Deserialize)]
+struct Settings { db_url: String, workers: usize }
+let mut cfg = config::Config::builder()
+    .set_default("workers", 4)?
+    .add_source(config::File::with_name("Config").required(false))
+    .add_source(config::Environment::default())
+    .build()?;
+let s: Settings = cfg.try_deserialize()?;
+```
+
+A.162 Embedded KV Choices: RocksDB vs Sled vs LMDB
+- Use when: selecting a local key-value store.
+- Context: RocksDB (LSM, high write throughput, tuned space/compaction), Sled (pure Rust, lock-free B+ tree, watch prefixes, may use more space), LMDB (memory-mapped, great read throughput, multi-process, write-once txn).
+- Avoid/Anti-pattern: defaulting without measuring space/write amp; multi-process with Sled; LMDB for heavy concurrent writers.
+
+A.163 Messaging Clients: NATS vs Kafka vs Pulsar
+- Use when: building message-driven systems.
+- Context: NATS (async-nats; simple pub/sub, JetStream for at-least-once), Kafka (rdkafka/librdkafka; partitions, consumer groups, backpressure), Pulsar (pure Rust clients; topic/partitioning, async API).
+- Avoid/Anti-pattern: unbounded consumers; ignoring idempotency and exactly-once myths; mixing at-most/at-least-once semantics.
+
+A.164 no_std Embedded Patterns: RTIC, embedded-hal, Panic, Debugging
+- Use when: Cortex-M/embedded development.
+- Context: `#![no_std]`, provide `#[panic_handler]`; use `embedded-hal` traits and platform HALs; structure apps with RTIC; debug/flash with probe-rs; beware global alloc (linked_list_allocator) if using `alloc`.
+- Avoid/Anti-pattern: unwinding panics in no_std; blocking busy-waits without timers; tight coupling to a single MCU.
 
 0A. WORKSPACE AND DEPENDENCY MANAGEMENT
 --------------------------------
