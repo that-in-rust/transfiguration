@@ -6,7 +6,7 @@ description = "Real ONNX LLM inference for Tokio code summarization"
 
 [dependencies]
 # ONNX Runtime for ML inference
-ort = { version = "2.0.0-rc.4", features = ["load-dynamic", "copy-dylibs"] }
+ort = { version = "2.0.0-rc.4", features = ["download-binaries", "copy-dylibs"] }
 ndarray = "0.15"
 
 # Async runtime
@@ -37,6 +37,10 @@ criterion = { version = "0.5", features = ["html_reports"] }
 # [[bin]]
 # name = "simple_summarizer"
 # path = "simple_summarizer.rs"
+
+[[bin]]
+name = "demo_summarize_tokio"
+path = "src/bin/demo_summarize_tokio.rs"
 
 # [[bench]]
 # name = "parallel_processing"

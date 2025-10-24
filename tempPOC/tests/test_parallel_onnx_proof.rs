@@ -34,7 +34,7 @@ async fn test_20_parallel_onnx_sessions_proof() {
     println!();
     
     // Load ONNX model
-    let model_path = "models/torch_model.onnx";
+    let model_path = "models/simple_model.onnx";
     
     // Verify model exists
     assert!(
@@ -105,10 +105,11 @@ async fn test_20_parallel_onnx_sessions_proof() {
                     "input" => Value::from_array(([1, 1, 28, 28], input_data.into_boxed_slice())).unwrap()
                 ];
                 
-                let mut session_lock = session.lock().unwrap();
-                let outputs = session_lock.run(input_tensor);
-                let is_ok = outputs.is_ok();
-                drop(session_lock); // Release lock immediately
+                let is_ok = {
+                    let mut session_lock = session.lock().unwrap();
+                    let outputs = session_lock.run(input_tensor);
+                    outputs.is_ok()
+                }; // lock is dropped here
                 
                 let latency = inference_start.elapsed();
                 session_latencies.push(latency);
@@ -208,7 +209,7 @@ async fn test_20_parallel_onnx_sessions_proof() {
 async fn test_20_sessions_creation_proof() {
     println!("🧪 Simplified Proof: 20 ONNX Sessions Creation");
     
-    let model_path = "models/torch_model.onnx";
+    let model_path = "models/simple_model.onnx";
     assert!(std::path::Path::new(model_path).exists());
     
     let session_builder = Session::builder()
