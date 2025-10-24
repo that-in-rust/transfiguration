@@ -6,7 +6,6 @@
 //! - Monitor memory usage during processing
 
 use std::time::{Duration, Instant};
-use crate::errors::Result;
 
 /// Individual chunk processing result
 #[derive(Debug, Clone)]

@@ -4,7 +4,7 @@
 //! All claims are backed by automated tests with measurable outcomes.
 
 use crate::chunking::Chunk;
-use crate::errors::{ProcessingError, Result};
+use crate::errors::Result;
 use thiserror::Error;
 
 /// Executive Summary Contract (REQ-INF-001.0)

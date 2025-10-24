@@ -9,7 +9,7 @@ use crate::chunking::Chunk;
 use crate::inference::InferencePipeline;
 use crate::results::{ChunkResult, ProcessingResults, DefaultResultsAggregator, ResultsAggregator};
 use crate::config::SystemConfig;
-use crate::errors::{ProcessingError, Result};
+use crate::errors::Result;
 use std::time::Instant;
 
 /// Processing configuration

@@ -62,7 +62,7 @@ pub enum ProcessingError {
         source: Box<dyn std::error::Error + Send + Sync>,
     },
 
-    #[error("Detokenization failed for tokens {:?}: {source}")]
+    #[error("Detokenization failed for tokens {source:?}: {source}")]
     DetokenizationFailed {
         token_ids: Vec<u32>,
         #[source]

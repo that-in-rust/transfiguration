@@ -7,6 +7,16 @@ use crate::chunking::Chunk;
 use crate::errors::{ProcessingError, Result};
 use thiserror::Error;
 
+/// Convert SmolInferenceError to ProcessingError for compatibility
+impl From<SmolInferenceError> for ProcessingError {
+    fn from(err: SmolInferenceError) -> Self {
+        ProcessingError::InferenceFailed {
+            chunk_id: 0, // Will be overridden if available
+            message: format!("SmolLM2 inference error: {}", err),
+        }
+    }
+}
+
 /// REQ-SMOL-001.0: SmolLM2 Text Generation Contract
 ///
 /// # Preconditions
@@ -322,17 +332,17 @@ mod contract_tests {
         };
 
         // Too short
-        let result = validator.validate_summary("short", &chunk);
+        let result = SmolOutputValidator::validate_summary("short", &chunk);
         assert!(result.is_err());
 
         // Too long
         let long_summary = "a".repeat(201);
-        let result = validator.validate_summary(&long_summary, &chunk);
+        let result = SmolOutputValidator::validate_summary(&long_summary, &chunk);
         assert!(result.is_err());
 
         // Valid length
         let valid_summary = "This function prints a test message to the console output";
-        let result = validator.validate_summary(valid_summary, &chunk);
+        let result = SmolOutputValidator::validate_summary(valid_summary, &chunk);
         assert!(result.is_ok());
     }
 
@@ -373,12 +383,12 @@ mod contract_tests {
 
         // Valid content with code concepts
         let valid_summary = "Function that adds two integers and returns the result";
-        let result = validator.validate_summary(valid_summary, &chunk);
+        let result = SmolOutputValidator::validate_summary(valid_summary, &chunk);
         assert!(result.is_ok());
 
         // Empty content
         let empty_summary = "          ";
-        let result = validator.validate_summary(empty_summary, &chunk);
+        let result = SmolOutputValidator::validate_summary(empty_summary, &chunk);
         assert!(result.is_err());
     }
 }

@@ -6,7 +6,6 @@
 //! - Memory usage must stay under 200MB per session
 //! - Total memory usage must stay under 4GB
 
-use std::sync::Arc;
 use anyhow::Result;
 
 pub mod manager;

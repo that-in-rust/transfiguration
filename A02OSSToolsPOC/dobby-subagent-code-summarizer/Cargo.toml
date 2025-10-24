@@ -16,6 +16,10 @@ tokio = { version = "1.35", features = ["full"] }
 anyhow = "1.0"
 thiserror = "1.0"
 
+# Serialization for config parsing
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
 # Logging (optional for now)
 # tracing = "0.1"
 # tracing-subscriber = "0.3"
@@ -32,8 +36,10 @@ clap = { version = "4.4", features = ["derive"] }
 # Date/time for file naming
 chrono = "0.4"
 
+
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3.8"
 
 # Binaries commented out for now - focus on library and tests
 # [[bin]]

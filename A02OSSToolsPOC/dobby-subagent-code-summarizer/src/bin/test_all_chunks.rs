@@ -1,15 +1,17 @@
-//! Test program to run ONNX inference on all iggy chunks
+//! Test program to run SmolLM2 production inference on all iggy chunks
+//! Design101 Principle 1: Executable Specifications
 use dobby_subagent_code_summarizer::{
-    OnnxInferencePipeline, InferenceConfig, Chunk, inference::InferencePipeline
+    SmolLM2InferencePipeline, Chunk, SmolLM2Inference, ProductionSmolLM2Tokenizer
 };
 use std::time::Instant;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("🚀 Starting ONNX inference on all iggy chunks...");
+    println!("🚀 Starting SmolLM2 Production inference on all iggy chunks...");
+    println!("🔧 Using battle-tested HuggingFace tokenizer (Design101 Principle 9)");
 
-    // Create inference pipeline
-    let config = InferenceConfig::default();
-    let pipeline = OnnxInferencePipeline::new(config)?;
+    // Create production SmolLM2 inference pipeline with proven components
+    let pipeline = SmolLM2InferencePipeline::<ProductionSmolLM2Tokenizer>::new_production()
+        .map_err(|e| format!("Failed to create production pipeline: {}", e))?;
 
     let chunks_dir = std::fs::read_dir("chunks/")?;
     let mut chunks = Vec::new();
@@ -52,9 +54,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             content,
         };
 
-        // Run inference
+        // Run SmolLM2 inference
         let chunk_start = Instant::now();
-        match pipeline.process_chunk(&chunk) {
+        match pipeline.generate_summary(&chunk) {
             Ok(summary) => {
                 let duration = chunk_start.elapsed();
                 println!("✅ Chunk {} ({} lines): {}ms", chunk_name, line_count, duration.as_millis());

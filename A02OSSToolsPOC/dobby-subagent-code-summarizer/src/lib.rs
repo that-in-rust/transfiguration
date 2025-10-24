@@ -16,8 +16,10 @@ pub mod tokenizer;
 pub mod tokenizer_simple;
 pub mod tokenizer_codet5;
 pub mod tokenizer_smollm;
+pub mod smol_production_tokenizer;
 pub mod t5_inference_contract;
 pub mod smol_inference_contract;
+pub mod smol_inference;
 
 // Import traits for use within the library
 use orchestrator::ParallelProcessor;
@@ -34,12 +36,16 @@ pub use validation::{DefaultContractValidator, ValidationReport};
 pub use config::SystemConfig;
 pub use errors::{ProcessingError, Result};
 
-// Re-export SmolLM2 components
-pub use tokenizer_smollm::{SmolLM2Tokenizer, SmolTokenizerProvider, create_smollm_tokenizer};
+// Re-export SmolLM2 components (Production First - Design101 Principle 9)
+pub use smol_production_tokenizer::{
+    ProductionSmolLM2Tokenizer, SmolLM2TokenizerProvider, SpecialTokens,
+    create_production_smollm_tokenizer
+};
 pub use smol_inference_contract::{
     SmolLM2Inference, SmolModelConfiguration, SmolInferenceError,
     SmolOutputValidator, SmolPerformanceMetrics
 };
+pub use smol_inference::SmolLM2InferencePipeline;
 
 /// Main library interface
 pub struct OnnxSummarizer {

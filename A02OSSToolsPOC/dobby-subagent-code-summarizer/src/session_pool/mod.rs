@@ -6,7 +6,7 @@
 //! - Support 20 concurrent sessions
 //! - Track memory usage per session
 
-use crate::errors::{ProcessingError, Result};
+use crate::errors::Result;
 
 /// Session pool configuration
 #[derive(Debug, Clone)]

@@ -7,7 +7,7 @@
 
 use crate::config::SystemConfig;
 use crate::results::ProcessingResults;
-use crate::errors::{ProcessingError, Result};
+use crate::errors::Result;
 
 /// Validation report with contract satisfaction metrics
 #[derive(Debug)]
