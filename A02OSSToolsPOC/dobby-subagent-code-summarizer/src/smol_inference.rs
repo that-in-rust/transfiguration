@@ -166,15 +166,12 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::tokenizer_smollm::create_smollm_tokenizer;
-    use std::fs;
-    use tempfile::tempdir;
-
+    
     /// GREEN Phase Test: Model health validation
     #[test]
     fn test_smol_inference_model_loading_fails() -> Result<()> {
         // GREEN: This should pass because we have basic model health validation
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let result = pipeline.validate_model_health();
@@ -187,7 +184,7 @@ mod tests {
     #[test]
     fn test_smol_inference_performance_contract_violation() -> Result<()> {
         // GREEN: This should pass because our implementation is fast
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let chunk = Chunk {
@@ -220,7 +217,7 @@ mod tests {
     #[test]
     fn test_smol_inference_output_length_validation() -> Result<()> {
         // GREEN: This should pass because our implementation enforces length constraints
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let chunk = Chunk {
@@ -245,7 +242,7 @@ mod tests {
     #[test]
     fn test_smol_inference_output_diversity_contract() -> Result<()> {
         // GREEN: Test that different inputs produce different outputs
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let chunks = vec![
@@ -310,7 +307,7 @@ mod tests {
     #[test]
     fn test_smol_inference_memory_contract() -> Result<()> {
         // GREEN: This should pass because our implementation is memory-efficient
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let chunk = Chunk {
@@ -341,7 +338,7 @@ mod tests {
     #[test]
     fn test_smol_inference_success_rate_contract() -> Result<()> {
         // RED: This will fail until we implement robust inference
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let test_chunks = vec![
@@ -391,7 +388,7 @@ mod tests {
     /// RED Phase Test: Configuration validation
     #[test]
     fn test_smol_inference_configuration_validation() -> Result<()> {
-        let real_tokenizer = create_smollm_tokenizer()?;
+        let real_tokenizer = crate::create_production_smollm_tokenizer()?;
         let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
 
         let config = pipeline.model_config();

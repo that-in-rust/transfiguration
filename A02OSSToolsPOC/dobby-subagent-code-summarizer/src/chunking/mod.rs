@@ -42,6 +42,12 @@ pub struct TextChunker {
     contract: ChunkingContract,
 }
 
+impl Default for TextChunker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TextChunker {
     pub fn new() -> Self {
         Self {

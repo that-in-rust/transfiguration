@@ -95,8 +95,8 @@ impl SimpleCodeT5Tokenizer {
         let mut current = String::new();
         let chars: Vec<char> = prefixed_text.chars().collect();
 
-        for i in 0..chars.len() {
-            current.push(chars[i]);
+        for ch in &chars {
+            current.push(*ch);
 
             // Check if current substring is in vocab
             if let Some(&token_id) = self.vocab.get(&current) {
@@ -158,7 +158,7 @@ impl SimpleCodeT5Tokenizer {
             let token_id_u32 = token_id as u32;
             if let Some(token) = self.reverse_vocab.get(&token_id_u32) {
                 text.push_str(token);
-            } else if token_id >= 32 && token_id <= 126 {
+            } else if (32..=126).contains(&token_id) {
                 // Handle ASCII characters directly
                 text.push(token_id as u8 as char);
             }

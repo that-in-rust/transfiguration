@@ -94,6 +94,7 @@ impl CodeT5Tokenizer {
     }
 
     /// Load vocabulary from JSON file (handle single-line format)
+    #[allow(dead_code)]
     fn load_json_vocab(vocab_file: &Path) -> Result<HashMap<String, u32>> {
         let file = File::open(vocab_file)
             .map_err(|e| ProcessingError::TokenizerLoadFailed {
@@ -150,6 +151,7 @@ impl CodeT5Tokenizer {
     }
 
     /// Find colon that's not inside quotes
+    #[allow(dead_code)]
     fn find_colon_outside_quotes(s: &str) -> Option<usize> {
         let mut in_quotes = false;
         let mut escape_next = false;
@@ -172,6 +174,7 @@ impl CodeT5Tokenizer {
     }
 
     /// Extract string value from JSON string literal
+    #[allow(dead_code)]
     fn extract_json_string(s: &str) -> String {
         let trimmed = s.trim();
         if trimmed.starts_with('"') && trimmed.ends_with('"') {
@@ -261,7 +264,7 @@ impl CodeT5Tokenizer {
             let token_id_u32 = token_id as u32;
             if let Some(token) = self.reverse_vocab.get(&token_id_u32) {
                 text.push_str(token);
-            } else if token_id >= 32 && token_id <= 126 {
+            } else if (32..=126).contains(&token_id) {
                 // Handle ASCII characters directly
                 text.push(token_id as u8 as char);
             }

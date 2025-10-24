@@ -125,7 +125,7 @@ async fn test_real_iggy_chunk_processing_fails() -> anyhow::Result<()> {
         let content = std::fs::read_to_string(chunk_path);
 
         if content.is_ok() {
-            let chunk = Chunk {
+            let _chunk = Chunk {
                 id: index as u64,
                 line_start: index * 300,
                 line_end: (index + 1) * 300,

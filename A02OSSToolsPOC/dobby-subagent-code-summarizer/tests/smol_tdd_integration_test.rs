@@ -7,7 +7,8 @@
 //! ✅ Pattern-based inference (to be replaced with ONNX)
 
 use dobby_subagent_code_summarizer::{
-    Chunk, SmolLM2Tokenizer, SmolOutputValidator, SmolPerformanceMetrics
+    Chunk, SmolOutputValidator, SmolPerformanceMetrics,
+    create_production_smollm_tokenizer
 };
 use dobby_subagent_code_summarizer::smol_inference::SmolLM2InferencePipeline;
 use dobby_subagent_code_summarizer::smol_inference_contract::SmolLM2Inference;
@@ -48,7 +49,7 @@ fn test_comprehensive_smollm_tdd_implementation() -> anyhow::Result<()> {
 
     // Phase 3: Test inference pipeline with REAL neural generation (NO patterns!)
     println!("\n📋 Phase 3: Testing REAL Neural Inference Pipeline (NO pattern matching!)");
-    let real_tokenizer = dobby_subagent_code_summarizer::tokenizer_smollm::create_smollm_tokenizer()
+    let real_tokenizer = create_production_smollm_tokenizer()
         .expect("Should load REAL SmolLM2 tokenizer");
     let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)
         .expect("Should create inference pipeline with REAL tokenizer");

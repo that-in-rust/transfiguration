@@ -26,16 +26,17 @@ impl From<&SystemConfig> for ProcessingConfig {
 
 /// Parallel processor trait for dependency injection
 pub trait ParallelProcessor: Send + Sync {
-    async fn process_chunks_parallel<I: InferencePipeline + 'static>(
+    fn process_chunks_parallel<I: InferencePipeline + 'static>(
         &self,
         chunks: Vec<Chunk>,
         inference: &I,
         config: &SystemConfig,
-    ) -> Result<ProcessingResults>;
+    ) -> impl std::future::Future<Output = Result<ProcessingResults>> + Send;
 }
 
 /// Default Tokio-based processor
 pub struct TokioParallelProcessor {
+    #[allow(dead_code)]
     cfg: ProcessingConfig,
 }
 
@@ -48,7 +49,7 @@ impl ParallelProcessor for TokioParallelProcessor {
         &self,
         chunks: Vec<Chunk>,
         inference: &I,
-        config: &SystemConfig,
+        _config: &SystemConfig,
     ) -> Result<ProcessingResults> {
         let total = chunks.len();
         let mut results = Vec::with_capacity(total);
@@ -58,33 +59,33 @@ impl ParallelProcessor for TokioParallelProcessor {
             let start = Instant::now();
             let summary = inference.process_chunk(&chunk);
             let chunk_result = match summary {
-                Ok(s) => ChunkResult { 
-                    chunk_id: chunk.id as usize, 
-                    summary: s, 
-                    processing_time: start.elapsed(), 
-                    success: true, 
-                    error_message: None 
+                Ok(s) => ChunkResult {
+                    chunk_id: chunk.id as usize,
+                    summary: s,
+                    processing_time: start.elapsed(),
+                    success: true,
+                    error_message: None
                 },
-                Err(e) => ChunkResult { 
-                    chunk_id: chunk.id as usize, 
-                    summary: String::new(), 
-                    processing_time: start.elapsed(), 
-                    success: false, 
-                    error_message: Some(e.to_string()) 
+            Err(e) => ChunkResult {
+                    chunk_id: chunk.id as usize,
+                    summary: String::new(),
+                    processing_time: start.elapsed(),
+                    success: false,
+                    error_message: Some(e.to_string())
                 },
-            };
-            results.push(chunk_result);
-        }
+        };
+        results.push(chunk_result);
+    }
 
-        // Aggregate
-        let aggregator = DefaultResultsAggregator;
-        let mut aggregated = aggregator.aggregate(results);
+    // Aggregate
+    let aggregator = DefaultResultsAggregator;
+    let mut aggregated = aggregator.aggregate(results);
 
-        // STUB: no memory tracking yet; set peak memory to 0
-        aggregated.peak_memory_mb = 0;
-        aggregated
-            .summary(); // compute final metrics already done inside aggregate
+    // STUB: no memory tracking yet; set peak memory to 0
+    aggregated.peak_memory_mb = 0;
+    aggregated
+        .summary(); // compute final metrics already done inside aggregate
 
-        Ok(aggregated)
+    Ok(aggregated)
     }
 }

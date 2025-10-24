@@ -5,7 +5,7 @@
 use crate::errors::{ProcessingError, Result};
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Read};
+use std::io::{BufReader, Read};
 use std::path::Path;
 
 /// SmolLM2 tokenizer following CodeT5 pattern
@@ -118,7 +118,7 @@ impl SmolLM2Tokenizer {
     /// - ProcessingError::DetokenizationFailed if decoding fails
     pub fn decode_summary(&self, token_ids: &[u32]) -> Result<String> {
         // Convert u32 to u32 for lookup
-        let ids: Vec<u32> = token_ids.iter().map(|&id| id).collect();
+        let ids: Vec<u32> = token_ids.to_vec();
 
         // Simple decoding
         let mut words = Vec::new();
@@ -261,7 +261,7 @@ impl SmolTokenizerProvider for SmolLM2Tokenizer {
 /// This entire MockSmolTokenizer implementation has been eliminated.
 /// All tests and examples must use the real SmolLM2Tokenizer from from_default_model().
 /// No more fake mock responses, pattern matching, or token simulation!
-
+///
 /// Factory function for creating tokenizers (dependency injection) - REAL tokenizer only!
 pub fn create_smollm_tokenizer() -> Result<impl SmolTokenizerProvider> {
     SmolLM2Tokenizer::from_default_model()
@@ -277,9 +277,7 @@ pub fn create_mock_tokenizer() -> impl SmolTokenizerProvider {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs;
-    use tempfile::tempdir;
-
+    
     /// RED Phase Test: Tokenizer JSON vocabulary loading failure
     #[test]
     fn test_tokenizer_json_missing_file_fails() -> Result<()> {

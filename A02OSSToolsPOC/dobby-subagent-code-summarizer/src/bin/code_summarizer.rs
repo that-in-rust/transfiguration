@@ -9,8 +9,8 @@ use std::time::Instant;
 use std::path::Path;
 use clap::Parser;
 use chrono::Utc;
-use tempPOC::{
-    inference::{OnnxInferencePipeline, InferenceConfig, InferencePipeline},
+use dobby_subagent_code_summarizer::{
+    inference::{OnnxInferencePipeline, InferenceConfig},
     chunking::TextChunker,
     Chunk,
 };

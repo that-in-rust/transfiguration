@@ -55,7 +55,7 @@ use thiserror::Error;
 /// Given: Chunk with only comments or whitespace
 /// When: inference_pipeline.generate_summary() is called
 /// Then: Returns appropriate summary or structured error
-
+///
 /// Trait-based dependency injection for testability (Principle 3)
 pub trait CodeT5Inference: Send + Sync {
     /// Generate code summary with measurable contracts
@@ -149,7 +149,7 @@ pub struct OutputValidator;
 
 impl OutputValidator {
     /// Validate summary meets all contract requirements
-    pub fn validate_summary(summary: &str, input_chunk: &Chunk) -> Result<()> {
+    pub fn validate_summary(summary: &str, _input_chunk: &Chunk) -> Result<()> {
         // Length validation (10-200 characters)
         if summary.len() < 10 {
             return Err(InferenceError::OutputValidationFailed {
@@ -263,7 +263,7 @@ mod contract_tests {
     /// Test Scenario 1: Output Diversity Validation (REQ-INF-001.3)
     #[test]
     fn test_output_diversity_contract() {
-        let validator = OutputValidator;
+        let _validator = OutputValidator;
 
         let output1 = "This function defines a hello world message";
         let output2 = "The struct contains configuration fields";
@@ -278,7 +278,7 @@ mod contract_tests {
     /// Test Scenario 2: Summary Length Validation
     #[test]
     fn test_summary_length_validation() {
-        let validator = OutputValidator;
+        let _validator = OutputValidator;
         let chunk = Chunk {
             id: 0,
             line_start: 0,

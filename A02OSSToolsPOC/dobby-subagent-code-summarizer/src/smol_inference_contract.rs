@@ -70,7 +70,7 @@ impl From<SmolInferenceError> for ProcessingError {
 /// Given: Standard chunk with 300 lines of code
 /// When: smol_inference_pipeline.generate_summary() is called
 /// Then: Completes in <500ms with <100MB additional memory usage
-
+///
 /// Trait-based dependency injection for testability (Principle 3)
 pub trait SmolLM2Inference: Send + Sync {
     /// Generate 1-line code summary with measurable contracts
@@ -260,7 +260,7 @@ impl SmolPerformanceMetrics {
         }
     }
 
-    pub fn validate_contract(&self, max_duration: std::time::Duration, max_memory_mb: usize, chunk_id: usize) -> Result<()> {
+    pub fn validate_contract(&self, max_duration: std::time::Duration, max_memory_mb: usize, _chunk_id: usize) -> Result<()> {
         let elapsed = self.start_time.elapsed();
         let memory_after = Self::get_memory_usage();
         let memory_used_mb = (memory_after.saturating_sub(self.memory_before)) / (1024 * 1024);
@@ -307,7 +307,7 @@ mod contract_tests {
     /// Test Scenario 1: Output Diversity Validation (REQ-SMOL-001.3)
     #[test]
     fn test_output_diversity_contract() {
-        let validator = SmolOutputValidator;
+        let _validator = SmolOutputValidator;
 
         let output1 = "Function that prints hello world message to console";
         let output2 = "Struct representing user with name and age fields";
@@ -322,7 +322,7 @@ mod contract_tests {
     /// Test Scenario 2: Summary Length Validation
     #[test]
     fn test_summary_length_validation() {
-        let validator = SmolOutputValidator;
+        let _validator = SmolOutputValidator;
         let chunk = Chunk {
             id: 0,
             line_start: 0,
@@ -372,7 +372,7 @@ mod contract_tests {
     /// Test Scenario 4: Content Validation
     #[test]
     fn test_content_validation() {
-        let validator = SmolOutputValidator;
+        let _validator = SmolOutputValidator;
         let chunk = Chunk {
             id: 0,
             line_start: 0,

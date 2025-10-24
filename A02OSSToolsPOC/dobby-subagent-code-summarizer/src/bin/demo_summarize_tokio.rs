@@ -4,8 +4,8 @@
 //! tokio-rs/tokio repository source code (152,388 lines of Rust code).
 
 use std::time::Instant;
-use tempPOC::{
-    inference::{OnnxInferencePipeline, InferenceConfig, InferencePipeline},
+use dobby_subagent_code_summarizer::{
+    inference::{OnnxInferencePipeline, InferenceConfig},
     chunking::TextChunker,
     Chunk,
 };
@@ -67,7 +67,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     for (i, chunk_lines) in demo_chunks {
         // Create a mock Chunk struct
         let chunk_content = chunk_lines.join("\n");
-        let chunk = tempPOC::Chunk {
+        let chunk = Chunk {
             id: i as u64,
             line_start: i * chunk_size,
             line_end: std::cmp::min((i + 1) * chunk_size, lines.len()),

@@ -76,6 +76,7 @@ pub trait SmolLM2TokenizerProvider: Send + Sync {
 pub struct ProductionSmolLM2Tokenizer {
     tokenizer: Tokenizer,
     special_tokens: SpecialTokens,
+    #[allow(dead_code)]
     model_path: PathBuf,
 }
 
@@ -209,7 +210,7 @@ impl ProductionSmolLM2Tokenizer {
         }
 
         // Validate token IDs - allow PAD=EOS overlap (common in many models)
-        let token_ids = vec![special_tokens.bos_id, special_tokens.eos_id, special_tokens.unk_id];
+        let token_ids = [special_tokens.bos_id, special_tokens.eos_id, special_tokens.unk_id];
         let unique_ids: std::collections::HashSet<_> = token_ids.iter().collect();
         if unique_ids.len() != token_ids.len() {
             return Err(ProcessingError::TokenizerLoadFailed {

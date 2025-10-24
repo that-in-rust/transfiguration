@@ -4,7 +4,7 @@
 //! Shows the dramatic improvement from "Empty decoded text" to meaningful summaries
 
 use dobby_subagent_code_summarizer::{
-    Chunk, SmolLM2Tokenizer, SmolLM2InferencePipeline
+    Chunk, SmolLM2InferencePipeline, create_production_smollm_tokenizer
 };
 use std::time::Instant;
 
@@ -14,12 +14,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Load the real SmolLM2 tokenizer
     println!("\n📋 Loading Real SmolLM2 Tokenizer...");
-    let tokenizer = SmolLM2Tokenizer::from_default_model()?;
+    let tokenizer = create_production_smollm_tokenizer()?;
     println!("✅ Loaded real SmolLM2 tokenizer with {} vocabulary entries", tokenizer.vocab_size());
 
     // Create inference pipeline with REAL SmolLM2 tokenizer (no more mocks!)
     println!("\n📋 Creating SmolLM2 Inference Pipeline with REAL tokenizer...");
-    let real_tokenizer = dobby_subagent_code_summarizer::tokenizer_smollm::create_smollm_tokenizer()?;
+    let real_tokenizer = create_production_smollm_tokenizer()?;
     let pipeline = SmolLM2InferencePipeline::new(real_tokenizer)?;
     println!("✅ Pipeline ready with REAL neural inference (NO pattern matching!)");
 
