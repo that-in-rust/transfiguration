@@ -1,36 +1,150 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# =============================================================================
+# RIGOROUS GITIGNORE - TRANSFIGURATION PROJECT
+# =============================================================================
+# This file is organized by category and designed to prevent files >70MB from
+# entering the repository. All binary files, model files, and build artifacts
+# are explicitly excluded.
 
-# Rust
+# =============================================================================
+# 1. LARGE FILES & BINARIES (>70MB PROTECTION)
+# =============================================================================
+# AI/ML Model Files (typically >100MB)
+*.onnx
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.pb
+*.tflite
+*.h5
+*.hdf5
+*.ckpt
+*.pkl
+*.pickle
+
+# Archives & Compressed Files
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.7z
+*.rar
+*.gz
+*.bz2
+
+# Disk Images & Installers
+*.dmg
+*.iso
+*.img
+*.pkg
+*.deb
+*.rpm
+*.exe
+*.msi
+*.app
+*.snap
+
+# Large Binary Files
+*.so
+*.dll
+*.dylib
+*.node
+*.wasm
+*.a
+*.lib
+
+# Media Files (often large)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# Large Data Files
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+*.parquet
+*.arrow
+*.feather
+
+# Large Text/Data Files
+*.json.gz
+*.csv.gz
+*.txt.gz
+
+# =============================================================================
+# 2. RUST & CARGO
+# =============================================================================
 target/
 Cargo.lock
 **/*.rs.bk
 *.pdb
+.cargo/
+rust-toolchain*
 
-# Build outputs
+# =============================================================================
+# 3. BUILD OUTPUTS & DISTRIBUTION
+# =============================================================================
 dist/
 build/
 out/
+*.build
+*.dist
+release/
+debug/
 
-# TypeScript
+# =============================================================================
+# 4. NODE.JS & JAVASCRIPT
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.eslintcache
+.stylelintcache
 *.tsbuildinfo
 .tscache/
 
-# React
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# =============================================================================
+# 5. ENVIRONMENT & CONFIGURATION FILES
+# =============================================================================
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+config/local/
+settings/local/
 
-# VS Code
+# =============================================================================
+# 6. IDE & EDITOR FILES
+# =============================================================================
 .vscode/
-*.vsix
+.idea/
+*.swp
+*.swo
+*~
 .vscode-test/
+*.sublime-*
+.atom/
+.brackets/
+.c9/
+*.sublime-workspace
+*.sublime-project
 
-# OS generated files
+# =============================================================================
+# 7. OPERATING SYSTEM FILES
+# =============================================================================
 .DS_Store
 .DS_Store?
 ._*
@@ -38,170 +152,147 @@ out/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
+*.lnk
 
-# Logs
-logs
+# =============================================================================
+# 8. LOGS & TEMPORARY FILES
+# =============================================================================
+logs/
 *.log
+*.log.*
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
+# =============================================================================
+# 9. TEST COVERAGE & REPORTS
+# =============================================================================
 coverage/
 *.lcov
-
-# nyc test coverage
 .nyc_output
+coverage.xml
+test-results/
+reports/
+.coverage
 
-# Dependency directories
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env
-.env.test
-
-# parcel-bundler cache (https://parceljs.org/)
+# =============================================================================
+# 10. PYTHON SPECIFIC
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
 .cache
-.parcel-cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+*.ipynb_checkpoints
 
-# next.js build output
-.next
+# =============================================================================
+# 11. MACHINE LEARNING & DATA SCIENCE
+# =============================================================================
+# Model directories
+models/
+!models/*.rs
+!models/*.md
+!models/*.txt
 
-# nuxt.js build output
-.nuxt
+# Data directories
+data/
+datasets/
+!data/*.rs
+!data/*.md
+!data/*.txt
 
-# vuepress build output
-.vuepress/dist
+# Training artifacts
+checkpoints/
+wandb/
+mlruns/
+tensorboard_logs/
+*.ckpt
+*.pth
+*.pt
 
-# Serverless directories
-.serverless
+# =============================================================================
+# 12. CONTAINER & DEPLOYMENT
+# =============================================================================
+.dockerignore
+docker-compose.override.yml
+.docker/
 
-# FuseBox cache
-.fusebox/
-
-# tempPOC directory specific rules
-# ================================
-
-# Rust build artifacts
+# =============================================================================
+# 13. PROJECT SPECIFIC - tempPOC DIRECTORY
+# =============================================================================
+# tempPOC build artifacts
 tempPOC/target/
 tempPOC/Cargo.lock
 
-# Model files and weights
+# tempPOC model files (exclude all large models)
 tempPOC/*.onnx
+tempPOC/*.safetensors
 tempPOC/*.bin
 tempPOC/*.pt
 tempPOC/*.pth
 tempPOC/*.zip
 tempPOC/*.tar.gz
 
-# Model directories (except Rust source files)
+# tempPOC model directories
 tempPOC/models/
+tempPOC/full_tokio_run/models/
 !tempPOC/models/*.rs
+!tempPOC/models/*.md
+!tempPOC/full_tokio_run/models/*.rs
+!tempPOC/full_tokio_run/models/*.md
+!tempPOC/full_tokio_run/models/*.txt
 
-# Build outputs and caches
+# tempPOC build outputs
 tempPOC/outputs/
 tempPOC/chunks/
-tempPOC/.cargo/
+tempPOC/cache/
+tempPOC/target/
 
-# Keep source code structure but ignore large files
-tempPOC/src/**/*.rs
-!tempPOC/src/
+# tempPOC logs and temp files
+tempPOC/*.log
+tempPOC/tmp/
+tempPOC/temp/
 
-# Test outputs and coverage
+# tempPOC test outputs
 tempPOC/tests/output/
 tempPOC/coverage/
 
-# Editor and IDE specific files
+# tempPOC editor files
 tempPOC/.vscode/
 tempPOC/.idea/
 tempPOC/*.sublime-workspace
 
-# Logs and temporary files
-tempPOC/*.log
-tempPOC/tmp/
-
-# Python specific
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Jupyter notebooks
-*.ipynb_checkpoints
-
-# Environment files
-.env
-.env.*
-!.env.example
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-
-# Added by cargo
-
-/target
-
-# Downloads for static analysis (excluded from git)
-# Exclude entire download analysis folder except for our documentation
-Insp04_DownloadAnalysis/*
-
-# Allow ONLY our analysis documentation and scripts
-# Exclude all binary files globally
-*.deb
-*.zip
-*.tar.gz
-*.tar.xz
-*.dmg
-*.exe
-*.msi
-*.pkg
-*.app
-*.jar
-*.so
-*.node
-*.wasm
-*.pak
-*.dat
-*.bin
-*.ttf
-*.otf
-*.dll
-*.dylib
-
-# Cloned repositories for analysis (completely excluded)
-parseltongue/
-zed/
-
+# =============================================================================
+# 14. ARCHIVED DIRECTORIES (never commit these)
+# =============================================================================
 # Large analysis directories (archived in zzArchive202510)
 Insp04_DownloadAnalysis/
 Insp09_ActiveWorkspaces_StrategicInitiatives/
@@ -210,5 +301,47 @@ Insp11MVP/
 deconstructor/
 downloads-for-analysis/
 
-# Keep only active working project
-!tempPOC/full_tokio_run/
+# Cloned repositories for analysis
+parseltongue/
+zed/
+
+# =============================================================================
+# 15. ALLOWED EXCEPTIONS (what we DO want to track)
+# =============================================================================
+# Keep only essential source files and documentation
+!tempPOC/full_tokio_run/src/
+!tempPOC/full_tokio_run/Cargo.toml
+!tempPOC/full_tokio_run/README.md
+!tempPOC/full_tokio_run/.gitignore
+!tempPOC/Cargo.toml
+!tempPOC/src/
+
+# =============================================================================
+# 16. SAFETY NETS
+# =============================================================================
+# Prevent any file over 50MB from being committed (Git LFS required for larger files)
+*.large
+*.huge
+*.big
+
+# Common patterns for accidentally large files
+dump.sql
+database.sql
+backup.sql
+*.dump
+*.backup
+*.export
+
+# =============================================================================
+# END OF GITIGNORE
+# =============================================================================
+
+# NOTE: This .gitignore is designed to be rigorous and prevent accidental
+# commits of large files. If you need to track large files, use Git LFS.
+#
+# To add large files with Git LFS:
+# git lfs track "*.onnx"
+# git lfs track "*.safetensors"
+# git add .gitattributes
+# git add your-large-file.onnx
+# git commit -m "Add large model file with LFS"
