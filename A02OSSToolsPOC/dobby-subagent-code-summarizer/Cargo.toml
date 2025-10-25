@@ -6,7 +6,7 @@ description = "Real ONNX LLM inference for Tokio code summarization"
 
 [dependencies]
 # ONNX Runtime 2.0 for ML inference
-ort = { version = "2.0.0-rc.10", default-features = false, features = ["load-dynamic", "half"] }
+ort = { version = "2.0.0-rc.10", default-features = false, features = ["load-dynamic", "ndarray", "coreml", "half"] }
 ndarray = "0.15"
 anyhow = "1.0"
 
