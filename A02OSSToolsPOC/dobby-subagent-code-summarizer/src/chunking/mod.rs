@@ -99,7 +99,12 @@ impl TextChunker {
         }
 
         let processing_time = start_time.elapsed();
-        let expected_max_time_ms = (file_size_mb as u128) * (self.contract.processing_time_ms_per_mb as u128);
+        let expected_max_time_ms = if file_size_mb == 0 {
+            // For small files < 1MB, allow at least 100ms
+            100u128
+        } else {
+            (file_size_mb as u128) * (self.contract.processing_time_ms_per_mb as u128)
+        };
 
         // TDD-First: GREEN phase - validate postconditions
         if processing_time.as_millis() > expected_max_time_ms {

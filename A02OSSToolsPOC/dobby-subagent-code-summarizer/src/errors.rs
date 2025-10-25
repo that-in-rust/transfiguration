@@ -77,12 +77,12 @@ impl From<ort::Error> for ProcessingError {
     }
 }
 
-/// Convert from our new InferenceError to existing ProcessingError
-impl From<crate::t5_inference_contract::InferenceError> for ProcessingError {
-    fn from(err: crate::t5_inference_contract::InferenceError) -> Self {
+/// Convert from our SmolLM2 InferenceError to existing ProcessingError
+impl From<crate::smol_inference_contract::SmolInferenceError> for ProcessingError {
+    fn from(err: crate::smol_inference_contract::SmolInferenceError) -> Self {
         ProcessingError::InferenceFailed {
             chunk_id: 0, // Will be overridden if provided
-            message: format!("Inference error: {}", err),
+            message: format!("SmolLM2 inference error: {}", err),
         }
     }
 }

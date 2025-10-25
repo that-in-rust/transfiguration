@@ -278,6 +278,11 @@ A02OSSToolsPOC/*/chunks/
 A02OSSToolsPOC/*/cache/
 A02OSSToolsPOC/*/target/
 
+# A02OSSToolsPOC tokenizer and model artifacts
+A02OSSToolsPOC/*/tokenizer_dir/
+A02OSSToolsPOC/*/*.int4
+A02OSSToolsPOC/*/*.gguf
+
 # A02OSSToolsPOC logs and temp files
 A02OSSToolsPOC/*/*.log
 A02OSSToolsPOC/*/tmp/
@@ -293,7 +298,29 @@ A02OSSToolsPOC/*/.idea/
 A02OSSToolsPOC/*/*.sublime-workspace
 
 # =============================================================================
-# 14. ARCHIVED DIRECTORIES (never commit these)
+# 14. ONNX RUNTIME GENAI AND EXTERNAL DEPENDENCIES
+# =============================================================================
+# ONNX Runtime GenAI - Large external dependency
+onnxruntime-genai/
+!onnxruntime-genai/*.md
+!onnxruntime-genai/*.txt
+
+# Root-level quantization and model files
+*.int4
+*.gguf
+export_*_int4.py
+verify_*_model.py
+test_*_inference.py
+*_quantization_summary.md
+*_inference_test.py
+*_simple_inference.py
+
+# Generated headers and bindings
+ort_genai_c.h
+bindgen_wrapper.h
+
+# =============================================================================
+# 15. ARCHIVED DIRECTORIES (never commit these)
 # =============================================================================
 # Large analysis directories (archived in zzArchive202510)
 Insp04_DownloadAnalysis/
@@ -318,7 +345,7 @@ zed/
 !tempPOC/src/
 
 # =============================================================================
-# 16. SAFETY NETS
+# 17. SAFETY NETS
 # =============================================================================
 # Prevent any file over 50MB from being committed (Git LFS required for larger files)
 *.large
@@ -334,7 +361,7 @@ backup.sql
 *.export
 
 # =============================================================================
-# END OF GITIGNORE
+# 18. END OF GITIGNORE
 # =============================================================================
 
 # NOTE: This .gitignore is designed to be rigorous and prevent accidental

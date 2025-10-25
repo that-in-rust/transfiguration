@@ -6,7 +6,7 @@
 //! - Collect results and feed to aggregator/validator
 
 use crate::chunking::Chunk;
-use crate::inference::InferencePipeline;
+use crate::smol_inference_contract::SmolLM3Inference;
 use crate::results::{ChunkResult, ProcessingResults, DefaultResultsAggregator, ResultsAggregator};
 use crate::config::SystemConfig;
 use crate::errors::Result;
@@ -26,10 +26,10 @@ impl From<&SystemConfig> for ProcessingConfig {
 
 /// Parallel processor trait for dependency injection
 pub trait ParallelProcessor: Send + Sync {
-    fn process_chunks_parallel<I: InferencePipeline + 'static>(
+    fn process_chunks_parallel<I: SmolLM3Inference + 'static>(
         &self,
         chunks: Vec<Chunk>,
-        inference: &I,
+        inference: &mut I,
         config: &SystemConfig,
     ) -> impl std::future::Future<Output = Result<ProcessingResults>> + Send;
 }
@@ -45,10 +45,10 @@ impl TokioParallelProcessor {
 }
 
 impl ParallelProcessor for TokioParallelProcessor {
-    async fn process_chunks_parallel<I: InferencePipeline + 'static>(
+    async fn process_chunks_parallel<I: SmolLM3Inference + 'static>(
         &self,
         chunks: Vec<Chunk>,
-        inference: &I,
+        inference: &mut I,
         _config: &SystemConfig,
     ) -> Result<ProcessingResults> {
         let total = chunks.len();
@@ -57,7 +57,7 @@ impl ParallelProcessor for TokioParallelProcessor {
         // Process chunks sequentially for MVP (real impl will use tokio::spawn)
         for chunk in chunks {
             let start = Instant::now();
-            let summary = inference.process_chunk(&chunk);
+            let summary = inference.generate_summary(&chunk);
             let chunk_result = match summary {
                 Ok(s) => ChunkResult {
                     chunk_id: chunk.id as usize,

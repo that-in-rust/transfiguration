@@ -1,30 +1,20 @@
-//! SmolLM2-135M-Inference Executable Specifications
+//! SmolLM3-135M-Inference Executable Specifications
 //!
 //! TDD-First: Contract-driven development with measurable outcomes
 //! Every claim must be validated by automated tests
 
 use crate::chunking::Chunk;
-use crate::errors::{ProcessingError, Result};
+use crate::errors::Result;
 use thiserror::Error;
 
-/// Convert SmolInferenceError to ProcessingError for compatibility
-impl From<SmolInferenceError> for ProcessingError {
-    fn from(err: SmolInferenceError) -> Self {
-        ProcessingError::InferenceFailed {
-            chunk_id: 0, // Will be overridden if available
-            message: format!("SmolLM2 inference error: {}", err),
-        }
-    }
-}
-
-/// REQ-SMOL-001.0: SmolLM2 Text Generation Contract
+/// REQ-SMOL-001.0: SmolLM3 Text Generation Contract
 ///
 /// # Preconditions
-/// - SmolLM2-135M-Instruct ONNX model loaded successfully from models/smolLM2-onnx/model.onnx
-/// - SmolLM2 tokenizer loaded from models/smolLM2-onnx/tokenizer.json
+/// - SmolLM3-135M-Instruct ONNX model loaded successfully from models/smolLM3-onnx/model.onnx
+/// - SmolLM3 tokenizer loaded from models/smolLM3-onnx/tokenizer.json
 /// - Input chunk contains valid Rust source code (1-1000 lines)
 /// - Input text properly formatted with "Summarize this code in one line: " prefix
-/// - Model input sequence length ≤ 512 tokens
+/// - Model input sequence length ≤ 4096 tokens
 ///
 /// # Postconditions
 /// - Returns Ok(String) with meaningful 1-line code summary
@@ -37,8 +27,8 @@ impl From<SmolInferenceError> for ProcessingError {
 ///
 /// # Error Conditions
 /// - SmolInferenceError::ModelLoadFailed if ONNX model cannot be loaded
-/// - SmolInferenceError::TokenizerFailed if SmolLM2 tokenizer loading fails
-/// - SmolInferenceError::InputTooLong if chunk exceeds 512 token limit
+/// - SmolInferenceError::TokenizerFailed if SmolLM3 tokenizer loading fails
+/// - SmolInferenceError::InputTooLong if chunk exceeds 4096 token limit
 /// - SmolInferenceError::InferenceFailed if ONNX inference encounters errors
 /// - SmolInferenceError::OutputDecodingFailed if token decoding fails
 /// - SmolInferenceError::OutputValidationFailed if summary violates constraints
@@ -72,7 +62,7 @@ impl From<SmolInferenceError> for ProcessingError {
 /// Then: Completes in <500ms with <100MB additional memory usage
 ///
 /// Trait-based dependency injection for testability (Principle 3)
-pub trait SmolLM2Inference: Send + Sync {
+pub trait SmolLM3Inference: Send + Sync {
     /// Generate 1-line code summary with measurable contracts
     ///
     /// # Performance Contract (Principle 5)
@@ -85,20 +75,20 @@ pub trait SmolLM2Inference: Send + Sync {
     /// - Must contain meaningful words describing code functionality
     /// - Different inputs must produce different outputs (>80% diversity)
     /// - Summary must be human-readable English
-    fn generate_summary(&self, chunk: &Chunk) -> Result<String>;
+    fn generate_summary(&mut self, chunk: &Chunk) -> Result<String>;
 
-    /// Validate SmolLM2 model health and readiness
+    /// Validate SmolLM3 model health and readiness
     ///
     /// # Postconditions
     /// - Returns Ok(()) if model and tokenizer loaded successfully
     /// - Returns Err(SmolInferenceError) if any component failed to load
-    fn validate_model_health(&self) -> Result<()>;
+    fn validate_model_health(&mut self) -> Result<()>;
 
     /// Get model configuration for debugging and validation
-    fn model_config(&self) -> SmolModelConfiguration;
+    fn model_config(&mut self) -> SmolModelConfiguration;
 }
 
-/// SmolLM2 model configuration for diagnostics and testing
+/// SmolLM3 model configuration for diagnostics and testing
 #[derive(Debug, Clone, PartialEq)]
 pub struct SmolModelConfiguration {
     pub model_path: String,
@@ -111,22 +101,22 @@ pub struct SmolModelConfiguration {
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum SmolModelType {
-    SmolLM2_135M,
-    SmolLM2_360M,
-    SmolLM2_1_7B,
+    SmolLM3_135M,
+    SmolLM3_360M,
+    SmolLM3_1_7B,
     Custom(String),
 }
 
 /// Structured error hierarchy using thiserror (Principle 6)
 #[derive(Error, Debug)]
 pub enum SmolInferenceError {
-    #[error("SmolLM2 model loading failed: {source}")]
+    #[error("SmolLM3 model loading failed: {source}")]
     ModelLoadFailed {
         #[from]
         source: Box<dyn std::error::Error + Send + Sync>,
     },
 
-    #[error("SmolLM2 tokenizer initialization failed: {reason}: {source}")]
+    #[error("SmolLM3 tokenizer initialization failed: {reason}: {source}")]
     TokenizerFailed {
         reason: String,
         source: Box<dyn std::error::Error + Send + Sync>,
@@ -138,7 +128,7 @@ pub enum SmolInferenceError {
         max_length: usize,
     },
 
-    #[error("SmolLM2 ONNX inference failed: {message}")]
+    #[error("SmolLM3 ONNX inference failed: {message}")]
     InferenceFailed {
         message: String,
         chunk_id: usize,

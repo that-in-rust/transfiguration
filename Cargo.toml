@@ -15,3 +15,13 @@ description = "Transfiguration - OSS Tools for AI-powered code analysis"
 tokio = { version = "1.35", features = ["full"] }
 anyhow = "1.0"
 thiserror = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokenizers = "0.15"
+ort = { version = "2.0.0-rc.4", features = ["download-binaries", "copy-dylibs"] }
+ndarray = "0.15"
+libc = "0.2"
+bindgen = "0.69"
+sysinfo = "0.30"
+clap = { version = "4.4", features = ["derive"] }
+chrono = "0.4"
