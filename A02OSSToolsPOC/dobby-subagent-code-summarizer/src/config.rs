@@ -1,12 +1,102 @@
-//! System configuration with TDD-First contracts
-//!
-//! Executable Specifications:
-//! - max_concurrent_sessions: 20
-//! - max_memory_mb: 4096 (4GB)
-//! - chunk_size: 300 lines
-//! - max_chunk_processing_time_s: 2
+//! Configuration structures for generation and model settings
 
 use std::path::PathBuf;
+use clap::ValueEnum;
+
+/// Strategy for text generation
+#[derive(Debug, Clone, ValueEnum)]
+pub enum SamplingStrategy {
+    #[value(name = "sampling")]
+    Sampling,
+    #[value(name = "beam")]
+    Beam,
+}
+
+/// Generation configuration parameters
+#[derive(Debug, Clone)]
+pub struct GenerationConfig {
+    pub strategy: SamplingStrategy,
+
+    // Sampling parameters
+    pub temperature: f32,
+    pub top_p: f32,
+    pub top_k: usize,
+
+    // Beam search parameters
+    pub num_beams: usize,
+    pub length_penalty: f32,
+    pub early_stopping: bool,
+
+    // Universal generation controls
+    pub max_new_tokens: usize,
+    pub min_length: usize,
+    pub repetition_penalty: f32,
+    pub no_repeat_ngram_size: usize,
+    pub stop_sequences: Vec<String>,
+}
+
+impl Default for GenerationConfig {
+    fn default() -> Self {
+        Self {
+            strategy: SamplingStrategy::Sampling,
+            temperature: 0.35,
+            top_p: 0.85,
+            top_k: 40,
+            num_beams: 3,
+            length_penalty: 1.05,
+            early_stopping: false,
+            max_new_tokens: 60,
+            min_length: 35,
+            repetition_penalty: 1.15,
+            no_repeat_ngram_size: 3,
+            stop_sequences: vec!["\n\n".to_string()],
+        }
+    }
+}
+
+/// Model configuration
+#[derive(Debug, Clone)]
+pub struct ModelConfig {
+    pub name: String,
+    pub model_path: PathBuf,
+    pub tokenizer_path: Option<PathBuf>,
+}
+
+impl ModelConfig {
+    pub fn new(name: String, model_path: PathBuf, tokenizer_path: Option<PathBuf>) -> Self {
+        Self {
+            name,
+            model_path,
+            tokenizer_path,
+        }
+    }
+
+    /// Resolve default model paths based on model name
+    pub fn from_name(name: &str, custom_path: Option<PathBuf>, tokenizer_path: Option<PathBuf>) -> Self {
+        let model_path = custom_path.unwrap_or_else(|| match name {
+            "qwen2.5-0.5b-int4" => PathBuf::from("./models/qwen2.5-0.5b-int4"),
+            "smollm2-135m" => PathBuf::from("./models/smollm2-135m"),
+            "smollm2-360m" => PathBuf::from("./models/smollm2-360m"),
+            _ => PathBuf::from(format!("./models/{}", name)),
+        });
+
+        Self {
+            name: name.to_string(),
+            model_path,
+            tokenizer_path,
+        }
+    }
+
+    /// Get tokenizer path (model_path/tokenizer_dir if not specified)
+    pub fn tokenizer_path(&self) -> PathBuf {
+        self.tokenizer_path.clone().unwrap_or_else(|| {
+            match self.name.as_str() {
+                "qwen2.5-0.5b-int4" => PathBuf::from("./tokenizer_dir"),
+                _ => self.model_path.join("tokenizer"),
+            }
+        })
+    }
+}
 
 /// System configuration with executable contracts
 #[derive(Debug, Clone)]

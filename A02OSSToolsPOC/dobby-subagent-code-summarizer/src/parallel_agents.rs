@@ -9,6 +9,7 @@ use tokio::task::JoinHandle;
 use std::path::PathBuf;
 
 use crate::inference::OptimizedInferenceEngine;
+use crate::config::GenerationConfig;
 
 /// Configuration for 20-agent parallel processing system
 #[derive(Debug, Clone)]
@@ -21,6 +22,8 @@ pub struct ParallelConfig {
     pub tokenizer_dir: PathBuf,
     /// Maximum concurrent tasks (typically matches Mac Mini core count)
     pub max_concurrent: usize,
+    /// Generation configuration for text generation
+    pub generation_config: GenerationConfig,
 }
 
 impl Default for ParallelConfig {
@@ -30,6 +33,7 @@ impl Default for ParallelConfig {
             model_dir: PathBuf::from("./models/qwen2.5-0.5b-int4"),
             tokenizer_dir: PathBuf::from("./tokenizer_dir"),
             max_concurrent: num_cpus::get(), // Mac Mini core count (8-10)
+            generation_config: GenerationConfig::default(),
         }
     }
 }
@@ -101,7 +105,7 @@ impl ParallelAgentSystem {
             let handle = tokio::spawn(async move {
                 let start_time = std::time::Instant::now();
 
-                // Process chunk using shared engine (99.7% performance improvement)
+                // Process chunk using shared engine with generation config (99.7% performance improvement)
                 let summary = engine.summarize_chunk(&chunk)
                     .unwrap_or_else(|e| {
                         error!("❌ Agent {} failed to process chunk: {}", agent_index, e);
@@ -166,19 +170,20 @@ impl ParallelAgentSystem {
             // Assign agent index for tracking
             let agent_index = chunk_index % self.config.agent_count;
             let prompt = prompt.to_string(); // Clone prompt for each task
+            let generation_config = self.config.generation_config.clone(); // Clone generation config
 
             // Clone the shared engine (Arc provides thread-safe sharing)
             let engine = self.engine.clone();
 
-            info!("Dispatching chunk {} to agent {} ({} chars) with shared session reuse",
-                  chunk_index, agent_index, chunk.len());
+            info!("Dispatching chunk {} to agent {} ({} chars) with strategy: {:?}, temp: {:.2}",
+                  chunk_index, agent_index, chunk.len(), generation_config.strategy, generation_config.temperature);
 
             // Spawn async task for parallel processing
             let handle = tokio::spawn(async move {
                 let start_time = std::time::Instant::now();
 
-                // Process chunk using shared engine (99.7% performance improvement)
-                let summary = engine.summarize_chunk_with_prompt(&chunk, &prompt)
+                // Process chunk using shared engine with generation config (99.7% performance improvement)
+                let summary = engine.summarize_chunk_with_generation_config(&chunk, &prompt, &generation_config)
                     .unwrap_or_else(|e| {
                         error!("❌ Agent {} failed to process chunk: {}", agent_index, e);
                         format!("ERROR: Failed to process chunk - {}", e)

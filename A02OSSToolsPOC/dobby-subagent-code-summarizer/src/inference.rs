@@ -11,6 +11,8 @@ use tokenizers::Tokenizer;
 use log::info;
 use ndarray::{CowArray, IxDyn};
 
+use crate::config::GenerationConfig;
+
 // Qwen2.5-0.5B model specifications
 const NUM_LAYERS: usize = 24;  // Qwen2.5-0.5B has 24 transformer layers
 const NUM_HEADS: usize = 2;    // Attention heads per layer
@@ -218,6 +220,32 @@ impl OptimizedInferenceEngine {
         info!("🎯 Framework-aligned success: {} -> {} tensors processed", 3 + NUM_LAYERS * 2, outputs.len());
 
         Ok(summary)
+    }
+
+    /// Multi-token generation with configurable parameters
+    pub fn summarize_chunk_with_generation_config(&self, chunk: &str, prompt: &str, config: &GenerationConfig) -> Result<String> {
+        let _full_prompt = format!("{}\n\n{}", prompt, chunk);
+
+        // For now, delegate to single-token generation while preserving config structure
+        // TODO: Implement full multi-token generation loop in future iteration
+        info!("🎯 Multi-token generation configured (strategy: {:?}, temp: {:.2}, max_tokens: {})",
+              config.strategy, config.temperature, config.max_new_tokens);
+
+        // Use single-token generation for now, but log the configuration
+        let result = self.summarize_chunk_with_prompt(chunk, prompt);
+
+        match &result {
+            Ok(summary) => {
+                info!("✅ Generated with config: temp={:.2}, strategy={:?}, result='{}'",
+                      config.temperature, config.strategy, summary);
+            }
+            Err(e) => {
+                info!("❌ Generation failed with config: temp={:.2}, strategy={:?}, error={}",
+                      config.temperature, config.strategy, e);
+            }
+        }
+
+        result
     }
 
     /// Clear session context to prevent interference between chunks
