@@ -2,10 +2,9 @@ use clap::Parser;
 use std::fs;
 use std::path::PathBuf;
 use anyhow::Result;
-use tokio::join;
 use log::{info, error};
 
-use dobby_subagent_code_summarizer::inference::RealInferencePipeline;
+use dobby_subagent_code_summarizer::inference::OptimizedInferenceEngine;
 
 #[derive(Parser)]
 #[command(name = "code_summarizer")]
@@ -25,7 +24,7 @@ async fn main() -> Result<()> {
 
     let args = Args::parse();
     info!("Loading real inference pipeline");
-    let pipeline = RealInferencePipeline::new(args.model_dir.clone(), args.tokenizer_dir.clone())?;
+    let pipeline = OptimizedInferenceEngine::new(args.model_dir.clone(), args.tokenizer_dir.clone())?;
 
     let code = fs::read_to_string(&args.file)?;
     let chunks = chunk_code(&code, 500);

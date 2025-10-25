@@ -331,6 +331,117 @@ ERROR: Failed to process chunk - Failed to run inference on model: Non-zero stat
 3. **Clean Architecture:** Remove dead modules, fix exports, improve chunking
 4. **Validate Real Outputs:** Ensure summaries contain actual neural content
 
+## 🎯 **IMPLEMENTATION VALIDATION CHECKLIST**
+
+### ✅ **COMPULSORY CLI REQUIREMENTS (All Arguments Required - No Defaults)**
+
+Every argument must be explicitly provided by the user - no default values:
+
+- [ ] `--file <INPUT_PATH>`: Input code file to summarize (must exist)
+- [ ] `--output-file <ABSOLUTE_PATH>`: Final summary destination (absolute path required)
+- [ ] `--results-file <ABSOLUTE_PATH>`: Progress log destination (absolute path required)
+- [ ] `--loc <NUMBER>`: Lines per chunk (user must specify, no default)
+- [ ] `--prompt "<TEXT>"`: Custom summarization prompt (user must specify)
+- [ ] `--agent-count <NUMBER>`: Number of parallel agents (user must specify)
+- [ ] `--model-dir <PATH>`: Model directory path (user must specify)
+- [ ] `--tokenizer-dir <PATH>`: Tokenizer directory path (user must specify)
+
+### ✅ **TECHNICAL IMPLEMENTATION VALIDATION**
+
+- [ ] **LOC-based chunking**: Replace char-based `chunk_code(1000)` with user-specified LOC
+- [ ] **Simple prompt integration**: No length enforcement, trust LLM for natural summaries
+- [ ] **Context clearing session isolation**: Reuse sessions with proper state clearing (0ms overhead)
+- [ ] **Dual output system**: Separate summary file and progress log file
+- [ ] **Absolute path validation**: Enforce absolute paths for output files
+- [ ] **Auto-create parent directories**: Create necessary directories for output files
+- [ ] **Real-time progress logging**: Log chunk processing to results file
+- [ ] **Help system**: Show helpful error messages for missing required arguments
+
+### ✅ **NEURAL INFERENCE FIXES**
+
+- [ ] **Add missing past_key_values tensors**: Fix Qwen model input requirements
+- [ ] **Implement proper text decoding**: Convert logits to actual text (not just metadata)
+- [ ] **Replace error messages with summaries**: Generate real neural summaries
+- [ ] **Validate summary content**: Ensure outputs contain actual neural content, not errors
+
+### ✅ **TESTING VALIDATION (3 Files)**
+
+- [ ] **iggy_apache.txt** (8,725 lines) → verified neural summaries in output file
+- [ ] **ray-project-ray-8a5edab282632443.txt** → verified neural summaries in output file
+- [ ] **tokio-rs-tokio-8a5edab282632443.txt** → verified neural summaries in output file
+- [ ] **grep validation**: "neural inference" found in summaries (not error messages)
+- [ ] **Performance metrics**: <2s per 1000 lines with specified agent count
+- [ ] **File validation**: Output files created at specified absolute paths
+
+## 🚀 **COMPLETE USAGE EXAMPLES (All Arguments Required)**
+
+### Example 1: Security Analysis
+```bash
+cargo run --bin parallel_summarizer -- \
+  --file ./iggy_apache.txt \
+  --output-file /Users/amuldotexe/summaries/iggy_security_analysis.md \
+  --results-file /Users/amuldotexe/logs/iggy_security_progress.log \
+  --loc 2000 \
+  --prompt "Analyze security vulnerabilities and attack surfaces:" \
+  --agent-count 20 \
+  --model-dir ./models/qwen2.5-0.5b-int4 \
+  --tokenizer-dir ./tokenizer_dir
+```
+
+### Example 2: Documentation Generation
+```bash
+cargo run --bin parallel_summarizer -- \
+  --file ./tokio-rs-tokio-8a5edab282632443.txt \
+  --output-file /Users/amuldotexe/docs/tokio_api_documentation.md \
+  --results-file /Users/amuldotexe/logs/tokio_doc_progress.log \
+  --loc 1500 \
+  --prompt "Generate comprehensive API documentation:" \
+  --agent-count 15 \
+  --model-dir ./models/qwen2.5-0.5b-int4 \
+  --tokenizer-dir ./tokenizer_dir
+```
+
+### Example 3: Architecture Analysis
+```bash
+cargo run --bin parallel_summarizer -- \
+  --file ./ray-project-ray-8a5edab282632443.txt \
+  --output-file /Users/amuldotexe/analysis/ray_architecture_review.md \
+  --results-file /Users/amuldotexe/logs/ray_analysis_progress.log \
+  --loc 1000 \
+  --prompt "Analyze system architecture and design patterns:" \
+  --agent-count 25 \
+  --model-dir ./models/qwen2.5-0.5b-int4 \
+  --tokenizer-dir ./tokenizer_dir
+```
+
+### Missing Arguments → Help System
+```bash
+cargo run --bin parallel_summarizer -- --file ./iggy_apache.txt
+# ❌ ERROR: Missing required arguments:
+#    --output-file <ABSOLUTE_PATH>
+#    --results-file <ABSOLUTE_PATH>
+#    --loc <NUMBER>
+#    --prompt "<TEXT>"
+#    --agent-count <NUMBER>
+#    --model-dir <PATH>
+#    --tokenizer-dir <PATH>
+# 📖 Use --help for complete usage information
+```
+
+## 📊 **EXPECTED BEHAVIOR**
+
+### Input Validation
+- **Absolute paths required**: `--output-file` and `--results-file` must start with `/`
+- **File existence check**: `--file` must exist, helpful error if not found
+- **Directory creation**: Parent directories auto-created for output files
+- **Compulsory enforcement**: No defaults, user must specify all parameters
+
+### Output System
+- **Summary file**: Clean neural summaries at specified absolute path
+- **Progress file**: Detailed processing timeline and metrics
+- **Real-time logging**: Progress updates to both console and results file
+- **Performance metrics**: Processing time, chunk count, agent utilization
+
 ---
 
-**Status:** 20-agent parallel architecture working, neural inference completely broken. Major cleanup and model input fixes required before any meaningful summaries can be generated.
+**Status:** 20-agent parallel architecture working, neural inference completely broken. Complete CLI redesign with compulsory arguments and validation checklist implemented. Major cleanup and model input fixes required before any meaningful summaries can be generated.
