@@ -70,12 +70,12 @@ pub enum ProcessingError {
     },
 }
 
-// Convert ort::Error to ProcessingError
-impl From<ort::Error> for ProcessingError {
-    fn from(err: ort::Error) -> Self {
-        ProcessingError::OrtError(err.to_string())
-    }
-}
+// Convert ort::Error to ProcessingError (ort 1.16.3 compatibility)
+// impl From<ort::Error> for ProcessingError {
+//     fn from(err: ort::Error) -> Self {
+//         ProcessingError::OrtError(err.to_string())
+//     }
+// }
 
 /// Convert from our SmolLM2 InferenceError to existing ProcessingError
 impl From<crate::smol_inference_contract::SmolInferenceError> for ProcessingError {

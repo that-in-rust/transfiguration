@@ -5,8 +5,8 @@ edition = "2021"
 description = "Real ONNX LLM inference for Tokio code summarization"
 
 [dependencies]
-# ONNX Runtime 2.0 for ML inference
-ort = { version = "2.0.0-rc.10", default-features = false, features = ["load-dynamic", "ndarray", "coreml", "half"] }
+# ONNX Runtime 1.16.3 for ML inference (stable version - Shreyas Doshi approach)
+ort = { version = "1.16.3", default-features = false, features = ["load-dynamic", "half"] }
 ndarray = "0.15"
 anyhow = "1.0"
 
