@@ -18,7 +18,8 @@ pub mod smol_inference_contract;
 // pub mod ffi_bindings; // REMOVED - no longer needed
 // pub mod ort_genai_bindings; // REMOVED - no longer needed
 pub mod smol_inference_ort_genai;
-pub mod inference;  // New ort 2.0 real inference implementation
+pub mod inference;  // ort 1.16.3 real inference implementation
+pub mod parallel_agents;  // 20-agent parallel processing architecture
 
 // Import traits for use within the library
 use orchestrator::ParallelProcessor;
@@ -42,6 +43,7 @@ pub use smol_inference_contract::{
 // pub use smol_inference_ffi_pipeline::SmolLM3InferenceFFIPipeline;  // Temporarily disabled
 // pub use smol_inference_mock::SmolLM2MockPipeline; // REMOVED - mocks not allowed
 pub use smol_inference_ort_genai::OrtGenAiInferencePipeline;
+pub use parallel_agents::{ParallelAgentSystem, ParallelConfig, ParallelMetrics};
 // pub use real_inference::RealInferencePipeline; // Temporarily disabled
 
 // Create type aliases for consistency
