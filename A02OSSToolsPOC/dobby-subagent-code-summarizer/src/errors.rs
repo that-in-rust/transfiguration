@@ -77,12 +77,3 @@ pub enum ProcessingError {
 //     }
 // }
 
-/// Convert from our SmolLM2 InferenceError to existing ProcessingError
-impl From<crate::smol_inference_contract::SmolInferenceError> for ProcessingError {
-    fn from(err: crate::smol_inference_contract::SmolInferenceError) -> Self {
-        ProcessingError::InferenceFailed {
-            chunk_id: 0, // Will be overridden if provided
-            message: format!("SmolLM2 inference error: {}", err),
-        }
-    }
-}

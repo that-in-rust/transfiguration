@@ -51,12 +51,8 @@ criterion = { version = "0.5", features = ["html_reports"] }
 tempfile = "3.8"
 
 [[bin]]
-name = "code_summarizer"
-path = "src/bin/code_summarizer.rs"
-
-[[bin]]
-name = "test_ort_api"
-path = "src/test_ort_api.rs"
+name = "parallel_summarizer"
+path = "src/bin/parallel_summarizer.rs"
 
 [profile.release]
 lto = true
