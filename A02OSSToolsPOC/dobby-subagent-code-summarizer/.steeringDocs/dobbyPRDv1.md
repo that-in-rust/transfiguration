@@ -1,125 +1,231 @@
-# Commmand Lines
+# Dobby Code Summarizer - Product Requirements
 
-## Parallel Summarizer
+## Project Overview
 
-### Quick Start - Best for Code Analysis (Recommended)
-```bash
-# Use the built release binary for best performance
-./target/release/parallel_summarizer \
-    --file ./tests/fixtures/iggy_apache.txt \
-    --output-file /tmp/iggy_summary.md \
-    --results-file /tmp/iggy_progress.log \
-    --loc 300 \
-    --prompt "Create a concise 2-3 line summary of this code chunk focusing on its main functionality and purpose." \
-    --agent-count 10 \
-    --model-name qwen2.5-0.5b-int4 \
-    --sampling-strategy beam \
-    --num-beams 3 \
-    --early-stopping \
-    --temperature 0.30 \
-    --max-new-tokens 60 \
-    --min-length 35
+Dobby is a Rust-based code summarization tool that uses intelligent parsing and parallel AI inference to generate concise summaries of codebases. The project is organized as a Cargo workspace with two focused crates:
+
+1. **`semantic-code-chunker`** - Tree-sitter based semantic code parsing and chunking
+2. **`parallel-inference-engine`** - 10x parallel AI model inference for summarization
+
+## Architecture
+
+```
+dobby-subagent-code-summarizer/
+├── Cargo.toml                    # Workspace root
+├── semantic-code-chunker/        # Crate 1: Parsing & chunking
+│   ├── src/
+│   │   ├── lib.rs               # Main chunking interface
+│   │   ├── tree_sitter.rs       # Tree-sitter integration
+│   │   ├── languages.rs         # Language-specific parsers
+│   │   ├── chunking.rs          # Semantic chunking logic
+│   │   └── text_chunker.rs      # Non-code text chunking
+│   └── Cargo.toml
+└── parallel-inference-engine/    # Crate 2: AI processing
+    ├── src/
+    │   ├── lib.rs               # Main inference interface
+    │   ├── models.rs            # Model management
+    │   ├── parallel.rs          # 10x parallel processing
+    │   ├── inference.rs         # AI inference logic
+    │   └── cli.rs               # Command-line interface
+    └── Cargo.toml
 ```
 
-### Large Scale Processing (1.25M LOC - 3 minutes)
-```bash
-# Process massive codebases with 10x parallelism
-./target/release/parallel_summarizer \
-    --file ./large_codebase/full_project.txt \
-    --output-file /tmp/full_summary.md \
-    --results-file /tmp/full_progress.log \
-    --loc 300 \
-    --prompt "Summarize this code in 2-3 lines, focusing on architecture patterns and key functionality." \
-    --agent-count 10 \
-    --model-name qwen2.5-0.5b-int4 \
-    --sampling-strategy beam \
-    --num-beams 3 \
-    --early-stopping \
-    --temperature 0.30 \
-    --max-new-tokens 60 \
-    --min-length 35
+---
+
+## Feature 1: Semantic Code Chunking (`semantic-code-chunker`)
+
+### Purpose
+Intelligently parse and segment codebases into semantic chunks rather than arbitrary line counts, using Tree-sitter for language-aware analysis.
+
+### Key Capabilities
+- **Tree-sitter Integration**: AST-based parsing for 20+ programming languages
+- **Semantic Boundaries**: Chunk based on functions, classes, modules, and logical blocks
+- **Token-based Sizing**: Optimize chunks by token count rather than lines
+- **Language Awareness**: Different chunking strategies per language
+- **Non-code Support**: Text chunking for documentation and configuration files
+
+### Chunking Strategies
+
+#### Code Files (Tree-sitter based):
+```rust
+// Semantic boundaries for different languages
+Rust: fn, impl, struct, enum, mod, trait blocks
+Python: def, class, async def, with blocks
+JavaScript: function, class, method, arrow functions
+TypeScript: interface, type, class, function
+Go: func, method, struct, interface definitions
+Java: class, method, interface, enum definitions
 ```
 
-
-## localLLM browsing
-
-Based on my research of Anthropic API patterns, LiteLLM proxy configurations, and local LLM server conventions, here's the recommended command line format for your Rust tool that creates an Anthropic-type key and local endpoint for claude-code integration:
-
-
-Following your existing CLI patterns and the 4-word naming convention from your project memories, here's the suggested format:
-
-```bash
-./target/release/local_llm_endpoint \
-    --model-path /absolute/path/to/model.onnx \
-    --tokenizer-path /absolute/path/to/tokenizer \
-    --host 127.0.0.1 \
-    --port 4000 \
-    --anthropic-version 2023-06-01 \
-    --api-key sk-local-$(date +%s) \
-    --max-tokens 4096 \
-    --temperature 0.7 \
-    --top-p 0.9 \
-    --context-window 8192 \
-    --enable-streaming \
-    --enable-cors \
-    --log-level info \
-    --config-file /path/to/endpoint-config.yaml
+#### Non-code Files:
+```rust
+// Smart text chunking preserving context
+Markdown: Section headers (# ## ###), code blocks
+JSON/YAML: Logical object/group boundaries
+Plain Text: Paragraph and sentence boundaries
+Configuration: File section boundaries
 ```
 
-## Key Design Decisions
-
-**Anthropic API Compatibility:**
-- Uses standard Anthropic headers (`x-api-key`, `anthropic-version`, `content-type`)
-- Implements `/v1/messages` endpoint for claude-code compatibility
-- Supports streaming responses for real-time interaction
-
-**Model Configuration:**
-- **Absolute paths** for both model and tokenizer (as you mentioned)
-- Support for ONNX models (matching your existing inference pipeline)
-- Configurable context window and generation parameters
-
-**Network & Security:**
-- Configurable host/port for local deployment
-- Dynamic API key generation with timestamp for uniqueness
-- CORS support for web-based claude-code usage
-
-**Integration Features:**
-- Compatible with LiteLLM proxy patterns I found in the documentation
-- Environment variable support (`ANTHROPIC_BASE_URL`, `ANTHROPIC_API_KEY`)
-- Structured logging for debugging
-
-
-For different deployment scenarios:
+### CLI Interface
 
 ```bash
-# Development mode with debug logging
-./target/release/local_llm_endpoint \
-    --model-path ./models/qwen2.5-0.5b-int4.onnx \
-    --host localhost \
-    --port 11434 \
-    --log-level debug
+# Basic semantic chunking
+dobby chunk \
+    --input ./src \
+    --output ./chunks.json \
+    --max-tokens 1000 \
+    --preserve-context
 
-# Production deployment
-./target/release/local_llm_endpoint \
-    --config-file /etc/dobby/endpoint-config.yaml \
-    --log-level warn
+# Language-specific chunking
+dobby chunk \
+    --input ./rust-project \
+    --output ./rust-chunks.json \
+    --languages rust,toml \
+    --strategy semantic \
+    --include-exports
 
-# Custom model with specific parameters
-./target/release/local_llm_endpoint \
-    --model-path /models/custom-reasoning-model.onnx \
-    --tokenizer-path /models/custom-tokenizer \
-    --context-window 16384 \
-    --max-tokens 8192 \
-    --temperature 0.3
+# Mixed content processing
+dobby chunk \
+    --input ./mixed-repo \
+    --output ./all-chunks.json \
+    --code-strategy semantic \
+    --text-strategy paragraph \
+    --context-window 2048
 ```
 
+### Parameters
+- `--input`: Path to file or directory (required)
+- `--output`: Output file for chunk metadata (required)
+- `--max-tokens`: Maximum tokens per chunk (default: 1000)
+- `--languages`: Comma-separated languages to process
+- `--strategy`: Chunking strategy (semantic, hybrid, lines)
+- `--preserve-context`: Include surrounding context for each chunk
+- `--include-exports`: Only chunk public/exported functions and types
+- `--context-window`: Model context window size for optimization
 
-The tool should also support these environment variables for seamless claude-code integration:
+---
+
+## Feature 2: Parallel Inference Engine (`parallel-inference-engine`)
+
+### Purpose
+Process semantic code chunks in parallel using AI models to generate concise, contextually aware summaries.
+
+### Key Capabilities
+- **10x Parallel Processing**: Concurrent inference with semaphore control
+- **Multiple Model Support**: TinyLlama-1.1B, DeepSeek-Coder-1.3B, Gemma-2-2B
+- **Intelligent Routing**: Route chunks to appropriate models based on content type
+- **Session Reuse**: Shared model sessions for memory efficiency
+- **Progress Tracking**: Real-time processing status and error recovery
+
+### Model Routing Strategy
+
+```rust
+// Intelligent model selection based on chunk content
+Code Chunks: deepseek-coder-1.3b (code-specialized)
+Documentation: gemma-2-2b (highest quality)
+Large Chunks: tinyllama-1.1b (fast processing)
+Mixed Content: auto-select based on content analysis
+```
+
+### CLI Interface
 
 ```bash
-export ANTHROPIC_BASE_URL=http://localhost:4000
-export ANTHROPIC_API_KEY=sk-local-$(date +%s)
-export CLAUDE_CODE_API_KEY_HELPER_TTL_MS=3600000
+# Process pre-chunked files
+dobby summarize \
+    --chunks ./chunks.json \
+    --output ./summary.md \
+    --model auto \
+    --parallel 10
+
+# Direct file processing with integrated chunking
+dobby process \
+    --input ./src \
+    --output ./analysis.md \
+    --chunking-strategy semantic \
+    --model deepseek-coder-1.3b \
+    --parallel 15
+
+# High-quality documentation generation
+dobby process \
+    --input ./lib \
+    --output ./docs/README.md \
+    --model gemma-2-2b \
+    --quality-mode thorough \
+    --include-signatures
+
+# Batch processing multiple repositories
+dobby batch \
+    --input ./repos/ \
+    --output ./summaries/ \
+    --pattern "*/src/*.rs" \
+    --model deepseek-coder-1.3b \
+    --parallel 20
 ```
 
-This format aligns with your existing Rust CLI patterns using clap, provides comprehensive configuration options, and ensures full compatibility with claude-code's expected Anthropic API interface.
+### Parameters
+- `--chunks`: Pre-computed chunk file (from `dobby chunk`)
+- `--input`: Direct file/directory input (triggers integrated chunking)
+- `--output`: Summary output file (required)
+- `--model`: Model selection or "auto" for intelligent routing
+- `--parallel`: Number of parallel agents (default: 10, max: 100)
+- `--chunking-strategy`: Strategy for on-the-fly chunking
+- `--quality-mode`: Processing quality (fast, balanced, thorough)
+- `--include-signatures`: Include function/type signatures in summaries
+- `--pattern`: Glob pattern for file selection (batch mode)
+
+---
+
+## Configuration
+
+### Chunking Configuration (`chunking.yaml`)
+```yaml
+chunking:
+  max_tokens: 1000
+  preserve_context: true
+  context_overlap: 100
+
+languages:
+  rust:
+    boundaries: ["fn", "impl", "struct", "enum", "mod", "trait"]
+    include_tests: false
+  python:
+    boundaries: ["def", "class", "async def", "with"]
+    preserve_docstrings: true
+  javascript:
+    boundaries: ["function", "class", "method", "=>"]
+    include_exports: true
+
+strategies:
+  code: "semantic"
+  text: "paragraph"
+  mixed: "hybrid"
+```
+
+### Model Configuration (`models.yaml`)
+```yaml
+models:
+  tinyllama-1.1b:
+    path: "./models/tinyllama-1.1b"
+    ram_mb: 550
+    context_length: 2048
+    best_for: ["speed", "large_files"]
+
+  deepseek-coder-1.3b:
+    path: "./models/deepseek-coder-1.3b"
+    ram_mb: 500
+    context_length: 4096
+    best_for: ["code", "technical_accuracy"]
+
+  gemma-2-2b:
+    path: "./models/gemma-2-2b"
+    ram_mb: 680
+    context_length: 8192
+    best_for: ["quality", "documentation"]
+
+routing:
+  code_heavy: "deepseek-coder-1.3b"
+  documentation: "gemma-2-2b"
+  mixed_content: "auto"
+  large_files: "tinyllama-1.1b"
+```
+
