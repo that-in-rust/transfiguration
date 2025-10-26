@@ -117,3 +117,6 @@ test_sample_Summary_*.md
 # Model quantization exports
 export_*.py
 quantization_summary.md
+
+# Prevent accidental inclusion of onnxruntime-genai directory
+onnxruntime-genai/
