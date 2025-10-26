@@ -120,3 +120,6 @@ quantization_summary.md
 
 # Prevent accidental inclusion of onnxruntime-genai directory
 onnxruntime-genai/
+
+# Reference GitHub repositories (do not commit)
+.doNotCommit/.refGitHubRepo/
