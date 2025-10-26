@@ -3,13 +3,12 @@
 # =============================================================================
 
 # =============================================================================
-# BUILD ARTIFACTS (Large, regenerable)
+# EMBEDDED GIT REPOSITORIES (Must be first)
 # =============================================================================
-target/
-build/
-dist/
-out/
-Cargo.lock
+**/.git/
+!/.git
+tokenizer_dir/.git/
+onnxruntime-genai/.git/
 
 # =============================================================================
 # LARGE MODEL FILES (Exceeds GitHub 100MB limit)
@@ -21,10 +20,40 @@ Cargo.lock
 *.pth
 *.gguf
 *.int4
-# Keep small model config files (trackable)
-!**/*.json
-!**/*.txt
-!**/*.md
+
+# =============================================================================
+# BUILD ARTIFACTS (Large, regenerable)
+# =============================================================================
+target/
+build/
+dist/
+out/
+Cargo.lock
+
+# =============================================================================
+# EXTERNAL DEPENDENCIES (Can be re-downloaded)
+# =============================================================================
+verify_*_model.py
+*_simple_inference.py
+*_inference_test.py
+# Note: export_*_int4.py and quantization summaries are small and useful - keep them
+
+# =============================================================================
+# BACKUP AND VERSIONED FILES
+# =============================================================================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.rs.bk
+**/lib.rs.backup
+
+# Large test/temp Python files (but keep small export scripts)
+test_*.py
+*_test.py
+*_temp.py
+*_debug.py
 
 # =============================================================================
 # PYTHON CACHE AND TEMPORARIES
@@ -33,8 +62,6 @@ __pycache__/
 *.py[cod]
 *.pyc
 *.pyo
-*.pyo
-__pycache__/
 .Python
 env/
 venv/
@@ -43,11 +70,6 @@ env.bak/
 venv.bak/
 .venv/
 *.egg-info/
-dist/
-build/
-*.egg
-pip-log.txt
-pip-delete-this-directory.txt
 .tox/
 .coverage
 .cache
@@ -97,23 +119,7 @@ tmp/
 temp/
 *.tmp
 *.temp
-*.bak
-*.backup
-*.old
-*.orig
-*.rej
 test_progress.log
-
-# =============================================================================
-# BACKUP AND VERSIONED FILES
-# =============================================================================
-*.bak
-*.backup
-*.old
-*.orig
-*.rej
-*.rs.bk
-**/lib.rs.backup
 
 # =============================================================================
 # VIRTUAL ENVIRONMENTS AND CONFIG
@@ -233,24 +239,6 @@ docker-compose.override.yml
 .docker/
 
 # =============================================================================
-# EMBEDDED GIT REPOSITORIES (Use submodules instead)
-# =============================================================================
-tokenizer_dir/.git/
-onnxruntime-genai/.git/
-**/.git/
-!/.git
-
-# =============================================================================
-# EXTERNAL DEPENDENCIES (Can be re-downloaded)
-# =============================================================================
-export_*_int4.py
-*_quantization_summary.md
-verify_*_model.py
-*_simple_inference.py
-*_inference_test.py
-qwen_*.py
-
-# =============================================================================
 # ONNX RUNTIME SPECIFIC
 # =============================================================================
 onnxruntime-genai/build/
@@ -274,21 +262,9 @@ tokenizer_dir/
 !tokenizer_dir/**/*.md
 
 # =============================================================================
-# ALLOWED EXCEPTIONS (What we DO want to track)
+# ALLOWED EXCEPTIONS - Must come LAST
 # =============================================================================
-# Source code and documentation
-!**/*.rs
-!**/*.py
-!**/*.md
-!**/*.json
-!**/*.toml
-!**/*.yaml
-!**/*.yml
-!**/*.txt
-!**/*.sh
-!**/*.sql
-
-# Configuration and project files
+# Configuration and project files (but respect patterns above)
 !**/.gitignore
 !**/.gitattributes
 !**/Cargo.toml
@@ -297,13 +273,27 @@ tokenizer_dir/
 !**/Makefile
 !**/Dockerfile
 
-# A01OSSToolsIdeation archive contents (preserve)
+# A01OSSToolsIdeation archive contents (preserve everything except system files)
 !A01OSSToolsIdeation/**/*
-# But exclude system files within it
+# Exclude specific system files within A01OSSToolsIdeation
 A01OSSToolsIdeation/**/.DS_Store
 A01OSSToolsIdeation/**/tmp/
 A01OSSToolsIdeation/**/temp/
 A01OSSToolsIdeation/**/logs/
+A01OSSToolsIdeation/**/lib.rs.backup
+A01OSSToolsIdeation/**/*.bak
+A01OSSToolsIdeation/**/*.backup
+A01OSSToolsIdeation/**/*.old
+A01OSSToolsIdeation/**/*.orig
+A01OSSToolsIdeation/**/*.rej
+
+# Small model config files only (not large binaries)
+!models/**/*.json
+!models/**/*.txt
+!models/**/*.md
+!tokenizer_dir/**/*.json
+!tokenizer_dir/**/*.txt
+!tokenizer_dir/**/*.md
 
 # =============================================================================
 # END OF COMPREHENSIVE GITIGNORE
@@ -311,17 +301,18 @@ A01OSSToolsIdeation/**/logs/
 # This gitignore is designed to be safe for "git add ."
 #
 # What gets tracked:
-# - Source code (.rs, .py, .md, .json, etc)
+# - Source code (.rs, .py, .md, .json, etc) - respects earlier ignore patterns
 # - Configuration files and documentation
-# - A01OSSToolsIdeation archive (reports, analysis)
-# - Small model config files (JSON, TXT, MD)
+# - A01OSSToolsIdeation archive (reports, analysis) - except system files
+# - Small model config files (JSON, TXT, MD) - not large model binaries
 # - Project structure and build files
 #
 # What gets ignored:
 # - Large models (*.onnx, *.safetensors) - GitHub limit
-# - Build artifacts (target/, build/, dist/)
+# - Build artifacts (target/, build/, dist/, Cargo.lock)
+# - Export scripts and quantization files (regenerable)
 # - Cache and temporary files
 # - IDE and OS files
 # - Embedded git repositories
 # - Large binaries and media files
-# - Regenerable scripts and exports
+# - Backup files (*.backup, *.bak, *.old)
