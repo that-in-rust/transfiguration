@@ -6,8 +6,16 @@ use thiserror::Error;
 
 pub type Result<T> = std::result::Result<T, ProcessingError>;
 
+// Type alias for backward compatibility
+pub type InferenceError = ProcessingError;
+
 #[derive(Error, Debug)]
 pub enum ProcessingError {
+    #[error("Inference error: {0}")]
+    InferenceError(String),
+
+    #[error("Tokenization error: {0}")]
+    TokenizationError(String),
     #[error("Model loading failed: {source}")]
     ModelLoadFailed {
         #[source]

@@ -33,6 +33,9 @@ sysinfo = { workspace = true }
 # CPU core count detection for parallel processing
 num_cpus = "1.16"
 
+# Random sampling for temperature
+rand = "0.8"
+
 # CLI argument parsing
 clap = { workspace = true }
 
