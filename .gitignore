@@ -1,150 +1,27 @@
 # =============================================================================
-# RIGOROUS GITIGNORE - TRANSFIGURATION PROJECT
+# MINIMAL GITIGNORE - TRANSFIGURATION PROJECT
 # =============================================================================
-# This file is organized by category and designed to prevent files >70MB from
-# entering the repository. All binary files, model files, and build artifacts
-# are explicitly excluded.
 
-# =============================================================================
-# 1. LARGE FILES & BINARIES (>70MB PROTECTION)
-# =============================================================================
-# AI/ML Model Files (typically >100MB)
-*.onnx
-*.safetensors
-*.bin
-*.pt
-*.pth
-*.pb
-*.tflite
-*.h5
-*.hdf5
-*.ckpt
-*.pkl
-*.pickle
-
-# Archives & Compressed Files
-*.zip
-*.tar.gz
-*.tar.xz
-*.tar.bz2
-*.7z
-*.rar
-*.gz
-*.bz2
-
-# Disk Images & Installers
-*.dmg
-*.iso
-*.img
-*.pkg
-*.deb
-*.rpm
-*.exe
-*.msi
-*.app
-*.snap
-
-# Large Binary Files
-*.so
-*.dll
-*.dylib
-*.node
-*.wasm
-*.a
-*.lib
-
-# Media Files (often large)
-*.mp4
-*.avi
-*.mov
-*.mkv
-*.flv
-*.wmv
-*.mp3
-*.wav
-*.flac
-*.aac
-
-# Large Data Files
-*.sql
-*.sqlite
-*.sqlite3
-*.db
-*.mdb
-*.parquet
-*.arrow
-*.feather
-
-# Large Text/Data Files
-*.json.gz
-*.csv.gz
-*.txt.gz
-
-# =============================================================================
-# 2. RUST & CARGO
-# =============================================================================
+# Rust build artifacts
 target/
 Cargo.lock
 **/*.rs.bk
-*.pdb
-.cargo/
-rust-toolchain*
 
-# =============================================================================
-# 3. BUILD OUTPUTS & DISTRIBUTION
-# =============================================================================
-dist/
-build/
-out/
-*.build
-*.dist
-release/
-debug/
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+__pycache__/
 
-# =============================================================================
-# 4. NODE.JS & JAVASCRIPT
-# =============================================================================
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.npm
-.yarn-integrity
-.eslintcache
-.stylelintcache
-*.tsbuildinfo
-.tscache/
-
-# =============================================================================
-# 5. ENVIRONMENT & CONFIGURATION FILES
-# =============================================================================
-.env
-.env.*
-!.env.example
-.envrc
-.direnv/
-config/local/
-settings/local/
-
-# =============================================================================
-# 6. IDE & EDITOR FILES
-# =============================================================================
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.vscode-test/
-*.sublime-*
-.atom/
-.brackets/
-.c9/
-*.sublime-workspace
-*.sublime-project
 
-# =============================================================================
-# 7. OPERATING SYSTEM FILES
-# =============================================================================
+# macOS system files
 .DS_Store
 .DS_Store?
 ._*
@@ -152,224 +29,55 @@ settings/local/
 .Trashes
 ehthumbs.db
 Thumbs.db
-desktop.ini
-*.lnk
 
-# =============================================================================
-# 8. LOGS & TEMPORARY FILES
-# =============================================================================
-logs/
+# Logs and temporary files
 *.log
-*.log.*
-tmp/
-temp/
 *.tmp
 *.temp
+logs/
+tmp/
+temp/
+
+# Build outputs
+build/
+dist/
+out/
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Package managers
+node_modules/
+.npm
+.yarn-integrity
+
+# Test coverage
+coverage/
+*.lcov
+.nyc_output
+test-results/
+
+# Backup files
 *.bak
 *.backup
 *.old
 *.orig
 *.rej
 
-# =============================================================================
-# 9. TEST COVERAGE & REPORTS
-# =============================================================================
-coverage/
-*.lcov
-.nyc_output
-coverage.xml
-test-results/
-reports/
-.coverage
+# Large model files (optional - uncomment if needed)
+# *.onnx
+# *.safetensors
+# *.bin
+# *.pt
+# *.pth
 
 # =============================================================================
-# 10. PYTHON SPECIFIC
+# END OF MINIMAL GITIGNORE
 # =============================================================================
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-.venv/
-*.egg-info/
-dist/
-build/
-*.egg
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-*.ipynb_checkpoints
-
-# =============================================================================
-# 11. MACHINE LEARNING & DATA SCIENCE
-# =============================================================================
-# Model directories
-models/
-!models/*.rs
-!models/*.md
-!models/*.txt
-
-# Data directories
-data/
-datasets/
-!data/*.rs
-!data/*.md
-!data/*.txt
-
-# Training artifacts
-checkpoints/
-wandb/
-mlruns/
-tensorboard_logs/
-*.ckpt
-*.pth
-*.pt
-
-# =============================================================================
-# 12. CONTAINER & DEPLOYMENT
-# =============================================================================
-.dockerignore
-docker-compose.override.yml
-.docker/
-
-# =============================================================================
-# 13. PROJECT SPECIFIC - A03Artifacts DIRECTORY
-# =============================================================================
-# A03Artifacts contains large model files and build outputs
-A03Artifacts/
-!A03Artifacts/*.md
-!A03Artifacts/*.txt
-
-# A02OSSToolsPOC build artifacts
-A02OSSToolsPOC/*/target/
-A02OSSToolsPOC/*/Cargo.lock
-
-# A02OSSToolsPOC model files (exclude all large models)
-A02OSSToolsPOC/*/*.onnx
-A02OSSToolsPOC/*/*.safetensors
-A02OSSToolsPOC/*/*.bin
-A02OSSToolsPOC/*/*.pt
-A02OSSToolsPOC/*/*.pth
-A02OSSToolsPOC/*/*.zip
-A02OSSToolsPOC/*/*.tar.gz
-
-# A02OSSToolsPOC model directories
-A02OSSToolsPOC/*/models/
-!A02OSSToolsPOC/*/models/*.rs
-!A02OSSToolsPOC/*/models/*.md
-!A02OSSToolsPOC/*/models/*.txt
-
-# A02OSSToolsPOC build outputs
-A02OSSToolsPOC/*/outputs/
-A02OSSToolsPOC/*/chunks/
-A02OSSToolsPOC/*/cache/
-A02OSSToolsPOC/*/target/
-
-# A02OSSToolsPOC tokenizer and model artifacts
-A02OSSToolsPOC/*/tokenizer_dir/
-A02OSSToolsPOC/*/*.int4
-A02OSSToolsPOC/*/*.gguf
-
-# A02OSSToolsPOC logs and temp files
-A02OSSToolsPOC/*/*.log
-A02OSSToolsPOC/*/tmp/
-A02OSSToolsPOC/*/temp/
-
-# A02OSSToolsPOC test outputs
-A02OSSToolsPOC/*/tests/output/
-A02OSSToolsPOC/*/coverage/
-
-# A02OSSToolsPOC editor files
-A02OSSToolsPOC/*/.vscode/
-A02OSSToolsPOC/*/.idea/
-A02OSSToolsPOC/*/*.sublime-workspace
-
-# =============================================================================
-# 14. ONNX RUNTIME GENAI AND EXTERNAL DEPENDENCIES
-# =============================================================================
-# ONNX Runtime GenAI - Large external dependency
-onnxruntime-genai/
-!onnxruntime-genai/*.md
-!onnxruntime-genai/*.txt
-
-# Root-level quantization and model files
-*.int4
-*.gguf
-export_*_int4.py
-verify_*_model.py
-test_*_inference.py
-*_quantization_summary.md
-*_inference_test.py
-*_simple_inference.py
-
-# Generated headers and bindings
-ort_genai_c.h
-bindgen_wrapper.h
-
-# =============================================================================
-# 15. ARCHIVED DIRECTORIES (never commit these)
-# =============================================================================
-# Large analysis directories (archived in zzArchive202510)
-Insp04_DownloadAnalysis/
-Insp10ParselTongue and Pensieve Design/
-Insp11MVP/
-deconstructor/
-downloads-for-analysis/
-
-# Cloned repositories for analysis
-parseltongue/
-zed/
-
-# =============================================================================
-# 15. ALLOWED EXCEPTIONS (what we DO want to track)
-# =============================================================================
-# Keep only essential source files and documentation
-!tempPOC/full_tokio_run/src/
-!tempPOC/full_tokio_run/Cargo.toml
-!tempPOC/full_tokio_run/README.md
-!tempPOC/full_tokio_run/.gitignore
-!tempPOC/Cargo.toml
-!tempPOC/src/
-
-# =============================================================================
-# 17. SAFETY NETS
-# =============================================================================
-# Prevent any file over 50MB from being committed (Git LFS required for larger files)
-*.large
-*.huge
-*.big
-
-# Common patterns for accidentally large files
-dump.sql
-database.sql
-backup.sql
-*.dump
-*.backup
-*.export
-
-# =============================================================================
-# 18. END OF GITIGNORE
-# =============================================================================
-
-# NOTE: This .gitignore is designed to be rigorous and prevent accidental
-# commits of large files. If you need to track large files, use Git LFS.
-#
-# To add large files with Git LFS:
-# git lfs track "*.onnx"
-# git lfs track "*.safetensors"
-# git add .gitattributes
-# git add your-large-file.onnx
-# git commit -m "Add large model file with LFS"
+# Note: This gitignore is intentionally minimal to avoid accidentally excluding
+# important project files like A01OSSToolsIdeation archive contents.
