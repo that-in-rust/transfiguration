@@ -296,6 +296,11 @@ A01OSSToolsIdeation/**/*.rej
 !tokenizer_dir/**/*.md
 
 # =============================================================================
+# REFERENCE GITHUB REPOSITORIES
+# =============================================================================
+.refGitHubRepos/
+
+# =============================================================================
 # END OF COMPREHENSIVE GITIGNORE
 # =============================================================================
 # This gitignore is designed to be safe for "git add ."
@@ -316,3 +321,4 @@ A01OSSToolsIdeation/**/*.rej
 # - Embedded git repositories
 # - Large binaries and media files
 # - Backup files (*.backup, *.bak, *.old)onnxruntime-genai/
+# - Reference GitHub repositories (.refGitHubRepos/)
