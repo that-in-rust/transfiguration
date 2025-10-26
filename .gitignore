@@ -1,27 +1,82 @@
 # =============================================================================
-# MINIMAL GITIGNORE - TRANSFIGURATION PROJECT
+# COMPREHENSIVE GITIGNORE - Safe for "git add ."
 # =============================================================================
 
-# Rust build artifacts (52M+ space usage)
+# =============================================================================
+# BUILD ARTIFACTS (Large, regenerable)
+# =============================================================================
 target/
+build/
+dist/
+out/
 Cargo.lock
-**/*.rs.bk
 
-# Python cache
+# =============================================================================
+# LARGE MODEL FILES (Exceeds GitHub 100MB limit)
+# =============================================================================
+*.onnx
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+*.int4
+# Keep small model config files (trackable)
+!**/*.json
+!**/*.txt
+!**/*.md
+
+# =============================================================================
+# PYTHON CACHE AND TEMPORARIES
+# =============================================================================
 __pycache__/
 *.py[cod]
 *.pyc
 *.pyo
+*.pyo
 __pycache__/
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+*.ipynb_checkpoints
 
-# IDE and editor files
+# =============================================================================
+# IDE AND EDITOR FILES
+# =============================================================================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.vscode-test/
+*.sublime-*
+.atom/
+.brackets/
+.c9/
+*.sublime-workspace
+*.sublime-project
 
-# macOS system files (10K+ scattered files)
+# =============================================================================
+# OPERATING SYSTEM FILES
+# =============================================================================
 .DS_Store
 .DS_Store?
 ._*
@@ -29,75 +84,244 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
+*.lnk
 
-# Logs and temporary files
-*.log
-*.tmp
-*.temp
+# =============================================================================
+# LOGS AND TEMPORARY FILES
+# =============================================================================
 logs/
+*.log
+*.log.*
 tmp/
 temp/
-test_progress.log
-
-# Build outputs
-build/
-dist/
-out/
-
-# Virtual environments
-.env
-.venv
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Package managers
-node_modules/
-.npm
-.yarn-integrity
-
-# Test coverage
-coverage/
-*.lcov
-.nyc_output
-test-results/
-
-# Backup files
+*.tmp
+*.temp
 *.bak
 *.backup
 *.old
 *.orig
 *.rej
-
-# Large model files - COMMENT OUT TO TRACK ESSENTIAL MODELS
-# Uncomment if models become too large for repo
-# *.onnx
-# *.safetensors
-# *.bin
-# *.pt
-# *.pth
+test_progress.log
 
 # =============================================================================
-# PROJECT SPECIFIC - Large directories to ignore
+# BACKUP AND VERSIONED FILES
 # =============================================================================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.rs.bk
+**/lib.rs.backup
 
-# ONNX Runtime GenAI build artifacts (898K src + large build dirs)
+# =============================================================================
+# VIRTUAL ENVIRONMENTS AND CONFIG
+# =============================================================================
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+config/local/
+settings/local/
+
+# =============================================================================
+# PACKAGE MANAGERS
+# =============================================================================
+node_modules/
+.npm
+.yarn-integrity
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.tscache/
+
+# =============================================================================
+# TEST COVERAGE AND REPORTS
+# =============================================================================
+coverage/
+*.lcov
+.nyc_output
+test-results/
+reports/
+.mypy_cache/
+.pytest_cache/
+
+# =============================================================================
+# LARGE DATA FILES
+# =============================================================================
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+*.parquet
+*.arrow
+*.feather
+*.json.gz
+*.csv.gz
+*.txt.gz
+
+# =============================================================================
+# ARCHIVES AND COMPRESSED FILES
+# =============================================================================
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.7z
+*.rar
+*.gz
+*.bz2
+
+# =============================================================================
+# LARGE EXECUTABLES AND BINARIES
+# =============================================================================
+*.exe
+*.msi
+*.dmg
+*.iso
+*.img
+*.pkg
+*.deb
+*.rpm
+*.app
+*.snap
+*.so
+*.dll
+*.dylib
+*.node
+*.wasm
+*.a
+*.lib
+
+# =============================================================================
+# MEDIA FILES (Usually large)
+# =============================================================================
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# =============================================================================
+# DOCUMENTATION BUILD ARTIFACTS
+# =============================================================================
+docs/_build/
+site/
+/_build/
+
+# =============================================================================
+# PROFILING AND BENCHMARKING
+# =============================================================================
+*.prof
+*.profile
+*.flame
+*.perf
+
+# =============================================================================
+# CONTAINER AND DEPLOYMENT
+# =============================================================================
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# =============================================================================
+# EMBEDDED GIT REPOSITORIES (Use submodules instead)
+# =============================================================================
+tokenizer_dir/.git/
+onnxruntime-genai/.git/
+**/.git/
+!/.git
+
+# =============================================================================
+# EXTERNAL DEPENDENCIES (Can be re-downloaded)
+# =============================================================================
+export_*_int4.py
+*_quantization_summary.md
+verify_*_model.py
+*_simple_inference.py
+*_inference_test.py
+qwen_*.py
+
+# =============================================================================
+# ONNX RUNTIME SPECIFIC
+# =============================================================================
 onnxruntime-genai/build/
 onnxruntime-genai/**/*.pyc
 onnxruntime-genai/**/__pycache__/
-
-# External quantization scripts at root (can be regenerated)
-export_*_int4.py
-*_quantization_summary.md
+.ort_cache/
+ort_genai_c.h
+bindgen_wrapper.h
 
 # =============================================================================
-# END OF MINIMAL GITIGNORE
+# PROJECT-SPECIFIC EXCLUSIONS
 # =============================================================================
-# Space analysis:
-# - target/: 52M (Rust build artifacts)
-# - onnxruntime-genai/: 898K source + large build dirs
-# - A01OSSToolsIdeation/: 296K (archive - PRESERVE)
-# - A02OSSToolsPOC models/: 490M (ESSENTIAL - track)
-# - tokenizer_dir/: 11M (ESSENTIAL - track)
-# Note: A01OSSToolsIdeation archive is now fully trackable
+# Large model directories but keep config files
+models/
+!models/**/*.json
+!models/**/*.txt
+!models/**/*.md
+tokenizer_dir/
+!tokenizer_dir/**/*.json
+!tokenizer_dir/**/*.txt
+!tokenizer_dir/**/*.md
+
+# =============================================================================
+# ALLOWED EXCEPTIONS (What we DO want to track)
+# =============================================================================
+# Source code and documentation
+!**/*.rs
+!**/*.py
+!**/*.md
+!**/*.json
+!**/*.toml
+!**/*.yaml
+!**/*.yml
+!**/*.txt
+!**/*.sh
+!**/*.sql
+
+# Configuration and project files
+!**/.gitignore
+!**/.gitattributes
+!**/Cargo.toml
+!**/README.md
+!**/LICENSE
+!**/Makefile
+!**/Dockerfile
+
+# A01OSSToolsIdeation archive contents (preserve)
+!A01OSSToolsIdeation/**/*
+# But exclude system files within it
+A01OSSToolsIdeation/**/.DS_Store
+A01OSSToolsIdeation/**/tmp/
+A01OSSToolsIdeation/**/temp/
+A01OSSToolsIdeation/**/logs/
+
+# =============================================================================
+# END OF COMPREHENSIVE GITIGNORE
+# =============================================================================
+# This gitignore is designed to be safe for "git add ."
+#
+# What gets tracked:
+# - Source code (.rs, .py, .md, .json, etc)
+# - Configuration files and documentation
+# - A01OSSToolsIdeation archive (reports, analysis)
+# - Small model config files (JSON, TXT, MD)
+# - Project structure and build files
+#
+# What gets ignored:
+# - Large models (*.onnx, *.safetensors) - GitHub limit
+# - Build artifacts (target/, build/, dist/)
+# - Cache and temporary files
+# - IDE and OS files
+# - Embedded git repositories
+# - Large binaries and media files
+# - Regenerable scripts and exports
