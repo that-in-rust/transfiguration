@@ -2,7 +2,7 @@
 # MINIMAL GITIGNORE - TRANSFIGURATION PROJECT
 # =============================================================================
 
-# Rust build artifacts
+# Rust build artifacts (52M+ space usage)
 target/
 Cargo.lock
 **/*.rs.bk
@@ -21,7 +21,7 @@ __pycache__/
 *.swo
 *~
 
-# macOS system files
+# macOS system files (10K+ scattered files)
 .DS_Store
 .DS_Store?
 ._*
@@ -37,6 +37,7 @@ Thumbs.db
 logs/
 tmp/
 temp/
+test_progress.log
 
 # Build outputs
 build/
@@ -69,7 +70,8 @@ test-results/
 *.orig
 *.rej
 
-# Large model files (optional - uncomment if needed)
+# Large model files - COMMENT OUT TO TRACK ESSENTIAL MODELS
+# Uncomment if models become too large for repo
 # *.onnx
 # *.safetensors
 # *.bin
@@ -77,7 +79,25 @@ test-results/
 # *.pth
 
 # =============================================================================
+# PROJECT SPECIFIC - Large directories to ignore
+# =============================================================================
+
+# ONNX Runtime GenAI build artifacts (898K src + large build dirs)
+onnxruntime-genai/build/
+onnxruntime-genai/**/*.pyc
+onnxruntime-genai/**/__pycache__/
+
+# External quantization scripts at root (can be regenerated)
+export_*_int4.py
+*_quantization_summary.md
+
+# =============================================================================
 # END OF MINIMAL GITIGNORE
 # =============================================================================
-# Note: This gitignore is intentionally minimal to avoid accidentally excluding
-# important project files like A01OSSToolsIdeation archive contents.
+# Space analysis:
+# - target/: 52M (Rust build artifacts)
+# - onnxruntime-genai/: 898K source + large build dirs
+# - A01OSSToolsIdeation/: 296K (archive - PRESERVE)
+# - A02OSSToolsPOC models/: 490M (ESSENTIAL - track)
+# - tokenizer_dir/: 11M (ESSENTIAL - track)
+# Note: A01OSSToolsIdeation archive is now fully trackable
