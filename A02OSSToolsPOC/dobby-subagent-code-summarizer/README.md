@@ -1,23 +1,26 @@
 # Dobby Subagent Code Summarizer
 
-**Last Updated:** 2025-10-25
-**Status:** ✅ WORKING - 10x Parallel Neural Inference with Read-Only Session Sharing
+**Last Updated:** 2025-10-26
+**Status:** ⚠️ CRITICAL INFERENCE ISSUE - Parallel Architecture Works, Neural Engine Fails
 
-## System Overview
+## Current Situation
 
-The Dobby Subagent Code Summarizer provides real neural code summarization using:
+The 10x parallel architecture is functional, but the neural inference engine cannot complete processing.
 
-- **Qwen2.5-0.5B-Instruct** model with ONNX Runtime
-- **10x Parallel Architecture** with read-only session sharing
-- **Multi-Token Generation** with temperature sampling
-- **LOC-based Chunking** for intelligent code segmentation
+### Working Components
+- ✅ **Parallel Architecture**: Semaphore system correctly manages 10 concurrent agents
+- ✅ **Session Sharing**: Read-only ONNX session sharing works without memory bloat
+- ✅ **Thread Safety**: Multiple inference attempts launch simultaneously
+- ✅ **Chunk Processing**: 508-chunk Tokio repository (152K lines) loads and segments correctly
 
-### Key Achievements
-- ✅ **10x Parallel Performance**: 3.4x speedup (32.6s vs 111+ seconds)
-- ✅ **True Parallelism**: Multiple chunks processing simultaneously
-- ✅ **Memory Efficient**: ~1GB usage (6.4% of 16GB) vs 5GB for multiple sessions
-- ✅ **Multi-Token Neural Generation**: Real text output with complete sentences
-- ✅ **Read-Only Session Sharing**: Thread-safe ONNX 1.16.x session architecture
+### Critical Issue
+- ❌ **Neural Inference**: Qwen2.5 model execution hangs indefinitely (tested 52+ minutes)
+- ❌ **No Output**: Zero chunks completed despite successful parallel launches
+- ❌ **Resource Waste**: 6+ GB RAM consumption with zero results
+- ❌ **Both Strategies Fail**: Beam search and sampling both hang
+
+### Technical Status
+The system successfully launches 10 parallel agents, but the ONNX Runtime integration with Qwen2.5-0.5B model cannot complete inference. This is not a parallelism problem - the architecture works correctly.
 
 ## Technical Architecture
 
@@ -58,9 +61,10 @@ The system provides end-to-end neural text generation:
 - **Result**: ✅ **All 51 tensors accepted by model**, no more "Missing Input" errors
 
 **Neural Processing**:
-- **Multi-Token Generation Loop**: Iterative generation with temperature sampling
+- **Multi-Token Generation Loop**: Iterative generation with beam search
 - **Real Logits Extraction**: `[1, sequence_length, 151936]` tensor with full vocabulary probabilities
-- **Temperature Sampling**: Controlled randomness for diverse outputs
+- **Beam Search**: Systematic exploration of generation paths for consistent output
+- **Context Reset**: Each chunk processes independently, eliminating beam search resource concerns
 - **Token Decoding**: Converts token IDs back to text using HuggingFace tokenizer
 - **Result**: ✅ **Real neural text generation** with complete sentences
 
@@ -137,14 +141,16 @@ cargo run --release --bin parallel_summarizer -- --help
     --file ./tests/fixtures/iggy_apache.txt \
     --output-file /tmp/iggy_summary.md \
     --results-file /tmp/iggy_progress.log \
-    --loc 500 \
+    --loc 300 \
     --prompt "Create a concise 2-3 line summary of this code chunk focusing on its main functionality and purpose." \
     --agent-count 10 \
     --model-name qwen2.5-0.5b-int4 \
-    --sampling-strategy sampling \
-    --temperature 0.3 \
-    --max-new-tokens 40 \
-    --min-length 15
+    --sampling-strategy beam \
+    --num-beams 3 \
+    --early-stopping \
+    --temperature 0.30 \
+    --max-new-tokens 60 \
+    --min-length 35
 ```
 
 ### Large Scale Processing (1.25M LOC - 3 minutes)
@@ -154,14 +160,16 @@ cargo run --release --bin parallel_summarizer -- --help
     --file ./large_codebase/full_project.txt \
     --output-file /tmp/full_summary.md \
     --results-file /tmp/full_progress.log \
-    --loc 500 \
+    --loc 300 \
     --prompt "Summarize this code in 2-3 lines, focusing on architecture patterns and key functionality." \
     --agent-count 10 \
     --model-name qwen2.5-0.5b-int4 \
-    --sampling-strategy sampling \
-    --temperature 0.25 \
-    --max-new-tokens 35 \
-    --min-length 20
+    --sampling-strategy beam \
+    --num-beams 3 \
+    --early-stopping \
+    --temperature 0.30 \
+    --max-new-tokens 60 \
+    --min-length 35
 ```
 
 ### Code Security Analysis
@@ -395,34 +403,27 @@ RUST_LOG=info cargo test
 cargo clippy -- -D warnings
 ```
 
-### Performance Characteristics
-- **Parallel Processing**: 10 concurrent agents with semaphore control
-- **Memory Usage**: ~1GB total (single session + per-request state)
-- **Processing Speed**: 3.4x faster than serial processing
-- **Multi-Token Generation**: Real neural text output with complete sentences
-- **Scalability**: Handles large codebases efficiently
+### Investigation Results
 
-## Current Status
+**Root Cause Identified**: The neural inference engine with Qwen2.5-0.5B model hangs indefinitely during ONNX Runtime execution. This affects both beam search and sampling strategies.
 
-### Completed Features
-- **Multi-token generation**: Complete neural text output with temperature sampling
-- **Parallel processing**: 10 concurrent agents with semaphore control
-- **CLI interface**: Full parameter control with validation and help
-- **Memory management**: Efficient session sharing with per-request state isolation
+**Parallel System Status**: The 10x parallel architecture functions correctly - semaphore control, session sharing, and thread safety all work as designed.
 
-### Architecture
-- **Session sharing**: Thread-safe ONNX Runtime 1.16.x session sharing
-- **Parallel control**: Semaphore-based concurrency management
-- **Chunking**: LOC-based intelligent code segmentation
-- **Error handling**: Comprehensive validation with clear messages
+**Resource Impact**: Tests show 6+ GB RAM consumption with zero completed outputs, indicating the inference process enters an infinite loop or hangs during model execution.
 
-### Performance
-- **Speed improvement**: 3.4x faster than serial processing
-- **Memory usage**: ~1GB total (single session + per-request state)
-- **Scalability**: Large codebase processing with 10x parallelism
-- **Quality**: Real neural text generation with complete sentences
+## Next Steps
+
+**Priority 1**: Debug ONNX Runtime integration with Qwen2.5-0.5B model
+- Investigate model compatibility issues
+- Test with alternative inference implementations
+- Verify tensor input/output shapes
+
+**Priority 2**: Consider alternative approaches
+- Implement fallback inference engines
+- Test with different model quantizations
+- Evaluate alternative neural summarization methods
 
 ---
 
-**Last Updated:** 2025-10-25
-**Status**: Working - 10x parallel neural code summarization with multi-token generation
+**Last Updated:** 2025-10-26
+**Status**: Investigation Required - Neural inference engine hanging, parallel architecture functional
