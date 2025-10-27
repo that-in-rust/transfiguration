@@ -9,6 +9,9 @@ pub mod parallel_agents;  // 20-agent parallel processing architecture
 pub mod config;
 pub mod errors;
 
+// Layer 1 Core Traits (TDD-First Architecture)
+pub mod layer1;
+
 // Re-export main components for parallel_summarizer
 pub use chunking::{TextChunker, Chunk};
 pub use config::SystemConfig;
