@@ -15,6 +15,9 @@
 // pub mod inference; // Commented out due to compilation errors
 // pub mod pipeline;  // Commented out due to compilation errors
 
+// GREEN PHASE: Minimal implementations
+pub mod implementations;
+
 // Include test modules
 #[cfg(test)]
 pub mod tests;

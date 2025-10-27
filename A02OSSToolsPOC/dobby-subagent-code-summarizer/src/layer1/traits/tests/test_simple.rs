@@ -4,16 +4,16 @@
 //! We'll expand this once we verify the basic RED phase works.
 
 #[cfg(test)]
-mod simple_red_phase_tests {
+pub mod simple_red_phase_tests {
     use std::time::Duration;
 
     /// A simple trait that needs implementation
-    trait SimpleTrait {
+    pub trait SimpleTrait {
         fn do_something(&self) -> Result<String, &'static str>;
     }
 
     /// Mock implementation that will fail in RED phase
-    struct MockImplementation;
+    pub struct MockImplementation;
 
     impl SimpleTrait for MockImplementation {
         fn do_something(&self) -> Result<String, &'static str> {

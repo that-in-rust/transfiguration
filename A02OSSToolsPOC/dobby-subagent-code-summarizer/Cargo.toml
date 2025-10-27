@@ -73,6 +73,12 @@ async-trait = "0.1"
 # UUID generation for tests
 uuid = { version = "1.0", features = ["v4", "serde"] }
 
+# Random number generation for mock behavior
+rand = "0.8"
+
+# Async streams for realistic mock behavior
+async-stream = "0.3"
+
 # Test utilities
 pretty_assertions = "1.4"  # Better diff output
 insta = "1.34"  # Snapshot testing
