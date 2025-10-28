@@ -24,6 +24,7 @@
 //! - Error context addition: < 5ms
 
 use std::fmt::Debug;
+use std::error::Error;
 use thiserror::Error;
 
 /// Database-specific errors with detailed context
@@ -86,6 +87,7 @@ pub enum DatabaseError {
 
 /// Inference-specific errors with model context
 #[derive(Debug)]
+#[derive(Error)]
 pub enum InferenceError {
     #[error("Model loading failed: {model_path}")]
     ModelLoading {
@@ -172,57 +174,6 @@ pub enum InferenceError {
 
     #[error("Detokenization failed: {reason}")]
     DetokenizationError { reason: String },
-}
-    #[error("Model loading failed: {model_path}")]
-    ModelLoading {
-        model_path: String,
-        #[source]
-        source: Box<dyn Error + Send + Sync>,
-    },
-
-    #[error("Inference execution failed: {stage}")]
-    Execution {
-        stage: String,
-        #[source]
-        source: Box<dyn Error + Send + Sync>,
-    },
-
-    #[error("Metal acceleration unavailable: {reason}")]
-    MetalUnavailable { reason: String },
-
-    #[error("Session pool exhausted: {requested} sessions requested, {available} available")]
-    SessionPoolExhausted { requested: usize, available: usize },
-
-    #[error("Quantization failed: {quantization_type}")]
-    Quantization {
-        quantization_type: String,
-        #[source]
-        source: Box<dyn Error + Send + Sync>,
-    },
-
-    #[error("Input validation failed: {field} {issue}")]
-    InputValidation { field: String, issue: String },
-
-    #[error("Model not found: {model_id}")]
-    ModelNotFound { model_id: ModelId },
-
-    #[error("Insufficient memory: {required_mb}MB required, {available_mb}MB available")]
-    InsufficientMemory { required_mb: usize, available_mb: usize },
-
-    #[error("Device unavailable: {device_type}")]
-    DeviceUnavailable { device_type: String },
-
-    #[error("Inference timeout: {operation} after {duration:?}")]
-    InferenceTimeout {
-        operation: String,
-        duration: std::time::Duration,
-    },
-
-    #[error("Invalid input format: {input_type}")]
-    InvalidInputFormat { input_type: String },
-
-    #[error("Output generation failed: {reason}")]
-    OutputGenerationFailed { reason: String },
 }
 
 /// Pipeline-level errors with comprehensive context

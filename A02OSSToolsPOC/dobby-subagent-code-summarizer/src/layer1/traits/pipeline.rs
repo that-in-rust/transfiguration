@@ -458,5 +458,9 @@ pub enum HealthSeverity {
 }
 
 // Re-export types from other modules for convenience
-pub use super::database::{DatabaseProvider, DatabaseError, RecordId};
-pub use super::inference::{InferenceEngine, InferenceError, ModelId};
+pub use super::database::DatabaseProvider;
+pub use super::database::RecordId;
+pub use super::inference::InferenceEngine;
+pub use super::inference::ModelId;
+pub use crate::layer1::traits::error::DatabaseError;
+pub use crate::layer1::traits::error::InferenceError;
