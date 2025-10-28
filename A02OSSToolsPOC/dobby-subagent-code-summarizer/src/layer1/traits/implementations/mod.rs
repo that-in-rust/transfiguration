@@ -12,16 +12,19 @@
 //! ## Module Structure
 //! - database_simple: GREEN phase minimal working implementation
 //! - production_database: REFACTOR phase production-ready implementation
+//! - inference_engine: Production-ready InferenceEngine trait implementation
+//! - pipeline_orchestrator: High-level orchestration combining database and inference
 
-// pub mod database;  // Complex version with trait dependencies
 pub mod database_simple;  // Simple GREEN phase implementation
 pub mod production_database;  // REFACTOR phase production implementation
-// pub mod inference;  // TODO: Implement next
-// pub mod pipeline;   // TODO: Implement next
+pub mod inference_engine;  // Production-ready InferenceEngine implementation
+pub mod pipeline_orchestrator;  // High-level pipeline orchestration
 
 // Re-export implementations for convenience
-// pub use database::*;
 pub use database_simple::*;
 pub use production_database::*;
-// pub use inference::*;
-// pub use pipeline::*;
+pub use inference_engine::{TraitInferenceEngine, TraitModelInfo, SessionPool};
+pub use pipeline_orchestrator::{
+    PipelineOrchestrator, PipelineConfig, PipelineJob, PipelineJobResult, JobOptions,
+    PipelineHealth, PipelineMetrics, PipelineOrchestratorTrait
+};

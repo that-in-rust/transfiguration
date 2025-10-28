@@ -85,8 +85,94 @@ pub enum DatabaseError {
 }
 
 /// Inference-specific errors with model context
-#[derive(Error, Debug)]
+#[derive(Debug)]
 pub enum InferenceError {
+    #[error("Model loading failed: {model_path}")]
+    ModelLoading {
+        model_path: String,
+        #[source]
+        source: Box<dyn Error + Send + Sync>,
+    },
+
+    #[error("Inference execution failed: {stage}")]
+    Execution {
+        stage: String,
+        #[source]
+        source: Box<dyn Error + Send + Sync>,
+    },
+
+    #[error("Metal acceleration unavailable: {reason}")]
+    MetalUnavailable { reason: String },
+
+    #[error("Session pool exhausted: {requested} sessions requested, {available} available")]
+    SessionPoolExhausted { requested: usize, available: usize },
+
+    #[error("Quantization failed: {quantization_type}")]
+    Quantization {
+        quantization_type: String,
+        #[source]
+        source: Box<dyn Error + Send + Sync>,
+    },
+
+    #[error("Input validation failed: {field} {issue}")]
+    InputValidation { field: String, issue: String },
+
+    #[error("Model not found: {model_id}")]
+    ModelNotFound { model_id: ModelId },
+
+    #[error("Insufficient memory: {required_mb}MB required, {available_mb}MB available")]
+    InsufficientMemory { required_mb: usize, available_mb: usize },
+
+    #[error("Device unavailable: {device_type}")]
+    DeviceUnavailable { device_type: String },
+
+    #[error("Inference timeout: {operation} after {duration:?}")]
+    InferenceTimeout {
+        operation: String,
+        duration: std::time::Duration,
+    },
+
+    #[error("Invalid input format: {input_type}")]
+    InvalidInputFormat { input_type: String },
+
+    #[error("Output generation failed: {reason}")]
+    OutputGenerationFailed { reason: String },
+
+    #[error("Batch processing failed: {failed_count}/{total_count} items failed")]
+    BatchProcessingFailed {
+        failed_count: usize,
+        total_count: usize,
+        #[source]
+        source: Box<dyn Error + Send + Sync>,
+    },
+
+    #[error("Streaming error: {reason}")]
+    StreamingError { reason: String },
+
+    #[error("Resource temporarily unavailable: {resource}")]
+    ResourceTemporarilyUnavailable { resource: String },
+
+    #[error("Model configuration error: {parameter} = {value} is invalid")]
+    ConfigurationError {
+        parameter: String,
+        value: String,
+    },
+
+    #[error("Performance contract violation: {contract_type} - {details}")]
+    PerformanceContractViolation {
+        contract_type: String,
+        details: String,
+    },
+
+    #[error("Session creation failed: {reason}")]
+    SessionCreationFailed { reason: String },
+
+    #[error("Tokenization failed: {reason}")]
+    TokenizationError { reason: String },
+
+    #[error("Detokenization failed: {reason}")]
+    DetokenizationError { reason: String },
+}
     #[error("Model loading failed: {model_path}")]
     ModelLoading {
         model_path: String,

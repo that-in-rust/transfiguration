@@ -40,25 +40,87 @@ pub struct SessionId(pub uuid::Uuid);
 
 /// Inference result with comprehensive metadata
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct InferenceResult {
+pub struct InferenceResult<T: ModelInfo = ConcreteModelInfo> {
     pub content: String,
     pub token_count: usize,
     pub confidence: f64,
     pub processing_time_ms: u64,
     pub session_id: SessionId,
-    pub model_info: ModelInfo,
+    pub model_info: T,
     pub metadata: InferenceMetadata,
 }
 
 /// Model information and capabilities
+pub trait ModelInfo: Send + Sync + Debug + Clone {
+    /// Get the unique model identifier
+    fn model_id(&self) -> &ModelId;
+
+    /// Get the model name
+    fn model_name(&self) -> &str;
+
+    /// Get the model type
+    fn model_type(&self) -> &ModelType;
+
+    /// Get device information
+    fn device(&self) -> &DeviceInfo;
+
+    /// Get model capabilities
+    fn capabilities(&self) -> &ModelCapabilities;
+
+    /// Get performance characteristics
+    fn performance(&self) -> &ModelPerformance;
+
+    /// Check if model supports a specific capability
+    fn supports_capability(&self, capability: &str) -> bool {
+        self.capabilities().supported_formats.iter().any(|f| f == capability)
+    }
+
+    /// Get estimated memory usage in MB
+    fn estimated_memory_mb(&self) -> usize {
+        self.performance().memory_usage_mb
+    }
+
+    /// Check if model is healthy for inference
+    fn is_healthy(&self) -> bool {
+        self.performance().efficiency_score > 0.5
+    }
+}
+
+/// Concrete model information implementation for serialization
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ModelInfo {
+pub struct ConcreteModelInfo {
     pub model_id: ModelId,
     pub model_name: String,
     pub model_type: ModelType,
     pub device: DeviceInfo,
     pub capabilities: ModelCapabilities,
     pub performance: ModelPerformance,
+}
+
+impl ModelInfo for ConcreteModelInfo {
+    fn model_id(&self) -> &ModelId {
+        &self.model_id
+    }
+
+    fn model_name(&self) -> &str {
+        &self.model_name
+    }
+
+    fn model_type(&self) -> &ModelType {
+        &self.model_type
+    }
+
+    fn device(&self) -> &DeviceInfo {
+        &self.device
+    }
+
+    fn capabilities(&self) -> &ModelCapabilities {
+        &self.capabilities
+    }
+
+    fn performance(&self) -> &ModelPerformance {
+        &self.performance
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
