@@ -32,6 +32,9 @@ pub mod test_simple;
 // pub mod test_green_phase;  // Commented out due to import issues
 pub mod test_green_phase_simple;
 
+// REFACTOR phase tests for production-ready features
+pub mod test_refactor_phase;
+
 // Common test utilities and helpers
 // pub mod test_common;  // Commented out due to compilation errors
 

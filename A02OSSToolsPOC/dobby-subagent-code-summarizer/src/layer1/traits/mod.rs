@@ -10,10 +10,10 @@
 //! - Performance Contracts: Measurable performance guarantees
 //! - Error Propagation: Detailed error types with context
 
-// pub mod database;  // Commented out due to compilation errors
-// pub mod error;     // Commented out due to compilation errors
-// pub mod inference; // Commented out due to compilation errors
-// pub mod pipeline;  // Commented out due to compilation errors
+// pub mod database;  // Temporarily disabled for REFACTOR demonstration
+// pub mod error;     // Temporarily disabled for REFACTOR demonstration
+// pub mod inference; // Temporarily disabled for REFACTOR demonstration
+// pub mod pipeline;  // Temporarily disabled for REFACTOR demonstration
 
 // GREEN PHASE: Minimal implementations
 pub mod implementations;
@@ -23,7 +23,7 @@ pub mod implementations;
 pub mod tests;
 
 // Re-export core types for convenience
-// pub use database::*;
-// pub use error::*;
-// pub use inference::*;
-// pub use pipeline::*;
+// pub use database::*;  // Temporarily disabled for REFACTOR demonstration
+// pub use error::*;     // Temporarily disabled for REFACTOR demonstration
+// pub use inference::*; // Temporarily disabled for REFACTOR demonstration
+// pub use pipeline::*;  // Temporarily disabled for REFACTOR demonstration
