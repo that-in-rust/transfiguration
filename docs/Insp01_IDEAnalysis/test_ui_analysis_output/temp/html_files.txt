@@ -1,9 +1,0 @@
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/code/electron-browser/workbench/workbench.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/contrib/webview/browser/pre/index.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/contrib/webview/browser/pre/fake.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/index.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/microsoft-authentication/media/index.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/github-authentication/media/index.html
-/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/LICENSES.chromium.html
