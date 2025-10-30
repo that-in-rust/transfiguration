@@ -1,0 +1,35 @@
+[workspace]
+members = [
+    "A02OSSToolsPOC/dobby-subagent-code-summarizer"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Amul <amul@example.com>"]
+description = "Transfiguration - OSS Tools for AI-powered code analysis"
+
+[workspace.dependencies]
+# Shared dependencies can be defined here
+tokio = { version = "1.35", features = ["full"] }
+anyhow = "1.0"
+thiserror = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokenizers = "0.15"
+ort = { version = "2.0.0-rc.4", features = ["download-binaries", "copy-dylibs"] }
+ndarray = "0.15"
+libc = "0.2"
+bindgen = "0.69"
+sysinfo = "0.30"
+clap = { version = "4.4", features = ["derive"] }
+chrono = "0.4"
+
+# Production dependencies for REFACTOR phase
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+parking_lot = "0.12"
+tokio-util = "0.7"
+backoff = "0.4"
+async-trait = "0.1"
