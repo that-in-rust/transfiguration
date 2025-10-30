@@ -1,0 +1,3020 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1347,
+      "extension": ".md"
+    },
+    {
+      "path": ".gitignore",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 2169,
+      "extension": ""
+    },
+    {
+      "path": "docs/CLEAN-UP-EXERCISE.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17168,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/TABLE_OF_CONTENTS.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 34194,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/file_classifications.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 34763,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/COMPLETE_TOOL_INVENTORY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7772,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/STATIC_ANALYSIS_JOURNAL.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5244,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1219,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/MASTER_IDE_EVOLUTION_ANALYSIS.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 41793,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/COMPREHENSIVE_IDE_EVOLUTION_ANALYSIS.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10728,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/README_DOWNLOADS.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2702,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp04_DownloadAnalysis/JETBRAINS_COMPLETE_PRODUCT_LIST.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5623,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/parallel_subagent_framework_validation_report.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9241,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/Cargo.toml",
+      "filter": 0,
+      "reason": "other_type_.toml",
+      "size": 925,
+      "extension": ".toml"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/TOC_INDEX.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9182,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/TABLE_OF_CONTENTS.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 213895,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/TABLE_OF_CONTENTS.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 12670,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5712,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/TOC_QUICK_REFERENCE.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6059,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.gitignore",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 8383,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/ClaudeSOP.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8242,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.gitattributes",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 3534,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/claude_code_zai_env.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 5375,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/TOC_GENERATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8126,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/archive_utils/export_smollm_int4.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 8071,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/archive_utils/export_qwen_int4.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 13057,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/archive_utils/ModelREADME.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1508,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/archive_utils/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 517,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/archive_utils/qwen_quantization_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6124,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/prepare_vocab_for_rust.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 1785,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/download_codet5_simple.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 4007,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/convert_with_optimum.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 2721,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/download_t5_model.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 3503,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/convert_codet5_simple.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 6920,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/download_codet5_final.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 3220,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/convert_codet5_to_onnx.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 4970,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/create_simple_model.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 2689,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/scripts/download_codet5.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 5429,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/Cargo.toml",
+      "filter": 0,
+      "reason": "other_type_.toml",
+      "size": 3024,
+      "extension": ".toml"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/validate_setup",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 485248,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/cozo_candle_research_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 28276,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 14278,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.gitignore",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 1551,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/backlog.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10397,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.prdArchDocs/P01dobbyPRDv1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13800,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.prdArchDocs/TDD-First-Rust-Architecture-Specification.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 67468,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.prdArchDocs/Arch01dobbyV1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 59482,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/tests/fixtures/tokio-rs-tokio-8a5edab282632443.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 4669751,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/tests/fixtures/iggy_apache.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 383872,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/tests/fixtures/ray-project-ray-8a5edab282632443.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 46375519,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.cargo/config.toml",
+      "filter": 0,
+      "reason": "other_type_.toml",
+      "size": 1450,
+      "extension": ".toml"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.domainDocs/P01_TechnicalArchitecture_DatabaseToSummaryPipeline.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 91560,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A02OSSToolsPOC/dobby-subagent-code-summarizer/.domainDocs/P02_MockDataAndTestScenarios_Comprehensive.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 100339,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/A01PyramidForMVP.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 26613,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/A99NotesV1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 61884,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/A02EssentialCargoNames.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6344,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/a97HQNotesV1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 92470,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/A98NotesV2.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 89299,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B01Current/A02ArchV1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25999,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/RustIdiomsAgent20251025.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 102438,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/RustIdiomsLong20251021.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 110536,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/LLM_PROMPT_RustIdioms.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4894,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_large.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 5328588,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/trun_rust_idiom_5.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 974413,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_new.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 964387,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_main.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 2882752,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_1.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 1168806,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/trun_rust_idiom_2.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 238515,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/trun_rust_idiom_driver1.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 974413,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustResearch_urls.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 1593,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/trun_rust_idiom_driver2.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 1779432,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RusIdioms_trun_rust_idiom_extra1.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 2223534,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_3.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 830732,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustHallowsPrep.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 336337,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_trun_rust_idiom_4.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 987194,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp06RustNotes/RustIdioms_i00-pattern-list.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 17566,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/build.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 8877,
+      "extension": ".py"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P45RustPatternDiscoveryMethod.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 15247,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P11ClaudeInspired.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8841,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P40ScopeFixation.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5479,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P04ClaudeMermaid01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 18633,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P15ValidateArchitecture.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 52786,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P05ModuleMermaid.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 26051,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthropics-claude-code-8a5edab282632443 (1).txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 207114,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P23ClaudePlugin.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11629,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P13ClaudeComplete.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11634,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P17SubAgentGame.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 12533,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P16NotesOnSubAgents.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 38428,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P31ChatPRDNotes.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16714,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P41FilteredTools.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 80041,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P34DeepNotes.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 349045,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/build-manifest.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 10139,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/fission-ai-openspec-8a5edab282632443.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 939937,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P08MermaidUserFlow.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7679,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P24ClaudePlugin02.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 35257,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3116,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P19_128K_Context_Analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16095,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P02Deconstructionv01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24021,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P10Complete.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8803,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P22PreFlightIdeas.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 46445,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P01ParseltonguePRDv01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8212,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P14ThreeJourneys.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 42815,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P07MetaPatternsMermaid.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25467,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P44ToolsMermaid02.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 12570,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P43ToolsMermaid01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 15605,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P25ToolCollection.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 288226,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P26ToolsMermaid01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5083,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P20_Bug_Fixing_UserJourney.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 48490,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P45RustPatternFilesFinder.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4348,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/chunk_themes_filtered.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 90903,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P06EnhancementMermaid.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 37766,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/cline-cline-8a5edab282632443.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 6655887,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P09RustCargos.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7889,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P21_ArchV01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 42294,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P10IdeasPart2.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9547,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P00CoreUserflow20251014p1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3926,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P42MECEtools.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 164636,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P03Mermaid01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4873,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P10Ideas.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7940,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/anthropics-claude-code-8a5edab282632443 (3).txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 237257,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P18AltWays.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 23936,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P46llamaExplore.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5136,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P35ToolEnrichmentTaskList.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10717,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/P04ClaudeMermaid02.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20661,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/zzArchive/chunk_themes_sorted_by_number.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 3768964,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/zzArchive/chunk_themes_sorted.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 3768964,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp04_PRD202510/zzArchive/chunk_themes.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 3768963,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp05_EvolutionAnalysis/A001_CompleteIDEEvolution.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17921,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp05_EvolutionAnalysis/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1109,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/A003_HybridPlan2Architecture.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16237,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/A004_ImplementationTracker.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16113,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5656,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/A002_RustRoverDeconstruction.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25319,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/A001_RustPerformanceOverview.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7200,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/bin/macos/x86-64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 505104,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/bin/macos/arm64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 468512,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/bin/linux/x86-64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 2837088,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp02_RustPerformance/bin/linux/arm64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 2959632,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/PERFORMANCE_OPTIMIZATION_GUIDE.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 28386,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 12088,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/UI_STRUCTURE_ANALYSIS_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7717,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Cargo.toml",
+      "filter": 0,
+      "reason": "other_type_.toml",
+      "size": 792,
+      "extension": ".toml"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/MIGRATION_DECISION_FRAMEWORK.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17589,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/CONFIGURATION_ANALYZER_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8344,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/TASK_6_IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10001,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/MIGRATION_ANALYSIS_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11165,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_configuration_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 14634,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6915,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Dockerfile",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 425,
+      "extension": ""
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/analyze_kiro.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 16229,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8444,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Journal20250926.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9829,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/integrate_analysis_results.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 20796,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_syntax.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 1366,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_analysis_pipeline.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 10965,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/docker-compose.yml",
+      "filter": 0,
+      "reason": "other_type_.yml",
+      "size": 797,
+      "extension": ".yml"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/kiro_analysis_config.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 2168,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_minimal_behavioral.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 2562,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 4147,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/BEHAVIORAL_ANALYSIS_IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8281,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1237,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/progress.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 378,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/status.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 269,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/components/html_components.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/components/html_templates.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/components/html_analysis.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 5614,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/styling/css_animations.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 172783,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/styling/css_variables.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/styling/css_media_queries.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 6188,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/styling/css_analysis.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 6249,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/styling/css_rules.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 2244,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/assets/icons_catalog.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 12011,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/assets/fonts_catalog.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 14292,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/assets/images_catalog.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 349460,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/assets/media_analysis.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 409868,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/assets/svg_analysis.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 260326,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/themes/theme_analysis.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 9413,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/themes/color_schemes.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 204003,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/themes/theme_configs.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_ui_analysis_output/ui/themes/icon_themes.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 48477,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/task_3_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7345,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ecosystem_trends/future_scenario_planning_framework.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24334,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ecosystem_trends/user_preference_evolution_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20866,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ecosystem_trends/ecosystem_trend_analysis_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11546,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ecosystem_trends/technology_adoption_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17672,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/analysis/comprehensive_pattern_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20939,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/analysis/strategic_recommendation_framework.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25801,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/analysis/kiro_implementation_roadmap.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 31096,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/vscode_forks/comprehensive_fork_catalog.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 23500,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/vscode_forks/extension_system_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 23098,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/vscode_forks/ai_integration_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 39458,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/vscode_forks/business_model_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25367,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ai_ides/ai_ux_interaction_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24843,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ai_ides/competitive_matrix.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 297,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ai_ides/competitive_analysis_detailed.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 0,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ai_ides/competitive_positioning_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 27317,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/ai_ides/ai_service_integration_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 14834,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/technical_patterns/performance_optimization_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 68889,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/technical_patterns/extension_system_architecture_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 37253,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/technical_patterns/state_management_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 46348,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/rust_wasm_ides/comprehensive_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13524,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/rust_wasm_ides/task_4_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10166,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/rust_wasm_ides/interop_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 29635,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/rust_wasm_ides/architecture_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 56149,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/research_data/rust_wasm_ides/performance_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 18436,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.LLMNotes/DeconstructDebZero-Trust.deb Dissection_ A Rust Toolchain for Safe, Deep-Dive Package Analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 31354,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.LLMNotes/UnpackKiro_Unpack With Confidence_ A Secure, Streaming-Fast Deep-Dive into Kiro\u2019s.deb.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 37221,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.LLMNotes/UnpackKiro_trun_c928898c8ef7483eace3078d9b2f944e.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 642511,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.LLMNotes/Notes01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4412,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.LLMNotes/DeconstructDeb_trun_c928898c8ef7483eadc3541123e5d88f.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 557564,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/kiro_analysis_output/status.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 68,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_js_samples/performance_patterns.js",
+      "filter": 0,
+      "reason": "other_type_.js",
+      "size": 1386,
+      "extension": ".js"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_js_samples/event_handlers.js",
+      "filter": 0,
+      "reason": "other_type_.js",
+      "size": 833,
+      "extension": ".js"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_js_samples/state_management.js",
+      "filter": 0,
+      "reason": "other_type_.js",
+      "size": 1365,
+      "extension": ".js"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_js_samples/error_handling.js",
+      "filter": 0,
+      "reason": "other_type_.js",
+      "size": 1680,
+      "extension": ".js"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/error_handling.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 1747,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/typescript_parser.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 27889,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/behavioral_pattern_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 30503,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/phase2_handoff.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 45699,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/result_aggregation.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 41302,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/configuration_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 25007,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/baseline_comparison.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 35629,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/file_discovery.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 15169,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/ui_structure_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 42882,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/validation_framework.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 22749,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/output_management.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 9054,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/lib/api_surface_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 70948,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/MermaidSteering.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 32583,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 22555,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11534,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 12940,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17463,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17462,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/S03-Table-of-Contents.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24071,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 18796,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4105,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6608,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5488,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/steering/code-conventions.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 53408,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/steering/kiro-behavioral-replication.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5020,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/steering/A01-README-MOSTIMP.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2288,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/.kiro/steering/design101-tdd-architecture-principles.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 29107,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_output/behavior/summary.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 23,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_output/behavior/event_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_output/behavior/error_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_output/behavior/state_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/test_behavioral_output/behavior/performance_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Claude-code-analysis/benchmarking.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7162,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Claude-code-analysis/indexing.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3058,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp01_IDEAnalysis/Claude-code-analysis/limitation.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6056,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp00_Tools/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 744,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp00_Tools/batch_download_reproduction.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 13458,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A003_StructuralPatternISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8795,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A011EvolvedJourney.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 38733,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/anthropics-claude-code-8a5edab282632443 (1).txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 207114,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/WIP20251014p1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3931,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A007_ArchitecturalEvolution_ISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6666,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A006_MintoPyramid_ISG_Strategy.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5762,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A005_ReasoningWithISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13173,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A016DeepNotes.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 75447,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A004_InterfaceContextISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20000,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A012ExecutableJourney.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20585,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A001_StrategicEvolution.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13036,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10604,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A008further.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4646,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A009focus20251014p1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10219,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A002_WhenToStopOptimizing.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4045,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A015UsefulIdeas.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 528360,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A014Architecturev2.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9828,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/Enriching ISG for Better Reasoning.pdf",
+      "filter": 0,
+      "reason": "other_type_.pdf",
+      "size": 264972,
+      "extension": ".pdf"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A010UserJourney01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 60255,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/A013Architecturev1.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11366,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/rust-lang-rust-analyzer-8a5edab282632443.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 12242721,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/A01OSSToolsIdeation/B02ARCHIVE/Insp09_ActiveWorkspaces_StrategicInitiatives/Insp03_ParseltongueEvolution/schemas/llm_delta_packet.schema.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 5461,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.domainDocs/D01Subagents.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 34910,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.domainDocs/D03TreeSitterSemanticChunking.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24961,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.domainDocs/D04StrategicCandleDecision.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 21249,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/transfiguration-ab20251014p1/.domainDocs/D02LightweightLLMResearch.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 19281,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp05_EvolutionAnalysis/A001_CompleteIDEEvolution.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17921,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp05_EvolutionAnalysis/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 1109,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/A003_HybridPlan2Architecture.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16237,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/A004_ImplementationTracker.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 16113,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5656,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/A002_RustRoverDeconstruction.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25319,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/A001_RustPerformanceOverview.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7200,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/bin/macos/x86-64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 505104,
+      "extension": ""
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/bin/macos/arm64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 468512,
+      "extension": ""
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/bin/linux/x86-64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 2837088,
+      "extension": ""
+    },
+    {
+      "path": "docs/Insp02_RustPerformance/bin/linux/arm64/intellij-rust-native-helper",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 2959632,
+      "extension": ""
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/PERFORMANCE_OPTIMIZATION_GUIDE.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 28386,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 12088,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/UI_STRUCTURE_ANALYSIS_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7717,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Cargo.toml",
+      "filter": 0,
+      "reason": "other_type_.toml",
+      "size": 792,
+      "extension": ".toml"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/MIGRATION_DECISION_FRAMEWORK.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17589,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/CONFIGURATION_ANALYZER_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8344,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/TASK_6_IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10001,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/MIGRATION_ANALYSIS_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11165,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_configuration_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 14634,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6915,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Dockerfile",
+      "filter": 0,
+      "reason": "other_type_",
+      "size": 425,
+      "extension": ""
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/analyze_kiro.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 16229,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Cargo.lock",
+      "filter": 0,
+      "reason": "other_type_.lock",
+      "size": 87258,
+      "extension": ".lock"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8444,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Journal20250926.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 9829,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/integrate_analysis_results.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 20796,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_syntax.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 1366,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_analysis_pipeline.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 10965,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/docker-compose.yml",
+      "filter": 0,
+      "reason": "other_type_.yml",
+      "size": 797,
+      "extension": ".yml"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_config.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 2168,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_minimal_behavioral.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 2562,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_ui_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 4147,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/BEHAVIORAL_ANALYSIS_IMPLEMENTATION_SUMMARY.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8281,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/migrations/001_initial_schema.sql",
+      "filter": 0,
+      "reason": "other_type_.sql",
+      "size": 6948,
+      "extension": ".sql"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_infrastructure/database/schema.sql",
+      "filter": 0,
+      "reason": "other_type_.sql",
+      "size": 0,
+      "extension": ".sql"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_infrastructure/database/migration_projects_schema.sql",
+      "filter": 0,
+      "reason": "other_type_.sql",
+      "size": 5994,
+      "extension": ".sql"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/task_3_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7345,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ecosystem_trends/future_scenario_planning_framework.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24334,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ecosystem_trends/user_preference_evolution_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20866,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ecosystem_trends/ecosystem_trend_analysis_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11546,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ecosystem_trends/technology_adoption_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17672,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/analysis/comprehensive_pattern_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20939,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/analysis/strategic_recommendation_framework.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25801,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/analysis/kiro_implementation_roadmap.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 31096,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/vscode_forks/comprehensive_fork_catalog.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 23500,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/vscode_forks/extension_system_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 23098,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/vscode_forks/ai_integration_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 39458,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/vscode_forks/business_model_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 25367,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ai_ides/ai_ux_interaction_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24843,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ai_ides/competitive_matrix.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 297,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ai_ides/competitive_analysis_detailed.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 0,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ai_ides/competitive_positioning_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 27317,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/ai_ides/ai_service_integration_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 14834,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/technical_patterns/performance_optimization_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 68889,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/technical_patterns/extension_system_architecture_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 37253,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/technical_patterns/state_management_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 46348,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/rust_wasm_ides/comprehensive_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13524,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/rust_wasm_ides/task_4_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10166,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/rust_wasm_ides/interop_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 29635,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/rust_wasm_ides/architecture_patterns.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 56149,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/research_data/rust_wasm_ides/performance_analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 18436,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.LLMNotes/DeconstructDebZero-Trust.deb Dissection_ A Rust Toolchain for Safe, Deep-Dive Package Analysis.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 31354,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.LLMNotes/UnpackKiro_Unpack With Confidence_ A Secure, Streaming-Fast Deep-Dive into Kiro\u2019s.deb.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 37221,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.LLMNotes/UnpackKiro_trun_c928898c8ef7483eace3078d9b2f944e.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 642511,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.LLMNotes/Notes01.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4412,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.LLMNotes/DeconstructDeb_trun_c928898c8ef7483eadc3541123e5d88f.txt",
+      "filter": 1,
+      "reason": "txt_file",
+      "size": 557564,
+      "extension": ".txt"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/status.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 68,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/task_6_integration_summary.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 204,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/task_6_integration_summary.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2873,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/vs_code_baseline_comparison.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 1542,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/configuration_comparison.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/ui_comparison.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/migration_complexity.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 1092,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/vs_code_baseline_comparison.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3106,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/kiro_customizations.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 81,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/baseline_comparison/api_comparison.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/cross_references/index.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 159,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/cross_references/index.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 95,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/architecture_requirements.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 8653,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/phase2_handoff_documentation.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 24070,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/phase2_handoff_documentation.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8605,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/technical_constraints.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 5082,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/phase2_input_specification.json",
+      "filter": 1,
+      "reason": "json_with_keywords",
+      "size": 3939,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/phase2_handoff/priority_matrix.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 6156,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/validation/validation_summary.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 202,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/validation/confidence_report.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2013,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/validation/confidence_levels.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 837,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/behavioral_specification/kiro_behavioral_specification.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 976,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/behavioral_specification/behavioral_specification_report.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2457,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/kiro_analysis_output/reports/behavioral_specification/completeness_validation.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 1830,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/error_handling.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 1747,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/typescript_parser.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 27889,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/behavioral_pattern_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 30503,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/phase2_handoff.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 45699,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/result_aggregation.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 41302,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/configuration_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 25007,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/baseline_comparison.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 35629,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/file_discovery.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 15169,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/ui_structure_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 42882,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/validation_framework.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 22749,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/output_management.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 9054,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/lib/api_surface_analyzer.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 70948,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/MermaidSteering.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 32583,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 22555,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 11534,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S02-identify-transfiguration-behavior/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 12940,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17463,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 17462,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/S03-Table-of-Contents.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 24071,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S03-static-analysis-phase-2/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 18796,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/requirements.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4105,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/tasks.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6608,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/specs/S01-rust-file-unpacker/design.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5488,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/steering/code-conventions.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 53408,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/steering/kiro-behavioral-replication.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5020,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/steering/A01-README-MOSTIMP.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 2288,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/.kiro/steering/design101-tdd-architecture-principles.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 29107,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_output/behavior/summary.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 23,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_output/behavior/event_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_output/behavior/error_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_output/behavior/state_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/test_behavioral_output/behavior/performance_patterns.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 3,
+      "extension": ".json"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/benchmarking.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 7162,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/indexing.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 3058,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/available_tools.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5776,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/mermaid.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4882,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/implementation_plan.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8206,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp01_IDEAnalysis/Claude-code-analysis/limitation.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6056,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp00_Tools/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 744,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp00_Tools/batch_download_reproduction.sh",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 13458,
+      "extension": ".sh"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A003_StructuralPatternISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 8795,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A007_ArchitecturalEvolution_ISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 6666,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A006_MintoPyramid_ISG_Strategy.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 5762,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A005_ReasoningWithISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13173,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A004_InterfaceContextISG.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 20000,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A001_StrategicEvolution.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 13036,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/README.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 10604,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A008further.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4646,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/A002_WhenToStopOptimizing.md",
+      "filter": 1,
+      "reason": "markdown_file",
+      "size": 4045,
+      "extension": ".md"
+    },
+    {
+      "path": "docs/Insp03_ParseltongueEvolution/schemas/llm_delta_packet.schema.json",
+      "filter": 0,
+      "reason": "json_without_keywords",
+      "size": 5461,
+      "extension": ".json"
+    },
+    {
+      "path": "scripts/classify_files.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 6316,
+      "extension": ".py"
+    },
+    {
+      "path": "scripts/filter_and_cleanup.py",
+      "filter": 1,
+      "reason": "script_file",
+      "size": 7626,
+      "extension": ".py"
+    }
+  ],
+  "stats": {
+    "total": 421,
+    "preserve": 345,
+    "delete": 76
+  },
+  "by_reason": {
+    "markdown_file": 245,
+    "other_type_": 15,
+    "json_with_keywords": 18,
+    "other_type_.toml": 5,
+    "script_file": 57,
+    "txt_file": 25,
+    "other_type_.yml": 2,
+    "json_without_keywords": 45,
+    "other_type_.js": 4,
+    "other_type_.pdf": 1,
+    "other_type_.lock": 1,
+    "other_type_.sql": 3
+  },
+  "by_extension": {
+    ".md": {
+      "preserve": 245,
+      "delete": 0
+    },
+    "": {
+      "preserve": 0,
+      "delete": 15
+    },
+    ".json": {
+      "preserve": 18,
+      "delete": 45
+    },
+    ".toml": {
+      "preserve": 0,
+      "delete": 5
+    },
+    ".sh": {
+      "preserve": 43,
+      "delete": 0
+    },
+    ".py": {
+      "preserve": 14,
+      "delete": 0
+    },
+    ".txt": {
+      "preserve": 25,
+      "delete": 0
+    },
+    ".yml": {
+      "preserve": 0,
+      "delete": 2
+    },
+    ".js": {
+      "preserve": 0,
+      "delete": 4
+    },
+    ".pdf": {
+      "preserve": 0,
+      "delete": 1
+    },
+    ".lock": {
+      "preserve": 0,
+      "delete": 1
+    },
+    ".sql": {
+      "preserve": 0,
+      "delete": 3
+    }
+  }
+}
