@@ -1,0 +1,127 @@
+[
+  {
+    "query": "(max-width: 600px)",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "query": "(-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi)",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "query": "(max-width: 950px)",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "query": "(max-width: 620px)",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "query": "(prefers-color-scheme: dark)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "(prefers-color-scheme: light)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "(prefers-reduced-motion: no-preference)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "screen and (min-width: 600px)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "(min-width: 250px)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "(min-width: 330px)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "query": "(min-width:40rem)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(min-width:48rem)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(min-width:64rem)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(min-width:80rem)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(min-width:96rem)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(prefers-reduced-motion:no-preference)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "screen and (min-width:600px)",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "query": "(min-width: 640px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 768px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 1024px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 1280px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 1536px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 640px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(min-width: 1024px)",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "query": "(prefers-color-scheme: light)",
+    "source_file": "auth.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/github-authentication/media/auth.css"
+  }
+]
