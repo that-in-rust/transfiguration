@@ -1,0 +1,1704 @@
+[
+  {
+    "name": "monaco-cursor-smooth",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-cursor-phase",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-cursor-expand",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "fadeOut",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "codicon-spin",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "fadein",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-findInput-highlight-0",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-findInput-highlight-1",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-findInput-highlight-dark-0",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-findInput-highlight-dark-1",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "progress",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "monaco-review-widget-focus",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "editor-dictation-animation",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "nb-cursor-blink",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "nb-cursor-smooth",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "nb-cursor-phase",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "nb-cursor-expand",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "ellipsis",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "kf-chat-editing-atomic-edit",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "kf-chat-editing-last-edit-shift",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "pulse",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "code-blink-key",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "ani-terminal-speech",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "shift",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "wiggle",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "flash",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "fadeIn",
+    "type": "keyframes",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation>.cursor{transition",
+    "value": "all 80ms}.monaco-editor .cursors-layer.cursor-block-outline-style>.cursor{background:transparent!important;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "monaco-cursor-smooth .5s ease-in-out 0s 20 alternate}.cursor-phase{animation:monaco-cursor-phase .5s ease-in-out 0s 20 alternate}.cursor-expand>.cursor{animation:monaco-cursor-expand .5s ease-in-out 0s 20 alternate}.monaco-editor .mwh{position:absolute;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "none}.inline-progress-widget:hover .icon:before{content:var(--vscode-icon-x-content);",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn .15s ease-out}@keyframes fadeOut{0%{opacity:1}to{opacity:0}}.monaco-editor .monaco-editor-overlaymessage.fadeOut{animation:fadeOut .1s ease-out}.monaco-editor .monaco-editor-overlaymessage .message{padding:2px 4px;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "codicon-spin 1.5s steps(30) infinite}.codicon-modifier-disabled{opacity:.4}.codicon-loading,.codicon-tree-item-loading:before{animation-duration:1s!important;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-timing-function",
+    "value": "cubic-bezier(.53,.21,.29,.67)!important}.monaco-editor .codicon.codicon-symbol-array,.monaco-workbench .codicon.codicon-symbol-array{color:var(--vscode-symbolIcon-arrayForeground)}.monaco-editor .codicon.codicon-symbol-boolean,.monaco-workbench .codicon.codicon-symbol-boolean{color:var(--vscode-symbolIcon-booleanForeground)}.monaco-editor .codicon.codicon-symbol-class,.monaco-workbench .codicon.codicon-symbol-class{color:var(--vscode-symbolIcon-classForeground)}.monaco-editor .codicon.codicon-symbol-method,.monaco-workbench .codicon.codicon-symbol-method{color:var(--vscode-symbolIcon-methodForeground)}.monaco-editor .codicon.codicon-symbol-color,.monaco-workbench .codicon.codicon-symbol-color{color:var(--vscode-symbolIcon-colorForeground)}.monaco-editor .codicon.codicon-symbol-constant,.monaco-workbench .codicon.codicon-symbol-constant{color:var(--vscode-symbolIcon-constantForeground)}.monaco-editor .codicon.codicon-symbol-constructor,.monaco-workbench .codicon.codicon-symbol-constructor{color:var(--vscode-symbolIcon-constructorForeground)}.monaco-editor .codicon.codicon-symbol-value,.monaco-workbench .codicon.codicon-symbol-value,.monaco-editor .codicon.codicon-symbol-enum,.monaco-workbench .codicon.codicon-symbol-enum{color:var(--vscode-symbolIcon-enumeratorForeground)}.monaco-editor .codicon.codicon-symbol-enum-member,.monaco-workbench .codicon.codicon-symbol-enum-member{color:var(--vscode-symbolIcon-enumeratorMemberForeground)}.monaco-editor .codicon.codicon-symbol-event,.monaco-workbench .codicon.codicon-symbol-event{color:var(--vscode-symbolIcon-eventForeground)}.monaco-editor .codicon.codicon-symbol-field,.monaco-workbench .codicon.codicon-symbol-field{color:var(--vscode-symbolIcon-fieldForeground)}.monaco-editor .codicon.codicon-symbol-file,.monaco-workbench .codicon.codicon-symbol-file{color:var(--vscode-symbolIcon-fileForeground)}.monaco-editor .codicon.codicon-symbol-folder,.monaco-workbench .codicon.codicon-symbol-folder{color:var(--vscode-symbolIcon-folderForeground)}.monaco-editor .codicon.codicon-symbol-function,.monaco-workbench .codicon.codicon-symbol-function{color:var(--vscode-symbolIcon-functionForeground)}.monaco-editor .codicon.codicon-symbol-interface,.monaco-workbench .codicon.codicon-symbol-interface{color:var(--vscode-symbolIcon-interfaceForeground)}.monaco-editor .codicon.codicon-symbol-key,.monaco-workbench .codicon.codicon-symbol-key{color:var(--vscode-symbolIcon-keyForeground)}.monaco-editor .codicon.codicon-symbol-keyword,.monaco-workbench .codicon.codicon-symbol-keyword{color:var(--vscode-symbolIcon-keywordForeground)}.monaco-editor .codicon.codicon-symbol-module,.monaco-workbench .codicon.codicon-symbol-module{color:var(--vscode-symbolIcon-moduleForeground)}.monaco-editor .codicon.codicon-symbol-namespace,.monaco-workbench .codicon.codicon-symbol-namespace{color:var(--vscode-symbolIcon-namespaceForeground)}.monaco-editor .codicon.codicon-symbol-null,.monaco-workbench .codicon.codicon-symbol-null{color:var(--vscode-symbolIcon-nullForeground)}.monaco-editor .codicon.codicon-symbol-number,.monaco-workbench .codicon.codicon-symbol-number{color:var(--vscode-symbolIcon-numberForeground)}.monaco-editor .codicon.codicon-symbol-object,.monaco-workbench .codicon.codicon-symbol-object{color:var(--vscode-symbolIcon-objectForeground)}.monaco-editor .codicon.codicon-symbol-operator,.monaco-workbench .codicon.codicon-symbol-operator{color:var(--vscode-symbolIcon-operatorForeground)}.monaco-editor .codicon.codicon-symbol-package,.monaco-workbench .codicon.codicon-symbol-package{color:var(--vscode-symbolIcon-packageForeground)}.monaco-editor .codicon.codicon-symbol-property,.monaco-workbench .codicon.codicon-symbol-property{color:var(--vscode-symbolIcon-propertyForeground)}.monaco-editor .codicon.codicon-symbol-reference,.monaco-workbench .codicon.codicon-symbol-reference{color:var(--vscode-symbolIcon-referenceForeground)}.monaco-editor .codicon.codicon-symbol-snippet,.monaco-workbench .codicon.codicon-symbol-snippet{color:var(--vscode-symbolIcon-snippetForeground)}.monaco-editor .codicon.codicon-symbol-string,.monaco-workbench .codicon.codicon-symbol-string{color:var(--vscode-symbolIcon-stringForeground)}.monaco-editor .codicon.codicon-symbol-struct,.monaco-workbench .codicon.codicon-symbol-struct{color:var(--vscode-symbolIcon-structForeground)}.monaco-editor .codicon.codicon-symbol-text,.monaco-workbench .codicon.codicon-symbol-text{color:var(--vscode-symbolIcon-textForeground)}.monaco-editor .codicon.codicon-symbol-type-parameter,.monaco-workbench .codicon.codicon-symbol-type-parameter{color:var(--vscode-symbolIcon-typeParameterForeground)}.monaco-editor .codicon.codicon-symbol-unit,.monaco-workbench .codicon.codicon-symbol-unit{color:var(--vscode-symbolIcon-unitForeground)}.monaco-editor .codicon.codicon-symbol-variable,.monaco-workbench .codicon.codicon-symbol-variable{color:var(--vscode-symbolIcon-variableForeground)}.monaco-editor .lightBulbWidget{display:flex;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadein .1s linear}.monaco-editor .inlineSuggestionsHints{padding:4px;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadein .1s linear}.monaco-hover.hidden{display:none}.monaco-hover a:hover:not(.disabled){cursor:pointer}.monaco-hover .hover-contents:not(.html-hover-contents){padding:4px 8px}.monaco-hover .markdown-hover>.hover-contents:not(.code-hover-contents){max-width:var(--vscode-hover-maxWidth, 500px);",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "monaco-findInput-highlight-0 .1s linear 0s}.monaco-findInput.highlight-1 .controls,.hc-light .monaco-findInput.highlight-1 .controls{animation:monaco-findInput-highlight-1 .1s linear 0s}.hc-black .monaco-findInput.highlight-0 .controls,.vs-dark .monaco-findInput.highlight-0 .controls{animation:monaco-findInput-highlight-dark-0 .1s linear 0s}.hc-black .monaco-findInput.highlight-1 .controls,.vs-dark .monaco-findInput.highlight-1 .controls{animation:monaco-findInput-highlight-dark-1 .1s linear 0s}@keyframes monaco-findInput-highlight-0{0%{background:#fdff00cc}to{background:transparent}}@keyframes monaco-findInput-highlight-1{0%{background:#fdff00cc}99%{background:transparent}}@keyframes monaco-findInput-highlight-dark-0{0%{background:#ffffff70}to{background:transparent}}@keyframes monaco-findInput-highlight-dark-1{0%{background:#ffffff70}99%{background:transparent}}.monaco-tl-row{display:flex;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "codicon-spin 1.25s steps(30) infinite}.monaco-tree-type-filter{position:absolute;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-duration",
+    "value": "0;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-name",
+    "value": "inherit!important;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-opacity, 1);background-color",
+    "value": "var(--vscode-inlineEdit-modifiedChangedTextBackground)}}.monaco-editor .sticky-widget{overflow:hidden;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-name",
+    "value": "progress;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-duration",
+    "value": "4s;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-iteration-count",
+    "value": "infinite;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-timing-function",
+    "value": "linear}.monaco-progress-container.infinite.infinite-long-running .progress-bit{animation-timing-function:steps(100)}@keyframes progress{0%{transform:translate(0) scaleX(1)}50%{transform:translate(2500%) scaleX(3)}to{transform:translate(4900%) scaleX(1)}}.review-widget{width:100%;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "monaco-review-widget-focus 3s ease 0s}.review-widget .body .review-comment .comment-actions{margin-left:auto}.review-widget .body .review-comment .comment-actions .monaco-toolbar{height:22px}.review-widget .body .review-comment .comment-title .comment-header-info{overflow:hidden;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "editor-dictation-animation 1s infinite}@keyframes editor-dictation-animation{0%{color:var(--vscode-editorCursor-background)}50%{color:var(--vscode-activityBarBadge-background)}to{color:var(--vscode-editorCursor-background)}}.monaco-workbench .quick-input-list .quick-input-list-entry.has-actions:hover .quick-input-list-entry-action-bar .action-label.dirty-workspace:before{content:var(--vscode-icon-x-content);",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "nb-cursor-blink 1s step-end infinite}.nb-smooth{animation:nb-cursor-smooth .5s ease-in-out .5s infinite alternate}.nb-phase{animation:nb-cursor-phase .5s ease-in-out .5s infinite alternate}.nb-expand{animation:nb-cursor-expand .5s ease-in-out .5s infinite alternate}.nb-smooth-caret-animation{transition:all 80ms}@keyframes nb-cursor-blink{0%{opacity:1}50%{opacity:0}to{opacity:1}}@keyframes nb-cursor-smooth{0%,20%{opacity:1}60%,to{opacity:0}}@keyframes nb-cursor-phase{0%,20%{opacity:1}90%,to{opacity:0}}@keyframes nb-cursor-expand{0%,20%{transform:scaleY(1)}80%,to{transform:scaleY(0)}}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-multiCellHighlight .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-multiCellHighlight{background-color:var(--vscode-notebook-symbolHighlightBackground)!important}.notebookOverlay .monaco-list:focus-within .monaco-list-row.focused .cell-editor-focus .cell-editor-part:before{outline:solid 1px var(--vscode-notebook-focusedEditorBorder)}.notebookOverlay .cell.markdown h1{border-color:var(--vscode-notebook-cellBorderColor)}.notebookOverlay .monaco-list-row .cell-editor-part:before{outline:solid 1px var(--vscode-notebook-cellBorderColor)}.monaco-workbench .notebookOverlay .cell-statusbar-container .cell-language-picker:hover,.monaco-workbench .notebookOverlay .cell-statusbar-container .cell-status-item.cell-status-item-has-command:hover{background-color:var(--vscode-notebook-cellStatusBarItemHoverBackground)}.notebookOverlay>.cell-list-container>.cell-list-insertion-indicator{background-color:var(--vscode-notebook-cellInsertionIndicator)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider{background:var(--vscode-notebookScrollbarSlider-background)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider:hover{background:var(--vscode-notebookScrollbarSlider-hoverBackground)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider.active{background:var(--vscode-notebookScrollbarSlider-activeBackground)}.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .expandInputIcon:hover,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .expandOutputIcon:hover,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .cell-expand-part-button:hover{background-color:var(--vscode-toolbar-hoverBackground)}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-modified .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-modified{background-color:var(--vscode-editorGutter-modifiedBackground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-added .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-added{background-color:var(--vscode-diffEditor-insertedTextBackground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-deleted .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-deleted{background-color:var(--vscode-diffEditor-removedTextBackground)!important}.monaco-workbench .notebookOverlay .codicon-debug-continue{color:var(--vscode-icon-foreground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-chatGenerationHighlight .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-chatGenerationHighlight{background-color:var(--vscode-notebook-selectedCellBackground)!important}.monaco-workbench .notebookOverlay .cell-chat-part{display:none;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "ellipsis steps(4,end) 1s infinite}.interactive-item-container .header .avatar-container{display:flex;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "ellipsis steps(4,end) 1s infinite}}.interactive-item-container .value .rendered-markdown{line-height:1.5em}.interactive-item-container .value>.rendered-markdown p{margin:0 0 16px}.interactive-item-container .value>.chat-tool-invocation-part{.rendered-markdown p{margin:0 0 6px;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": ".35s kf-chat-editing-atomic-edit ease-out}.monaco-editor .chat-editing-pending-edit{z-index:1;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "2.3s kf-chat-editing-last-edit-shift ease-in-out infinite;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-delay",
+    "value": ".33s}.chat-notification-widget .chat-info-codicon,.chat-notification-widget .chat-error-codicon,.chat-notification-widget .chat-warning-codicon{display:flex;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "3s shift linear infinite}.monaco-workbench .zone-widget.inline-chat-widget>.zone-widget-container>.inline-chat{color:inherit;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "pulse ease-in 2.3s infinite}.chat-editor-overlay-widget .chat-editor-overlay-progress{align-items:center;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "code-blink-key 1s cubic-bezier(1,0,0,1) infinite alternate}.monaco-workbench .repl .repl-tree .output.expression .code-rapid-blink{animation:code-blink-key .3s cubic-bezier(1,0,0,1) infinite alternate}@keyframes code-blink-key{to{opacity:.4}}.monaco-workbench .repl .repl-tree .output.expression .code-subscript{vertical-align:sub;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "codicon-spin 1.25s steps(30) infinite}.testing-no-test-placeholder{display:none;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn .15s ease-out}>a{display:flex;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-duration",
+    "value": ".15s;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-name",
+    "value": "fadeIn;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "ani-terminal-speech 1s infinite}@keyframes ani-terminal-speech{0%{color:var(--vscode-terminalCursor-background)}50%{color:var(--vscode-activityBarBadge-background)}to{color:var(--vscode-terminalCursor-background)}}.terminal-voice-progress-text{font-style:italic;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "3s shift linear infinite}.xterm-screen .xterm-decoration-container .xterm-decoration.quick-fix{z-index:7}.monaco-workbench .terminal .terminal-command-decoration.quick-fix{color:var(--vscode-editorLightBulb-foreground)!important;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-duration",
+    "value": ".8s;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-iteration-count",
+    "value": "1;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-name",
+    "value": "wiggle}@keyframes flash{0%{background-color:initial}50%{background-color:var(--vscode-statusBarItem-prominentBackground)}to{background-color:initial}}.monaco-workbench .statusbar DIV#status\\.languageStatus.flash A{animation-duration:.8s;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-iteration-count",
+    "value": "1;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation-name",
+    "value": "flash}.monaco-workbench .hover-language-status{display:flex}.monaco-workbench .hover-language-status:not(:last-child){border-bottom:1px solid var(--vscode-notifications-border)}.monaco-workbench .hover-language-status>.severity{padding-right:8px;",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "animation",
+    "value": "none}.monaco-workbench.reduce-motion .interactive-input-part .monaco-action-bar .action-label.codicon-sync.codicon-modifier-spin:not(.disabled):before,.monaco-workbench.reduce-motion .interactive-input-part .monaco-action-bar .action-label.codicon-loading.codicon-modifier-spin:not(.disabled):before{content:var(--vscode-icon-debug-stop-content);",
+    "type": "animation-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1s linear;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .8s linear}.monaco-scrollable-element>.shadow{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1s linear}.monaco-editor .minimap.slider-mouseover:hover .minimap-slider,.monaco-editor .minimap.slider-mouseover .minimap-slider.active{opacity:1}.monaco-editor .minimap-slider .minimap-slider-horizontal{background:var(--vscode-minimapSlider-background)}.monaco-editor .minimap-slider:hover .minimap-slider-horizontal{background:var(--vscode-minimapSlider-hoverBackground)}.monaco-editor .minimap-slider.active .minimap-slider-horizontal{background:var(--vscode-minimapSlider-activeBackground)}.monaco-editor .minimap-shadow-visible{box-shadow:var(--vscode-scrollbar-shadow) -6px 0 6px -6px inset}.monaco-editor .minimap-shadow-hidden{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .5s}.minimap.minimap-autohide-scroll{pointer-events:none}.minimap.minimap-autohide-mouseover:hover,.minimap.minimap-autohide-scroll.active{opacity:1;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "all 80ms}.monaco-editor .cursors-layer.cursor-block-outline-style>.cursor{background:transparent!important;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .1s linear}.monaco-editor .margin-view-overlays .gpu-mark:hover{background-color:var(--vscode-editorWarning-foreground)}.monaco-list{position:relative;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .1s ease-out}.monaco-sash.hover:before,.monaco-sash.active:before{background:var(--vscode-sash-hoverBorder)}.monaco-sash.vertical:before{width:var(--vscode-sash-hover-size);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": " .2s ease-in;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .1s ease-out;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .7s;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "none}&.noTransition{transition:none}}&:hover .gutterItem{opacity:1;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1s ease-in-out}.gutterItem{.background{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "border-color .2s ease-out}.monaco-custom-toggle{margin-left:2px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1s linear}.monaco-tl-twistie,.monaco-tl-contents{height:100%}.monaco-tl-twistie{font-size:10px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "top .3s}.monaco-tree-type-filter.disabled{top:-40px!important}.monaco-tree-type-filter-input{flex:1}.monaco-tree-type-filter-input .monaco-inputbox{height:23px}.monaco-tree-type-filter-input .monaco-inputbox>.ibwrapper>.input,.monaco-tree-type-filter-input .monaco-inputbox>.ibwrapper>.mirror{padding:2px 4px}.monaco-tree-type-filter-input .monaco-findInput>.controls{top:2px}.monaco-tree-type-filter-actionbar{margin-left:4px}.monaco-tree-type-filter-actionbar .monaco-action-bar .action-label{padding:2px}.monaco-list .monaco-scrollable-element .monaco-tree-sticky-container{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .2s linear;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform 0ms linear}.monaco-editor .find-widget textarea{margin:0}.monaco-editor .find-widget.hiddenEditor{display:none}.monaco-editor .find-widget.replaceToggled>.replace-part{display:flex}.monaco-editor .find-widget.visible{transform:translateY(0)}.monaco-editor .find-widget .monaco-inputbox.synthetic-focus{outline:1px solid -webkit-focus-ring-color;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .5s;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "initial}.monaco-editor .margin-view-overlays:hover .codicon,.monaco-editor .margin-view-overlays .codicon.codicon-folding-collapsed,.monaco-editor .margin-view-overlays .codicon.codicon-folding-manual-collapsed,.monaco-editor .margin-view-overlays .codicon.alwaysShowFoldIcons{opacity:1}.monaco-editor .inline-folded:after{color:var(--vscode-editor-foldPlaceholderForeground);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "var(--vscode-editorStickyScroll-foldingOpacityTransition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .2s ease-in-out;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-delay",
+    "value": ".4s}&.visible{opacity:1}&.top{opacity:1;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .2s ease-in-out;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "ease-out}.reduce-motion .monaco-pane-view .split-view-view{transition-duration:0s!important}.monaco-pane-view.animated.vertical .split-view-view{transition-property:height}.monaco-pane-view.animated.horizontal .split-view-view{transition-property:width}#monaco-pane-drop-overlay{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .15s ease-out}#monaco-pane-drop-overlay>.pane-overlay-indicator.overlay-move-transition{transition:top 70ms ease-out,left 70ms ease-out,width 70ms ease-out,height 70ms ease-out,opacity .15s ease-out}.monaco-progress-container{width:100%;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "width .1s linear}.monaco-progress-container.discrete.done .progress-bit{width:100%}.monaco-progress-container.infinite .progress-bit{animation-name:progress;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .3s ease-out}.monaco-workbench .screencast-keyboard:empty{opacity:0}.monaco-workbench .screencast-keyboard>.key{padding:0 8px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": ".2s max-width ease-out}.monaco-workbench .pane>.pane-body .welcome-view-content.wide>.button-container{max-width:100%}.monaco-workbench .pane>.pane-body .welcome-view-content>.button-container>.monaco-button{max-width:300px}.monaco-workbench .pane>.pane-body .welcome-view-content>p{width:100%}.monaco-workbench .pane>.pane-body .welcome-view-content>*{margin-block-start:1em;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .15s ease-out}#monaco-workbench-editor-drop-overlay .editor-group-overlay-drop-into-prompt{text-align:center;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .15s ease-out}#monaco-workbench-editor-drop-overlay .editor-group-overlay-drop-into-prompt i{padding:0 8px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition{transition",
+    "value": "top 70ms ease-out,left 70ms ease-out,width 70ms ease-out,height 70ms ease-out,opacity .15s ease-out}.monaco-workbench.noauxiliarybar .part.auxiliarybar{display:none!important;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-property",
+    "value": "opacity;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": "0ms;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-delay",
+    "value": ".1s}.monaco-workbench .pane-composite-part>.title>.composite-bar-container.dragged-over>.composite-bar>.monaco-action-bar .action-item:before,.monaco-workbench .pane-composite-part>.title>.composite-bar-container.dragged-over>.composite-bar>.monaco-action-bar .action-item:after,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container.dragged-over>.composite-bar>.monaco-action-bar .action-item:before,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container.dragged-over>.composite-bar>.monaco-action-bar .action-item:after{display:block}.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:before,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:before{left:1px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-delay",
+    "value": "0s}.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.right+.action-item:before,.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.left:before,.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:last-of-type.right:after,.monaco-workbench .pane-composite-part>.title>.composite-bar-container.dragged-over-head>.composite-bar>.monaco-action-bar .action-item:first-of-type:before,.monaco-workbench .pane-composite-part>.title>.composite-bar-container.dragged-over-tail>.composite-bar>.monaco-action-bar .action-item:last-of-type:after,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.right+.action-item:before,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.left:before,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:last-of-type.right:after,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container.dragged-over-head>.composite-bar>.monaco-action-bar .action-item:first-of-type:before,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container.dragged-over-tail>.composite-bar>.monaco-action-bar .action-item:last-of-type:after{opacity:1}.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item .action-label,.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item .action-label{margin-right:0;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-property",
+    "value": "background-color;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": "0ms;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-delay",
+    "value": ".1s}.monaco-workbench .activitybar>.content.dragged-over .composite-bar>.monaco-action-bar .action-item:before,.monaco-workbench .activitybar>.content.dragged-over .composite-bar>.monaco-action-bar .action-item:after{display:block}.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.top:before,.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.top:after,.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.bottom:before,.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.bottom:after{transition-delay:0s}.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.bottom+.action-item:before,.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.top:before,.monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item:last-of-type.bottom:after,.monaco-workbench .activitybar>.content.dragged-over-head>.composite-bar>.monaco-action-bar .action-item:first-of-type:before,.monaco-workbench .activitybar>.content.dragged-over-tail>.composite-bar>.monaco-action-bar .action-item:last-of-type:after{background-color:var(--insert-border-color)}.monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .action-label{position:relative;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .3s ease}.monaco-workbench.border .activitybar.right>.content :not(.monaco-menu)>.monaco-action-bar .active-item-indicator{left:-2px}.monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .badge .badge-content{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .15s ease-out}.monaco-workbench.mac:not(.fullscreen) .part.statusbar:focus{border-bottom-right-radius:5px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .3s}.settings-editor>.settings-body .settings-toc-container{width:100%;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "all 80ms}@keyframes nb-cursor-blink{0%{opacity:1}50%{opacity:0}to{opacity:1}}@keyframes nb-cursor-smooth{0%,20%{opacity:1}60%,to{opacity:0}}@keyframes nb-cursor-phase{0%,20%{opacity:1}90%,to{opacity:0}}@keyframes nb-cursor-expand{0%,20%{transform:scaleY(1)}80%,to{transform:scaleY(0)}}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-multiCellHighlight .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-multiCellHighlight{background-color:var(--vscode-notebook-symbolHighlightBackground)!important}.notebookOverlay .monaco-list:focus-within .monaco-list-row.focused .cell-editor-focus .cell-editor-part:before{outline:solid 1px var(--vscode-notebook-focusedEditorBorder)}.notebookOverlay .cell.markdown h1{border-color:var(--vscode-notebook-cellBorderColor)}.notebookOverlay .monaco-list-row .cell-editor-part:before{outline:solid 1px var(--vscode-notebook-cellBorderColor)}.monaco-workbench .notebookOverlay .cell-statusbar-container .cell-language-picker:hover,.monaco-workbench .notebookOverlay .cell-statusbar-container .cell-status-item.cell-status-item-has-command:hover{background-color:var(--vscode-notebook-cellStatusBarItemHoverBackground)}.notebookOverlay>.cell-list-container>.cell-list-insertion-indicator{background-color:var(--vscode-notebook-cellInsertionIndicator)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider{background:var(--vscode-notebookScrollbarSlider-background)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider:hover{background:var(--vscode-notebookScrollbarSlider-hoverBackground)}.notebookOverlay .cell-list-container>.monaco-list>.monaco-scrollable-element>.scrollbar>.slider.active{background:var(--vscode-notebookScrollbarSlider-activeBackground)}.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .expandInputIcon:hover,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .expandOutputIcon:hover,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .cell-expand-part-button:hover{background-color:var(--vscode-toolbar-hoverBackground)}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-modified .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-modified{background-color:var(--vscode-editorGutter-modifiedBackground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-added .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-added{background-color:var(--vscode-diffEditor-insertedTextBackground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-cell-deleted .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-cell-deleted{background-color:var(--vscode-diffEditor-removedTextBackground)!important}.monaco-workbench .notebookOverlay .codicon-debug-continue{color:var(--vscode-icon-foreground)!important}.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.code-cell-row.nb-chatGenerationHighlight .cell-focus-indicator,.monaco-workbench .notebookOverlay .monaco-list .monaco-list-row.markdown-cell-row.nb-chatGenerationHighlight{background-color:var(--vscode-notebook-selectedCellBackground)!important}.monaco-workbench .notebookOverlay .cell-chat-part{display:none;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .2s ease-in-out}.monaco-workbench .notebookOverlay .cell-chat-part .glyph-margin-widgets .cgmr.codicon-inline-chat-opaque{opacity:.5}.monaco-workbench .notebookOverlay .cell-chat-part .glyph-margin-widgets .cgmr.codicon-inline-chat-transparent{opacity:0}.monaco-workbench .notebookOverlay .cell-chat-part .glyph-margin-widgets .cgmr.codicon-inline-chat-opaque:hover,.monaco-workbench .notebookOverlay .cell-chat-part .glyph-margin-widgets .cgmr.codicon-inline-chat-transparent:hover{opacity:1}.monaco-workbench .notebookOverlay .monaco-editor .contentWidgets .empty-editor-hint{cursor:auto}.monaco-workbench .notebookOverlay .cell-list-top-cell-toolbar-container{padding-top:1px!important}.monaco-workbench .notebookOverlay .cell-list-top-cell-toolbar-container.emptyNotebook{opacity:1!important}.monaco-workbench .notebookOverlay .cell-list-top-cell-toolbar-container,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .cell-bottom-toolbar-container{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .3s ease-in-out}.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .cell-bottom-toolbar-container{top:0;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1 s}.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row .markdown-cell-hover .notebook-folding-indicator.mouseover .codicon.codicon-notebook-expanded{opacity:1}.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row.focused .notebook-folding-indicator.mouseover .codicon.codicon-notebook-expanded,.monaco-workbench .notebookOverlay>.cell-list-container>.monaco-list>.monaco-scrollable-element>.monaco-list-rows>.monaco-list-row:hover .notebook-folding-indicator.mouseover .codicon.codicon-notebook-expanded{opacity:1}.monaco-workbench .notebookOverlay>.cell-list-container .notebook-folding-indicator{height:20px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .2s ease}.chat-todo-list-widget .todo-list-expand:hover .todo-clear-button-container,.chat-todo-list-widget .todo-list-expand:focus-within .todo-clear-button-container,.chat-todo-list-widget .todo-clear-button-container:focus-within{opacity:1}.chat-todo-list-widget .todo-clear-button-container .monaco-button{padding:2px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .2s ease-in-out}.monaco-workbench .glyph-margin-widgets .cgmr.codicon-inline-chat-opaque{opacity:.5}.monaco-workbench .glyph-margin-widgets .cgmr.codicon-inline-chat-transparent{opacity:0}.monaco-workbench .glyph-margin-widgets .cgmr.codicon-inline-chat-opaque:hover,.monaco-workbench .glyph-margin-widgets .cgmr.codicon-inline-chat-transparent:hover{opacity:1}.monaco-workbench .inline-chat .chat-attached-context{padding:3px 0}.monaco-workbench .monaco-editor .inline-chat-hint{cursor:pointer;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "top .2s linear;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "top 0ms linear}.monaco-workbench .notebookOverlay .simple-fr-find-part-wrapper.visible{z-index:100}.monaco-workbench .simple-fr-find-part,.monaco-workbench .simple-fr-replace-part{z-index:10;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition{top",
+    "value": "0}.monaco-workbench .simple-fr-find-part .monaco-findInput{flex:1}.monaco-workbench .simple-fr-find-part .button{min-width:20px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition,.monaco-workbench .notebookOverlay.notebook-editor.find-show-transition{overflow-y",
+    "value": "hidden}.monaco-workbench .notebookOverlay.notebook-editor .simple-fr-find-part-wrapper .matchesCount{text-align:center;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "left .5s linear}.chat-diff-change-content-widget .monaco-action-bar{padding:0;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "width 80ms linear,left 80ms linear,transform 80ms linear}.monaco-editor.modified-in-monaco-diff-editor .margin-view-overlays>div>.dirty-diff-glyph{display:none}.monaco-editor .dirty-diff-added:not(.pattern){border-left-style:solid}.monaco-editor .dirty-diff-added.primary{border-left-color:var(--vscode-editorGutter-addedBackground)}.monaco-editor .dirty-diff-added.primary:before{background:var(--vscode-editorGutter-addedBackground)}.monaco-editor .dirty-diff-added.secondary{border-left-color:var(--vscode-editorGutter-addedSecondaryBackground)}.monaco-editor .dirty-diff-added.secondary:before{background:var(--vscode-editorGutter-addedSecondaryBackground)}.monaco-editor .dirty-diff-added.pattern{background-repeat:repeat-y}.monaco-editor .dirty-diff-added.pattern:before{transform:translate(3px)}.monaco-editor .dirty-diff-added.pattern.primary,.monaco-editor .dirty-diff-added.pattern.primary:before{background-image:linear-gradient(-45deg,var(--vscode-editorGutter-addedBackground) 25%,var(--vscode-editorGutter-background) 25%,var(--vscode-editorGutter-background) 50%,var(--vscode-editorGutter-addedBackground) 50%,var(--vscode-editorGutter-addedBackground) 75%,var(--vscode-editorGutter-background) 75%,var(--vscode-editorGutter-background))}.monaco-editor .dirty-diff-added.pattern.secondary,.monaco-editor .dirty-diff-added.pattern.secondary:before{background-image:linear-gradient(45deg,var(--vscode-editorGutter-addedSecondaryBackground) 25%,var(--vscode-editorGutter-background) 25%,var(--vscode-editorGutter-background) 50%,var(--vscode-editorGutter-addedSecondaryBackground) 50%,var(--vscode-editorGutter-addedSecondaryBackground) 75%,var(--vscode-editorGutter-background) 75%,var(--vscode-editorGutter-background))}.monaco-editor .dirty-diff-modified:not(.pattern){border-left-style:solid}.monaco-editor .dirty-diff-modified.primary{border-left-color:var(--vscode-editorGutter-modifiedBackground)}.monaco-editor .dirty-diff-modified.primary:before{background:var(--vscode-editorGutter-modifiedBackground)}.monaco-editor .dirty-diff-modified.secondary{border-left-color:var(--vscode-editorGutter-modifiedSecondaryBackground)}.monaco-editor .dirty-diff-modified.secondary:before{background:var(--vscode-editorGutter-modifiedSecondaryBackground)}.monaco-editor .dirty-diff-modified.pattern{background-repeat:repeat-y}.monaco-editor .dirty-diff-modified.pattern:before{transform:translate(3px)}.monaco-editor .dirty-diff-modified.pattern.primary,.monaco-editor .dirty-diff-modified.pattern.primary:before{background-image:linear-gradient(-45deg,var(--vscode-editorGutter-modifiedBackground) 25%,var(--vscode-editorGutter-background) 25%,var(--vscode-editorGutter-background) 50%,var(--vscode-editorGutter-modifiedBackground) 50%,var(--vscode-editorGutter-modifiedBackground) 75%,var(--vscode-editorGutter-background) 75%,var(--vscode-editorGutter-background))}.monaco-editor .dirty-diff-modified.pattern.secondary,.monaco-editor .dirty-diff-modified.pattern.secondary:before{background-image:linear-gradient(45deg,var(--vscode-editorGutter-modifiedSecondaryBackground) 25%,var(--vscode-editorGutter-background) 25%,var(--vscode-editorGutter-background) 50%,var(--vscode-editorGutter-modifiedSecondaryBackground) 50%,var(--vscode-editorGutter-modifiedSecondaryBackground) 75%,var(--vscode-editorGutter-background) 75%,var(--vscode-editorGutter-background))}.monaco-workbench:not(.reduce-motion) .monaco-editor .dirty-diff-added,.monaco-workbench:not(.reduce-motion) .monaco-editor .dirty-diff-modified,.monaco-workbench:not(.reduce-motion) .monaco-editor .dirty-diff-deleted{transition:opacity .5s}.monaco-editor .margin:hover .dirty-diff-added,.monaco-editor .margin:hover .dirty-diff-modified,.monaco-editor .margin:hover .dirty-diff-deleted{opacity:1}.monaco-editor .dirty-diff-deleted:after{content:\"\";",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "border-top-width 80ms linear,border-bottom-width 80ms linear,bottom 80ms linear,opacity .5s}.monaco-editor .dirty-diff-deleted:before{background:var(--vscode-editorGutter-deletedBackground);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "height 80ms linear}.dirty-diff .peekview-title .dropdown{margin-right:10px}.dirty-diff .peekview-title .dropdown.select-container{cursor:default}.dirty-diff .peekview-title .dropdown .monaco-select-box{cursor:pointer;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .2s ease-in-out;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-property",
+    "value": "height,width,left,top;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".2s;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "ease-in}.webview.modified{box-shadow:-6px 0 5px -5px var(--vscode-scrollbar-shadow)}#sign-in-page-overlay.dark,#sign-in-page-overlay.light{background-image:url(../../media/1080.png)}#sign-in-page-overlay.dark{background-color:#292e32}#sign-in-page-overlay.light{background-color:#dff0fd}#sign-in-page-overlay.hcDark{background-color:#000}#sign-in-page-overlay.hcLight{background-color:#fff}.rendered-markdown.extensions-management-publisher-trust-dialog .codicon{vertical-align:sub}.rendered-markdown.extensions-management-publisher-trust-dialog .codicon.codicon-extensions-verified-publisher{color:var(--vscode-extensionIcon-verifiedForeground)}.extension-editor{height:100%;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "left 70ms ease-out,right 70ms ease-out,top 70ms ease-out,bottom 70ms ease-out,opacity .15s ease-out}.monaco-workbench .pane-body.integrated-terminal .terminal-group>.monaco-split-view2.horizontal .terminal-drop-overlay.drop-before{right:50%}.monaco-workbench .pane-body.integrated-terminal .terminal-group>.monaco-split-view2.horizontal .terminal-drop-overlay.drop-after{left:50%}.monaco-workbench .pane-body.integrated-terminal .terminal-group>.monaco-split-view2.vertical .terminal-drop-overlay.drop-before{bottom:50%}.monaco-workbench .pane-body.integrated-terminal .terminal-group>.monaco-split-view2.vertical .terminal-drop-overlay.drop-after{top:50%}.monaco-workbench .terminal .terminal-command-decoration:not(.default):hover{cursor:pointer}.monaco-workbench .terminal .terminal-command-decoration:not(.default):hover:before{border-radius:5px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .1s linear;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .8s linear}.xterm .xterm-scrollable-element>.shadow{position:absolute;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "top .2s linear;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "top 0ms linear}.monaco-workbench .simple-find-part.visible{visibility:visible}.monaco-workbench .simple-find-part.suppress-transition{transition:none}.monaco-workbench .simple-find-part.visible-transition{top:0}.monaco-workbench .simple-find-part .monaco-findInput{flex:1}.monaco-workbench .simple-find-part .matchesCount{width:73px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "left .25s,opacity .25s}.monaco-workbench.reduce-motion .part.editor>.content .gettingStartedContainer .gettingStartedSlide,.monaco-workbench.reduce-motion .part.editor>.content .gettingStartedContainer.animatable .gettingStartedSlide{transition:left 0s,opacity 0s}.monaco-workbench .part.editor>.content .gettingStartedContainer .gettingStartedSlideCategories>.gettingStartedCategoriesContainer{display:grid;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .25s,opacity .25s;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .25s,opacity .25s}.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .step-slide-content{display:grid;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .25s ease,background-color .25s ease}.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .step-dot:hover{transform:scale(1.2);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .25s,opacity .25s}.monaco-workbench.reduce-motion .part.editor>.content .gettingStartedContainer.newSlide .step-slides-container{transition:none}.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .moreText,.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .prev-button,.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .prev-button.button-link,.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .gettingStartedSlideDetails .prev-button{display:none}.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .step-description .button-container{margin-top:50px}.monaco-workbench .part.editor>.content .gettingStartedContainer.newSlide .step-description .button-container .monaco-button{height:40px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s ease-out,opacity .3s ease-out}.monaco-workbench>.notifications-toasts .notifications-list-container,.monaco-workbench>.notifications-toasts .notification-toast-container>.notification-toast,.monaco-workbench>.notifications-toasts .notification-toast-container>.notification-toast .monaco-scrollable-element,.monaco-workbench>.notifications-toasts .notification-toast-container>.notification-toast .monaco-list:not(.element-focused):focus:before,.monaco-workbench>.notifications-toasts .notification-toast-container>.notification-toast .monaco-list-row{border-radius:4px}.monaco-workbench.reduce-motion>.notifications-toasts .notification-toast-container>.notification-toast{transition:transform 0ms ease-out,opacity 0ms ease-out}.monaco-workbench>.notifications-toasts .notification-toast-container>.notification-toast.notification-fade-in{opacity:1;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "property": "transition",
+    "value": "none}.monaco-workbench>.notifications-toasts .codicon.codicon-error{color:var(--vscode-notificationsErrorIcon-foreground)!important}.monaco-workbench>.notifications-toasts .codicon.codicon-warning{color:var(--vscode-notificationsWarningIcon-foreground)!important}.monaco-workbench>.notifications-toasts .codicon.codicon-info{color:var(--vscode-notificationsInfoIcon-foreground)!important}.monaco-workbench>.notifications-toasts .notification-list-item{padding:8px 5px}.monaco-workbench>.notifications-toasts .notification-list-item>.notification-list-item-main-row{min-height:22px;",
+    "type": "transition-property",
+    "source_file": "workbench.desktop.main.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/out/vs/workbench/workbench.desktop.main.css"
+  },
+  {
+    "name": "blinking",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "pulse",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "eyeLeadIn",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "backgroundGrow",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "eyeMove",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "codicon-spin",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "pulse-kiro-purple",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "thinking",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "fadeIn",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "spin",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "fadeIn",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "blinking 4s infinite}@keyframes blinking{0%,60%{transform:scaleY(1)}60.5%,70%{transform:scaleY(.2)}70.5%,80%{transform:scaleY(1)}80.5%,90%{transform:scaleY(.2)}90.5%,to{transform:scaleY(1)}}.kiro-face.thinking .kiro-face-background.lead-in{animation:backgroundGrow .5s ease-out forwards}.kiro-face.thinking .kiro-face-background.main-animation{animation:pulse 3s infinite ease-in-out}.kiro-face.thinking .kiro-face-eye.lead-in{animation:eyeLeadIn .5s ease-out forwards}.kiro-face.thinking .kiro-face-eye.main-animation{animation:eyeMove 3s infinite ease-in-out}@keyframes pulse{0%{transform:scale(1.08);",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn var(--kiro-transition)}.kiro-dropdown-option{padding:var(--spacing-xs) var(--spacing-md);",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "codicon-spin 1.5s steps(30) infinite}.codicon-modifier-disabled{opacity:.5}.codicon-modifier-hidden{opacity:0}.codicon-loading{animation-duration:1s!important;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation-timing-function",
+    "value": "cubic-bezier(.53,.21,.29,.67)!important}.codicon-add:before{content:\"\"}.codicon-plus:before{content:\"\"}.codicon-gist-new:before{content:\"\"}.codicon-repo-create:before{content:\"\"}.codicon-lightbulb:before{content:\"\"}.codicon-light-bulb:before{content:\"\"}.codicon-repo:before{content:\"\"}.codicon-repo-delete:before{content:\"\"}.codicon-gist-fork:before{content:\"\"}.codicon-repo-forked:before{content:\"\"}.codicon-git-pull-request:before{content:\"\"}.codicon-git-pull-request-abandoned:before{content:\"\"}.codicon-record-keys:before{content:\"\"}.codicon-keyboard:before{content:\"\"}.codicon-tag:before{content:\"\"}.codicon-git-pull-request-label:before{content:\"\"}.codicon-tag-add:before{content:\"\"}.codicon-tag-remove:before{content:\"\"}.codicon-person:before{content:\"\"}.codicon-person-follow:before{content:\"\"}.codicon-person-outline:before{content:\"\"}.codicon-person-filled:before{content:\"\"}.codicon-git-branch:before{content:\"\"}.codicon-git-branch-create:before{content:\"\"}.codicon-git-branch-delete:before{content:\"\"}.codicon-source-control:before{content:\"\"}.codicon-mirror:before{content:\"\"}.codicon-mirror-public:before{content:\"\"}.codicon-star:before{content:\"\"}.codicon-star-add:before{content:\"\"}.codicon-star-delete:before{content:\"\"}.codicon-star-empty:before{content:\"\"}.codicon-comment:before{content:\"\"}.codicon-comment-add:before{content:\"\"}.codicon-alert:before{content:\"\"}.codicon-warning:before{content:\"\"}.codicon-search:before{content:\"\"}.codicon-search-save:before{content:\"\"}.codicon-log-out:before{content:\"\"}.codicon-sign-out:before{content:\"\"}.codicon-log-in:before{content:\"\"}.codicon-sign-in:before{content:\"\"}.codicon-eye:before{content:\"\"}.codicon-eye-unwatch:before{content:\"\"}.codicon-eye-watch:before{content:\"\"}.codicon-circle-filled:before{content:\"\"}.codicon-primitive-dot:before{content:\"\"}.codicon-close-dirty:before{content:\"\"}.codicon-debug-breakpoint:before{content:\"\"}.codicon-debug-breakpoint-disabled:before{content:\"\"}.codicon-debug-hint:before{content:\"\"}.codicon-terminal-decoration-success:before{content:\"\"}.codicon-primitive-square:before{content:\"\"}.codicon-edit:before{content:\"\"}.codicon-pencil:before{content:\"\"}.codicon-info:before{content:\"\"}.codicon-issue-opened:before{content:\"\"}.codicon-gist-private:before{content:\"\"}.codicon-git-fork-private:before{content:\"\"}.codicon-lock:before{content:\"\"}.codicon-mirror-private:before{content:\"\"}.codicon-close:before{content:\"\"}.codicon-remove-close:before{content:\"\"}.codicon-x:before{content:\"\"}.codicon-repo-sync:before{content:\"\"}.codicon-sync:before{content:\"\"}.codicon-clone:before{content:\"\"}.codicon-desktop-download:before{content:\"\"}.codicon-beaker:before{content:\"\"}.codicon-microscope:before{content:\"\"}.codicon-vm:before{content:\"\"}.codicon-device-desktop:before{content:\"\"}.codicon-file:before{content:\"\"}.codicon-file-text:before{content:\"\"}.codicon-more:before{content:\"\"}.codicon-ellipsis:before{content:\"\"}.codicon-kebab-horizontal:before{content:\"\"}.codicon-mail-reply:before{content:\"\"}.codicon-reply:before{content:\"\"}.codicon-organization:before{content:\"\"}.codicon-organization-filled:before{content:\"\"}.codicon-organization-outline:before{content:\"\"}.codicon-new-file:before{content:\"\"}.codicon-file-add:before{content:\"\"}.codicon-new-folder:before{content:\"\"}.codicon-file-directory-create:before{content:\"\"}.codicon-trash:before{content:\"\"}.codicon-trashcan:before{content:\"\"}.codicon-history:before{content:\"\"}.codicon-clock:before{content:\"\"}.codicon-folder:before{content:\"\"}.codicon-file-directory:before{content:\"\"}.codicon-symbol-folder:before{content:\"\"}.codicon-logo-github:before{content:\"\"}.codicon-mark-github:before{content:\"\"}.codicon-github:before{content:\"\"}.codicon-terminal:before{content:\"\"}.codicon-console:before{content:\"\"}.codicon-repl:before{content:\"\"}.codicon-zap:before{content:\"\"}.codicon-symbol-event:before{content:\"\"}.codicon-error:before{content:\"\"}.codicon-stop:before{content:\"\"}.codicon-variable:before{content:\"\"}.codicon-symbol-variable:before{content:\"\"}.codicon-array:before{content:\"\"}.codicon-symbol-array:before{content:\"\"}.codicon-symbol-module:before{content:\"\"}.codicon-symbol-package:before{content:\"\"}.codicon-symbol-namespace:before{content:\"\"}.codicon-symbol-object:before{content:\"\"}.codicon-symbol-method:before{content:\"\"}.codicon-symbol-function:before{content:\"\"}.codicon-symbol-constructor:before{content:\"\"}.codicon-symbol-boolean:before{content:\"\"}.codicon-symbol-null:before{content:\"\"}.codicon-symbol-numeric:before{content:\"\"}.codicon-symbol-number:before{content:\"\"}.codicon-symbol-structure:before{content:\"\"}.codicon-symbol-struct:before{content:\"\"}.codicon-symbol-parameter:before{content:\"\"}.codicon-symbol-type-parameter:before{content:\"\"}.codicon-symbol-key:before{content:\"\"}.codicon-symbol-text:before{content:\"\"}.codicon-symbol-reference:before{content:\"\"}.codicon-go-to-file:before{content:\"\"}.codicon-symbol-enum:before{content:\"\"}.codicon-symbol-value:before{content:\"\"}.codicon-symbol-ruler:before{content:\"\"}.codicon-symbol-unit:before{content:\"\"}.codicon-activate-breakpoints:before{content:\"\"}.codicon-archive:before{content:\"\"}.codicon-arrow-both:before{content:\"\"}.codicon-arrow-down:before{content:\"\"}.codicon-arrow-left:before{content:\"\"}.codicon-arrow-right:before{content:\"\"}.codicon-arrow-small-down:before{content:\"\"}.codicon-arrow-small-left:before{content:\"\"}.codicon-arrow-small-right:before{content:\"\"}.codicon-arrow-small-up:before{content:\"\"}.codicon-arrow-up:before{content:\"\"}.codicon-bell:before{content:\"\"}.codicon-bold:before{content:\"\"}.codicon-book:before{content:\"\"}.codicon-bookmark:before{content:\"\"}.codicon-debug-breakpoint-conditional-unverified:before{content:\"\"}.codicon-debug-breakpoint-conditional:before{content:\"\"}.codicon-debug-breakpoint-conditional-disabled:before{content:\"\"}.codicon-debug-breakpoint-data-unverified:before{content:\"\"}.codicon-debug-breakpoint-data:before{content:\"\"}.codicon-debug-breakpoint-data-disabled:before{content:\"\"}.codicon-debug-breakpoint-log-unverified:before{content:\"\"}.codicon-debug-breakpoint-log:before{content:\"\"}.codicon-debug-breakpoint-log-disabled:before{content:\"\"}.codicon-briefcase:before{content:\"\"}.codicon-broadcast:before{content:\"\"}.codicon-browser:before{content:\"\"}.codicon-bug:before{content:\"\"}.codicon-calendar:before{content:\"\"}.codicon-case-sensitive:before{content:\"\"}.codicon-check:before{content:\"\"}.codicon-checklist:before{content:\"\"}.codicon-chevron-down:before{content:\"\"}.codicon-chevron-left:before{content:\"\"}.codicon-chevron-right:before{content:\"\"}.codicon-chevron-up:before{content:\"\"}.codicon-chrome-close:before{content:\"\"}.codicon-chrome-maximize:before{content:\"\"}.codicon-chrome-minimize:before{content:\"\"}.codicon-chrome-restore:before{content:\"\"}.codicon-circle-outline:before{content:\"\"}.codicon-circle:before{content:\"\"}.codicon-debug-breakpoint-unverified:before{content:\"\"}.codicon-terminal-decoration-incomplete:before{content:\"\"}.codicon-circle-slash:before{content:\"\"}.codicon-circuit-board:before{content:\"\"}.codicon-clear-all:before{content:\"\"}.codicon-clippy:before{content:\"\"}.codicon-close-all:before{content:\"\"}.codicon-cloud-download:before{content:\"\"}.codicon-cloud-upload:before{content:\"\"}.codicon-code:before{content:\"\"}.codicon-collapse-all:before{content:\"\"}.codicon-color-mode:before{content:\"\"}.codicon-comment-discussion:before{content:\"\"}.codicon-credit-card:before{content:\"\"}.codicon-dash:before{content:\"\"}.codicon-dashboard:before{content:\"\"}.codicon-database:before{content:\"\"}.codicon-debug-continue:before{content:\"\"}.codicon-debug-disconnect:before{content:\"\"}.codicon-debug-pause:before{content:\"\"}.codicon-debug-restart:before{content:\"\"}.codicon-debug-start:before{content:\"\"}.codicon-debug-step-into:before{content:\"\"}.codicon-debug-step-out:before{content:\"\"}.codicon-debug-step-over:before{content:\"\"}.codicon-debug-stop:before{content:\"\"}.codicon-debug:before{content:\"\"}.codicon-device-camera-video:before{content:\"\"}.codicon-device-camera:before{content:\"\"}.codicon-device-mobile:before{content:\"\"}.codicon-diff-added:before{content:\"\"}.codicon-diff-ignored:before{content:\"\"}.codicon-diff-modified:before{content:\"\"}.codicon-diff-removed:before{content:\"\"}.codicon-diff-renamed:before{content:\"\"}.codicon-diff:before{content:\"\"}.codicon-diff-sidebyside:before{content:\"\"}.codicon-discard:before{content:\"\"}.codicon-editor-layout:before{content:\"\"}.codicon-empty-window:before{content:\"\"}.codicon-exclude:before{content:\"\"}.codicon-extensions:before{content:\"\"}.codicon-eye-closed:before{content:\"\"}.codicon-file-binary:before{content:\"\"}.codicon-file-code:before{content:\"\"}.codicon-file-media:before{content:\"\"}.codicon-file-pdf:before{content:\"\"}.codicon-file-submodule:before{content:\"\"}.codicon-file-symlink-directory:before{content:\"\"}.codicon-file-symlink-file:before{content:\"\"}.codicon-file-zip:before{content:\"\"}.codicon-files:before{content:\"\"}.codicon-filter:before{content:\"\"}.codicon-flame:before{content:\"\"}.codicon-fold-down:before{content:\"\"}.codicon-fold-up:before{content:\"\"}.codicon-fold:before{content:\"\"}.codicon-folder-active:before{content:\"\"}.codicon-folder-opened:before{content:\"\"}.codicon-gear:before{content:\"\"}.codicon-gift:before{content:\"\"}.codicon-gist-secret:before{content:\"\"}.codicon-gist:before{content:\"\"}.codicon-git-commit:before{content:\"\"}.codicon-git-compare:before{content:\"\"}.codicon-compare-changes:before{content:\"\"}.codicon-git-merge:before{content:\"\"}.codicon-github-action:before{content:\"\"}.codicon-github-alt:before{content:\"\"}.codicon-globe:before{content:\"\"}.codicon-grabber:before{content:\"\"}.codicon-graph:before{content:\"\"}.codicon-gripper:before{content:\"\"}.codicon-heart:before{content:\"\"}.codicon-home:before{content:\"\"}.codicon-horizontal-rule:before{content:\"\"}.codicon-hubot:before{content:\"\"}.codicon-inbox:before{content:\"\"}.codicon-issue-reopened:before{content:\"\"}.codicon-issues:before{content:\"\"}.codicon-italic:before{content:\"\"}.codicon-jersey:before{content:\"\"}.codicon-json:before{content:\"\"}.codicon-kebab-vertical:before{content:\"\"}.codicon-key:before{content:\"\"}.codicon-law:before{content:\"\"}.codicon-lightbulb-autofix:before{content:\"\"}.codicon-link-external:before{content:\"\"}.codicon-link:before{content:\"\"}.codicon-list-ordered:before{content:\"\"}.codicon-list-unordered:before{content:\"\"}.codicon-live-share:before{content:\"\"}.codicon-loading:before{content:\"\"}.codicon-location:before{content:\"\"}.codicon-mail-read:before{content:\"\"}.codicon-mail:before{content:\"\"}.codicon-markdown:before{content:\"\"}.codicon-megaphone:before{content:\"\"}.codicon-mention:before{content:\"\"}.codicon-milestone:before{content:\"\"}.codicon-git-pull-request-milestone:before{content:\"\"}.codicon-mortar-board:before{content:\"\"}.codicon-move:before{content:\"\"}.codicon-multiple-windows:before{content:\"\"}.codicon-mute:before{content:\"\"}.codicon-no-newline:before{content:\"\"}.codicon-note:before{content:\"\"}.codicon-octoface:before{content:\"\"}.codicon-open-preview:before{content:\"\"}.codicon-package:before{content:\"\"}.codicon-paintcan:before{content:\"\"}.codicon-pin:before{content:\"\"}.codicon-play:before{content:\"\"}.codicon-run:before{content:\"\"}.codicon-plug:before{content:\"\"}.codicon-preserve-case:before{content:\"\"}.codicon-preview:before{content:\"\"}.codicon-project:before{content:\"\"}.codicon-pulse:before{content:\"\"}.codicon-question:before{content:\"\"}.codicon-quote:before{content:\"\"}.codicon-radio-tower:before{content:\"\"}.codicon-reactions:before{content:\"\"}.codicon-references:before{content:\"\"}.codicon-refresh:before{content:\"\"}.codicon-regex:before{content:\"\"}.codicon-remote-explorer:before{content:\"\"}.codicon-remote:before{content:\"\"}.codicon-remove:before{content:\"\"}.codicon-replace-all:before{content:\"\"}.codicon-replace:before{content:\"\"}.codicon-repo-clone:before{content:\"\"}.codicon-repo-force-push:before{content:\"\"}.codicon-repo-pull:before{content:\"\"}.codicon-repo-push:before{content:\"\"}.codicon-report:before{content:\"\"}.codicon-request-changes:before{content:\"\"}.codicon-rocket:before{content:\"\"}.codicon-root-folder-opened:before{content:\"\"}.codicon-root-folder:before{content:\"\"}.codicon-rss:before{content:\"\"}.codicon-ruby:before{content:\"\"}.codicon-save-all:before{content:\"\"}.codicon-save-as:before{content:\"\"}.codicon-save:before{content:\"\"}.codicon-screen-full:before{content:\"\"}.codicon-screen-normal:before{content:\"\"}.codicon-search-stop:before{content:\"\"}.codicon-server:before{content:\"\"}.codicon-settings-gear:before{content:\"\"}.codicon-settings:before{content:\"\"}.codicon-shield:before{content:\"\"}.codicon-smiley:before{content:\"\"}.codicon-sort-precedence:before{content:\"\"}.codicon-split-horizontal:before{content:\"\"}.codicon-split-vertical:before{content:\"\"}.codicon-squirrel:before{content:\"\"}.codicon-star-full:before{content:\"\"}.codicon-star-half:before{content:\"\"}.codicon-symbol-class:before{content:\"\"}.codicon-symbol-color:before{content:\"\"}.codicon-symbol-constant:before{content:\"\"}.codicon-symbol-enum-member:before{content:\"\"}.codicon-symbol-field:before{content:\"\"}.codicon-symbol-file:before{content:\"\"}.codicon-symbol-interface:before{content:\"\"}.codicon-symbol-keyword:before{content:\"\"}.codicon-symbol-misc:before{content:\"\"}.codicon-symbol-operator:before{content:\"\"}.codicon-symbol-property:before{content:\"\"}.codicon-wrench:before{content:\"\"}.codicon-wrench-subaction:before{content:\"\"}.codicon-symbol-snippet:before{content:\"\"}.codicon-tasklist:before{content:\"\"}.codicon-telescope:before{content:\"\"}.codicon-text-size:before{content:\"\"}.codicon-three-bars:before{content:\"\"}.codicon-thumbsdown:before{content:\"\"}.codicon-thumbsup:before{content:\"\"}.codicon-tools:before{content:\"\"}.codicon-triangle-down:before{content:\"\"}.codicon-triangle-left:before{content:\"\"}.codicon-triangle-right:before{content:\"\"}.codicon-triangle-up:before{content:\"\"}.codicon-twitter:before{content:\"\"}.codicon-unfold:before{content:\"\"}.codicon-unlock:before{content:\"\"}.codicon-unmute:before{content:\"\"}.codicon-unverified:before{content:\"\"}.codicon-verified:before{content:\"\"}.codicon-versions:before{content:\"\"}.codicon-vm-active:before{content:\"\"}.codicon-vm-outline:before{content:\"\"}.codicon-vm-running:before{content:\"\"}.codicon-watch:before{content:\"\"}.codicon-whitespace:before{content:\"\"}.codicon-whole-word:before{content:\"\"}.codicon-window:before{content:\"\"}.codicon-word-wrap:before{content:\"\"}.codicon-zoom-in:before{content:\"\"}.codicon-zoom-out:before{content:\"\"}.codicon-list-filter:before{content:\"\"}.codicon-list-flat:before{content:\"\"}.codicon-list-selection:before{content:\"\"}.codicon-selection:before{content:\"\"}.codicon-list-tree:before{content:\"\"}.codicon-debug-breakpoint-function-unverified:before{content:\"\"}.codicon-debug-breakpoint-function:before{content:\"\"}.codicon-debug-breakpoint-function-disabled:before{content:\"\"}.codicon-debug-stackframe-active:before{content:\"\"}.codicon-circle-small-filled:before{content:\"\"}.codicon-debug-stackframe-dot:before{content:\"\"}.codicon-terminal-decoration-mark:before{content:\"\"}.codicon-debug-stackframe:before{content:\"\"}.codicon-debug-stackframe-focused:before{content:\"\"}.codicon-debug-breakpoint-unsupported:before{content:\"\"}.codicon-symbol-string:before{content:\"\"}.codicon-debug-reverse-continue:before{content:\"\"}.codicon-debug-step-back:before{content:\"\"}.codicon-debug-restart-frame:before{content:\"\"}.codicon-debug-alt:before{content:\"\"}.codicon-call-incoming:before{content:\"\"}.codicon-call-outgoing:before{content:\"\"}.codicon-menu:before{content:\"\"}.codicon-expand-all:before{content:\"\"}.codicon-feedback:before{content:\"\"}.codicon-git-pull-request-reviewer:before{content:\"\"}.codicon-group-by-ref-type:before{content:\"\"}.codicon-ungroup-by-ref-type:before{content:\"\"}.codicon-account:before{content:\"\"}.codicon-git-pull-request-assignee:before{content:\"\"}.codicon-bell-dot:before{content:\"\"}.codicon-debug-console:before{content:\"\"}.codicon-library:before{content:\"\"}.codicon-output:before{content:\"\"}.codicon-run-all:before{content:\"\"}.codicon-sync-ignored:before{content:\"\"}.codicon-pinned:before{content:\"\"}.codicon-github-inverted:before{content:\"\"}.codicon-server-process:before{content:\"\"}.codicon-server-environment:before{content:\"\"}.codicon-pass:before{content:\"\"}.codicon-issue-closed:before{content:\"\"}.codicon-stop-circle:before{content:\"\"}.codicon-play-circle:before{content:\"\"}.codicon-record:before{content:\"\"}.codicon-debug-alt-small:before{content:\"\"}.codicon-vm-connect:before{content:\"\"}.codicon-cloud:before{content:\"\"}.codicon-merge:before{content:\"\"}.codicon-export:before{content:\"\"}.codicon-graph-left:before{content:\"\"}.codicon-magnet:before{content:\"\"}.codicon-notebook:before{content:\"\"}.codicon-redo:before{content:\"\"}.codicon-check-all:before{content:\"\"}.codicon-pinned-dirty:before{content:\"\"}.codicon-pass-filled:before{content:\"\"}.codicon-circle-large-filled:before{content:\"\"}.codicon-circle-large:before{content:\"\"}.codicon-circle-large-outline:before{content:\"\"}.codicon-combine:before{content:\"\"}.codicon-gather:before{content:\"\"}.codicon-table:before{content:\"\"}.codicon-variable-group:before{content:\"\"}.codicon-type-hierarchy:before{content:\"\"}.codicon-type-hierarchy-sub:before{content:\"\"}.codicon-type-hierarchy-super:before{content:\"\"}.codicon-git-pull-request-create:before{content:\"\"}.codicon-run-above:before{content:\"\"}.codicon-run-below:before{content:\"\"}.codicon-notebook-template:before{content:\"\"}.codicon-debug-rerun:before{content:\"\"}.codicon-workspace-trusted:before{content:\"\"}.codicon-workspace-untrusted:before{content:\"\"}.codicon-workspace-unknown:before{content:\"\"}.codicon-terminal-cmd:before{content:\"\"}.codicon-terminal-debian:before{content:\"\"}.codicon-terminal-linux:before{content:\"\"}.codicon-terminal-powershell:before{content:\"\"}.codicon-terminal-tmux:before{content:\"\"}.codicon-terminal-ubuntu:before{content:\"\"}.codicon-terminal-bash:before{content:\"\"}.codicon-arrow-swap:before{content:\"\"}.codicon-copy:before{content:\"\"}.codicon-person-add:before{content:\"\"}.codicon-filter-filled:before{content:\"\"}.codicon-wand:before{content:\"\"}.codicon-debug-line-by-line:before{content:\"\"}.codicon-inspect:before{content:\"\"}.codicon-layers:before{content:\"\"}.codicon-layers-dot:before{content:\"\"}.codicon-layers-active:before{content:\"\"}.codicon-compass:before{content:\"\"}.codicon-compass-dot:before{content:\"\"}.codicon-compass-active:before{content:\"\"}.codicon-azure:before{content:\"\"}.codicon-issue-draft:before{content:\"\"}.codicon-git-pull-request-closed:before{content:\"\"}.codicon-git-pull-request-draft:before{content:\"\"}.codicon-debug-all:before{content:\"\"}.codicon-debug-coverage:before{content:\"\"}.codicon-run-errors:before{content:\"\"}.codicon-folder-library:before{content:\"\"}.codicon-debug-continue-small:before{content:\"\"}.codicon-beaker-stop:before{content:\"\"}.codicon-graph-line:before{content:\"\"}.codicon-graph-scatter:before{content:\"\"}.codicon-pie-chart:before{content:\"\"}.codicon-bracket:before{content:\"\"}.codicon-bracket-dot:before{content:\"\"}.codicon-bracket-error:before{content:\"\"}.codicon-lock-small:before{content:\"\"}.codicon-azure-devops:before{content:\"\"}.codicon-verified-filled:before{content:\"\"}.codicon-newline:before{content:\"\"}.codicon-layout:before{content:\"\"}.codicon-layout-activitybar-left:before{content:\"\"}.codicon-layout-activitybar-right:before{content:\"\"}.codicon-layout-panel-left:before{content:\"\"}.codicon-layout-panel-center:before{content:\"\"}.codicon-layout-panel-justify:before{content:\"\"}.codicon-layout-panel-right:before{content:\"\"}.codicon-layout-panel:before{content:\"\"}.codicon-layout-sidebar-left:before{content:\"\"}.codicon-layout-sidebar-right:before{content:\"\"}.codicon-layout-statusbar:before{content:\"\"}.codicon-layout-menubar:before{content:\"\"}.codicon-layout-centered:before{content:\"\"}.codicon-target:before{content:\"\"}.codicon-indent:before{content:\"\"}.codicon-record-small:before{content:\"\"}.codicon-error-small:before{content:\"\"}.codicon-terminal-decoration-error:before{content:\"\"}.codicon-arrow-circle-down:before{content:\"\"}.codicon-arrow-circle-left:before{content:\"\"}.codicon-arrow-circle-right:before{content:\"\"}.codicon-arrow-circle-up:before{content:\"\"}.codicon-layout-sidebar-right-off:before{content:\"\"}.codicon-layout-panel-off:before{content:\"\"}.codicon-layout-sidebar-left-off:before{content:\"\"}.codicon-blank:before{content:\"\"}.codicon-heart-filled:before{content:\"\"}.codicon-map:before{content:\"\"}.codicon-map-horizontal:before{content:\"\"}.codicon-fold-horizontal:before{content:\"\"}.codicon-map-filled:before{content:\"\"}.codicon-map-horizontal-filled:before{content:\"\"}.codicon-fold-horizontal-filled:before{content:\"\"}.codicon-circle-small:before{content:\"\"}.codicon-bell-slash:before{content:\"\"}.codicon-bell-slash-dot:before{content:\"\"}.codicon-comment-unresolved:before{content:\"\"}.codicon-git-pull-request-go-to-changes:before{content:\"\"}.codicon-git-pull-request-new-changes:before{content:\"\"}.codicon-search-fuzzy:before{content:\"\"}.codicon-comment-draft:before{content:\"\"}.codicon-send:before{content:\"\"}.codicon-sparkle:before{content:\"\"}.codicon-insert:before{content:\"\"}.codicon-mic:before{content:\"\"}.codicon-thumbsdown-filled:before{content:\"\"}.codicon-thumbsup-filled:before{content:\"\"}.codicon-coffee:before{content:\"\"}.codicon-snake:before{content:\"\"}.codicon-game:before{content:\"\"}.codicon-vr:before{content:\"\"}.codicon-chip:before{content:\"\"}.codicon-piano:before{content:\"\"}.codicon-music:before{content:\"\"}.codicon-mic-filled:before{content:\"\"}.codicon-repo-fetch:before{content:\"\"}.codicon-copilot:before{content:\"\"}.codicon-lightbulb-sparkle:before{content:\"\"}.codicon-robot:before{content:\"\"}.codicon-sparkle-filled:before{content:\"\"}.codicon-diff-single:before{content:\"\"}.codicon-diff-multiple:before{content:\"\"}.codicon-surround-with:before{content:\"\"}.codicon-share:before{content:\"\"}.codicon-git-stash:before{content:\"\"}.codicon-git-stash-apply:before{content:\"\"}.codicon-git-stash-pop:before{content:\"\"}.codicon-vscode:before{content:\"\"}.codicon-vscode-insiders:before{content:\"\"}.codicon-code-oss:before{content:\"\"}.codicon-run-coverage:before{content:\"\"}.codicon-run-all-coverage:before{content:\"\"}.codicon-coverage:before{content:\"\"}.codicon-github-project:before{content:\"\"}.codicon-map-vertical:before{content:\"\"}.codicon-fold-vertical:before{content:\"\"}.codicon-map-vertical-filled:before{content:\"\"}.codicon-fold-vertical-filled:before{content:\"\"}.codicon-go-to-search:before{content:\"\"}.codicon-percentage:before{content:\"\"}.codicon-sort-percentage:before{content:\"\"}.codicon-attach:before{content:\"\"}.codicon-go-to-editing-session:before{content:\"\"}.codicon-edit-session:before{content:\"\"}.codicon-code-review:before{content:\"\"}.codicon-copilot-warning:before{content:\"\"}.codicon-python:before{content:\"\"}.codicon-copilot-large:before{content:\"\"}.codicon-copilot-warning-large:before{content:\"\"}.codicon-keyboard-tab:before{content:\"\"}.codicon-copilot-blocked:before{content:\"\"}.codicon-copilot-not-connected:before{content:\"\"}.codicon-flag:before{content:\"\"}.codicon-lightbulb-empty:before{content:\"\"}.codicon-symbol-method-arrow:before{content:\"\"}.codicon-copilot-unavailable:before{content:\"\"}.codicon-repo-pinned:before{content:\"\"}.codicon-keyboard-tab-above:before{content:\"\"}.codicon-keyboard-tab-below:before{content:\"\"}.codicon-git-fetch:before{content:\"\"}.codicon-hook:before{content:\"\"}.codicon-shrink:before{content:\"\"}.codicon-restore:before{content:\"\"}.codicon-reorder:before{content:\"\"}.codicon-rejected:before{content:\"\"}.codicon-pending:before{content:\"\"}.codicon-pending-copy:before{content:\"\"}.codicon-new-space:before{content:\"\"}.codicon-info-small:before{content:\"\"}.codicon-in-progress:before{content:\"\"}.codicon-image:before{content:\"\"}.codicon-complete:before{content:\"\"}.codicon-cmd:before{content:\"\"}.codicon-clipboard:before{content:\"\"}.codicon-cancel-queue:before{content:\"\"}.codicon-cancel-queue-copy:before{content:\"\"}.codicon-call:before{content:\"\"}.codicon-brush:before{content:\"\"}.codicon-kiro:before{content:\"\"}.codicon-comment-filled:before{content:\"\"}*,*:before,*:after{box-sizing:border-box}*{margin:0}@media (prefers-reduced-motion: no-preference){html{interpolate-size:allow-keywords}}body{line-height:1.5;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "pulse-kiro-purple .6s infinite ease-in-out;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "thinking linear 1.5s infinite;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn .2s ease-in-out;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "spin 1s linear infinite}.cursor-default{cursor:default}.cursor-help{cursor:help}.cursor-pointer{cursor:pointer}.resize{resize:both}.flex-row{flex-direction:row}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0px}.gap-0\\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-\\[var\\(--spacing-xxl\\)\\]{gap:var(--spacing-xxl)}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn .3s ease-in-out}.hover\\:bg-\\[var\\(--vscode-input-background\\)\\]:hover{background-color:var(--vscode-input-background)}.hover\\:bg-stone-800:hover{--tw-bg-opacity:1;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "all .3s}.wmde-markdown pre .copied .octicon-copy{display:block}.wmde-markdown pre .copied .octicon-check{display:none}.wmde-markdown pre:hover .copied{visibility:visible}.wmde-markdown pre:hover .copied:hover{background:var(--color-prettylights-syntax-entity-tag);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color .2s ease-in-out}.tiptap p.is-editor-empty:first-child:before{color:#646464;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s ease}.mcp-tool-expand[data-expanded=true]{transform:rotate(90deg)}.mcp-tool-expand:hover{background-color:var(--vscode-button-tertiaryHoverBackground)}.mcp-tool-expand:focus{outline:1px solid var(--vscode-focusBorder);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "all var(--kiro-transition, .2s ease-in) ease}.session-details.vibe-selected{border-left:2px solid var(--vscode-accent);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s ease,fill .3s ease;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition)}.kiro-dropdown-option{padding",
+    "value": "var(--spacing-xs) var(--spacing-md);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-show-delay",
+    "value": ".15s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-closing-delay",
+    "value": ".15s}.core-styles-module_tooltip__3vRRp{left:0;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity var(--rt-transition-show-delay) ease-out}.core-styles-module_closing__sGnxF{opacity:0;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity var(--rt-transition-closing-delay) ease-in}.styles-module_tooltip__mnnfp{border-radius:3px;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": " .2s ease-in;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .15s ease,visibility .15s ease;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "border-color .2s ease}.kiro-focus-area:hover{border-color:var(--vscode-focusBorder)}.kiro-focus-area[data-focus=true],.kiro-focus-area:focus-within{border-color:var(--vscode-focusBorder)}.kiro-form-field{display:flex;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "min-height .5s}.kiro-snackbar-container{background-color:var(--vscode-snackbar-background);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "top .5s}@keyframes pulse-kiro-purple{0%{background-color:#8041e633}50%{background-color:#8041e640}to{background-color:#8041e633}}.kiro-snackbar-container.needs-attention{color:var(--vscode-accent);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s ease}.kiro-snackbar-expand[data-expanded=true]{transform:rotate(90deg)}.thinking-text[data-is-thinking=true]:after{animation:thinking linear 1.5s infinite;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition),left var(--kiro-transition)}.kiro-toggle-switch>input:checked:after{left:calc(.75 * var(--text-xl) + var(--toggle-switch-thumb-padding));",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition{transition-property",
+    "value": "color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-property",
+    "value": "color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-property",
+    "value": "color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "cubic-bezier(.4,0,.2,1);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s}.transition-\\[flex\\]{transition-property:flex;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "cubic-bezier(.4,0,.2,1);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s}.transition-\\[max-width\\]{transition-property:max-width;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "cubic-bezier(.4,0,.2,1);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s}.transition-all{transition-property:all;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "cubic-bezier(.4,0,.2,1);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": "cubic-bezier(.4,0,.2,1);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": ".15s}.duration-200{transition-duration:.2s}.duration-300{transition-duration:.3s}.duration-\\[200ms\\]{transition-duration:.2s}.ease-in{transition-timing-function:cubic-bezier(.4,0,1,1)}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}:root{--secondary-dark: rgb(37, 37, 38);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/continuedev/gui/dist/assets/index.css"
+  },
+  {
+    "name": "_float_1bkzo_1",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "_fadeIn_1bkzo_52",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "_fadeOut_1bkzo_56",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "_pulseInverse_1bkzo_1",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "blinking",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "pulse",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "eyeLeadIn",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "backgroundGrow",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "eyeMove",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "codicon-spin",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "pulse-kiro-purple",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "thinking",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "fadeIn",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "spin",
+    "type": "keyframes",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "_fadeIn_1bkzo_52 1s ease-in-out forwards}._fadeOut_1bkzo_56{animation:_fadeOut_1bkzo_56 .3s ease-in-out forwards}._animationWrapper_1bkzo_60{display:flex;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "_float_1bkzo_1 2s ease-in-out infinite;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "_pulseInverse_1bkzo_1 2s ease-in-out infinite;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "4s infinite blinking}@keyframes blinking{0%,60%{transform:scaleY(1)}60.5%,70%{transform:scaleY(.2)}70.5%,80%{transform:scaleY(1)}80.5%,90%{transform:scaleY(.2)}90.5%,to{transform:scaleY(1)}}.kiro-face.thinking .kiro-face-background.lead-in{animation:.5s ease-out forwards backgroundGrow}.kiro-face.thinking .kiro-face-background.main-animation{animation:3s ease-in-out infinite pulse}.kiro-face.thinking .kiro-face-eye.lead-in{animation:.5s ease-out forwards eyeLeadIn}.kiro-face.thinking .kiro-face-eye.main-animation{animation:3s ease-in-out infinite eyeMove}@keyframes pulse{50%{opacity:.5}}@keyframes eyeLeadIn{0%{transform:translate(0)}to{transform:translate(-4px)}}@keyframes backgroundGrow{0%{opacity:0}to{opacity:1}}@keyframes eyeMove{0%{transform:translate(-4px)}12.5%{transform:translate(-4px)}25%{transform:translate(-4px)}37.5%{transform:translate(-4px)}50%{transform:translate(4px)}62.5%{transform:translate(4px)}75%{transform:translate(4px)}87.5%{transform:translate(4px)}to{transform:translate(-4px)}}.kiro-dropdown{--dropdown-padding-inline:var(--spacing-xs);",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "fadeIn var(--kiro-transition);",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "1.5s steps(30,end) infinite codicon-spin}.codicon-modifier-disabled{opacity:.5}.codicon-modifier-hidden{opacity:0}.codicon-loading{animation-duration:1s!important;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation-timing-function",
+    "value": "cubic-bezier(.53,.21,.29,.67)!important}.codicon-add:before,.codicon-plus:before,.codicon-gist-new:before,.codicon-repo-create:before{content:\"\"}.codicon-lightbulb:before,.codicon-light-bulb:before{content:\"\"}.codicon-repo:before,.codicon-repo-delete:before{content:\"\"}.codicon-gist-fork:before,.codicon-repo-forked:before{content:\"\"}.codicon-git-pull-request:before,.codicon-git-pull-request-abandoned:before{content:\"\"}.codicon-record-keys:before,.codicon-keyboard:before{content:\"\"}.codicon-tag:before,.codicon-git-pull-request-label:before,.codicon-tag-add:before,.codicon-tag-remove:before{content:\"\"}.codicon-person:before,.codicon-person-follow:before,.codicon-person-outline:before,.codicon-person-filled:before{content:\"\"}.codicon-git-branch:before,.codicon-git-branch-create:before,.codicon-git-branch-delete:before,.codicon-source-control:before{content:\"\"}.codicon-mirror:before,.codicon-mirror-public:before{content:\"\"}.codicon-star:before,.codicon-star-add:before,.codicon-star-delete:before,.codicon-star-empty:before{content:\"\"}.codicon-comment:before,.codicon-comment-add:before{content:\"\"}.codicon-alert:before,.codicon-warning:before{content:\"\"}.codicon-search:before,.codicon-search-save:before{content:\"\"}.codicon-log-out:before,.codicon-sign-out:before{content:\"\"}.codicon-log-in:before,.codicon-sign-in:before{content:\"\"}.codicon-eye:before,.codicon-eye-unwatch:before,.codicon-eye-watch:before{content:\"\"}.codicon-circle-filled:before,.codicon-primitive-dot:before,.codicon-close-dirty:before,.codicon-debug-breakpoint:before,.codicon-debug-breakpoint-disabled:before,.codicon-debug-hint:before,.codicon-terminal-decoration-success:before{content:\"\"}.codicon-primitive-square:before{content:\"\"}.codicon-edit:before,.codicon-pencil:before{content:\"\"}.codicon-info:before,.codicon-issue-opened:before{content:\"\"}.codicon-gist-private:before,.codicon-git-fork-private:before,.codicon-lock:before,.codicon-mirror-private:before{content:\"\"}.codicon-close:before,.codicon-remove-close:before,.codicon-x:before{content:\"\"}.codicon-repo-sync:before,.codicon-sync:before{content:\"\"}.codicon-clone:before,.codicon-desktop-download:before{content:\"\"}.codicon-beaker:before,.codicon-microscope:before{content:\"\"}.codicon-vm:before,.codicon-device-desktop:before{content:\"\"}.codicon-file:before,.codicon-file-text:before{content:\"\"}.codicon-more:before,.codicon-ellipsis:before,.codicon-kebab-horizontal:before{content:\"\"}.codicon-mail-reply:before,.codicon-reply:before{content:\"\"}.codicon-organization:before,.codicon-organization-filled:before,.codicon-organization-outline:before{content:\"\"}.codicon-new-file:before,.codicon-file-add:before{content:\"\"}.codicon-new-folder:before,.codicon-file-directory-create:before{content:\"\"}.codicon-trash:before,.codicon-trashcan:before{content:\"\"}.codicon-history:before,.codicon-clock:before{content:\"\"}.codicon-folder:before,.codicon-file-directory:before,.codicon-symbol-folder:before{content:\"\"}.codicon-logo-github:before,.codicon-mark-github:before,.codicon-github:before{content:\"\"}.codicon-terminal:before,.codicon-console:before,.codicon-repl:before{content:\"\"}.codicon-zap:before,.codicon-symbol-event:before{content:\"\"}.codicon-error:before,.codicon-stop:before{content:\"\"}.codicon-variable:before,.codicon-symbol-variable:before{content:\"\"}.codicon-array:before,.codicon-symbol-array:before{content:\"\"}.codicon-symbol-module:before,.codicon-symbol-package:before,.codicon-symbol-namespace:before,.codicon-symbol-object:before{content:\"\"}.codicon-symbol-method:before,.codicon-symbol-function:before,.codicon-symbol-constructor:before{content:\"\"}.codicon-symbol-boolean:before,.codicon-symbol-null:before{content:\"\"}.codicon-symbol-numeric:before,.codicon-symbol-number:before{content:\"\"}.codicon-symbol-structure:before,.codicon-symbol-struct:before{content:\"\"}.codicon-symbol-parameter:before,.codicon-symbol-type-parameter:before{content:\"\"}.codicon-symbol-key:before,.codicon-symbol-text:before{content:\"\"}.codicon-symbol-reference:before,.codicon-go-to-file:before{content:\"\"}.codicon-symbol-enum:before,.codicon-symbol-value:before{content:\"\"}.codicon-symbol-ruler:before,.codicon-symbol-unit:before{content:\"\"}.codicon-activate-breakpoints:before{content:\"\"}.codicon-archive:before{content:\"\"}.codicon-arrow-both:before{content:\"\"}.codicon-arrow-down:before{content:\"\"}.codicon-arrow-left:before{content:\"\"}.codicon-arrow-right:before{content:\"\"}.codicon-arrow-small-down:before{content:\"\"}.codicon-arrow-small-left:before{content:\"\"}.codicon-arrow-small-right:before{content:\"\"}.codicon-arrow-small-up:before{content:\"\"}.codicon-arrow-up:before{content:\"\"}.codicon-bell:before{content:\"\"}.codicon-bold:before{content:\"\"}.codicon-book:before{content:\"\"}.codicon-bookmark:before{content:\"\"}.codicon-debug-breakpoint-conditional-unverified:before{content:\"\"}.codicon-debug-breakpoint-conditional:before,.codicon-debug-breakpoint-conditional-disabled:before{content:\"\"}.codicon-debug-breakpoint-data-unverified:before{content:\"\"}.codicon-debug-breakpoint-data:before,.codicon-debug-breakpoint-data-disabled:before{content:\"\"}.codicon-debug-breakpoint-log-unverified:before{content:\"\"}.codicon-debug-breakpoint-log:before,.codicon-debug-breakpoint-log-disabled:before{content:\"\"}.codicon-briefcase:before{content:\"\"}.codicon-broadcast:before{content:\"\"}.codicon-browser:before{content:\"\"}.codicon-bug:before{content:\"\"}.codicon-calendar:before{content:\"\"}.codicon-case-sensitive:before{content:\"\"}.codicon-check:before{content:\"\"}.codicon-checklist:before{content:\"\"}.codicon-chevron-down:before{content:\"\"}.codicon-chevron-left:before{content:\"\"}.codicon-chevron-right:before{content:\"\"}.codicon-chevron-up:before{content:\"\"}.codicon-chrome-close:before{content:\"\"}.codicon-chrome-maximize:before{content:\"\"}.codicon-chrome-minimize:before{content:\"\"}.codicon-chrome-restore:before{content:\"\"}.codicon-circle-outline:before,.codicon-circle:before,.codicon-debug-breakpoint-unverified:before,.codicon-terminal-decoration-incomplete:before{content:\"\"}.codicon-circle-slash:before{content:\"\"}.codicon-circuit-board:before{content:\"\"}.codicon-clear-all:before{content:\"\"}.codicon-clippy:before{content:\"\"}.codicon-close-all:before{content:\"\"}.codicon-cloud-download:before{content:\"\"}.codicon-cloud-upload:before{content:\"\"}.codicon-code:before{content:\"\"}.codicon-collapse-all:before{content:\"\"}.codicon-color-mode:before{content:\"\"}.codicon-comment-discussion:before{content:\"\"}.codicon-credit-card:before{content:\"\"}.codicon-dash:before{content:\"\"}.codicon-dashboard:before{content:\"\"}.codicon-database:before{content:\"\"}.codicon-debug-continue:before{content:\"\"}.codicon-debug-disconnect:before{content:\"\"}.codicon-debug-pause:before{content:\"\"}.codicon-debug-restart:before{content:\"\"}.codicon-debug-start:before{content:\"\"}.codicon-debug-step-into:before{content:\"\"}.codicon-debug-step-out:before{content:\"\"}.codicon-debug-step-over:before{content:\"\"}.codicon-debug-stop:before{content:\"\"}.codicon-debug:before{content:\"\"}.codicon-device-camera-video:before{content:\"\"}.codicon-device-camera:before{content:\"\"}.codicon-device-mobile:before{content:\"\"}.codicon-diff-added:before{content:\"\"}.codicon-diff-ignored:before{content:\"\"}.codicon-diff-modified:before{content:\"\"}.codicon-diff-removed:before{content:\"\"}.codicon-diff-renamed:before{content:\"\"}.codicon-diff:before,.codicon-diff-sidebyside:before{content:\"\"}.codicon-discard:before{content:\"\"}.codicon-editor-layout:before{content:\"\"}.codicon-empty-window:before{content:\"\"}.codicon-exclude:before{content:\"\"}.codicon-extensions:before{content:\"\"}.codicon-eye-closed:before{content:\"\"}.codicon-file-binary:before{content:\"\"}.codicon-file-code:before{content:\"\"}.codicon-file-media:before{content:\"\"}.codicon-file-pdf:before{content:\"\"}.codicon-file-submodule:before{content:\"\"}.codicon-file-symlink-directory:before{content:\"\"}.codicon-file-symlink-file:before{content:\"\"}.codicon-file-zip:before{content:\"\"}.codicon-files:before{content:\"\"}.codicon-filter:before{content:\"\"}.codicon-flame:before{content:\"\"}.codicon-fold-down:before{content:\"\"}.codicon-fold-up:before{content:\"\"}.codicon-fold:before{content:\"\"}.codicon-folder-active:before{content:\"\"}.codicon-folder-opened:before{content:\"\"}.codicon-gear:before{content:\"\"}.codicon-gift:before{content:\"\"}.codicon-gist-secret:before{content:\"\"}.codicon-gist:before{content:\"\"}.codicon-git-commit:before{content:\"\"}.codicon-git-compare:before,.codicon-compare-changes:before{content:\"\"}.codicon-git-merge:before{content:\"\"}.codicon-github-action:before{content:\"\"}.codicon-github-alt:before{content:\"\"}.codicon-globe:before{content:\"\"}.codicon-grabber:before{content:\"\"}.codicon-graph:before{content:\"\"}.codicon-gripper:before{content:\"\"}.codicon-heart:before{content:\"\"}.codicon-home:before{content:\"\"}.codicon-horizontal-rule:before{content:\"\"}.codicon-hubot:before{content:\"\"}.codicon-inbox:before{content:\"\"}.codicon-issue-reopened:before{content:\"\"}.codicon-issues:before{content:\"\"}.codicon-italic:before{content:\"\"}.codicon-jersey:before{content:\"\"}.codicon-json:before{content:\"\"}.codicon-kebab-vertical:before{content:\"\"}.codicon-key:before{content:\"\"}.codicon-law:before{content:\"\"}.codicon-lightbulb-autofix:before{content:\"\"}.codicon-link-external:before{content:\"\"}.codicon-link:before{content:\"\"}.codicon-list-ordered:before{content:\"\"}.codicon-list-unordered:before{content:\"\"}.codicon-live-share:before{content:\"\"}.codicon-loading:before{content:\"\"}.codicon-location:before{content:\"\"}.codicon-mail-read:before{content:\"\"}.codicon-mail:before{content:\"\"}.codicon-markdown:before{content:\"\"}.codicon-megaphone:before{content:\"\"}.codicon-mention:before{content:\"\"}.codicon-milestone:before,.codicon-git-pull-request-milestone:before{content:\"\"}.codicon-mortar-board:before{content:\"\"}.codicon-move:before{content:\"\"}.codicon-multiple-windows:before{content:\"\"}.codicon-mute:before{content:\"\"}.codicon-no-newline:before{content:\"\"}.codicon-note:before{content:\"\"}.codicon-octoface:before{content:\"\"}.codicon-open-preview:before{content:\"\"}.codicon-package:before{content:\"\"}.codicon-paintcan:before{content:\"\"}.codicon-pin:before{content:\"\"}.codicon-play:before,.codicon-run:before{content:\"\"}.codicon-plug:before{content:\"\"}.codicon-preserve-case:before{content:\"\"}.codicon-preview:before{content:\"\"}.codicon-project:before{content:\"\"}.codicon-pulse:before{content:\"\"}.codicon-question:before{content:\"\"}.codicon-quote:before{content:\"\"}.codicon-radio-tower:before{content:\"\"}.codicon-reactions:before{content:\"\"}.codicon-references:before{content:\"\"}.codicon-refresh:before{content:\"\"}.codicon-regex:before{content:\"\"}.codicon-remote-explorer:before{content:\"\"}.codicon-remote:before{content:\"\"}.codicon-remove:before{content:\"\"}.codicon-replace-all:before{content:\"\"}.codicon-replace:before{content:\"\"}.codicon-repo-clone:before{content:\"\"}.codicon-repo-force-push:before{content:\"\"}.codicon-repo-pull:before{content:\"\"}.codicon-repo-push:before{content:\"\"}.codicon-report:before{content:\"\"}.codicon-request-changes:before{content:\"\"}.codicon-rocket:before{content:\"\"}.codicon-root-folder-opened:before{content:\"\"}.codicon-root-folder:before{content:\"\"}.codicon-rss:before{content:\"\"}.codicon-ruby:before{content:\"\"}.codicon-save-all:before{content:\"\"}.codicon-save-as:before{content:\"\"}.codicon-save:before{content:\"\"}.codicon-screen-full:before{content:\"\"}.codicon-screen-normal:before{content:\"\"}.codicon-search-stop:before{content:\"\"}.codicon-server:before{content:\"\"}.codicon-settings-gear:before{content:\"\"}.codicon-settings:before{content:\"\"}.codicon-shield:before{content:\"\"}.codicon-smiley:before{content:\"\"}.codicon-sort-precedence:before{content:\"\"}.codicon-split-horizontal:before{content:\"\"}.codicon-split-vertical:before{content:\"\"}.codicon-squirrel:before{content:\"\"}.codicon-star-full:before{content:\"\"}.codicon-star-half:before{content:\"\"}.codicon-symbol-class:before{content:\"\"}.codicon-symbol-color:before{content:\"\"}.codicon-symbol-constant:before{content:\"\"}.codicon-symbol-enum-member:before{content:\"\"}.codicon-symbol-field:before{content:\"\"}.codicon-symbol-file:before{content:\"\"}.codicon-symbol-interface:before{content:\"\"}.codicon-symbol-keyword:before{content:\"\"}.codicon-symbol-misc:before{content:\"\"}.codicon-symbol-operator:before{content:\"\"}.codicon-symbol-property:before,.codicon-wrench:before,.codicon-wrench-subaction:before{content:\"\"}.codicon-symbol-snippet:before{content:\"\"}.codicon-tasklist:before{content:\"\"}.codicon-telescope:before{content:\"\"}.codicon-text-size:before{content:\"\"}.codicon-three-bars:before{content:\"\"}.codicon-thumbsdown:before{content:\"\"}.codicon-thumbsup:before{content:\"\"}.codicon-tools:before{content:\"\"}.codicon-triangle-down:before{content:\"\"}.codicon-triangle-left:before{content:\"\"}.codicon-triangle-right:before{content:\"\"}.codicon-triangle-up:before{content:\"\"}.codicon-twitter:before{content:\"\"}.codicon-unfold:before{content:\"\"}.codicon-unlock:before{content:\"\"}.codicon-unmute:before{content:\"\"}.codicon-unverified:before{content:\"\"}.codicon-verified:before{content:\"\"}.codicon-versions:before{content:\"\"}.codicon-vm-active:before{content:\"\"}.codicon-vm-outline:before{content:\"\"}.codicon-vm-running:before{content:\"\"}.codicon-watch:before{content:\"\"}.codicon-whitespace:before{content:\"\"}.codicon-whole-word:before{content:\"\"}.codicon-window:before{content:\"\"}.codicon-word-wrap:before{content:\"\"}.codicon-zoom-in:before{content:\"\"}.codicon-zoom-out:before{content:\"\"}.codicon-list-filter:before{content:\"\"}.codicon-list-flat:before{content:\"\"}.codicon-list-selection:before,.codicon-selection:before{content:\"\"}.codicon-list-tree:before{content:\"\"}.codicon-debug-breakpoint-function-unverified:before{content:\"\"}.codicon-debug-breakpoint-function:before,.codicon-debug-breakpoint-function-disabled:before{content:\"\"}.codicon-debug-stackframe-active:before{content:\"\"}.codicon-circle-small-filled:before,.codicon-debug-stackframe-dot:before,.codicon-terminal-decoration-mark:before{content:\"\"}.codicon-debug-stackframe:before,.codicon-debug-stackframe-focused:before{content:\"\"}.codicon-debug-breakpoint-unsupported:before{content:\"\"}.codicon-symbol-string:before{content:\"\"}.codicon-debug-reverse-continue:before{content:\"\"}.codicon-debug-step-back:before{content:\"\"}.codicon-debug-restart-frame:before{content:\"\"}.codicon-debug-alt:before{content:\"\"}.codicon-call-incoming:before{content:\"\"}.codicon-call-outgoing:before{content:\"\"}.codicon-menu:before{content:\"\"}.codicon-expand-all:before{content:\"\"}.codicon-feedback:before,.codicon-git-pull-request-reviewer:before{content:\"\"}.codicon-group-by-ref-type:before{content:\"\"}.codicon-ungroup-by-ref-type:before{content:\"\"}.codicon-account:before,.codicon-git-pull-request-assignee:before{content:\"\"}.codicon-bell-dot:before{content:\"\"}.codicon-debug-console:before{content:\"\"}.codicon-library:before{content:\"\"}.codicon-output:before{content:\"\"}.codicon-run-all:before{content:\"\"}.codicon-sync-ignored:before{content:\"\"}.codicon-pinned:before{content:\"\"}.codicon-github-inverted:before{content:\"\"}.codicon-server-process:before{content:\"\"}.codicon-server-environment:before{content:\"\"}.codicon-pass:before,.codicon-issue-closed:before{content:\"\"}.codicon-stop-circle:before{content:\"\"}.codicon-play-circle:before{content:\"\"}.codicon-record:before{content:\"\"}.codicon-debug-alt-small:before{content:\"\"}.codicon-vm-connect:before{content:\"\"}.codicon-cloud:before{content:\"\"}.codicon-merge:before{content:\"\"}.codicon-export:before{content:\"\"}.codicon-graph-left:before{content:\"\"}.codicon-magnet:before{content:\"\"}.codicon-notebook:before{content:\"\"}.codicon-redo:before{content:\"\"}.codicon-check-all:before{content:\"\"}.codicon-pinned-dirty:before{content:\"\"}.codicon-pass-filled:before{content:\"\"}.codicon-circle-large-filled:before{content:\"\"}.codicon-circle-large:before,.codicon-circle-large-outline:before{content:\"\"}.codicon-combine:before,.codicon-gather:before{content:\"\"}.codicon-table:before{content:\"\"}.codicon-variable-group:before{content:\"\"}.codicon-type-hierarchy:before{content:\"\"}.codicon-type-hierarchy-sub:before{content:\"\"}.codicon-type-hierarchy-super:before{content:\"\"}.codicon-git-pull-request-create:before{content:\"\"}.codicon-run-above:before{content:\"\"}.codicon-run-below:before{content:\"\"}.codicon-notebook-template:before{content:\"\"}.codicon-debug-rerun:before{content:\"\"}.codicon-workspace-trusted:before{content:\"\"}.codicon-workspace-untrusted:before{content:\"\"}.codicon-workspace-unknown:before{content:\"\"}.codicon-terminal-cmd:before{content:\"\"}.codicon-terminal-debian:before{content:\"\"}.codicon-terminal-linux:before{content:\"\"}.codicon-terminal-powershell:before{content:\"\"}.codicon-terminal-tmux:before{content:\"\"}.codicon-terminal-ubuntu:before{content:\"\"}.codicon-terminal-bash:before{content:\"\"}.codicon-arrow-swap:before{content:\"\"}.codicon-copy:before{content:\"\"}.codicon-person-add:before{content:\"\"}.codicon-filter-filled:before{content:\"\"}.codicon-wand:before{content:\"\"}.codicon-debug-line-by-line:before{content:\"\"}.codicon-inspect:before{content:\"\"}.codicon-layers:before{content:\"\"}.codicon-layers-dot:before{content:\"\"}.codicon-layers-active:before{content:\"\"}.codicon-compass:before{content:\"\"}.codicon-compass-dot:before{content:\"\"}.codicon-compass-active:before{content:\"\"}.codicon-azure:before{content:\"\"}.codicon-issue-draft:before{content:\"\"}.codicon-git-pull-request-closed:before{content:\"\"}.codicon-git-pull-request-draft:before{content:\"\"}.codicon-debug-all:before{content:\"\"}.codicon-debug-coverage:before{content:\"\"}.codicon-run-errors:before{content:\"\"}.codicon-folder-library:before{content:\"\"}.codicon-debug-continue-small:before{content:\"\"}.codicon-beaker-stop:before{content:\"\"}.codicon-graph-line:before{content:\"\"}.codicon-graph-scatter:before{content:\"\"}.codicon-pie-chart:before{content:\"\"}.codicon-bracket:before{content:\"\"}.codicon-bracket-dot:before{content:\"\"}.codicon-bracket-error:before{content:\"\"}.codicon-lock-small:before{content:\"\"}.codicon-azure-devops:before{content:\"\"}.codicon-verified-filled:before{content:\"\"}.codicon-newline:before{content:\"\"}.codicon-layout:before{content:\"\"}.codicon-layout-activitybar-left:before{content:\"\"}.codicon-layout-activitybar-right:before{content:\"\"}.codicon-layout-panel-left:before{content:\"\"}.codicon-layout-panel-center:before{content:\"\"}.codicon-layout-panel-justify:before{content:\"\"}.codicon-layout-panel-right:before{content:\"\"}.codicon-layout-panel:before{content:\"\"}.codicon-layout-sidebar-left:before{content:\"\"}.codicon-layout-sidebar-right:before{content:\"\"}.codicon-layout-statusbar:before{content:\"\"}.codicon-layout-menubar:before{content:\"\"}.codicon-layout-centered:before{content:\"\"}.codicon-target:before{content:\"\"}.codicon-indent:before{content:\"\"}.codicon-record-small:before{content:\"\"}.codicon-error-small:before,.codicon-terminal-decoration-error:before{content:\"\"}.codicon-arrow-circle-down:before{content:\"\"}.codicon-arrow-circle-left:before{content:\"\"}.codicon-arrow-circle-right:before{content:\"\"}.codicon-arrow-circle-up:before{content:\"\"}.codicon-layout-sidebar-right-off:before{content:\"\"}.codicon-layout-panel-off:before{content:\"\"}.codicon-layout-sidebar-left-off:before{content:\"\"}.codicon-blank:before{content:\"\"}.codicon-heart-filled:before{content:\"\"}.codicon-map:before,.codicon-map-horizontal:before,.codicon-fold-horizontal:before{content:\"\"}.codicon-map-filled:before,.codicon-map-horizontal-filled:before,.codicon-fold-horizontal-filled:before{content:\"\"}.codicon-circle-small:before{content:\"\"}.codicon-bell-slash:before{content:\"\"}.codicon-bell-slash-dot:before{content:\"\"}.codicon-comment-unresolved:before{content:\"\"}.codicon-git-pull-request-go-to-changes:before{content:\"\"}.codicon-git-pull-request-new-changes:before{content:\"\"}.codicon-search-fuzzy:before{content:\"\"}.codicon-comment-draft:before{content:\"\"}.codicon-send:before{content:\"\"}.codicon-sparkle:before{content:\"\"}.codicon-insert:before{content:\"\"}.codicon-mic:before{content:\"\"}.codicon-thumbsdown-filled:before{content:\"\"}.codicon-thumbsup-filled:before{content:\"\"}.codicon-coffee:before{content:\"\"}.codicon-snake:before{content:\"\"}.codicon-game:before{content:\"\"}.codicon-vr:before{content:\"\"}.codicon-chip:before{content:\"\"}.codicon-piano:before{content:\"\"}.codicon-music:before{content:\"\"}.codicon-mic-filled:before{content:\"\"}.codicon-repo-fetch:before{content:\"\"}.codicon-copilot:before{content:\"\"}.codicon-lightbulb-sparkle:before{content:\"\"}.codicon-robot:before{content:\"\"}.codicon-sparkle-filled:before{content:\"\"}.codicon-diff-single:before{content:\"\"}.codicon-diff-multiple:before{content:\"\"}.codicon-surround-with:before{content:\"\"}.codicon-share:before{content:\"\"}.codicon-git-stash:before{content:\"\"}.codicon-git-stash-apply:before{content:\"\"}.codicon-git-stash-pop:before{content:\"\"}.codicon-vscode:before{content:\"\"}.codicon-vscode-insiders:before{content:\"\"}.codicon-code-oss:before{content:\"\"}.codicon-run-coverage:before{content:\"\"}.codicon-run-all-coverage:before{content:\"\"}.codicon-coverage:before{content:\"\"}.codicon-github-project:before{content:\"\"}.codicon-map-vertical:before,.codicon-fold-vertical:before{content:\"\"}.codicon-map-vertical-filled:before,.codicon-fold-vertical-filled:before{content:\"\"}.codicon-go-to-search:before{content:\"\"}.codicon-percentage:before,.codicon-sort-percentage:before{content:\"\"}.codicon-attach:before{content:\"\"}.codicon-go-to-editing-session:before{content:\"\"}.codicon-edit-session:before{content:\"\"}.codicon-code-review:before{content:\"\"}.codicon-copilot-warning:before{content:\"\"}.codicon-python:before{content:\"\"}.codicon-copilot-large:before{content:\"\"}.codicon-copilot-warning-large:before{content:\"\"}.codicon-keyboard-tab:before{content:\"\"}.codicon-copilot-blocked:before{content:\"\"}.codicon-copilot-not-connected:before{content:\"\"}.codicon-flag:before{content:\"\"}.codicon-lightbulb-empty:before{content:\"\"}.codicon-symbol-method-arrow:before{content:\"\"}.codicon-copilot-unavailable:before{content:\"\"}.codicon-repo-pinned:before{content:\"\"}.codicon-keyboard-tab-above:before{content:\"\"}.codicon-keyboard-tab-below:before{content:\"\"}.codicon-git-fetch:before{content:\"\"}.codicon-hook:before{content:\"\"}.codicon-shrink:before{content:\"\"}.codicon-restore:before{content:\"\"}.codicon-reorder:before{content:\"\"}.codicon-rejected:before{content:\"\"}.codicon-pending:before{content:\"\"}.codicon-pending-copy:before{content:\"\"}.codicon-new-space:before{content:\"\"}.codicon-info-small:before{content:\"\"}.codicon-in-progress:before{content:\"\"}.codicon-image:before{content:\"\"}.codicon-complete:before{content:\"\"}.codicon-cmd:before{content:\"\"}.codicon-clipboard:before{content:\"\"}.codicon-cancel-queue:before{content:\"\"}.codicon-cancel-queue-copy:before{content:\"\"}.codicon-call:before{content:\"\"}.codicon-brush:before{content:\"\"}.codicon-kiro:before{content:\"\"}.codicon-comment-filled:before{content:\"\"}*,:before,:after{box-sizing:border-box}*{margin:0}@media (prefers-reduced-motion:no-preference){html{interpolate-size:allow-keywords}}body{-webkit-font-smoothing:antialiased;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": ".6s ease-in-out infinite pulse-kiro-purple}.kiro-snackbar-container.needs-attention:before{content:\"\";",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": "1.5s linear infinite thinking;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": ".2s ease-in-out fadeIn;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "animation",
+    "value": ".8s linear infinite spin;",
+    "type": "animation-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s,fill .3s}.kiro-face:not(.thinking) .kiro-face-eye.can-blink{animation:4s infinite blinking}@keyframes blinking{0%,60%{transform:scaleY(1)}60.5%,70%{transform:scaleY(.2)}70.5%,80%{transform:scaleY(1)}80.5%,90%{transform:scaleY(.2)}90.5%,to{transform:scaleY(1)}}.kiro-face.thinking .kiro-face-background.lead-in{animation:.5s ease-out forwards backgroundGrow}.kiro-face.thinking .kiro-face-background.main-animation{animation:3s ease-in-out infinite pulse}.kiro-face.thinking .kiro-face-eye.lead-in{animation:.5s ease-out forwards eyeLeadIn}.kiro-face.thinking .kiro-face-eye.main-animation{animation:3s ease-in-out infinite eyeMove}@keyframes pulse{50%{opacity:.5}}@keyframes eyeLeadIn{0%{transform:translate(0)}to{transform:translate(-4px)}}@keyframes backgroundGrow{0%{opacity:0}to{opacity:1}}@keyframes eyeMove{0%{transform:translate(-4px)}12.5%{transform:translate(-4px)}25%{transform:translate(-4px)}37.5%{transform:translate(-4px)}50%{transform:translate(4px)}62.5%{transform:translate(4px)}75%{transform:translate(4px)}87.5%{transform:translate(4px)}to{transform:translate(-4px)}}.kiro-dropdown{--dropdown-padding-inline:var(--spacing-xs);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition);position",
+    "value": "absolute;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition-show-delay",
+    "value": ".15s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition-closing-delay",
+    "value": ".15s}.core-styles-module_tooltip__3vRRp{opacity:0;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity var(--rt-transition-show-delay)ease-out}.core-styles-module_closing__sGnxF{opacity:0;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity var(--rt-transition-closing-delay)ease-in}.styles-module_tooltip__mnnfp{border-radius:3px;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": ".2s ease-in;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "opacity .15s,visibility .15s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "border-color .2s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "min-height .5s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "top .5s;",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "transform .3s}.kiro-snackbar-expand[data-expanded=true]{transform:rotate(90deg)}.thinking-text[data-is-thinking=true]:after{content:\"\";",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "property": "transition",
+    "value": "background-color var(--kiro-transition),left var(--kiro-transition);",
+    "type": "transition-property",
+    "source_file": "index.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/hook-editor/dist/index.css"
+  },
+  {
+    "name": "codicon-spin",
+    "type": "keyframes",
+    "source_file": "kiricon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/kiricons/dist/kiricon.css"
+  },
+  {
+    "property": "animation",
+    "value": " codicon-spin 1.5s steps(30) infinite;",
+    "type": "animation-property",
+    "source_file": "kiricon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/kiricons/dist/kiricon.css"
+  },
+  {
+    "property": "animation-duration",
+    "value": " 1s !important;",
+    "type": "animation-property",
+    "source_file": "kiricon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/kiricons/dist/kiricon.css"
+  },
+  {
+    "property": "animation-timing-function",
+    "value": " cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;",
+    "type": "animation-property",
+    "source_file": "kiricon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/packages/kiricons/dist/kiricon.css"
+  },
+  {
+    "property": "transition-property",
+    "value": " opacity;",
+    "type": "transition-property",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "property": "transition-timing-function",
+    "value": " cubic-bezier(0.4, 0, 0.2, 1);",
+    "type": "transition-property",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": " 150ms;",
+    "type": "transition-property",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "property": "transition-duration",
+    "value": " 200ms;",
+    "type": "transition-property",
+    "source_file": "chat-context-viewer.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/kiro.kiro-agent/bundled-webviews/chat-context-viewer.css"
+  },
+  {
+    "name": "codicon-spin",
+    "type": "keyframes",
+    "source_file": "codicon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/simple-browser/media/codicon.css"
+  },
+  {
+    "property": "animation",
+    "value": "codicon-spin 1.5s steps(30) infinite}.codicon-modifier-disabled{opacity:.5}.codicon-modifier-hidden{opacity:0}.codicon-loading{animation-duration:1s!important;",
+    "type": "animation-property",
+    "source_file": "codicon.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/simple-browser/media/codicon.css"
+  },
+  {
+    "name": "rise-and-glow",
+    "type": "keyframes",
+    "source_file": "auth.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/github-authentication/media/auth.css"
+  },
+  {
+    "property": "animation",
+    "value": " rise-and-glow 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;",
+    "type": "animation-property",
+    "source_file": "auth.css",
+    "source_path": "/Users/neetipatni/Desktop/extracted_kiro/data/usr/share/kiro/resources/app/extensions/github-authentication/media/auth.css"
+  }
+]
