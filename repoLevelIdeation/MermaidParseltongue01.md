@@ -469,7 +469,7 @@ flowchart TD
     class BOTTLENECK_FUNC bottleneck
     class SAVE,LOG exit
     
-    linkStyle 6 stroke:#d32f2f,stroke-width:4px,stroke-dasharray:5 5
+    linkStyle 5 stroke:#d32f2f,stroke-width:4px,stroke-dasharray:5 5
 ```
 
 ### Data Flow: Information Movement Through System
@@ -932,8 +932,7 @@ flowchart TD
     class UI_PKG,WEB_PKG,API_PKG,HANDLER_PKG,CORE_PKG,BUSINESS_PKG,DB_PKG,CACHE_PKG layer
     class V1,V2,V3 violation
     
-    linkStyle 0,1,2 stroke:#4caf50,stroke-width:2px
-    linkStyle 3,4,5 stroke:#d32f2f,stroke-width:3px,stroke-dasharray:5 5
+    linkStyle 0,1,2 stroke:#d32f2f,stroke-width:3px,stroke-dasharray:5 5
 ```
 
 ### Dependency Rule Violations
