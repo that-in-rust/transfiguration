@@ -52,9 +52,9 @@ flowchart TD
     end
     
     subgraph L0["LEVEL 0: Line Graph"]
-        L1["variable data flow"]
-        L2["taint tracking"]
-        L3["use-def chains"]
+        L0_1["variable data flow"]
+        L0_2["taint tracking"]
+        L0_3["use-def chains"]
     end
     
     L5 -.-> L4
@@ -98,14 +98,14 @@ flowchart TD
     end
     
     subgraph "Line Level"
-        VAR_DEF["let user = get_user()"] --> VAR_USE["validate(user)"]
+        L0_1["let user = get_user()"] --> L0_2["validate(user)"]
     end
     
     API -.->|"1. System boundary"| API_PKG
     API_PKG -.->|"2. Package flow"| HANDLER
     HANDLER -.->|"3. File dependency"| HANDLE
     HANDLE -.->|"4. Function call"| IF_BLOCK
-    IF_BLOCK -.->|"5. Control flow"| VAR_DEF
+    IF_BLOCK -.->|"5. Control flow"| L0_1
     
     classDef system fill:#e1f5fe,stroke:#0277bd
     classDef package fill:#f3e5f5,stroke:#7b1fa2
@@ -119,7 +119,7 @@ flowchart TD
     class HANDLER,PROCESSOR file
     class HANDLE,PROCESS function
     class IF_BLOCK,LOOP_BLOCK block
-    class VAR_DEF,VAR_USE line
+    class L0_1,L0_2 line
     
     linkStyle 5,6,7,8,9 stroke:#666,stroke-dasharray:5 5,color:#666
 ```
@@ -568,7 +568,7 @@ flowchart TD
     end
     
     subgraph L0["Line Level"]
-        TOKEN_VAR["let token = extract_token()"] --> TOKEN_USE["decode_jwt(token)"]
+        L0_1["let token = extract_token()"] --> L0_2["decode_jwt(token)"]
     end
     
     subgraph FLOW_TYPES["Flow Types at Each Level"]
@@ -581,7 +581,7 @@ flowchart TD
     API_PKG -.->|"2. Package dependency"| HANDLER
     HANDLER -.->|"3. File import"| HANDLE
     HANDLE -.->|"4. Function call"| IF_AUTH
-    IF_AUTH -.->|"5. Control transfer"| TOKEN_VAR
+    IF_AUTH -.->|"5. Control transfer"| L0_1
     
     L0 -->|"analyzed by"| FLOW_TYPES
     
@@ -598,7 +598,7 @@ flowchart TD
     class HANDLER,AUTH file
     class HANDLE,VALIDATE function
     class IF_AUTH,LOGIC block
-    class TOKEN_VAR,TOKEN_USE line
+    class L0_1,L0_2 line
     class CONTROL_FLOW,DATA_FLOW,TEMPORAL_FLOW flow
 ```
 
