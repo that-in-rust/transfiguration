@@ -53,3 +53,17 @@ Potential applications include:
 - Enhanced debugging and troubleshooting
 - Improved code refactoring and optimization
 
+# Current Scope
+
+Logical way to think of this problem statement
+- We need highest signal to noise ratio code context
+- Our first step was converting all code to basic function signatures dependency graph which is lower level map than files but higher level map than non-public interface and raw code
+- But we realized N things
+    - Even ISGs or Interface Signature Graphs can be large and eat up too much context
+    - Even if you remove a lot clearly useless stuff like tests or other folders from your ISGs still they are very large
+    - Even if you do above, then you still do not know how the compiler sees it in terms of control flow, data flow
+    - Even if you do above, then this is stil not enough signal information for the human to think of how to manipulate this code, because the compiler discovers the flow of the code as it processes it, but humans need to simulate it which is time-window analysis whereas most compilers just process and stop at the non-compilation
+        - Some things compilers can look forward via static rules
+        - Some things compilers cannot look forward because of logical errors and hence runtime behavior feels odd
+        - A human needs to do both which is time-window analysis
+- Our task is give highest quality context to the LLMs to think of how to manipulate this code
