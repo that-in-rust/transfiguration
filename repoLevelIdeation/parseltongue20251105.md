@@ -67,3 +67,5 @@ Logical way to think of this problem statement
         - Some things compilers cannot look forward because of logical errors and hence runtime behavior feels odd
         - A human needs to do both which is time-window analysis
 - Our task is give highest quality context to the LLMs to think of how to manipulate this code
+
+- Pure functional programming is a step in the right direction for highest predictability of code
