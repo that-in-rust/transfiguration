@@ -1,0 +1,2120 @@
+{
+  "-analysis__implementation_plan-6564047c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6564047c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__implementation_plan.md"
+  },
+  "007_ArchitecturalEvolution_ISG-1bf78378.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1bf78378",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A007_ArchitecturalEvolution_ISG.md"
+  },
+  "007_ArchitecturalEvolution_ISG-8d94fd95.md": {
+    "archived_date": "2025-11-07",
+    "hash": "8d94fd95",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A007_ArchitecturalEvolution_ISG.md"
+  },
+  "01-tdd-architecture-principles-5012f0ef.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5012f0ef",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__steering__design101-tdd-architecture-principles.md"
+  },
+  "01-tdd-architecture-principles-52d5ee08.md": {
+    "archived_date": "2025-11-07",
+    "hash": "52d5ee08",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__steering__design101-tdd-architecture-principles.md"
+  },
+  "014p1__.git__hooks__commit-msg-4474a0cf.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "4474a0cf",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__commit-msg.sample"
+  },
+  "014p1__.git__hooks__pre-commit-5123f72f.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "5123f72f",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-commit.sample"
+  },
+  "014p1__.git__hooks__pre-rebase-00f53bfc.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "00f53bfc",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-rebase.sample"
+  },
+  "0251014p1__.git__hooks__update-47ade06f.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "47ade06f",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__update.sample"
+  },
+  "0251014p1__TOC_QUICK_REFERENCE-cb8acca9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "cb8acca9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__TOC_QUICK_REFERENCE.md"
+  },
+  "0251014p1__claude_code_zai_env-11a0d44d.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "11a0d44d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__claude_code_zai_env.sh"
+  },
+  "02510__P15ValidateArchitecture-00721cee.md": {
+    "archived_date": "2025-11-07",
+    "hash": "00721cee",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P15ValidateArchitecture.md"
+  },
+  "02510__zzArchive__chunk_themes-0d92bb4a.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "0d92bb4a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__zzArchive__chunk_themes.txt"
+  },
+  "04_PRD202510__P05ModuleMermaid-454289dd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "454289dd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P05ModuleMermaid.md"
+  },
+  "04_PRD202510__P14ThreeJourneys-413c7e27.md": {
+    "archived_date": "2025-11-07",
+    "hash": "413c7e27",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P14ThreeJourneys.md"
+  },
+  "04_PRD202510__P40ScopeFixation-56015d7d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "56015d7d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P40ScopeFixation.md"
+  },
+  "04_PRD202510__P41FilteredTools-57db70ba.md": {
+    "archived_date": "2025-11-07",
+    "hash": "57db70ba",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P41FilteredTools.md"
+  },
+  "06RustNotes__RustResearch_urls-d6b6e4dd.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "d6b6e4dd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustResearch_urls.txt"
+  },
+  "06RustNotes__trun_rust_idiom_2-ebc17103.json": {
+    "archived_date": "2025-11-07",
+    "hash": "ebc17103",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__trun_rust_idiom_2.json"
+  },
+  "06RustNotes__trun_rust_idiom_5-0db77985.json": {
+    "archived_date": "2025-11-07",
+    "hash": "0db77985",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__trun_rust_idiom_5.json"
+  },
+  "1014p1__TOC_GENERATION_SUMMARY-9cd34c4d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9cd34c4d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__TOC_GENERATION_SUMMARY.md"
+  },
+  "10__P20_Bug_Fixing_UserJourney-c46a8a4f.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c46a8a4f",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P20_Bug_Fixing_UserJourney.md"
+  },
+  "14p1__.git__hooks__post-update-a9a2d46b.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "a9a2d46b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__post-update.sample"
+  },
+  "14p1__.git__hooks__pre-receive-23fff94c.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "23fff94c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-receive.sample"
+  },
+  "1_IDEAnalysis__Journal20250926-44f3177e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "44f3177e",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Journal20250926.md"
+  },
+  "1_IDEAnalysis__Journal20250926-4bd9784c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "4bd9784c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__Journal20250926.md"
+  },
+  "1__.git__hooks__applypatch-msg-aed2feb1.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "aed2feb1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__applypatch-msg.sample"
+  },
+  "1__.git__hooks__pre-applypatch-3cce000d.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "3cce000d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-applypatch.sample"
+  },
+  "202510__P07MetaPatternsMermaid-6ec3e3e3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6ec3e3e3",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P07MetaPatternsMermaid.md"
+  },
+  "28898c8ef7483eace3078d9b2f944e-c0bda1df.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "c0bda1df",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.LLMNotes__UnpackKiro_trun_c928898c8ef7483eace3078d9b2f944e.txt"
+  },
+  "28898c8ef7483eace3078d9b2f944e-c625be95.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "c625be95",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.LLMNotes__UnpackKiro_trun_c928898c8ef7483eace3078d9b2f944e.txt"
+  },
+  "28898c8ef7483eadc3541123e5d88f-8c6cc8bb.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "8c6cc8bb",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.LLMNotes__DeconstructDeb_trun_c928898c8ef7483eadc3541123e5d88f.txt"
+  },
+  "28898c8ef7483eadc3541123e5d88f-bcc08677.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "bcc08677",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.LLMNotes__DeconstructDeb_trun_c928898c8ef7483eadc3541123e5d88f.txt"
+  },
+  "4_PRD202510__P11ClaudeInspired-196a44d8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "196a44d8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P11ClaudeInspired.md"
+  },
+  "4_PRD202510__P13ClaudeComplete-65f366f1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "65f366f1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P13ClaudeComplete.md"
+  },
+  "4_PRD202510__P22PreFlightIdeas-d4346de0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d4346de0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P22PreFlightIdeas.md"
+  },
+  "4_PRD202510__P24ClaudePlugin02-db93e581.md": {
+    "archived_date": "2025-11-07",
+    "hash": "db93e581",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P24ClaudePlugin02.md"
+  },
+  "4_PRD202510__P25ToolCollection-ed87c21d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ed87c21d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P25ToolCollection.md"
+  },
+  "4_PRD202510__P26ToolsMermaid01-d5b4f7b9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d5b4f7b9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P26ToolsMermaid01.md"
+  },
+  "4_PRD202510__P43ToolsMermaid01-400d5293.md": {
+    "archived_date": "2025-11-07",
+    "hash": "400d5293",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P43ToolsMermaid01.md"
+  },
+  "4_PRD202510__P44ToolsMermaid02-1d56c9b6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1d56c9b6",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P44ToolsMermaid02.md"
+  },
+  "4p1__.domainDocs__D01Subagents-792cf14a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "792cf14a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.domainDocs__D01Subagents.md"
+  },
+  "51014p1__.git__hooks__pre-push-3fb2dd56.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "3fb2dd56",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-push.sample"
+  },
+  "51014p1__archive_utils__README-d1e8373d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d1e8373d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__archive_utils__README.md"
+  },
+  "510__P00CoreUserflow20251014p1-576fa783.md": {
+    "archived_date": "2025-11-07",
+    "hash": "576fa783",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P00CoreUserflow20251014p1.md"
+  },
+  "510__P19_128K_Context_Analysis-25b1639c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "25b1639c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P19_128K_Context_Analysis.md"
+  },
+  "510__P35ToolEnrichmentTaskList-36affa83.md": {
+    "archived_date": "2025-11-07",
+    "hash": "36affa83",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P35ToolEnrichmentTaskList.md"
+  },
+  "510__P45RustPatternFilesFinder-1ecea03c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1ecea03c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P45RustPatternFilesFinder.md"
+  },
+  "64a7ec49234b9359e5465040efacce-3bb6d70b.idx": {
+    "archived_date": "2025-11-07",
+    "hash": "3bb6d70b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__objects__pack__pack-5c6ba1b38864a7ec49234b9359e5465040efacce.idx"
+  },
+  "64a7ec49234b9359e5465040efacce-94b9d6a8.rev": {
+    "archived_date": "2025-11-07",
+    "hash": "94b9d6a8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__objects__pack__pack-5c6ba1b38864a7ec49234b9359e5465040efacce.rev"
+  },
+  "64a7ec49234b9359e5465040efacce-d753a4ed.pack": {
+    "archived_date": "2025-11-07",
+    "hash": "d753a4ed",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__objects__pack__pack-5c6ba1b38864a7ec49234b9359e5465040efacce.pack"
+  },
+  "A006_MintoPyramid_ISG_Strategy-7f8d987a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7f8d987a",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A006_MintoPyramid_ISG_Strategy.md"
+  },
+  "A006_MintoPyramid_ISG_Strategy-f72c6fa4.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f72c6fa4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A006_MintoPyramid_ISG_Strategy.md"
+  },
+  "AndTestScenarios_Comprehensive-1daa3d99.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1daa3d99",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__.domainDocs__P02_MockDataAndTestScenarios_Comprehensive.md"
+  },
+  "CONFIGURATION_ANALYZER_SUMMARY-b6b8f59c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b6b8f59c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__CONFIGURATION_ANALYZER_SUMMARY.md"
+  },
+  "CONFIGURATION_ANALYZER_SUMMARY-bba75115.md": {
+    "archived_date": "2025-11-07",
+    "hash": "bba75115",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__CONFIGURATION_ANALYZER_SUMMARY.md"
+  },
+  "Claude-code-analysis__indexing-547117c1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "547117c1",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__indexing.md"
+  },
+  "Claude-code-analysis__indexing-97ac40fd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "97ac40fd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__Claude-code-analysis__indexing.md"
+  },
+  "D202510__P01ParseltonguePRDv01-c80f2681.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c80f2681",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P01ParseltonguePRDv01.md"
+  },
+  "D202510__P06EnhancementMermaid-ce24a37a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ce24a37a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P06EnhancementMermaid.md"
+  },
+  "D202510__chunk_themes_filtered-1ea3b1ce.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "1ea3b1ce",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__chunk_themes_filtered.txt"
+  },
+  "DEAnalysis__.LLMNotes__Notes01-968dcc56.md": {
+    "archived_date": "2025-11-07",
+    "hash": "968dcc56",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.LLMNotes__Notes01.md"
+  },
+  "DEAnalysis__.LLMNotes__Notes01-aaa2db81.md": {
+    "archived_date": "2025-11-07",
+    "hash": "aaa2db81",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.LLMNotes__Notes01.md"
+  },
+  "EAnalysis__lib__error_handling-9af97244.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "9af97244",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__error_handling.sh"
+  },
+  "EAnalysis__lib__error_handling-da04b0df.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "da04b0df",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__error_handling.sh"
+  },
+  "EAnalysis__lib__file_discovery-647d807b.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "647d807b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__file_discovery.sh"
+  },
+  "EAnalysis__lib__file_discovery-aace935b.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "aace935b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__file_discovery.sh"
+  },
+  "EAnalysis__lib__phase2_handoff-177d561d.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "177d561d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__phase2_handoff.sh"
+  },
+  "EAnalysis__lib__phase2_handoff-d0e4a62f.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "d0e4a62f",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__phase2_handoff.sh"
+  },
+  "ETBRAINS_COMPLETE_PRODUCT_LIST-a5ac6d08.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a5ac6d08",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__JETBRAINS_COMPLETE_PRODUCT_LIST.md"
+  },
+  "Evolution__A009focus20251014p1-0873e4ce.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0873e4ce",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A009focus20251014p1.md"
+  },
+  "Fast Deep-Dive into Kiro\u2019s.deb-7bdf4d46.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7bdf4d46",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.LLMNotes__UnpackKiro_Unpack With Confidence_ A Secure, Streaming-Fast Deep-Dive into Kiro\u2019s.deb.md"
+  },
+  "Fast Deep-Dive into Kiro\u2019s.deb-a9f7a071.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a9f7a071",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.LLMNotes__UnpackKiro_Unpack With Confidence_ A Secure, Streaming-Fast Deep-Dive into Kiro\u2019s.deb.md"
+  },
+  "HENSIVE_IDE_EVOLUTION_ANALYSIS-028c04c0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "028c04c0",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__COMPREHENSIVE_IDE_EVOLUTION_ANALYSIS.md"
+  },
+  "Insp02_RustPerformance__README-9a1fff56.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9a1fff56",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp02_RustPerformance__README.md"
+  },
+  "Insp04_PRD202510__P03Mermaid01-a299aa2d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a299aa2d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P03Mermaid01.md"
+  },
+  "Insp04_PRD202510__P34DeepNotes-717da288.md": {
+    "archived_date": "2025-11-07",
+    "hash": "717da288",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P34DeepNotes.md"
+  },
+  "Insp04_PRD202510__P42MECEtools-e0474a31.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e0474a31",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P42MECEtools.md"
+  },
+  "NALYSIS_IMPLEMENTATION_SUMMARY-3b759e1b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3b759e1b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__BEHAVIORAL_ANALYSIS_IMPLEMENTATION_SUMMARY.md"
+  },
+  "NALYSIS_IMPLEMENTATION_SUMMARY-41678dde.md": {
+    "archived_date": "2025-11-07",
+    "hash": "41678dde",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__BEHAVIORAL_ANALYSIS_IMPLEMENTATION_SUMMARY.md"
+  },
+  "Notes__trun_rust_idiom_driver1-a661de6a.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "a661de6a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__trun_rust_idiom_driver1.txt"
+  },
+  "Notes__trun_rust_idiom_driver2-13a27fc9.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "13a27fc9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__trun_rust_idiom_driver2.txt"
+  },
+  "OC__scripts__download_t5_model-0721618e.py": {
+    "archived_date": "2025-11-07",
+    "hash": "0721618e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__download_t5_model.py"
+  },
+  "PERFORMANCE_OPTIMIZATION_GUIDE-b8669d2e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b8669d2e",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__PERFORMANCE_OPTIMIZATION_GUIDE.md"
+  },
+  "PERFORMANCE_OPTIMIZATION_GUIDE-f2177b73.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f2177b73",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__PERFORMANCE_OPTIMIZATION_GUIDE.md"
+  },
+  "PRD202510__P16NotesOnSubAgents-7b276680.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7b276680",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P16NotesOnSubAgents.md"
+  },
+  "RD202510__P02Deconstructionv01-ee501306.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ee501306",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P02Deconstructionv01.md"
+  },
+  "RustIdioms_trun_rust_idiom_new-39656d75.json": {
+    "archived_date": "2025-11-07",
+    "hash": "39656d75",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_new.json"
+  },
+  "S01-rust-file-unpacker__design-953d4c9a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "953d4c9a",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__design.md"
+  },
+  "S01-rust-file-unpacker__design-af39ac57.md": {
+    "archived_date": "2025-11-07",
+    "hash": "af39ac57",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__design.md"
+  },
+  "_.git__hooks__pre-merge-commit-66cdb7f4.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "66cdb7f4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__pre-merge-commit.sample"
+  },
+  "_.git__hooks__push-to-checkout-7ddc4083.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "7ddc4083",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__push-to-checkout.sample"
+  },
+  "_Claude-code-analysis__mermaid-de2ce26b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "de2ce26b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__mermaid.md"
+  },
+  "_D03TreeSitterSemanticChunking-64c2afbd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "64c2afbd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.domainDocs__D03TreeSitterSemanticChunking.md"
+  },
+  "_IDEAnalysis__test_ui_analyzer-57045053.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "57045053",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analyzer.sh"
+  },
+  "_IDEAnalysis__test_ui_analyzer-bbe2bea8.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "bbe2bea8",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_ui_analyzer.sh"
+  },
+  "_Insp04_PRD202510__P10Complete-f88242ba.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f88242ba",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P10Complete.md"
+  },
+  "_Insp04_PRD202510__P21_ArchV01-aa83c437.md": {
+    "archived_date": "2025-11-07",
+    "hash": "aa83c437",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P21_ArchV01.md"
+  },
+  "_MASTER_IDE_EVOLUTION_ANALYSIS-9a00b566.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9a00b566",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__MASTER_IDE_EVOLUTION_ANALYSIS.md"
+  },
+  "_P45RustPatternDiscoveryMethod-a081f939.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a081f939",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P45RustPatternDiscoveryMethod.md"
+  },
+  "_PRD202510__P04ClaudeMermaid01-a464e739.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a464e739",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P04ClaudeMermaid01.md"
+  },
+  "_PRD202510__P04ClaudeMermaid02-ca20a432.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ca20a432",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P04ClaudeMermaid02.md"
+  },
+  "_PRD202510__P08MermaidUserFlow-593ee4dc.md": {
+    "archived_date": "2025-11-07",
+    "hash": "593ee4dc",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P08MermaidUserFlow.md"
+  },
+  "_ParseltongueEvolution__README-11254fa4.md": {
+    "archived_date": "2025-11-07",
+    "hash": "11254fa4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__README.md"
+  },
+  "_ParseltongueEvolution__README-5835dd40.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5835dd40",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__README.md"
+  },
+  "_S01-rust-file-unpacker__tasks-00fce20b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "00fce20b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__tasks.md"
+  },
+  "_S01-rust-file-unpacker__tasks-6c22ac84.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6c22ac84",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__tasks.md"
+  },
+  "_TASK_6_IMPLEMENTATION_SUMMARY-10e56c84.md": {
+    "archived_date": "2025-11-07",
+    "hash": "10e56c84",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__TASK_6_IMPLEMENTATION_SUMMARY.md"
+  },
+  "_TASK_6_IMPLEMENTATION_SUMMARY-992e9cc2.md": {
+    "archived_date": "2025-11-07",
+    "hash": "992e9cc2",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__TASK_6_IMPLEMENTATION_SUMMARY.md"
+  },
+  "_UI_STRUCTURE_ANALYSIS_SUMMARY-09155494.md": {
+    "archived_date": "2025-11-07",
+    "hash": "09155494",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__UI_STRUCTURE_ANALYSIS_SUMMARY.md"
+  },
+  "_UI_STRUCTURE_ANALYSIS_SUMMARY-b7d39ce0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b7d39ce0",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__UI_STRUCTURE_ANALYSIS_SUMMARY.md"
+  },
+  "__A001_RustPerformanceOverview-0887417b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0887417b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp02_RustPerformance__A001_RustPerformanceOverview.md"
+  },
+  "__A001_RustPerformanceOverview-15209520.md": {
+    "archived_date": "2025-11-07",
+    "hash": "15209520",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp02_RustPerformance__A001_RustPerformanceOverview.md"
+  },
+  "__A002_RustRoverDeconstruction-6b32601d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6b32601d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp02_RustPerformance__A002_RustRoverDeconstruction.md"
+  },
+  "__A002_RustRoverDeconstruction-a89aed68.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a89aed68",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp02_RustPerformance__A002_RustRoverDeconstruction.md"
+  },
+  "__A003_HybridPlan2Architecture-78a74cb3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "78a74cb3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp02_RustPerformance__A003_HybridPlan2Architecture.md"
+  },
+  "__A003_HybridPlan2Architecture-be565e54.md": {
+    "archived_date": "2025-11-07",
+    "hash": "be565e54",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp02_RustPerformance__A003_HybridPlan2Architecture.md"
+  },
+  "__B01Current__A01PyramidForMVP-91f1d152.md": {
+    "archived_date": "2025-11-07",
+    "hash": "91f1d152",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__A01PyramidForMVP.md"
+  },
+  "__Insp04_PRD202510__P18AltWays-6dfc7d7f.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6dfc7d7f",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P18AltWays.md"
+  },
+  "__MIGRATION_DECISION_FRAMEWORK-399b04a6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "399b04a6",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__MIGRATION_DECISION_FRAMEWORK.md"
+  },
+  "__MIGRATION_DECISION_FRAMEWORK-ca48ef2e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ca48ef2e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__MIGRATION_DECISION_FRAMEWORK.md"
+  },
+  "__RustIdioms_trun_rust_idiom_1-fa73a541.json": {
+    "archived_date": "2025-11-07",
+    "hash": "fa73a541",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_1.json"
+  },
+  "__RustIdioms_trun_rust_idiom_3-aef0aaec.json": {
+    "archived_date": "2025-11-07",
+    "hash": "aef0aaec",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_3.json"
+  },
+  "__RustIdioms_trun_rust_idiom_4-14fa9323.json": {
+    "archived_date": "2025-11-07",
+    "hash": "14fa9323",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_4.json"
+  },
+  "__cline-cline-8a5edab282632443-1fe74fc5.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "1fe74fc5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__cline-cline-8a5edab282632443.txt"
+  },
+  "__cozo_candle_research_summary-d5016fb9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d5016fb9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__cozo_candle_research_summary.md"
+  },
+  "__phase2_handoff_documentation-79a62eee.md": {
+    "archived_date": "2025-11-07",
+    "hash": "79a62eee",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__phase2_handoff__phase2_handoff_documentation.md"
+  },
+  "__phase2_handoff_documentation-7b109dcf.json": {
+    "archived_date": "2025-11-07",
+    "hash": "7b109dcf",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__phase2_handoff__phase2_handoff_documentation.json"
+  },
+  "__scripts__create_simple_model-dabc7caa.py": {
+    "archived_date": "2025-11-07",
+    "hash": "dabc7caa",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__create_simple_model.py"
+  },
+  "__steering__A01-README-MOSTIMP-7c9644b4.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7c9644b4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__steering__A01-README-MOSTIMP.md"
+  },
+  "__steering__A01-README-MOSTIMP-bc53b8a7.md": {
+    "archived_date": "2025-11-07",
+    "hash": "bc53b8a7",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__steering__A01-README-MOSTIMP.md"
+  },
+  "__technology_adoption_analysis-3a760815.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3a760815",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ecosystem_trends__technology_adoption_analysis.md"
+  },
+  "__technology_adoption_analysis-b45b434c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b45b434c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ecosystem_trends__technology_adoption_analysis.md"
+  },
+  "__tests__fixtures__iggy_apache-608b9c0b.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "608b9c0b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__tests__fixtures__iggy_apache.txt"
+  },
+  "_chunk_themes_sorted_by_number-0cc3d3e5.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "0cc3d3e5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__zzArchive__chunk_themes_sorted_by_number.txt"
+  },
+  "_competitive_analysis_detailed-0344cb0e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0344cb0e",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ai_ides__competitive_analysis_detailed.md"
+  },
+  "_competitive_analysis_detailed-5bd71ea9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5bd71ea9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ai_ides__competitive_analysis_detailed.md"
+  },
+  "_preference_evolution_analysis-73581c89.md": {
+    "archived_date": "2025-11-07",
+    "hash": "73581c89",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ecosystem_trends__user_preference_evolution_analysis.md"
+  },
+  "_preference_evolution_analysis-ecbd22e8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ecbd22e8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ecosystem_trends__user_preference_evolution_analysis.md"
+  },
+  "_research_data__task_3_summary-250e7bbc.md": {
+    "archived_date": "2025-11-07",
+    "hash": "250e7bbc",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__task_3_summary.md"
+  },
+  "_research_data__task_3_summary-8955264d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "8955264d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__task_3_summary.md"
+  },
+  "_scripts__convert_with_optimum-0df48eba.py": {
+    "archived_date": "2025-11-07",
+    "hash": "0df48eba",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__convert_with_optimum.py"
+  },
+  "_validation__confidence_report-15339640.md": {
+    "archived_date": "2025-11-07",
+    "hash": "15339640",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__validation__confidence_report.md"
+  },
+  "agent-code-summarizer__backlog-6240712d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6240712d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__backlog.md"
+  },
+  "alysis__.kiro__MermaidSteering-9a2fd06e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9a2fd06e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__MermaidSteering.md"
+  },
+  "alysis__.kiro__MermaidSteering-b65bf90a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b65bf90a",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__MermaidSteering.md"
+  },
+  "alysis__IMPLEMENTATION_SUMMARY-5813c222.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5813c222",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__IMPLEMENTATION_SUMMARY.md"
+  },
+  "alysis__IMPLEMENTATION_SUMMARY-ba7beaf8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ba7beaf8",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__IMPLEMENTATION_SUMMARY.md"
+  },
+  "alysis__lib__output_management-6b4a2b39.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "6b4a2b39",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__output_management.sh"
+  },
+  "alysis__lib__output_management-b28541ba.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "b28541ba",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__output_management.sh"
+  },
+  "alysis__lib__typescript_parser-2bcfc9c1.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "2bcfc9c1",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__typescript_parser.sh"
+  },
+  "alysis__lib__typescript_parser-de2384d5.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "de2384d5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__typescript_parser.sh"
+  },
+  "alysis__test_analysis_pipeline-1ba895d5.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "1ba895d5",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_analysis_pipeline.sh"
+  },
+  "alysis__test_analysis_pipeline-a8668e00.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "a8668e00",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_analysis_pipeline.sh"
+  },
+  "analysis-phase-2__requirements-095d75e5.md": {
+    "archived_date": "2025-11-07",
+    "hash": "095d75e5",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__requirements.md"
+  },
+  "analysis-phase-2__requirements-c8791923.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c8791923",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__requirements.md"
+  },
+  "ansfiguration-behavior__design-63bd9c97.md": {
+    "archived_date": "2025-11-07",
+    "hash": "63bd9c97",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__design.md"
+  },
+  "ansfiguration-behavior__design-98bb904e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "98bb904e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__design.md"
+  },
+  "asm_ides__performance_analysis-6cc353e8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6cc353e8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__rust_wasm_ides__performance_analysis.md"
+  },
+  "asm_ides__performance_analysis-a641a092.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a641a092",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__rust_wasm_ides__performance_analysis.md"
+  },
+  "atives__RustIdiomsLong20251021-d00cf4df.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d00cf4df",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__RustIdiomsLong20251021.md"
+  },
+  "aude-code-8a5edab282632443 (1)-16daf37a.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "16daf37a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__anthropics-claude-code-8a5edab282632443 (1).txt"
+  },
+  "aude-code-8a5edab282632443 (1)-f899ae96.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "f899ae96",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__anthropics-claude-code-8a5edab282632443 (1).txt"
+  },
+  "aude-code-8a5edab282632443 (3)-31ec7709.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "31ec7709",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__anthropics-claude-code-8a5edab282632443 (3).txt"
+  },
+  "aude-code-analysis__limitation-216211d8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "216211d8",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__limitation.md"
+  },
+  "aude-code-analysis__limitation-5fd69fd0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5fd69fd0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__Claude-code-analysis__limitation.md"
+  },
+  "b20251014p1__TABLE_OF_CONTENTS-b6efde1d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b6efde1d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__TABLE_OF_CONTENTS.md"
+  },
+  "b20251014p1__TABLE_OF_CONTENTS-c1caf233.json": {
+    "archived_date": "2025-11-07",
+    "hash": "c1caf233",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__TABLE_OF_CONTENTS.json"
+  },
+  "b__behavioral_pattern_analyzer-6b345eab.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "6b345eab",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__behavioral_pattern_analyzer.sh"
+  },
+  "b__behavioral_pattern_analyzer-c15082a3.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "c15082a3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__behavioral_pattern_analyzer.sh"
+  },
+  "bagent-code-summarizer__README-8e8da80a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "8e8da80a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__README.md"
+  },
+  "ce__A004_ImplementationTracker-674d0a47.md": {
+    "archived_date": "2025-11-07",
+    "hash": "674d0a47",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp02_RustPerformance__A004_ImplementationTracker.md"
+  },
+  "ce__A004_ImplementationTracker-d173ef74.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d173ef74",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp02_RustPerformance__A004_ImplementationTracker.md"
+  },
+  "code-analysis__available_tools-c1d761a6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c1d761a6",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__available_tools.md"
+  },
+  "comprehensive_pattern_analysis-994cac51.md": {
+    "archived_date": "2025-11-07",
+    "hash": "994cac51",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__analysis__comprehensive_pattern_analysis.md"
+  },
+  "comprehensive_pattern_analysis-db6df0f4.md": {
+    "archived_date": "2025-11-07",
+    "hash": "db6df0f4",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__analysis__comprehensive_pattern_analysis.md"
+  },
+  "cripts__convert_codet5_to_onnx-26a34682.py": {
+    "archived_date": "2025-11-07",
+    "hash": "26a34682",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__convert_codet5_to_onnx.py"
+  },
+  "cripts__download_codet5_simple-eb2e8ab8.py": {
+    "archived_date": "2025-11-07",
+    "hash": "eb2e8ab8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__download_codet5_simple.py"
+  },
+  "cripts__prepare_vocab_for_rust-9b8170b4.py": {
+    "archived_date": "2025-11-07",
+    "hash": "9b8170b4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__prepare_vocab_for_rust.py"
+  },
+  "cs__D04StrategicCandleDecision-49f5694b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "49f5694b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.domainDocs__D04StrategicCandleDecision.md"
+  },
+  "de-code-analysis__benchmarking-34de5007.md": {
+    "archived_date": "2025-11-07",
+    "hash": "34de5007",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__Claude-code-analysis__benchmarking.md"
+  },
+  "de-code-analysis__benchmarking-927a9cd6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "927a9cd6",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__Claude-code-analysis__benchmarking.md"
+  },
+  "deation__B01Current__A02ArchV1-86dd24d0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "86dd24d0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__A02ArchV1.md"
+  },
+  "eEvolution__A011EvolvedJourney-dad2fb31.md": {
+    "archived_date": "2025-11-07",
+    "hash": "dad2fb31",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A011EvolvedJourney.md"
+  },
+  "eEvolution__A013Architecturev1-23b3a219.md": {
+    "archived_date": "2025-11-07",
+    "hash": "23b3a219",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A013Architecturev1.md"
+  },
+  "eEvolution__A014Architecturev2-77b06785.md": {
+    "archived_date": "2025-11-07",
+    "hash": "77b06785",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A014Architecturev2.md"
+  },
+  "eation__B01Current__A98NotesV2-93545733.md": {
+    "archived_date": "2025-11-07",
+    "hash": "93545733",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__A98NotesV2.md"
+  },
+  "eation__B01Current__A99NotesV1-02561d0c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "02561d0c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__A99NotesV1.md"
+  },
+  "ehavioral_specification_report-61802209.md": {
+    "archived_date": "2025-11-07",
+    "hash": "61802209",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__behavioral_specification__behavioral_specification_report.md"
+  },
+  "eltongueEvolution__A008further-15b35022.md": {
+    "archived_date": "2025-11-07",
+    "hash": "15b35022",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A008further.md"
+  },
+  "eltongueEvolution__A008further-208e7c99.md": {
+    "archived_date": "2025-11-07",
+    "hash": "208e7c99",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A008further.md"
+  },
+  "es__Insp01_IDEAnalysis__README-137ec514.md": {
+    "archived_date": "2025-11-07",
+    "hash": "137ec514",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__README.md"
+  },
+  "es__Insp04_PRD202510__P10Ideas-95cac6bd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "95cac6bd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P10Ideas.md"
+  },
+  "es__ai_ux_interaction_patterns-0d7d6174.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0d7d6174",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ai_ides__ai_ux_interaction_patterns.md"
+  },
+  "es__ai_ux_interaction_patterns-872fc111.md": {
+    "archived_date": "2025-11-07",
+    "hash": "872fc111",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ai_ides__ai_ux_interaction_patterns.md"
+  },
+  "est_ui_analysis_output__README-0d103818.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0d103818",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__README.md"
+  },
+  "fe, Deep-Dive Package Analysis-376dd98b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "376dd98b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.LLMNotes__DeconstructDebZero-Trust.deb Dissection_ A Rust Toolchain for Safe, Deep-Dive Package Analysis.md"
+  },
+  "fe, Deep-Dive Package Analysis-941e38c8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "941e38c8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.LLMNotes__DeconstructDebZero-Trust.deb Dissection_ A Rust Toolchain for Safe, Deep-Dive Package Analysis.md"
+  },
+  "ff__phase2_input_specification-0a8862c6.json": {
+    "archived_date": "2025-11-07",
+    "hash": "0a8862c6",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__phase2_handoff__phase2_input_specification.json"
+  },
+  "forks__ai_integration_analysis-aedfb118.md": {
+    "archived_date": "2025-11-07",
+    "hash": "aedfb118",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__vscode_forks__ai_integration_analysis.md"
+  },
+  "forks__ai_integration_analysis-edb0cfef.md": {
+    "archived_date": "2025-11-07",
+    "hash": "edb0cfef",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__vscode_forks__ai_integration_analysis.md"
+  },
+  "forks__business_model_analysis-10863011.md": {
+    "archived_date": "2025-11-07",
+    "hash": "10863011",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__vscode_forks__business_model_analysis.md"
+  },
+  "forks__business_model_analysis-74f55774.md": {
+    "archived_date": "2025-11-07",
+    "hash": "74f55774",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__vscode_forks__business_model_analysis.md"
+  },
+  "formance_optimization_patterns-25061488.md": {
+    "archived_date": "2025-11-07",
+    "hash": "25061488",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__technical_patterns__performance_optimization_patterns.md"
+  },
+  "formance_optimization_patterns-5dc5099c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "5dc5099c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__technical_patterns__performance_optimization_patterns.md"
+  },
+  "g__kiro-behavioral-replication-a9a360e1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a9a360e1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__steering__kiro-behavioral-replication.md"
+  },
+  "g__kiro-behavioral-replication-e4820b8b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e4820b8b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__steering__kiro-behavioral-replication.md"
+  },
+  "git__hooks__fsmonitor-watchman-0db25040.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "0db25040",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__fsmonitor-watchman.sample"
+  },
+  "git__hooks__prepare-commit-msg-9a75f9d2.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "9a75f9d2",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__prepare-commit-msg.sample"
+  },
+  "git__hooks__sendemail-validate-91c86667.sample": {
+    "archived_date": "2025-11-07",
+    "hash": "91c86667",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.git__hooks__sendemail-validate.sample"
+  },
+  "handoff__technical_constraints-9d193f7b.json": {
+    "archived_date": "2025-11-07",
+    "hash": "9d193f7b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__phase2_handoff__technical_constraints.json"
+  },
+  "hive_utils__export_smollm_int4-62ca50c0.py": {
+    "archived_date": "2025-11-07",
+    "hash": "62ca50c0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__archive_utils__export_smollm_int4.py"
+  },
+  "i_service_integration_patterns-51b183a8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "51b183a8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ai_ides__ai_service_integration_patterns.md"
+  },
+  "i_service_integration_patterns-9eda610b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9eda610b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ai_ides__ai_service_integration_patterns.md"
+  },
+  "iatives__LLM_PROMPT_RustIdioms-cacbc171.md": {
+    "archived_date": "2025-11-07",
+    "hash": "cacbc171",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__LLM_PROMPT_RustIdioms.md"
+  },
+  "iguration-ab20251014p1__README-d9a444d0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d9a444d0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__README.md"
+  },
+  "ils__qwen_quantization_summary-246c1dbc.md": {
+    "archived_date": "2025-11-07",
+    "hash": "246c1dbc",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__archive_utils__qwen_quantization_summary.md"
+  },
+  "ion__A002_WhenToStopOptimizing-bd60d06d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "bd60d06d",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A002_WhenToStopOptimizing.md"
+  },
+  "ion__A002_WhenToStopOptimizing-e0b92614.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e0b92614",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A002_WhenToStopOptimizing.md"
+  },
+  "ion__A003_StructuralPatternISG-43a569c1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "43a569c1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A003_StructuralPatternISG.md"
+  },
+  "ion__A003_StructuralPatternISG-7434d4a3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7434d4a3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A003_StructuralPatternISG.md"
+  },
+  "is__MIGRATION_ANALYSIS_SUMMARY-8d0ee6c3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "8d0ee6c3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__MIGRATION_ANALYSIS_SUMMARY.md"
+  },
+  "is__MIGRATION_ANALYSIS_SUMMARY-a9369bfd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a9369bfd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__MIGRATION_ANALYSIS_SUMMARY.md"
+  },
+  "is__integrate_analysis_results-6403ebe1.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "6403ebe1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__integrate_analysis_results.sh"
+  },
+  "is__integrate_analysis_results-ea9c1b1f.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "ea9c1b1f",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__integrate_analysis_results.sh"
+  },
+  "is__lib__ui_structure_analyzer-3a049bef.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "3a049bef",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__ui_structure_analyzer.sh"
+  },
+  "is__lib__ui_structure_analyzer-fce94063.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "fce94063",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__ui_structure_analyzer.sh"
+  },
+  "ives__Insp04_PRD202510__README-3c520efe.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3c520efe",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__README.md"
+  },
+  "ks__comprehensive_fork_catalog-18f4c856.md": {
+    "archived_date": "2025-11-07",
+    "hash": "18f4c856",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__vscode_forks__comprehensive_fork_catalog.md"
+  },
+  "ks__comprehensive_fork_catalog-caba67ca.md": {
+    "archived_date": "2025-11-07",
+    "hash": "caba67ca",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__vscode_forks__comprehensive_fork_catalog.md"
+  },
+  "loadAnalysis__README_DOWNLOADS-014ab065.md": {
+    "archived_date": "2025-11-07",
+    "hash": "014ab065",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__README_DOWNLOADS.md"
+  },
+  "lysis__COMPLETE_TOOL_INVENTORY-563f34b4.md": {
+    "archived_date": "2025-11-07",
+    "hash": "563f34b4",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__COMPLETE_TOOL_INVENTORY.md"
+  },
+  "lysis__STATIC_ANALYSIS_JOURNAL-3ae9041d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3ae9041d",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__STATIC_ANALYSIS_JOURNAL.md"
+  },
+  "lysis__lib__result_aggregation-0b35c087.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "0b35c087",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__result_aggregation.sh"
+  },
+  "lysis__lib__result_aggregation-974b7979.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "974b7979",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__result_aggregation.sh"
+  },
+  "lysis__test_minimal_behavioral-a7e9e92d.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "a7e9e92d",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_minimal_behavioral.sh"
+  },
+  "lysis__test_minimal_behavioral-da7cbbef.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "da7cbbef",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_minimal_behavioral.sh"
+  },
+  "m_ides__comprehensive_analysis-522df4f3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "522df4f3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__rust_wasm_ides__comprehensive_analysis.md"
+  },
+  "m_ides__comprehensive_analysis-b456b744.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b456b744",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__rust_wasm_ides__comprehensive_analysis.md"
+  },
+  "mpetitive_positioning_analysis-6720f596.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6720f596",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ai_ides__competitive_positioning_analysis.md"
+  },
+  "mpetitive_positioning_analysis-6a10bc14.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6a10bc14",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ai_ides__competitive_positioning_analysis.md"
+  },
+  "n-ai-openspec-8a5edab282632443-b2422828.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "b2422828",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__fission-ai-openspec-8a5edab282632443.txt"
+  },
+  "n__vs_code_baseline_comparison-87233af6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "87233af6",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__baseline_comparison__vs_code_baseline_comparison.md"
+  },
+  "n_system_architecture_patterns-f14bfb8b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f14bfb8b",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__technical_patterns__extension_system_architecture_patterns.md"
+  },
+  "n_system_architecture_patterns-fcf43cb8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "fcf43cb8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__technical_patterns__extension_system_architecture_patterns.md"
+  },
+  "ngueEvolution__A015UsefulIdeas-7fafaefd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7fafaefd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A015UsefulIdeas.md"
+  },
+  "nsp01_IDEAnalysis__test_syntax-1420013d.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "1420013d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_syntax.sh"
+  },
+  "nsp01_IDEAnalysis__test_syntax-90c8046c.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "90c8046c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_syntax.sh"
+  },
+  "nsp04_DownloadAnalysis__README-a00103f1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a00103f1",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp04_DownloadAnalysis__README.md"
+  },
+  "nsp04_PRD202510__P09RustCargos-002681ef.md": {
+    "archived_date": "2025-11-07",
+    "hash": "002681ef",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P09RustCargos.md"
+  },
+  "nsp04_PRD202510__P10IdeasPart2-65dd35c1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "65dd35c1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P10IdeasPart2.md"
+  },
+  "nt_framework_validation_report-6e10a629.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6e10a629",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__parallel_subagent_framework_validation_report.md"
+  },
+  "ocs__D02LightweightLLMResearch-6c4b60a6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6c4b60a6",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__.domainDocs__D02LightweightLLMResearch.md"
+  },
+  "off__architecture_requirements-ff6d482e.json": {
+    "archived_date": "2025-11-07",
+    "hash": "ff6d482e",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__phase2_handoff__architecture_requirements.json"
+  },
+  "okio-rs-tokio-8a5edab282632443-c7f47c5e.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "c7f47c5e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__tests__fixtures__tokio-rs-tokio-8a5edab282632443.txt"
+  },
+  "olution__A005_ReasoningWithISG-85220906.md": {
+    "archived_date": "2025-11-07",
+    "hash": "85220906",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A005_ReasoningWithISG.md"
+  },
+  "olution__A005_ReasoningWithISG-acc7e959.md": {
+    "archived_date": "2025-11-07",
+    "hash": "acc7e959",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A005_ReasoningWithISG.md"
+  },
+  "olution__A012ExecutableJourney-0c5aa497.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0c5aa497",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A012ExecutableJourney.md"
+  },
+  "osystem_trend_analysis_summary-ab2fa1a9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "ab2fa1a9",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ecosystem_trends__ecosystem_trend_analysis_summary.md"
+  },
+  "osystem_trend_analysis_summary-e4d2b274.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e4d2b274",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ecosystem_trends__ecosystem_trend_analysis_summary.md"
+  },
+  "p04_PRD202510__P17SubAgentGame-3ba92bec.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3ba92bec",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P17SubAgentGame.md"
+  },
+  "p04_PRD202510__P23ClaudePlugin-c73796a3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c73796a3",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P23ClaudePlugin.md"
+  },
+  "p04_PRD202510__P31ChatPRDNotes-384213cf.md": {
+    "archived_date": "2025-11-07",
+    "hash": "384213cf",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P31ChatPRDNotes.md"
+  },
+  "p04_PRD202510__P46llamaExplore-a2faa6c8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a2faa6c8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__P46llamaExplore.md"
+  },
+  "p1__archive_utils__ModelREADME-600bf35b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "600bf35b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__archive_utils__ModelREADME.md"
+  },
+  "phase-2__S03-Table-of-Contents-1402eada.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1402eada",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__S03-Table-of-Contents.md"
+  },
+  "phase-2__S03-Table-of-Contents-bcdfd9a0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "bcdfd9a0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__S03-Table-of-Contents.md"
+  },
+  "ports__cross_references__index-c2e1517a.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c2e1517a",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__cross_references__index.md"
+  },
+  "r__.prdArchDocs__Arch01dobbyV1-e8b270d2.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e8b270d2",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__.prdArchDocs__Arch01dobbyV1.md"
+  },
+  "r__.prdArchDocs__P01dobbyPRDv1-1aef6e2e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "1aef6e2e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__.prdArchDocs__P01dobbyPRDv1.md"
+  },
+  "ransfiguration-behavior__tasks-0dcf114e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "0dcf114e",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__tasks.md"
+  },
+  "ransfiguration-behavior__tasks-d812c6be.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d812c6be",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__tasks.md"
+  },
+  "ration-ab20251014p1__ClaudeSOP-958a8538.md": {
+    "archived_date": "2025-11-07",
+    "hash": "958a8538",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__ClaudeSOP.md"
+  },
+  "ration-ab20251014p1__TOC_INDEX-97037f3d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "97037f3d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__TOC_INDEX.md"
+  },
+  "rchive_utils__export_qwen_int4-16d7896e.py": {
+    "archived_date": "2025-11-07",
+    "hash": "16d7896e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__archive_utils__export_qwen_int4.py"
+  },
+  "re_scenario_planning_framework-780f460b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "780f460b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__ecosystem_trends__future_scenario_planning_framework.md"
+  },
+  "re_scenario_planning_framework-f8ba223c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f8ba223c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__ecosystem_trends__future_scenario_planning_framework.md"
+  },
+  "rks__extension_system_analysis-10e29e01.md": {
+    "archived_date": "2025-11-07",
+    "hash": "10e29e01",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__vscode_forks__extension_system_analysis.md"
+  },
+  "rks__extension_system_analysis-33c1c0dd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "33c1c0dd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__vscode_forks__extension_system_analysis.md"
+  },
+  "rns__state_management_patterns-2b90457c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "2b90457c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__technical_patterns__state_management_patterns.md"
+  },
+  "rns__state_management_patterns-a2c44adc.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a2c44adc",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__technical_patterns__state_management_patterns.md"
+  },
+  "ro__steering__code-conventions-6f90e224.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6f90e224",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__steering__code-conventions.md"
+  },
+  "ro__steering__code-conventions-7313e9c7.md": {
+    "archived_date": "2025-11-07",
+    "hash": "7313e9c7",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__steering__code-conventions.md"
+  },
+  "rust-analyzer-8a5edab282632443-204bc6d5.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "204bc6d5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__rust-lang-rust-analyzer-8a5edab282632443.txt"
+  },
+  "rust_wasm_ides__task_4_summary-84f09d8c.md": {
+    "archived_date": "2025-11-07",
+    "hash": "84f09d8c",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__rust_wasm_ides__task_4_summary.md"
+  },
+  "rust_wasm_ides__task_4_summary-97779ab7.md": {
+    "archived_date": "2025-11-07",
+    "hash": "97779ab7",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__rust_wasm_ides__task_4_summary.md"
+  },
+  "sIdioms_trun_rust_idiom_extra1-eca3db8d.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "eca3db8d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RusIdioms_trun_rust_idiom_extra1.txt"
+  },
+  "sPOC__scripts__download_codet5-5fdaf170.py": {
+    "archived_date": "2025-11-07",
+    "hash": "5fdaf170",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__download_codet5.py"
+  },
+  "s__RustIdioms_i00-pattern-list-40265292.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "40265292",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_i00-pattern-list.txt"
+  },
+  "s__batch_download_reproduction-0a847319.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "0a847319",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp00_Tools__batch_download_reproduction.sh"
+  },
+  "s__batch_download_reproduction-439778dd.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "439778dd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp00_Tools__batch_download_reproduction.sh"
+  },
+  "s__kiro_implementation_roadmap-355814e1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "355814e1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__analysis__kiro_implementation_roadmap.md"
+  },
+  "s__kiro_implementation_roadmap-4017e0b5.md": {
+    "archived_date": "2025-11-07",
+    "hash": "4017e0b5",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__analysis__kiro_implementation_roadmap.md"
+  },
+  "s__lib__configuration_analyzer-42ff9770.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "42ff9770",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__configuration_analyzer.sh"
+  },
+  "s__lib__configuration_analyzer-c19bde39.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "c19bde39",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__configuration_analyzer.sh"
+  },
+  "s__test_configuration_analyzer-bbcb3b9e.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "bbcb3b9e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_configuration_analyzer.sh"
+  },
+  "s__test_configuration_analyzer-e54c4a42.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "e54c4a42",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_configuration_analyzer.sh"
+  },
+  "scripts__convert_codet5_simple-7b91e96a.py": {
+    "archived_date": "2025-11-07",
+    "hash": "7b91e96a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__convert_codet5_simple.py"
+  },
+  "scripts__download_codet5_final-142400fa.py": {
+    "archived_date": "2025-11-07",
+    "hash": "142400fa",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__scripts__download_codet5_final.py"
+  },
+  "sis__A001_CompleteIDEEvolution-d5908f79.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d5908f79",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp05_EvolutionAnalysis__A001_CompleteIDEEvolution.md"
+  },
+  "sis__A001_CompleteIDEEvolution-e795c3d3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e795c3d3",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp05_EvolutionAnalysis__A001_CompleteIDEEvolution.md"
+  },
+  "sis__lib__api_surface_analyzer-29ca2728.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "29ca2728",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__api_surface_analyzer.sh"
+  },
+  "sis__lib__api_surface_analyzer-52ed5bc1.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "52ed5bc1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__api_surface_analyzer.sh"
+  },
+  "sis__lib__validation_framework-6c65284e.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "6c65284e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__validation_framework.sh"
+  },
+  "sis__lib__validation_framework-94d0978c.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "94d0978c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__validation_framework.sh"
+  },
+  "sm_ides__architecture_patterns-052be6b7.md": {
+    "archived_date": "2025-11-07",
+    "hash": "052be6b7",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__rust_wasm_ides__architecture_patterns.md"
+  },
+  "sm_ides__architecture_patterns-3a92e7da.md": {
+    "archived_date": "2025-11-07",
+    "hash": "3a92e7da",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__rust_wasm_ides__architecture_patterns.md"
+  },
+  "sp01_IDEAnalysis__analyze_kiro-052b9a74.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "052b9a74",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__analyze_kiro.sh"
+  },
+  "sp01_IDEAnalysis__analyze_kiro-9686d883.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "9686d883",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__analyze_kiro.sh"
+  },
+  "sp04_PRD202510__build-manifest-70c54c4d.json": {
+    "archived_date": "2025-11-07",
+    "hash": "70c54c4d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__build-manifest.json"
+  },
+  "sp05_EvolutionAnalysis__README-4ce06031.md": {
+    "archived_date": "2025-11-07",
+    "hash": "4ce06031",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp05_EvolutionAnalysis__README.md"
+  },
+  "sp05_EvolutionAnalysis__README-e326b7cd.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e326b7cd",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp05_EvolutionAnalysis__README.md"
+  },
+  "sp06RustNotes__RustHallowsPrep-60cec94d.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "60cec94d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustHallowsPrep.txt"
+  },
+  "st-file-unpacker__requirements-094808e7.md": {
+    "archived_date": "2025-11-07",
+    "hash": "094808e7",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__requirements.md"
+  },
+  "st-file-unpacker__requirements-f95d72cf.md": {
+    "archived_date": "2025-11-07",
+    "hash": "f95d72cf",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S01-rust-file-unpacker__requirements.md"
+  },
+  "stIdioms_trun_rust_idiom_large-4f680865.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "4f680865",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_large.txt"
+  },
+  "st_wasm_ides__interop_patterns-31d5b077.md": {
+    "archived_date": "2025-11-07",
+    "hash": "31d5b077",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__rust_wasm_ides__interop_patterns.md"
+  },
+  "st_wasm_ides__interop_patterns-45171eec.md": {
+    "archived_date": "2025-11-07",
+    "hash": "45171eec",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__rust_wasm_ides__interop_patterns.md"
+  },
+  "static-analysis-phase-2__tasks-69ef4280.md": {
+    "archived_date": "2025-11-07",
+    "hash": "69ef4280",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__tasks.md"
+  },
+  "static-analysis-phase-2__tasks-eda88e1e.md": {
+    "archived_date": "2025-11-07",
+    "hash": "eda88e1e",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__tasks.md"
+  },
+  "t__ui__styling__css_animations-a43f52f4.json": {
+    "archived_date": "2025-11-07",
+    "hash": "a43f52f4",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__ui__styling__css_animations.json"
+  },
+  "tatic-analysis-phase-2__design-65be71e8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "65be71e8",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__design.md"
+  },
+  "tatic-analysis-phase-2__design-e144ecf2.md": {
+    "archived_date": "2025-11-07",
+    "hash": "e144ecf2",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S03-static-analysis-phase-2__design.md"
+  },
+  "tegic_recommendation_framework-6342b1d1.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6342b1d1",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__research_data__analysis__strategic_recommendation_framework.md"
+  },
+  "tegic_recommendation_framework-fc51ca44.md": {
+    "archived_date": "2025-11-07",
+    "hash": "fc51ca44",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__research_data__analysis__strategic_recommendation_framework.md"
+  },
+  "tiatives__Insp00_Tools__README-c9769049.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c9769049",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp00_Tools__README.md"
+  },
+  "tion__A004_InterfaceContextISG-23d91001.md": {
+    "archived_date": "2025-11-07",
+    "hash": "23d91001",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A004_InterfaceContextISG.md"
+  },
+  "tion__A004_InterfaceContextISG-eceab9e3.md": {
+    "archived_date": "2025-11-07",
+    "hash": "eceab9e3",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A004_InterfaceContextISG.md"
+  },
+  "tion__B01Current__a97HQNotesV1-cedaddd0.md": {
+    "archived_date": "2025-11-07",
+    "hash": "cedaddd0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__a97HQNotesV1.md"
+  },
+  "tives__Insp04_PRD202510__build-379ee751.py": {
+    "archived_date": "2025-11-07",
+    "hash": "379ee751",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__build.py"
+  },
+  "tives__RustIdiomsAgent20251025-48f1ffc5.md": {
+    "archived_date": "2025-11-07",
+    "hash": "48f1ffc5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__RustIdiomsAgent20251025.md"
+  },
+  "tongueEvolution__A016DeepNotes-d27ff00d.md": {
+    "archived_date": "2025-11-07",
+    "hash": "d27ff00d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A016DeepNotes.md"
+  },
+  "tongueEvolution__WIP20251014p1-c69c1557.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c69c1557",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__WIP20251014p1.md"
+  },
+  "tput__ui__assets__svg_analysis-b639c26d.json": {
+    "archived_date": "2025-11-07",
+    "hash": "b639c26d",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__ui__assets__svg_analysis.json"
+  },
+  "ts__task_6_integration_summary-fc0fb98f.md": {
+    "archived_date": "2025-11-07",
+    "hash": "fc0fb98f",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__kiro_analysis_output__reports__task_6_integration_summary.md"
+  },
+  "ture_DatabaseToSummaryPipeline-cbd606e9.md": {
+    "archived_date": "2025-11-07",
+    "hash": "cbd606e9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__.domainDocs__P01_TechnicalArchitecture_DatabaseToSummaryPipeline.md"
+  },
+  "ueEvolution__A010UserJourney01-a63fecd8.md": {
+    "archived_date": "2025-11-07",
+    "hash": "a63fecd8",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A010UserJourney01.md"
+  },
+  "uration-behavior__requirements-6072fc9b.md": {
+    "archived_date": "2025-11-07",
+    "hash": "6072fc9b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__requirements.md"
+  },
+  "uration-behavior__requirements-c03b1cbe.md": {
+    "archived_date": "2025-11-07",
+    "hash": "c03b1cbe",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__.kiro__specs__S02-identify-transfiguration-behavior__requirements.md"
+  },
+  "urrent__A02EssentialCargoNames-b627d9f6.md": {
+    "archived_date": "2025-11-07",
+    "hash": "b627d9f6",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B01Current__A02EssentialCargoNames.md"
+  },
+  "ust-Architecture-Specification-11767d16.md": {
+    "archived_date": "2025-11-07",
+    "hash": "11767d16",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__.prdArchDocs__TDD-First-Rust-Architecture-Specification.md"
+  },
+  "ustIdioms_trun_rust_idiom_main-166f6434.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "166f6434",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp06RustNotes__RustIdioms_trun_rust_idiom_main.txt"
+  },
+  "ut__ui__assets__images_catalog-f2efc881.json": {
+    "archived_date": "2025-11-07",
+    "hash": "f2efc881",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__ui__assets__images_catalog.json"
+  },
+  "ut__ui__assets__media_analysis-ebb9fa3b.json": {
+    "archived_date": "2025-11-07",
+    "hash": "ebb9fa3b",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__ui__assets__media_analysis.json"
+  },
+  "ution__A001_StrategicEvolution-229064bb.md": {
+    "archived_date": "2025-11-07",
+    "hash": "229064bb",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp03_ParseltongueEvolution__A001_StrategicEvolution.md"
+  },
+  "ution__A001_StrategicEvolution-9b880b27.md": {
+    "archived_date": "2025-11-07",
+    "hash": "9b880b27",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp03_ParseltongueEvolution__A001_StrategicEvolution.md"
+  },
+  "utput__ui__themes__icon_themes-e059ded5.json": {
+    "archived_date": "2025-11-07",
+    "hash": "e059ded5",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_ui_analysis_output__ui__themes__icon_themes.json"
+  },
+  "y-project-ray-8a5edab282632443-03fbf247.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "03fbf247",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A02OSSToolsPOC__dobby-subagent-code-summarizer__tests__fixtures__ray-project-ray-8a5edab282632443.txt"
+  },
+  "ysis__lib__baseline_comparison-6be06af9.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "6be06af9",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__lib__baseline_comparison.sh"
+  },
+  "ysis__lib__baseline_comparison-9258120d.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "9258120d",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__lib__baseline_comparison.sh"
+  },
+  "ysis__test_behavioral_analyzer-68c26e4c.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "68c26e4c",
+    "location": "T99unclassifiedDocs",
+    "original": "Insp01_IDEAnalysis__test_behavioral_analyzer.sh"
+  },
+  "ysis__test_behavioral_analyzer-cc2cd26a.sh": {
+    "archived_date": "2025-11-07",
+    "hash": "cc2cd26a",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp01_IDEAnalysis__test_behavioral_analyzer.sh"
+  },
+  "zzArchive__chunk_themes_sorted-326bfea0.txt": {
+    "archived_date": "2025-11-07",
+    "hash": "326bfea0",
+    "location": "T99unclassifiedDocs",
+    "original": "transfiguration-ab20251014p1__A01OSSToolsIdeation__B02ARCHIVE__Insp09_ActiveWorkspaces_StrategicInitiatives__Insp04_PRD202510__zzArchive__chunk_themes_sorted.txt"
+  }
+}
