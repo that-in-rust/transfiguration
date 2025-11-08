@@ -24,13 +24,13 @@ Each pattern includes:
 ## Analysis Progress
 
 ### Files Analyzed:
-- **option.rs** (2,756 lines): In progress - 21 patterns documented
+- **option.rs** (2,756 lines): ✅ COMPLETED - 41 patterns documented
   - Lines 1-500: ✅ Completed (Patterns 1-7)
   - Lines 501-1000: ✅ Completed (Patterns 8-14)
   - Lines 1001-1500: ✅ Completed (Patterns 15-21)
-  - Lines 1501-2000: Pending
-  - Lines 2001-2500: Pending
-  - Lines 2501-2756: Pending
+  - Lines 1501-2000: ✅ Completed (Patterns 22-30)
+  - Lines 2001-2500: ✅ Completed (Patterns 31-37)
+  - Lines 2501-2756: ✅ Completed (Patterns 38-41)
 
 ### Files Planned:
 - result.rs (2,202 lines)
@@ -766,6 +766,831 @@ user.ok_or_else(|| Error::new("User not found"))
 ```
 
 **Source**: `library/core/src/option.rs:1234-1279`
+
+---
+
+### Pattern 22: or() and or_else() for Fallback Values
+
+**Description**: Use `or()` to provide a fallback Option if the current Option is None. Use `or_else()` for lazy evaluation.
+
+**When to Use**:
+- Providing default/fallback values that are also Optional
+- Chaining multiple potential sources
+- Implementing fallback logic
+- When you want "first available value" semantics
+
+**When NOT to Use**:
+- When you need a concrete value (use `unwrap_or` instead)
+- For complex fallback logic (use `match`)
+- When the fallback is never None (use `unwrap_or`)
+
+**Example** (from option.rs:1601-1615):
+```rust
+let x = Some(2);
+let y = None;
+assert_eq!(x.or(y), Some(2)); // x has value, returns x
+
+let x = None;
+let y = Some(100);
+assert_eq!(x.or(y), Some(100)); // x is None, returns y
+
+// Lazy evaluation
+assert_eq!(None.or_else(|| expensive_computation()), Some(...));
+```
+
+**Real-world usage**:
+```rust
+// Try cache, then database, then default
+let value = cache.get(key)
+    .or_else(|| database.fetch(key))
+    .or(Some(default_value));
+```
+
+**Source**: `library/core/src/option.rs:1590-1657`
+
+---
+
+### Pattern 23: xor() for Exclusive Or Logic
+
+**Description**: Return Some if exactly one of two Options is Some, otherwise return None.
+
+**When to Use**:
+- When you need "one or the other, but not both" semantics
+- Validating mutually exclusive optional fields
+- Implementing toggle or switch logic
+- When both being present is an error condition
+
+**When NOT to Use**:
+- When both being Some is valid (use `zip`)
+- For simple fallback logic (use `or`)
+- When you need to know which one was Some
+
+**Example** (from option.rs:1664-1678):
+```rust
+let x = Some(2);
+let y: Option<u32> = None;
+assert_eq!(x.xor(y), Some(2)); // Only x is Some
+
+let x: Option<u32> = None;
+let y = Some(2);
+assert_eq!(x.xor(y), Some(2)); // Only y is Some
+
+let x = Some(2);
+let y = Some(2);
+assert_eq!(x.xor(y), None); // Both are Some - returns None!
+
+let x: Option<u32> = None;
+let y: Option<u32> = None;
+assert_eq!(x.xor(y), None); // Both None
+```
+
+**Source**: `library/core/src/option.rs:1659-1692`
+
+---
+
+### Pattern 24: insert() for In-Place Mutation with Reference
+
+**Description**: Insert a value into an Option and immediately get a mutable reference to it, replacing any existing value.
+
+**When to Use**:
+- When you need to initialize and immediately modify
+- For in-place updates
+- When you want a reference to the inserted value
+- Building complex structures incrementally
+
+**When NOT to Use**:
+- When you want to preserve the old value if Some (use `get_or_insert`)
+- For simple assignment without needing a reference
+- When you don't need the mutable reference
+
+**Example** (from option.rs:1708-1716):
+```rust
+let mut opt = None;
+let val = opt.insert(1);
+assert_eq!(*val, 1);
+assert_eq!(opt.unwrap(), 1);
+
+let val = opt.insert(2); // Replaces old value!
+assert_eq!(*val, 2);
+*val = 3; // Can mutate in place
+assert_eq!(opt.unwrap(), 3);
+```
+
+**Source**: `library/core/src/option.rs:1698-1729`
+
+---
+
+### Pattern 25: get_or_insert() Family for Lazy Initialization
+
+**Description**: Insert a value only if None, then return a mutable reference. Supports default values, Default trait, and custom functions.
+
+**When to Use**:
+- Lazy initialization patterns
+- Cache-like behavior
+- When you want to ensure a value exists
+- Building values on first access
+
+**When NOT to Use**:
+- When you want to replace existing values (use `insert`)
+- When you don't need a mutable reference
+- For immutable access (use `unwrap_or`)
+
+**Example** (from option.rs:1740-1799):
+```rust
+let mut x = None;
+{
+    let y: &mut u32 = x.get_or_insert(5);
+    assert_eq!(y, &5);
+    *y = 7;
+}
+assert_eq!(x, Some(7));
+
+// With Default trait
+let mut x: Option<Vec<String>> = None;
+x.get_or_insert_default().push("item".to_string());
+
+// With custom function (lazy)
+let mut x = None;
+x.get_or_insert_with(|| expensive_computation());
+```
+
+**Source**: `library/core/src/option.rs:1731-1816`
+
+---
+
+### Pattern 26: take() for Ownership Transfer
+
+**Description**: Take the value out of an Option, leaving None in its place.
+
+**When to Use**:
+- When you need to move the value out while keeping the Option
+- Implementing "consume and replace" patterns
+- In state machines where you need to take ownership
+- When you want to temporarily extract a value
+
+**When NOT to Use**:
+- When you want to keep the Option intact (use `as_ref()` or `clone()`)
+- For simple unwrapping (use `unwrap()` or `expect()`)
+- When you don't need to preserve the Option variable
+
+**Example** (from option.rs:1827-1835):
+```rust
+let mut x = Some(2);
+let y = x.take();
+assert_eq!(x, None); // x is now None!
+assert_eq!(y, Some(2)); // value moved to y
+
+let mut x: Option<u32> = None;
+let y = x.take();
+assert_eq!(x, None);
+assert_eq!(y, None);
+```
+
+**Real-world usage**:
+```rust
+struct Parser {
+    buffer: Option<String>,
+}
+
+impl Parser {
+    fn consume_buffer(&mut self) -> Option<String> {
+        self.buffer.take() // Leaves None, returns the buffer
+    }
+}
+```
+
+**Source**: `library/core/src/option.rs:1822-1843`
+
+---
+
+### Pattern 27: take_if() for Conditional Extraction
+
+**Description**: Take the value out only if it satisfies a predicate, leaving None if taken or keeping the value if not.
+
+**When to Use**:
+- Conditional state transitions
+- Implementing business logic with ownership transfer
+- When predicate can mutate the value before deciding
+- Selective consumption patterns
+
+**When NOT to Use**:
+- For simple filtering (use `filter()`)
+- When you don't need to take ownership
+- When the predicate is expensive (it runs even if None)
+
+**Example** (from option.rs:1854-1867):
+```rust
+let mut x = Some(42);
+
+// Predicate can mutate!
+let prev = x.take_if(|v| if *v == 42 {
+    *v += 1;
+    false // Don't take
+} else {
+    false
+});
+assert_eq!(x, Some(43)); // Value was mutated
+assert_eq!(prev, None); // But not taken
+
+let prev = x.take_if(|v| *v == 43);
+assert_eq!(x, None); // Taken!
+assert_eq!(prev, Some(43));
+```
+
+**Source**: `library/core/src/option.rs:1845-1877`
+
+---
+
+### Pattern 28: replace() for Swap and Return
+
+**Description**: Replace the value in an Option and return the old value, leaving Some in place.
+
+**When to Use**:
+- When you need both old and new values
+- Implementing swap operations
+- Update-and-return patterns
+- When you want to ensure Some remains
+
+**When NOT to Use**:
+- When you don't need the old value (use simple assignment)
+- When you want to leave None (use `take()`)
+- For conditional updates (use `get_or_insert()`)
+
+**Example** (from option.rs:1886-1894):
+```rust
+let mut x = Some(2);
+let old = x.replace(5);
+assert_eq!(x, Some(5)); // New value
+assert_eq!(old, Some(2)); // Old value returned
+
+let mut x = None;
+let old = x.replace(3);
+assert_eq!(x, Some(3)); // Now Some!
+assert_eq!(old, None); // Was None
+```
+
+**Source**: `library/core/src/option.rs:1879-1901`
+
+---
+
+### Pattern 29: zip() for Combining Options
+
+**Description**: Combine two Options into an Option of a tuple. Returns Some only if both are Some.
+
+**When to Use**:
+- When you need both values together
+- Validation where all inputs must be present
+- Combining independent optional results
+- Creating pairs from separate sources
+
+**When NOT to Use**:
+- When you need "or" semantics (use `or()`)
+- For fallback behavior
+- When you want to handle each None differently
+
+**Example** (from option.rs:1911-1916):
+```rust
+let x = Some(1);
+let y = Some("hi");
+let z = None::<u8>;
+
+assert_eq!(x.zip(y), Some((1, "hi"))); // Both Some
+assert_eq!(x.zip(z), None); // One is None
+```
+
+**Real-world usage**:
+```rust
+let user_id = get_user_id();
+let session_id = get_session_id();
+
+// Only proceed if both exist
+let (uid, sid) = user_id.zip(session_id)
+    .ok_or(Error::Unauthorized)?;
+```
+
+**Source**: `library/core/src/option.rs:1903-1929`
+
+---
+
+### Pattern 30: zip_with() for Combining and Transforming
+
+**Description**: Combine two Options and transform them with a function in one operation.
+
+**When to Use**:
+- Combining and transforming Options atomically
+- Building complex types from optional components
+- When you need more than just a tuple
+- Functional-style option combination
+
+**When NOT to Use**:
+- When a simple tuple is sufficient (use `zip()`)
+- For operations that might fail (use nested `and_then()`)
+- When you need to handle None cases differently
+
+**Example** (from option.rs:1938-1957):
+```rust
+#[derive(Debug, PartialEq)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+impl Point {
+    fn new(x: f64, y: f64) -> Self {
+        Self { x, y }
+    }
+}
+
+let x = Some(17.5);
+let y = Some(42.7);
+
+assert_eq!(x.zip_with(y, Point::new), Some(Point { x: 17.5, y: 42.7 }));
+assert_eq!(x.zip_with(None, Point::new), None);
+```
+
+**Source**: `library/core/src/option.rs:1931-1971`
+
+---
+
+### Pattern 31: unzip() for Splitting Tupled Options
+
+**Description**: Convert `Option<(T, U)>` into `(Option<T>, Option<U>)`, the inverse of `zip()`.
+
+**When to Use**:
+- When you need to split paired optional values
+- Undoing a previous `zip()` operation
+- When you want to handle each component independently
+- Pattern matching on tuple elements
+
+**When NOT to Use**:
+- When you need both values together (keep as tuple)
+- For simple destructuring (use pattern matching)
+- When both values should remain synchronized
+
+**Example** (from option.rs:2019-2023):
+```rust
+let x = Some((1, "hi"));
+let y = None::<(u8, u32)>;
+
+assert_eq!(x.unzip(), (Some(1), Some("hi")));
+assert_eq!(y.unzip(), (None, None));
+```
+
+**Real-world usage**:
+```rust
+// Split coordinates
+let point: Option<(f64, f64)> = get_point();
+let (x, y) = point.unzip();
+// Now handle x and y independently
+```
+
+**Source**: `library/core/src/option.rs:2010-2033`
+
+---
+
+### Pattern 32: copied() and cloned() for Reference Options
+
+**Description**: Convert `Option<&T>` or `Option<&mut T>` to `Option<T>` by copying or cloning the referenced value.
+
+**When to Use**:
+- After calling `as_ref()` or methods that return references
+- When you need an owned value from a reference
+- With Copy types (use `copied()`)
+- With Clone types (use `cloned()`)
+- Working with iterators over references
+
+**When NOT to Use**:
+- When the reference itself is what you need
+- For non-Copy/Clone types
+- When cloning is expensive and unnecessary
+
+**Example** (from option.rs:2042-2073):
+```rust
+// With Copy types
+let x = 12;
+let opt_x = Some(&x);
+assert_eq!(opt_x, Some(&12));
+let copied = opt_x.copied();
+assert_eq!(copied, Some(12)); // Owned value
+
+// With Clone types
+let s = String::from("hello");
+let opt_s = Some(&s);
+let cloned = opt_s.cloned();
+assert_eq!(cloned, Some(String::from("hello")));
+```
+
+**Real-world usage**:
+```rust
+// Common in iterator chains
+let names: Vec<Option<String>> = vec_of_refs
+    .iter()
+    .map(|item| item.name.as_ref())
+    .map(|opt_ref| opt_ref.cloned())
+    .collect();
+```
+
+**Source**: `library/core/src/option.rs:2035-2137`
+
+---
+
+### Pattern 33: transpose() for Option<Result> ⟷ Result<Option> Conversion
+
+**Description**: Convert between `Option<Result<T, E>>` and `Result<Option<T>, E>`, useful for error handling with optional values.
+
+**When to Use**:
+- Integrating Option-based code with Result-based error handling
+- When you want to short-circuit on errors but keep None as valid
+- Converting between different error handling styles
+- Using `?` operator with nested Option/Result
+
+**When NOT to Use**:
+- When the semantics of None and Err are different
+- For simple unwrapping (use `ok_or`)
+- When you don't need the transposed form
+
+**Example** (from option.rs:2152-2154):
+```rust
+#[derive(Debug, Eq, PartialEq)]
+struct SomeErr;
+
+let x: Option<Result<i32, SomeErr>> = Some(Ok(5));
+let y: Result<Option<i32>, SomeErr> = Ok(Some(5));
+assert_eq!(x.transpose(), y);
+
+// Transformations:
+// Some(Ok(x)) => Ok(Some(x))
+// Some(Err(e)) => Err(e)  // Error propagates!
+// None => Ok(None)         // None is valid
+```
+
+**Real-world usage**:
+```rust
+fn fetch_optional_data(id: Option<u64>) -> Result<Option<Data>, Error> {
+    id.map(|id| fetch_data(id)) // Option<Result<Data, Error>>
+      .transpose()               // Result<Option<Data>, Error>
+}
+
+// Now you can use ? operator:
+let data = fetch_optional_data(some_id)?; // Result unwrapped, Option preserved
+```
+
+**Source**: `library/core/src/option.rs:2139-2166`
+
+---
+
+### Pattern 34: Implementing Clone for Options Efficiently
+
+**Description**: Use optimized `clone_from()` to avoid unnecessary allocations when cloning into an existing Option.
+
+**When to Use**:
+- When repeatedly updating an Option with cloned values
+- In performance-critical code
+- When the contained type has an efficient `clone_from` implementation
+- For reusing allocations
+
+**When NOT to Use**:
+- For Copy types (just use copy)
+- When clone_from doesn't provide benefits
+- In code where clarity is more important than performance
+
+**Example** (from option.rs:2207-2211):
+```rust
+impl<T: Clone> Clone for Option<T> {
+    fn clone_from(&mut self, source: &Self) {
+        match (self, source) {
+            (Some(to), Some(from)) => to.clone_from(from), // Reuse allocation!
+            (to, from) => *to = from.clone(),               // New allocation
+        }
+    }
+}
+```
+
+**Benefit**:
+```rust
+let mut target: Option<String> = Some(String::with_capacity(100));
+let source = Some(String::from("short"));
+
+// clone_from reuses the 100-byte allocation
+target.clone_from(&source);
+```
+
+**Source**: `library/core/src/option.rs:2190-2213`
+
+---
+
+### Pattern 35: Using From Trait for Option Construction
+
+**Description**: Use `From<T> for Option<T>` and related conversions for ergonomic Option construction.
+
+**When to Use**:
+- In generic code that accepts `Into<Option<T>>`
+- For implicit conversions
+- Making APIs more flexible
+- Converting between Option and reference types
+
+**When NOT to Use**:
+- When explicit `Some()` is clearer
+- In simple, non-generic code
+- When the conversion might be surprising
+
+**Example** (from option.rs:2287-2293, 2312-2320):
+```rust
+// T -> Option<T>
+let o: Option<u8> = Option::from(67);
+assert_eq!(Some(67), o);
+
+// &Option<T> -> Option<&T>
+let s: Option<String> = Some(String::from("Hello, Rustaceans!"));
+let o: Option<usize> = Option::from(&s).map(|ss: &String| ss.len());
+println!("Can still print s: {s:?}"); // s not consumed!
+
+// Function that accepts Into<Option<T>>
+fn maybe_process<T>(value: impl Into<Option<T>>) {
+    let opt = value.into();
+    // Process opt...
+}
+
+maybe_process(42);        // T -> Option<T>
+maybe_process(Some(42));  // Option<T> -> Option<T>
+```
+
+**Source**: `library/core/src/option.rs:2279-2345`
+
+---
+
+### Pattern 36: Option Ordering and Comparison
+
+**Description**: None compares as less than any Some, and Some values compare by their contained values.
+
+**When to Use**:
+- Sorting collections of Options
+- Using Options as keys in ordered containers
+- Implementing ordering for types containing Options
+- When None should be "smallest"
+
+**When NOT to Use**:
+- When None should not have an ordering
+- When custom ordering is needed
+- For equality checks only (use PartialEq)
+
+**Example** (from option.rs:2375-2395):
+```rust
+// Ordering rules:
+assert!(None < Some(0));        // None is always less
+assert!(Some(0) < Some(1));     // Some values compare normally
+
+// Sorting
+let mut opts = vec![Some(3), None, Some(1), Some(2), None];
+opts.sort();
+assert_eq!(opts, vec![None, None, Some(1), Some(2), Some(3)]);
+
+// In structs
+#[derive(PartialOrd, Ord, PartialEq, Eq)]
+struct Person {
+    age: Option<u32>,  // None means unknown
+}
+
+// People with unknown age sort first
+```
+
+**Implementation**:
+```rust
+impl<T: Ord> Ord for Option<T> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        match (self, other) {
+            (Some(l), Some(r)) => l.cmp(r),
+            (Some(_), None) => Ordering::Greater,
+            (None, Some(_)) => Ordering::Less,
+            (None, None) => Ordering::Equal,
+        }
+    }
+}
+```
+
+**Source**: `library/core/src/option.rs:2371-2397`
+
+---
+
+### Pattern 37: Default Implementation (None as Default)
+
+**Description**: Option's Default implementation always returns None, making it useful for initialization.
+
+**When to Use**:
+- When initializing collections of Options
+- With `#[derive(Default)]` on structs
+- In builder patterns
+- For "empty" initial state
+
+**When NOT to Use**:
+- When a Some default makes more sense (use a const or custom Default)
+- When None is not a sensible default
+
+**Example** (from option.rs:2226-2232):
+```rust
+let opt: Option<u32> = Option::default();
+assert!(opt.is_none());
+
+// In structs
+#[derive(Default)]
+struct Config {
+    timeout: Option<Duration>,  // Defaults to None
+    retries: Option<u32>,        // Defaults to None
+}
+
+let config = Config::default();
+assert!(config.timeout.is_none());
+
+// In collections
+let opts: Vec<Option<i32>> = vec![Default::default(); 5];
+assert_eq!(opts, vec![None, None, None, None, None]);
+```
+
+**Source**: `library/core/src/option.rs:2218-2233`
+
+---
+
+### Pattern 38: FromIterator for Short-Circuiting Collection
+
+**Description**: Collect an iterator of `Option<T>` into `Option<Collection<T>>`, short-circuiting on first None.
+
+**When to Use**:
+- Processing collections where all operations must succeed
+- Validating or transforming all elements
+- When you want fail-fast behavior
+- With checked arithmetic operations
+
+**When NOT to Use**:
+- When you want to collect successful values only (use `filter_map`)
+- When you need to know which element failed
+- For partial results
+
+**Example** (from option.rs:2590-2634):
+```rust
+// Success case - all values present
+let items = vec![0_u16, 1, 2];
+let res: Option<Vec<u16>> = items
+    .iter()
+    .map(|x| x.checked_add(1))
+    .collect();
+assert_eq!(res, Some(vec![1, 2, 3]));
+
+// Failure case - first None stops collection
+let items = vec![2_u16, 1, 0];
+let res: Option<Vec<u16>> = items
+    .iter()
+    .map(|x| x.checked_sub(1))
+    .collect();
+assert_eq!(res, None); // Last element would underflow
+
+// Short-circuit behavior - processing stops at first None
+let items = vec![3_u16, 2, 1, 10];
+let mut shared = 0;
+let res: Option<Vec<u16>> = items
+    .iter()
+    .map(|x| { shared += x; x.checked_sub(2) })
+    .collect();
+assert_eq!(res, None);
+assert_eq!(shared, 6); // Only processed 3, 2, 1 (not 10!)
+```
+
+**Source**: `library/core/src/option.rs:2576-2645`
+
+---
+
+### Pattern 39: The Try Trait (? Operator Implementation)
+
+**Description**: Option implements the Try trait, enabling the `?` operator for early return on None.
+
+**When to Use**:
+- In functions returning Option
+- To propagate None up the call stack
+- For cleaner error handling without explicit matching
+- Chaining fallible operations
+
+**When NOT to Use**:
+- When you need to handle None with custom logic
+- In functions not returning Option or Result
+- When the short-circuit behavior is surprising
+
+**How It Works** (from option.rs:2649-2665):
+```rust
+impl<T> Try for Option<T> {
+    type Output = T;
+    type Residual = Option<Infallible>;
+
+    fn from_output(output: T) -> Option<T> {
+        Some(output)
+    }
+
+    fn branch(self) -> ControlFlow<Self::Residual, T> {
+        match self {
+            Some(v) => ControlFlow::Continue(v),  // Extract value
+            None => ControlFlow::Break(None),      // Early return
+        }
+    }
+}
+```
+
+**Usage**:
+```rust
+fn get_config() -> Option<Config> {
+    let path = get_path()?;      // Returns None if get_path() is None
+    let contents = read(path)?;   // Returns None if read() is None
+    parse(contents)?              // Returns None if parse() is None
+}
+```
+
+**Source**: `library/core/src/option.rs:2647-2694`
+
+---
+
+### Pattern 40: flatten() for Nested Options
+
+**Description**: Convert `Option<Option<T>>` to `Option<T>`, removing one level of nesting.
+
+**When to Use**:
+- After mapping with a function that returns Option
+- When you have naturally nested Options
+- To avoid `Option<Option<T>>` types
+- As an alternative to `and_then` with identity
+
+**When NOT to Use**:
+- When you need to distinguish between Some(None) and None
+- For more than one level (call `flatten()` multiple times)
+- When `and_then` is clearer
+
+**Example** (from option.rs:2704-2719):
+```rust
+let x: Option<Option<u32>> = Some(Some(6));
+assert_eq!(Some(6), x.flatten());
+
+let x: Option<Option<u32>> = Some(None);
+assert_eq!(None, x.flatten()); // Some(None) flattens to None
+
+let x: Option<Option<u32>> = None;
+assert_eq!(None, x.flatten());
+
+// Flattening only removes one level
+let x: Option<Option<Option<u32>>> = Some(Some(Some(6)));
+assert_eq!(Some(Some(6)), x.flatten());
+assert_eq!(Some(6), x.flatten().flatten());
+```
+
+**Relationship to and_then**:
+```rust
+// These are equivalent:
+option.flatten()
+option.and_then(|x| x)
+```
+
+**Source**: `library/core/src/option.rs:2696-2732`
+
+---
+
+### Pattern 41: Array transpose() for Batch Processing
+
+**Description**: Transpose `[Option<T>; N]` into `Option<[T; N]>`, succeeding only if all elements are Some.
+
+**When to Use**:
+- Processing fixed-size arrays of optional values
+- When all values must be present to proceed
+- Batch validation of array elements
+- Converting between representations
+
+**When NOT to Use**:
+- With variable-length collections (use `Iterator::collect`)
+- When partial arrays are acceptable
+- For dynamic-sized data
+
+**Example** (from option.rs:2743-2749):
+```rust
+let data = [Some(0); 1000];
+let data: Option<[u8; 1000]> = data.transpose();
+assert_eq!(data, Some([0; 1000])); // All Some -> Some(array)
+
+let data = [Some(0), None];
+let data: Option<[u8; 2]> = data.transpose();
+assert_eq!(data, None); // One None -> None
+```
+
+**Real-world usage**:
+```rust
+// Parsing fixed-size coordinate data
+let coords: [Option<f64>; 3] = [
+    parse_coord("1.5"),
+    parse_coord("2.5"),
+    parse_coord("3.5"),
+];
+
+let point: Option<[f64; 3]> = coords.transpose();
+match point {
+    Some([x, y, z]) => process_3d_point(x, y, z),
+    None => handle_invalid_coordinates(),
+}
+```
+
+**Source**: `library/core/src/option.rs:2734-2756`
 
 ---
 
