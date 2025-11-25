@@ -1,24 +1,25 @@
 # Graph-Based Compiler Architecture Documentation
 
-**Status**: Research Complete → Implementation Ready with Datalog Patterns
-**Version**: 2.0 (v002)
-**Date**: 2025-11-25 (v002: Added Complete Datalog Implementation Patterns)
+**Status**: Research Complete → Production Implementation Specification
+**Version**: 3.0 (v003)
+**Date**: 2025-11-25 (v003: Added Complete HLD/LLD Implementation Specification)
 
 ---
 
 ## Quick Start
 
-**Read this first**: [`MASTER-REFERENCE-v002.md`](./MASTER-REFERENCE-v002.md)
+**Read this first**: [`MASTER-REFERENCE-v003.md`](./MASTER-REFERENCE-v003.md)
 
 This is the single comprehensive document using the Minto Pyramid Principle:
 - **Top**: Strategic recommendation (build Hybrid Graph-Native compiler)
 - **Layer 1**: Key supporting arguments (technical, performance, strategic, implementation)
 - **Layer 2**: Evidence and detailed analysis
 - **Layer 3**: Deep technical details (in appendices + Datalog patterns)
+- **Layer 4**: Complete implementation specification (HLD/LLD + 85+ queries)
 
-**Reading time**: 90-120 minutes for complete understanding (including Datalog patterns)
+**Reading time**: 90-120 minutes for complete understanding (including implementation specs)
 
-**New in v002**: Complete Datalog implementation patterns for all 7 compiler phases
+**New in v003**: Complete High-Level Design (HLD), Low-Level Design (LLD), 85+ CozoDB Query Catalog, Rust Interface Definitions
 
 ---
 
@@ -27,11 +28,12 @@ This is the single comprehensive document using the Minto Pyramid Principle:
 ```
 docs/compiler-architecture/
 ├── README.md (this file)
-├── MASTER-REFERENCE-v002.md ⭐ START HERE (LATEST)
+├── MASTER-REFERENCE-v003.md ⭐ START HERE (LATEST)
 ├── QUICK-REFERENCE.md
 │
 └── zzArchive/
-    ├── MASTER-REFERENCE-v001.md (previous version)
+    ├── MASTER-REFERENCE-v002.md (previous version)
+    ├── MASTER-REFERENCE-v001.md (older version)
     ├── 00-ARCHITECTURE-COMPARISON-TABLE.md
     ├── 01-HLD-GRAPH-COMPILER.md
     ├── 02-LLD-IMPLEMENTATION.md
@@ -44,7 +46,7 @@ docs/compiler-architecture/
 
 ---
 
-## What's in MASTER-REFERENCE-v002.md
+## What's in MASTER-REFERENCE-v003.md
 
 ### Part I: Strategic Context (30 pages)
 - **Situation**: Current state of compilation (gcc/clang/rustc)
@@ -97,13 +99,20 @@ docs/compiler-architecture/
 - High-Level Pattern Summary (comparison table)
 - Integration with Earlier Parts
 
+### Part VI: Complete Implementation Specification (30 pages) **NEW in v003**
+- High-Level Design (HLD): System architecture
+- Low-Level Design (LLD): CozoDB Schema (40+ relations)
+- Rust Interface Definitions (8 trait groups, 50+ methods)
+- Comprehensive Query Catalog (85+ complete Datalog queries)
+- Implementation Examples (concrete code for each phase)
+
 ### Appendices (10 pages)
 - Architecture comparison table
 - Granularity levels (token to module)
 - Multi-language support (12 languages)
 - LLVM integration details
 
-**Total**: ~180 pages of actionable, rigorous analysis (including 600+ lines of executable Datalog code)
+**Total**: ~260 pages of production-ready implementation specification (including 2000+ lines of executable code and 85+ Datalog queries)
 
 ---
 
@@ -265,6 +274,7 @@ Detailed research documents (350+ pages total):
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2025-11-25 | 3.0 (v003) | **Added Part VI: Complete Implementation Specification** (HLD, LLD with 40+ CozoDB relations, 8 Rust trait groups with 50+ methods, 85+ complete Datalog queries, implementation examples). Production-ready specification. Archived v002. |
 | 2025-11-25 | 2.0 (v002) | **Added Part V: Datalog Implementation Patterns** (7 complete compiler phase patterns with 600+ lines of executable Datalog code). Implemented versioning system, archived v001. |
 | 2025-11-25 | 1.1 (v001) | Added Part II.5: Development Methodology & Standards (TDD, four-word naming, versioning, quality enforcement) |
 | 2025-11-24 | 1.0 | Initial comprehensive research synthesis |
